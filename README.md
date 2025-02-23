@@ -21,12 +21,10 @@
 ## Возможные названия
 - LoveLink
 - HeartBeat
-- MatchMakers
 - CupidConnect
 - DateSphere
 - FlirtFinder
 - LoveQuest
-- Chemistry Chat
 - SweetMeet
 - AffinityFinder
 
