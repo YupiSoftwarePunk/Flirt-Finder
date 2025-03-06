@@ -20,13 +20,10 @@
 
 ## Возможные названия
 - LoveLink
-- HeartBeat
-- CupidConnect
 - DateSphere
 - FlirtFinder
 - LoveQuest
 - SweetMeet
-- AffinityFinder
 
 
 ## Функционал проекта
