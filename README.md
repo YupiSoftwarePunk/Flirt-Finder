@@ -24,6 +24,8 @@
 - FlirtFinder
 - LoveQuest
 - SweetMeet
+- BlinkDate (знакомства в одно мгновение, отсылка к "love at first sight")
+- HeartSync (синхронизация сердец)
 
 
 ## Функционал проекта
