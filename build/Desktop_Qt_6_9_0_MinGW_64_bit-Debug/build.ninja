@@ -176,7 +176,7 @@ build Prototype_autogen_timestamp_deps: phony
 #############################################
 # Utility command for Prototype_autogen
 
-build Prototype_autogen: phony CMakeFiles/Prototype_autogen Prototype_autogen/include/ui_mainwindow.h Prototype_autogen/timestamp Prototype_autogen/mocs_compilation.cpp Prototype_autogen_timestamp_deps
+build Prototype_autogen: phony CMakeFiles/Prototype_autogen Prototype_autogen/include/ui_mainwindow.h Prototype_autogen/include/ui_secondwindow.h Prototype_autogen/timestamp Prototype_autogen/mocs_compilation.cpp Prototype_autogen_timestamp_deps
 
 
 #############################################
@@ -193,7 +193,7 @@ build Prototype_autogen/timestamp Prototype_autogen/mocs_compilation.cpp | ${cma
 #############################################
 # Phony custom command for CMakeFiles\Prototype_autogen
 
-build CMakeFiles/Prototype_autogen Prototype_autogen/include/ui_mainwindow.h | ${cmake_ninja_workdir}CMakeFiles/Prototype_autogen ${cmake_ninja_workdir}Prototype_autogen/include/ui_mainwindow.h: phony Prototype_autogen/timestamp || Prototype_autogen_timestamp_deps
+build CMakeFiles/Prototype_autogen Prototype_autogen/include/ui_mainwindow.h Prototype_autogen/include/ui_secondwindow.h | ${cmake_ninja_workdir}CMakeFiles/Prototype_autogen ${cmake_ninja_workdir}Prototype_autogen/include/ui_mainwindow.h ${cmake_ninja_workdir}Prototype_autogen/include/ui_secondwindow.h: phony Prototype_autogen/timestamp || Prototype_autogen_timestamp_deps
 
 # =============================================================================
 # Target aliases.
