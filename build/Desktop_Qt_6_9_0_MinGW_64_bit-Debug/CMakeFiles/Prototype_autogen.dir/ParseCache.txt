@@ -373,6 +373,6 @@ C:/Users/Denis/Documents/Qt projects/Prototype/mainwindow.h
  mdp:C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/wchar.h
  mdp:C:/Users/Denis/Documents/Qt projects/Prototype/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/Prototype_autogen/moc_predefs.h
  mdp:C:/Users/Denis/Documents/Qt projects/Prototype/mainwindow.h
+C:/Users/Denis/Documents/Qt projects/Prototype/main.cpp
 C:/Users/Denis/Documents/Qt projects/Prototype/mainwindow.cpp
  uic:./ui_mainwindow.h
-C:/Users/Denis/Documents/Qt projects/Prototype/main.cpp

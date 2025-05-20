@@ -15,18 +15,41 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+
+QMap<QString, QString> userDatabase;
+
+// Enter
 void MainWindow::on_pushButton_clicked()
 {
     QString login = ui->login->text();
     QString password = ui->password->text();
 
-    if  (login == "user" && password == "1234")
+    if (userDatabase.contains(login) && userDatabase[login] == password)
     {
         QMessageBox::information(this, "Success", "Авторизация прошла успешно!");
     }
     else
     {
-        QMessageBox::warning(this, "Fail", "Ошибка авторизации! Ошибка в логине или пароле!");
+        QMessageBox::warning(this, "Fail", "Ошибка авторизации! Неверный логин или пароль!");
+    }
+}
+
+
+// Registration
+void MainWindow::on_pushButton_2_clicked()
+{
+    QString login = ui->login->text();
+    QString password = ui->password->text();
+
+
+    if (userDatabase.contains(login))
+    {
+        QMessageBox::warning(this, "Fail", "Аккаунт с таким логином уже существует!");
+    }
+    else
+    {
+        userDatabase.insert(login, password);
+        QMessageBox::information(this, "Success", "Регистрация прошла успешно!");
     }
 }
 
