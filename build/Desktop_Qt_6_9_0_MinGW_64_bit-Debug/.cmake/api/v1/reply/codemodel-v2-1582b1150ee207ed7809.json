@@ -1,0 +1,79 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-b2b75f305d3db5735c5a.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "Prototype",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "Prototype::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Prototype-Debug-fd0ff4bf225ce3cbc934.json",
+					"name" : "Prototype",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "Prototype_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Prototype_autogen-Debug-6f785255e86fea067f3a.json",
+					"name" : "Prototype_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "Prototype_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Prototype_autogen_timestamp_deps-Debug-021268d07311289b0d99.json",
+					"name" : "Prototype_autogen_timestamp_deps",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/Users/Denis/Documents/Qt projects/Prototype/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug",
+		"source" : "C:/Users/Denis/Documents/Qt projects/Prototype"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}

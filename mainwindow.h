@@ -1,6 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "secondwindow.h"
 #include <QMainWindow>
 
 QT_BEGIN_NAMESPACE
@@ -24,5 +25,6 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    SecondWindow *sWindow;
 };
 #endif // MAINWINDOW_H

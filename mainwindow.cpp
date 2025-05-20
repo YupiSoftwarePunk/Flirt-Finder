@@ -1,5 +1,6 @@
 #include "mainwindow.h"
-#include "./ui_mainwindow.h"
+#include "ui_mainwindow.h"
+#include "secondwindow.h"
 
 #include <QMessageBox>
 
@@ -15,8 +16,8 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-
 QMap<QString, QString> userDatabase;
+
 
 // Enter
 void MainWindow::on_pushButton_clicked()
@@ -27,6 +28,11 @@ void MainWindow::on_pushButton_clicked()
     if (userDatabase.contains(login) && userDatabase[login] == password)
     {
         QMessageBox::information(this, "Success", "Авторизация прошла успешно!");
+
+        auto secondWindow = new SecondWindow();
+        secondWindow->show();
+
+        this->close();
     }
     else
     {
@@ -41,7 +47,6 @@ void MainWindow::on_pushButton_2_clicked()
     QString login = ui->login->text();
     QString password = ui->password->text();
 
-
     if (userDatabase.contains(login))
     {
         QMessageBox::warning(this, "Fail", "Аккаунт с таким логином уже существует!");
@@ -50,6 +55,10 @@ void MainWindow::on_pushButton_2_clicked()
     {
         userDatabase.insert(login, password);
         QMessageBox::information(this, "Success", "Регистрация прошла успешно!");
+
+        auto secondWindow = new SecondWindow();
+        secondWindow->show();
+
+        this->close();
     }
 }
-
