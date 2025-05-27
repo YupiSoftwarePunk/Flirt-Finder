@@ -11,50 +11,72 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
-#include <QtWidgets/QMainWindow>
-#include <QtWidgets/QMenuBar>
-#include <QtWidgets/QStatusBar>
-#include <QtWidgets/QWidget>
+#include <QtWidgets/QDialog>
+#include <QtWidgets/QGroupBox>
+#include <QtWidgets/QLineEdit>
+#include <QtWidgets/QPushButton>
 
 QT_BEGIN_NAMESPACE
 
-class Ui_MainWindow
+class Ui_Dialog
 {
 public:
-    QWidget *centralwidget;
-    QMenuBar *menubar;
-    QStatusBar *statusbar;
+    QGroupBox *groupBox;
+    QLineEdit *lineEdit;
+    QLineEdit *lineEdit_2;
+    QLineEdit *lineEdit_3;
+    QPushButton *pushButton;
+    QLineEdit *lineEdit_4;
+    QPushButton *pushButton_2;
 
-    void setupUi(QMainWindow *MainWindow)
+    void setupUi(QDialog *Dialog)
     {
-        if (MainWindow->objectName().isEmpty())
-            MainWindow->setObjectName("MainWindow");
-        MainWindow->resize(598, 366);
-        centralwidget = new QWidget(MainWindow);
-        centralwidget->setObjectName("centralwidget");
-        MainWindow->setCentralWidget(centralwidget);
-        menubar = new QMenuBar(MainWindow);
-        menubar->setObjectName("menubar");
-        menubar->setGeometry(QRect(0, 0, 598, 21));
-        MainWindow->setMenuBar(menubar);
-        statusbar = new QStatusBar(MainWindow);
-        statusbar->setObjectName("statusbar");
-        MainWindow->setStatusBar(statusbar);
+        if (Dialog->objectName().isEmpty())
+            Dialog->setObjectName("Dialog");
+        Dialog->resize(400, 300);
+        groupBox = new QGroupBox(Dialog);
+        groupBox->setObjectName("groupBox");
+        groupBox->setGeometry(QRect(10, 0, 381, 291));
+        lineEdit = new QLineEdit(groupBox);
+        lineEdit->setObjectName("lineEdit");
+        lineEdit->setGeometry(QRect(10, 30, 113, 24));
+        lineEdit_2 = new QLineEdit(groupBox);
+        lineEdit_2->setObjectName("lineEdit_2");
+        lineEdit_2->setGeometry(QRect(10, 70, 113, 24));
+        lineEdit_3 = new QLineEdit(groupBox);
+        lineEdit_3->setObjectName("lineEdit_3");
+        lineEdit_3->setGeometry(QRect(10, 120, 113, 24));
+        pushButton = new QPushButton(groupBox);
+        pushButton->setObjectName("pushButton");
+        pushButton->setGeometry(QRect(150, 230, 80, 24));
+        lineEdit_4 = new QLineEdit(groupBox);
+        lineEdit_4->setObjectName("lineEdit_4");
+        lineEdit_4->setGeometry(QRect(10, 170, 113, 24));
+        pushButton_2 = new QPushButton(groupBox);
+        pushButton_2->setObjectName("pushButton_2");
+        pushButton_2->setGeometry(QRect(260, 60, 80, 24));
 
-        retranslateUi(MainWindow);
+        retranslateUi(Dialog);
 
-        QMetaObject::connectSlotsByName(MainWindow);
+        QMetaObject::connectSlotsByName(Dialog);
     } // setupUi
 
-    void retranslateUi(QMainWindow *MainWindow)
+    void retranslateUi(QDialog *Dialog)
     {
-        MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
+        Dialog->setWindowTitle(QCoreApplication::translate("Dialog", "Dialog", nullptr));
+        groupBox->setTitle(QCoreApplication::translate("Dialog", "\320\241\320\276\320\267\320\264\320\260\320\275\320\270\320\265 \320\270 \320\267\320\260\320\277\320\276\320\273\320\275\320\265\320\275\320\270\320\265 \320\260\320\275\320\272\320\265\321\202\321\213", nullptr));
+        lineEdit->setText(QCoreApplication::translate("Dialog", "\320\230\320\274\321\217, \320\277\320\276\320\273", nullptr));
+        lineEdit_2->setText(QCoreApplication::translate("Dialog", "\320\222\320\276\320\267\321\200\320\260\321\201\321\202", nullptr));
+        lineEdit_3->setText(QCoreApplication::translate("Dialog", "\320\243\320\262\320\273\320\265\321\207\320\265\320\275\320\270\321\217", nullptr));
+        pushButton->setText(QCoreApplication::translate("Dialog", "\320\241\320\276\321\205\321\200\320\260\320\275\320\270\321\202\321\214", nullptr));
+        lineEdit_4->setText(QCoreApplication::translate("Dialog", "\320\223\320\276\321\200\320\276\320\264 \320\277\321\200\320\276\320\266\320\270\320\262\320\260\320\275\320\270\321\217", nullptr));
+        pushButton_2->setText(QCoreApplication::translate("Dialog", "\320\224\320\276\320\261\320\260\320\262\320\270\321\202\321\214 \321\204\320\276\321\202\320\276", nullptr));
     } // retranslateUi
 
 };
 
 namespace Ui {
-    class MainWindow: public Ui_MainWindow {};
+    class Dialog: public Ui_Dialog {};
 } // namespace Ui
 
 QT_END_NAMESPACE

@@ -1,19 +1,23 @@
 #ifndef SECONDWINDOW_H
 #define SECONDWINDOW_H
 
-#include <QWidget>
+#include <QDialog>
 
 namespace Ui {
 class SecondWindow;
 }
 
-class SecondWindow : public QWidget
+class SecondWindow : public QDialog
 {
     Q_OBJECT
 
 public:
-    SecondWindow(QWidget *parent = nullptr);
+    explicit SecondWindow(QWidget *parent = nullptr);
     ~SecondWindow();
+
+private slots:
+    void onSaveData(); // для сохранения данных
+    void onLoadPhoto();
 
 private:
     Ui::SecondWindow *ui;

@@ -150,8 +150,9 @@ Prototype_autogen/timestamp: \
 	C:/Qt/6.9.0/mingw_64/include/QtGui/qtransform.h \
 	C:/Qt/6.9.0/mingw_64/include/QtGui/qwindowdefs.h \
 	C:/Qt/6.9.0/mingw_64/include/QtGui/qwindowdefs_win.h \
+	C:/Qt/6.9.0/mingw_64/include/QtWidgets/QDialog \
 	C:/Qt/6.9.0/mingw_64/include/QtWidgets/QMainWindow \
-	C:/Qt/6.9.0/mingw_64/include/QtWidgets/QWidget \
+	C:/Qt/6.9.0/mingw_64/include/QtWidgets/qdialog.h \
 	C:/Qt/6.9.0/mingw_64/include/QtWidgets/qmainwindow.h \
 	C:/Qt/6.9.0/mingw_64/include/QtWidgets/qsizepolicy.h \
 	C:/Qt/6.9.0/mingw_64/include/QtWidgets/qtabwidget.h \
@@ -586,4 +587,5 @@ Prototype_autogen/timestamp: \
 	C:/Users/Denis/Documents/Qt\ projects/Prototype/secondwindow.cpp \
 	C:/Users/Denis/Documents/Qt\ projects/Prototype/secondwindow.h \
 	C:/Users/Denis/Documents/Qt\ projects/Prototype/mainwindow.ui \
+	C:/Users/Denis/Documents/Qt\ projects/Prototype/secondWindow.ui \
 	C:/Qt/Tools/CMake_64/bin/cmake.exe

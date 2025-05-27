@@ -38,10 +38,17 @@ template <> constexpr inline auto SecondWindow::qt_create_metaobjectdata<qt_meta
 {
     namespace QMC = QtMocConstants;
     QtMocHelpers::StringRefStorage qt_stringData {
-        "SecondWindow"
+        "SecondWindow",
+        "onSaveData",
+        "",
+        "onLoadPhoto"
     };
 
     QtMocHelpers::UintData qt_methods {
+        // Slot 'onSaveData'
+        QtMocHelpers::SlotData<void()>(1, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'onLoadPhoto'
+        QtMocHelpers::SlotData<void()>(3, 2, QMC::AccessPrivate, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -51,7 +58,7 @@ template <> constexpr inline auto SecondWindow::qt_create_metaobjectdata<qt_meta
             qt_methods, qt_properties, qt_enums);
 }
 Q_CONSTINIT const QMetaObject SecondWindow::staticMetaObject = { {
-    QMetaObject::SuperData::link<QWidget::staticMetaObject>(),
+    QMetaObject::SuperData::link<QDialog::staticMetaObject>(),
     qt_staticMetaObjectStaticContent<qt_meta_tag_ZN12SecondWindowE_t>.stringdata,
     qt_staticMetaObjectStaticContent<qt_meta_tag_ZN12SecondWindowE_t>.data,
     qt_static_metacall,
@@ -63,9 +70,13 @@ Q_CONSTINIT const QMetaObject SecondWindow::staticMetaObject = { {
 void SecondWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     auto *_t = static_cast<SecondWindow *>(_o);
-    (void)_t;
-    (void)_c;
-    (void)_id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        switch (_id) {
+        case 0: _t->onSaveData(); break;
+        case 1: _t->onLoadPhoto(); break;
+        default: ;
+        }
+    }
     (void)_a;
 }
 
@@ -79,12 +90,24 @@ void *SecondWindow::qt_metacast(const char *_clname)
     if (!_clname) return nullptr;
     if (!strcmp(_clname, qt_staticMetaObjectStaticContent<qt_meta_tag_ZN12SecondWindowE_t>.strings))
         return static_cast<void*>(this);
-    return QWidget::qt_metacast(_clname);
+    return QDialog::qt_metacast(_clname);
 }
 
 int SecondWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
-    _id = QWidget::qt_metacall(_c, _id, _a);
+    _id = QDialog::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        if (_id < 2)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 2;
+    }
+    if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        if (_id < 2)
+            *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
+        _id -= 2;
+    }
     return _id;
 }
 QT_WARNING_POP
