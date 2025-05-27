@@ -25,9 +25,9 @@ public:
     QLineEdit *lineEdit;
     QLineEdit *lineEdit_2;
     QLineEdit *lineEdit_3;
-    QPushButton *pushButton;
+    QPushButton *onSaveData;
     QLineEdit *lineEdit_4;
-    QPushButton *pushButton_2;
+    QPushButton *onLoadPhoto;
 
     void setupUi(QDialog *Dialog)
     {
@@ -46,15 +46,15 @@ public:
         lineEdit_3 = new QLineEdit(groupBox);
         lineEdit_3->setObjectName("lineEdit_3");
         lineEdit_3->setGeometry(QRect(10, 120, 113, 24));
-        pushButton = new QPushButton(groupBox);
-        pushButton->setObjectName("pushButton");
-        pushButton->setGeometry(QRect(150, 230, 80, 24));
+        onSaveData = new QPushButton(groupBox);
+        onSaveData->setObjectName("onSaveData");
+        onSaveData->setGeometry(QRect(150, 230, 80, 24));
         lineEdit_4 = new QLineEdit(groupBox);
         lineEdit_4->setObjectName("lineEdit_4");
         lineEdit_4->setGeometry(QRect(10, 170, 113, 24));
-        pushButton_2 = new QPushButton(groupBox);
-        pushButton_2->setObjectName("pushButton_2");
-        pushButton_2->setGeometry(QRect(260, 60, 80, 24));
+        onLoadPhoto = new QPushButton(groupBox);
+        onLoadPhoto->setObjectName("onLoadPhoto");
+        onLoadPhoto->setGeometry(QRect(260, 60, 91, 24));
 
         retranslateUi(Dialog);
 
@@ -68,9 +68,9 @@ public:
         lineEdit->setText(QCoreApplication::translate("Dialog", "\320\230\320\274\321\217, \320\277\320\276\320\273", nullptr));
         lineEdit_2->setText(QCoreApplication::translate("Dialog", "\320\222\320\276\320\267\321\200\320\260\321\201\321\202", nullptr));
         lineEdit_3->setText(QCoreApplication::translate("Dialog", "\320\243\320\262\320\273\320\265\321\207\320\265\320\275\320\270\321\217", nullptr));
-        pushButton->setText(QCoreApplication::translate("Dialog", "\320\241\320\276\321\205\321\200\320\260\320\275\320\270\321\202\321\214", nullptr));
+        onSaveData->setText(QCoreApplication::translate("Dialog", "\320\241\320\276\321\205\321\200\320\260\320\275\320\270\321\202\321\214", nullptr));
         lineEdit_4->setText(QCoreApplication::translate("Dialog", "\320\223\320\276\321\200\320\276\320\264 \320\277\321\200\320\276\320\266\320\270\320\262\320\260\320\275\320\270\321\217", nullptr));
-        pushButton_2->setText(QCoreApplication::translate("Dialog", "\320\224\320\276\320\261\320\260\320\262\320\270\321\202\321\214 \321\204\320\276\321\202\320\276", nullptr));
+        onLoadPhoto->setText(QCoreApplication::translate("Dialog", "\320\224\320\276\320\261\320\260\320\262\320\270\321\202\321\214 \321\204\320\276\321\202\320\276", nullptr));
     } // retranslateUi
 
 };

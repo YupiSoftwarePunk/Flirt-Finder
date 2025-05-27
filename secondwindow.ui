@@ -64,7 +64,7 @@
      <string>Увлечения</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="onSaveData">
     <property name="geometry">
      <rect>
       <x>150</x>
@@ -90,12 +90,12 @@
      <string>Город проживания</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QPushButton" name="onLoadPhoto">
     <property name="geometry">
      <rect>
       <x>260</x>
       <y>60</y>
-      <width>80</width>
+      <width>91</width>
       <height>24</height>
      </rect>
     </property>

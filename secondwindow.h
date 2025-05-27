@@ -2,6 +2,7 @@
 #define SECONDWINDOW_H
 
 #include <QDialog>
+#include <QPixmap>
 
 namespace Ui {
 class SecondWindow;
@@ -16,11 +17,13 @@ public:
     ~SecondWindow();
 
 private slots:
-    void onSaveData(); // для сохранения данных
+    void onSaveData();
     void onLoadPhoto();
 
 private:
     Ui::SecondWindow *ui;
+    QPixmap userPhoto;
+    QString photoPath;
 };
 
 #endif // SECONDWINDOW_H
