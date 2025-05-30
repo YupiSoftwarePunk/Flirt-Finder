@@ -5,6 +5,8 @@
 #include <QMessageBox>
 #include <QFile>
 #include <QTextStream>
+#include <QGraphicsPixmapItem>
+#include <QGraphicsScene>
 
 Second::Second(QWidget *parent)
     : QDialog(parent)
@@ -27,10 +29,19 @@ void Second::on_onLoadPhoto_clicked()
 
     if (!photoPath.isEmpty())
     {
-        m_photoPath = photoPath;
+        QPixmap pixmap(photoPath);
 
-        QMessageBox::information(this, "Фото добавлено",
-                                 "Фото успешно выбрано: " + photoPath);
+        if (pixmap.isNull())
+        {
+            QMessageBox::warning(this, "Ошибка", "Не удалось загрузить изображение!");
+            return;
+        }
+
+        QGraphicsScene *scene = new QGraphicsScene(this);
+        scene->addPixmap(pixmap.scaled(ui->graphicsView->size(), Qt::KeepAspectRatio));
+        ui->graphicsView->setScene(scene);
+
+        QMessageBox::information(this, "Фото добавлено", "Фото успешно выбрано!");
     }
 }
 
@@ -39,7 +50,7 @@ void Second::on_onSaveData_clicked()
 {
     QString name = ui->lineEdit->text();
     QString age = ui->lineEdit_2->text();
-    QString hobbies = ui->lineEdit_3->text();
+    QString hobbies = ui->textEdit->toPlainText();
     QString city = ui->lineEdit_4->text();
 
     if (name.isEmpty() || age.isEmpty() || hobbies.isEmpty() || city.isEmpty())
@@ -78,4 +89,3 @@ void Second::on_onSaveData_clicked()
         }
     }
 }
-

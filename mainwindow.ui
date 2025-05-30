@@ -26,109 +26,105 @@
     <property name="title">
      <string>Авторизация</string>
     </property>
-    <widget class="QPushButton" name="pushButton">
-     <property name="geometry">
-      <rect>
-       <x>110</x>
-       <y>110</y>
-       <width>80</width>
-       <height>24</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Авторизация</string>
-     </property>
-    </widget>
-    <widget class="QWidget" name="layoutWidget">
+    <widget class="QWidget" name="">
      <property name="geometry">
       <rect>
        <x>70</x>
        <y>30</y>
-       <width>160</width>
-       <height>60</height>
+       <width>162</width>
+       <height>101</height>
       </rect>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout">
+     <layout class="QVBoxLayout" name="verticalLayout_3">
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <layout class="QVBoxLayout" name="verticalLayout">
         <item>
-         <widget class="QLabel" name="label_2">
-          <property name="text">
-           <string>Пароль</string>
-          </property>
-         </widget>
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <item>
+           <widget class="QLabel" name="label_2">
+            <property name="text">
+             <string>Пароль</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="login"/>
+          </item>
+         </layout>
         </item>
         <item>
-         <widget class="QLineEdit" name="login"/>
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <item>
+           <widget class="QLabel" name="label">
+            <property name="text">
+             <string>Логин</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="password"/>
+          </item>
+         </layout>
         </item>
        </layout>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout">
-        <item>
-         <widget class="QLabel" name="label">
-          <property name="text">
-           <string>Логин</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLineEdit" name="password"/>
-        </item>
-       </layout>
+       <widget class="QPushButton" name="pushButton">
+        <property name="text">
+         <string>Авторизация</string>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>
-    <widget class="QPushButton" name="pushButton_2">
+    <widget class="QWidget" name="">
      <property name="geometry">
       <rect>
-       <x>100</x>
-       <y>250</y>
-       <width>80</width>
-       <height>24</height>
+       <x>70</x>
+       <y>170</y>
+       <width>162</width>
+       <height>92</height>
       </rect>
      </property>
-     <property name="text">
-      <string>Регистрация</string>
-     </property>
-    </widget>
-    <widget class="QWidget" name="layoutWidget_2">
-     <property name="geometry">
-      <rect>
-       <x>60</x>
-       <y>180</y>
-       <width>160</width>
-       <height>60</height>
-      </rect>
-     </property>
-     <layout class="QVBoxLayout" name="verticalLayout_2">
+     <layout class="QVBoxLayout" name="verticalLayout_4">
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_3">
+       <layout class="QVBoxLayout" name="verticalLayout_2">
         <item>
-         <widget class="QLabel" name="label_3">
-          <property name="text">
-           <string>Пароль</string>
-          </property>
-         </widget>
+         <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <item>
+           <widget class="QLabel" name="label_3">
+            <property name="text">
+             <string>Пароль</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="login_2"/>
+          </item>
+         </layout>
         </item>
         <item>
-         <widget class="QLineEdit" name="login_2"/>
+         <layout class="QHBoxLayout" name="horizontalLayout_4">
+          <item>
+           <widget class="QLabel" name="label_4">
+            <property name="text">
+             <string>Логин</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="password_2"/>
+          </item>
+         </layout>
         </item>
        </layout>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_4">
-        <item>
-         <widget class="QLabel" name="label_4">
-          <property name="text">
-           <string>Логин</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLineEdit" name="password_2"/>
-        </item>
-       </layout>
+       <widget class="QPushButton" name="pushButton_2">
+        <property name="text">
+         <string>Регистрация</string>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>

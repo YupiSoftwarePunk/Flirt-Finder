@@ -25,50 +25,11 @@
    <property name="title">
     <string>Создание и заполнение анкеты</string>
    </property>
-   <widget class="QLineEdit" name="lineEdit">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>30</y>
-      <width>113</width>
-      <height>24</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Имя, пол</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="lineEdit_2">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>70</y>
-      <width>113</width>
-      <height>24</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Возраст</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="lineEdit_3">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>120</y>
-      <width>113</width>
-      <height>24</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Увлечения</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="onSaveData">
     <property name="geometry">
      <rect>
-      <x>150</x>
-      <y>230</y>
+      <x>170</x>
+      <y>260</y>
       <width>80</width>
       <height>24</height>
      </rect>
@@ -77,24 +38,11 @@
      <string>Сохранить</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_4">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>170</y>
-      <width>113</width>
-      <height>24</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Город проживания</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="onLoadPhoto">
     <property name="geometry">
      <rect>
-      <x>260</x>
-      <y>60</y>
+      <x>270</x>
+      <y>150</y>
       <width>91</width>
       <height>24</height>
      </rect>
@@ -102,6 +50,72 @@
     <property name="text">
      <string>Добавить фото</string>
     </property>
+   </widget>
+   <widget class="QGraphicsView" name="graphicsView">
+    <property name="geometry">
+     <rect>
+      <x>250</x>
+      <y>30</y>
+      <width>121</width>
+      <height>101</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>30</y>
+      <width>231</width>
+      <height>222</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QLineEdit" name="lineEdit">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="placeholderText">
+        <string>Имя</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="lineEdit_5">
+       <property name="placeholderText">
+        <string>Пол</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="lineEdit_2">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="placeholderText">
+        <string>Возраст</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QTextEdit" name="textEdit">
+       <property name="placeholderText">
+        <string>Увлечения</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="lineEdit_4">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="placeholderText">
+        <string>Город проживания</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </widget>
   </widget>
  </widget>

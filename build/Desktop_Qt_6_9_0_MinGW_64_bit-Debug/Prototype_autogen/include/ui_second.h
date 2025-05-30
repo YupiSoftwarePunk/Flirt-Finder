@@ -12,9 +12,13 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QDialog>
+#include <QtWidgets/QGraphicsView>
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QTextEdit>
+#include <QtWidgets/QVBoxLayout>
+#include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
 
@@ -22,12 +26,16 @@ class Ui_Second
 {
 public:
     QGroupBox *groupBox;
-    QLineEdit *lineEdit;
-    QLineEdit *lineEdit_2;
-    QLineEdit *lineEdit_3;
     QPushButton *onSaveData;
-    QLineEdit *lineEdit_4;
     QPushButton *onLoadPhoto;
+    QGraphicsView *graphicsView;
+    QWidget *widget;
+    QVBoxLayout *verticalLayout;
+    QLineEdit *lineEdit;
+    QLineEdit *lineEdit_5;
+    QLineEdit *lineEdit_2;
+    QTextEdit *textEdit;
+    QLineEdit *lineEdit_4;
 
     void setupUi(QDialog *Second)
     {
@@ -37,24 +45,46 @@ public:
         groupBox = new QGroupBox(Second);
         groupBox->setObjectName("groupBox");
         groupBox->setGeometry(QRect(10, 0, 381, 291));
-        lineEdit = new QLineEdit(groupBox);
-        lineEdit->setObjectName("lineEdit");
-        lineEdit->setGeometry(QRect(10, 30, 113, 24));
-        lineEdit_2 = new QLineEdit(groupBox);
-        lineEdit_2->setObjectName("lineEdit_2");
-        lineEdit_2->setGeometry(QRect(10, 70, 113, 24));
-        lineEdit_3 = new QLineEdit(groupBox);
-        lineEdit_3->setObjectName("lineEdit_3");
-        lineEdit_3->setGeometry(QRect(10, 120, 113, 24));
         onSaveData = new QPushButton(groupBox);
         onSaveData->setObjectName("onSaveData");
-        onSaveData->setGeometry(QRect(150, 230, 80, 24));
-        lineEdit_4 = new QLineEdit(groupBox);
-        lineEdit_4->setObjectName("lineEdit_4");
-        lineEdit_4->setGeometry(QRect(10, 170, 113, 24));
+        onSaveData->setGeometry(QRect(170, 260, 80, 24));
         onLoadPhoto = new QPushButton(groupBox);
         onLoadPhoto->setObjectName("onLoadPhoto");
-        onLoadPhoto->setGeometry(QRect(260, 60, 91, 24));
+        onLoadPhoto->setGeometry(QRect(270, 150, 91, 24));
+        graphicsView = new QGraphicsView(groupBox);
+        graphicsView->setObjectName("graphicsView");
+        graphicsView->setGeometry(QRect(250, 30, 121, 101));
+        widget = new QWidget(groupBox);
+        widget->setObjectName("widget");
+        widget->setGeometry(QRect(10, 30, 231, 222));
+        verticalLayout = new QVBoxLayout(widget);
+        verticalLayout->setObjectName("verticalLayout");
+        verticalLayout->setContentsMargins(0, 0, 0, 0);
+        lineEdit = new QLineEdit(widget);
+        lineEdit->setObjectName("lineEdit");
+
+        verticalLayout->addWidget(lineEdit);
+
+        lineEdit_5 = new QLineEdit(widget);
+        lineEdit_5->setObjectName("lineEdit_5");
+
+        verticalLayout->addWidget(lineEdit_5);
+
+        lineEdit_2 = new QLineEdit(widget);
+        lineEdit_2->setObjectName("lineEdit_2");
+
+        verticalLayout->addWidget(lineEdit_2);
+
+        textEdit = new QTextEdit(widget);
+        textEdit->setObjectName("textEdit");
+
+        verticalLayout->addWidget(textEdit);
+
+        lineEdit_4 = new QLineEdit(widget);
+        lineEdit_4->setObjectName("lineEdit_4");
+
+        verticalLayout->addWidget(lineEdit_4);
+
 
         retranslateUi(Second);
 
@@ -65,12 +95,16 @@ public:
     {
         Second->setWindowTitle(QCoreApplication::translate("Second", "Dialog", nullptr));
         groupBox->setTitle(QCoreApplication::translate("Second", "\320\241\320\276\320\267\320\264\320\260\320\275\320\270\320\265 \320\270 \320\267\320\260\320\277\320\276\320\273\320\275\320\265\320\275\320\270\320\265 \320\260\320\275\320\272\320\265\321\202\321\213", nullptr));
-        lineEdit->setText(QCoreApplication::translate("Second", "\320\230\320\274\321\217, \320\277\320\276\320\273", nullptr));
-        lineEdit_2->setText(QCoreApplication::translate("Second", "\320\222\320\276\320\267\321\200\320\260\321\201\321\202", nullptr));
-        lineEdit_3->setText(QCoreApplication::translate("Second", "\320\243\320\262\320\273\320\265\321\207\320\265\320\275\320\270\321\217", nullptr));
         onSaveData->setText(QCoreApplication::translate("Second", "\320\241\320\276\321\205\321\200\320\260\320\275\320\270\321\202\321\214", nullptr));
-        lineEdit_4->setText(QCoreApplication::translate("Second", "\320\223\320\276\321\200\320\276\320\264 \320\277\321\200\320\276\320\266\320\270\320\262\320\260\320\275\320\270\321\217", nullptr));
         onLoadPhoto->setText(QCoreApplication::translate("Second", "\320\224\320\276\320\261\320\260\320\262\320\270\321\202\321\214 \321\204\320\276\321\202\320\276", nullptr));
+        lineEdit->setText(QString());
+        lineEdit->setPlaceholderText(QCoreApplication::translate("Second", "\320\230\320\274\321\217", nullptr));
+        lineEdit_5->setPlaceholderText(QCoreApplication::translate("Second", "\320\237\320\276\320\273", nullptr));
+        lineEdit_2->setText(QString());
+        lineEdit_2->setPlaceholderText(QCoreApplication::translate("Second", "\320\222\320\276\320\267\321\200\320\260\321\201\321\202", nullptr));
+        textEdit->setPlaceholderText(QCoreApplication::translate("Second", "\320\243\320\262\320\273\320\265\321\207\320\265\320\275\320\270\321\217", nullptr));
+        lineEdit_4->setText(QString());
+        lineEdit_4->setPlaceholderText(QCoreApplication::translate("Second", "\320\223\320\276\321\200\320\276\320\264 \320\277\321\200\320\276\320\266\320\270\320\262\320\260\320\275\320\270\321\217", nullptr));
     } // retranslateUi
 
 };
