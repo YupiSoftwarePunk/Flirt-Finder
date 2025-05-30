@@ -338,9 +338,9 @@
 			null
 		],
 		[
-			"C:/Users/Denis/Documents/Qt projects/Prototype/secondwindow.h",
+			"C:/Users/Denis/Documents/Qt projects/Prototype/second.h",
 			"MU",
-			"EWIEGA46WW/moc_secondwindow.cpp",
+			"EWIEGA46WW/moc_second.cpp",
 			null
 		]
 	],
@@ -422,7 +422,7 @@
 			null
 		],
 		[
-			"C:/Users/Denis/Documents/Qt projects/Prototype/secondwindow.cpp",
+			"C:/Users/Denis/Documents/Qt projects/Prototype/second.cpp",
 			"MU",
 			null
 		]

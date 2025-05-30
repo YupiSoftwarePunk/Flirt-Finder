@@ -1,6 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "secondwindow.h"
+#include "second.h"
 
 #include <QMessageBox>
 
@@ -29,7 +29,7 @@ void MainWindow::on_pushButton_clicked()
     {
         QMessageBox::information(this, "Success", "Авторизация прошла успешно!");
 
-        auto secondWindow = new SecondWindow();
+        auto secondWindow = new Second();
         secondWindow->show();
 
         this->close();
@@ -56,7 +56,7 @@ void MainWindow::on_pushButton_2_clicked()
         userDatabase.insert(login, password);
         QMessageBox::information(this, "Success", "Регистрация прошла успешно!");
 
-        auto secondWindow = new SecondWindow();
+        auto secondWindow = new Second();
         secondWindow->show();
 
         this->close();

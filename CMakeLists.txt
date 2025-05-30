@@ -23,8 +23,9 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(Prototype
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
-        secondwindow.h secondwindow.cpp
-        secondwindow.ui
+
+
+        second.h second.cpp second.ui
 
     )
 # Define target properties for Android with Qt 6 as:

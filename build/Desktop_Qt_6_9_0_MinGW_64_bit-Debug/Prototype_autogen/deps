@@ -124,7 +124,6 @@ Prototype_autogen/timestamp: \
 	C:/Qt/6.9.0/mingw_64/include/QtCore/qversiontagging.h \
 	C:/Qt/6.9.0/mingw_64/include/QtCore/qxptype_traits.h \
 	C:/Qt/6.9.0/mingw_64/include/QtCore/qyieldcpu.h \
-	C:/Qt/6.9.0/mingw_64/include/QtGui/QPixmap \
 	C:/Qt/6.9.0/mingw_64/include/QtGui/qaction.h \
 	C:/Qt/6.9.0/mingw_64/include/QtGui/qbitmap.h \
 	C:/Qt/6.9.0/mingw_64/include/QtGui/qbrush.h \
@@ -585,8 +584,8 @@ Prototype_autogen/timestamp: \
 	C:/Users/Denis/Documents/Qt\ projects/Prototype/main.cpp \
 	C:/Users/Denis/Documents/Qt\ projects/Prototype/mainwindow.cpp \
 	C:/Users/Denis/Documents/Qt\ projects/Prototype/mainwindow.h \
-	C:/Users/Denis/Documents/Qt\ projects/Prototype/secondwindow.cpp \
-	C:/Users/Denis/Documents/Qt\ projects/Prototype/secondwindow.h \
+	C:/Users/Denis/Documents/Qt\ projects/Prototype/second.cpp \
+	C:/Users/Denis/Documents/Qt\ projects/Prototype/second.h \
 	C:/Users/Denis/Documents/Qt\ projects/Prototype/mainwindow.ui \
-	C:/Users/Denis/Documents/Qt\ projects/Prototype/secondwindow.ui \
+	C:/Users/Denis/Documents/Qt\ projects/Prototype/second.ui \
 	C:/Qt/Tools/CMake_64/bin/cmake.exe
