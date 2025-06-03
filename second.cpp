@@ -7,12 +7,17 @@
 #include <QTextStream>
 #include <QGraphicsPixmapItem>
 #include <QGraphicsScene>
+#include <QKeyEvent>
 
 Second::Second(QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::Second)
 {
     ui->setupUi(this);
+
+    ui->lineEdit->installEventFilter(this);
+    ui->lineEdit_4->installEventFilter(this);
+    ui->textEdit->installEventFilter(this);
 }
 
 Second::~Second()
@@ -48,18 +53,11 @@ void Second::on_onLoadPhoto_clicked()
 
 void Second::on_onSaveData_clicked()
 {
-    // QRegularExpressionValidator *textValidator = new QRegularExpressionValidator(
-    //     QRegularExpression(R"(^[a-zA-Zа-яА-ЯёЁ\s-]+$)"), this);
-
-
     QString name = ui->lineEdit->text().trimmed();
     int age = ui->spinBox->value();
     QString hobbies = ui->textEdit->toPlainText();
     QString city = ui->lineEdit_4->text().trimmed();
     QString sex = ui->comboBox->currentText();
-
-    // ui->lineEdit->setValidator(textValidator);
-    // ui->lineEdit_4->setValidator(textValidator);
 
     if (name.isEmpty() || age == 0 || hobbies.isEmpty() || city.isEmpty())
     {
@@ -117,3 +115,33 @@ void Second::on_onSaveData_clicked()
     }
 }
 
+
+bool Second::eventFilter(QObject *watched, QEvent *event)
+{
+    if (event->type() == QEvent::KeyPress)
+    {
+        QKeyEvent *keyEvent = static_cast<QKeyEvent*>(event);
+
+        QLineEdit *edit = qobject_cast<QLineEdit*>(watched);
+        if (edit && (edit == ui->lineEdit || edit == ui->lineEdit_4))
+        {
+            if (!keyEvent->text().isEmpty() &&
+                !QRegularExpression("[a-zA-Zа-яА-ЯёЁ\\s-]").match(keyEvent->text()).hasMatch())
+            {
+                return true;
+            }
+        }
+
+        QTextEdit *textEditt = qobject_cast<QTextEdit *>(watched);
+        if (textEditt && textEditt == ui->textEdit)
+        {
+            if (!keyEvent->text().isEmpty() &&
+                !QRegularExpression("[a-zA-Zа-яА-ЯёЁ0-9\\s-]").match(keyEvent->text()).hasMatch())
+            {
+                return true;
+            }
+        }
+    }
+
+    return QDialog::eventFilter(watched, event);
+}
