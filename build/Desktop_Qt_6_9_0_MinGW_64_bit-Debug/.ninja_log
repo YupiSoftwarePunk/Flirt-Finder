@@ -1,65 +1,85 @@
 # ninja log v6
-47	205	7703261110282549	C:/Users/Denis/Documents/Qt projects/Prototype/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/Prototype_autogen/mocs_compilation.cpp	c8ac5236a8e4608e
-47	205	7703261110282549	Prototype_autogen/timestamp	c8ac5236a8e4608e
-675	2905	7703031024146221	CMakeFiles/Prototype.dir/main.cpp.obj	45b054c36e269581
-47	205	7703261110282549	Prototype_autogen/mocs_compilation.cpp	c8ac5236a8e4608e
-206	2410	7703261111873554	CMakeFiles/Prototype.dir/mainwindow.cpp.obj	3a8b281b8269e81b
-209	2602	7703261111914861	CMakeFiles/Prototype.dir/second.cpp.obj	9a936cb180fdbcb8
-47	205	7703261110282549	C:/Users/Denis/Documents/Qt projects/Prototype/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/Prototype_autogen/timestamp	c8ac5236a8e4608e
-671	2875	7703031024146221	CMakeFiles/Prototype.dir/Prototype_autogen/mocs_compilation.cpp.obj	147a62a47e69df98
-2602	2815	7703261135767165	Prototype.exe	49ba4fd7b71130c1
+11	646	7706626871441812	Prototype_autogen/timestamp	c8ac5236a8e4608e
+11	646	7706626871441812	C:/Users/Denis/Documents/Qt projects/Prototype/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/Prototype_autogen/mocs_compilation.cpp	c8ac5236a8e4608e
+11	646	7706626871441812	Prototype_autogen/mocs_compilation.cpp	c8ac5236a8e4608e
+650	2553	7706626872241905	CMakeFiles/Prototype.dir/main.cpp.obj	45b054c36e269581
+656	3314	7706626872309300	CMakeFiles/Prototype.dir/second.cpp.obj	9a936cb180fdbcb8
+11	646	7706626871441812	C:/Users/Denis/Documents/Qt projects/Prototype/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/Prototype_autogen/timestamp	c8ac5236a8e4608e
+653	3076	7706626872271882	CMakeFiles/Prototype.dir/mainwindow.cpp.obj	3a8b281b8269e81b
+647	2615	7706626872211890	CMakeFiles/Prototype.dir/Prototype_autogen/mocs_compilation.cpp.obj	147a62a47e69df98
+3314	3559	7706626898868063	Prototype.exe	49ba4fd7b71130c1
 629	684	7703024059183688	CMakeFiles/Prototype.dir/secondwindow.cpp.obj	19fa5d89c10799bf
-54	207	7703261646153767	Prototype_autogen/timestamp	c8ac5236a8e4608e
-54	207	7703261646153767	Prototype_autogen/mocs_compilation.cpp	c8ac5236a8e4608e
-54	207	7703261646153767	C:/Users/Denis/Documents/Qt projects/Prototype/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/Prototype_autogen/timestamp	c8ac5236a8e4608e
-54	207	7703261646153767	C:/Users/Denis/Documents/Qt projects/Prototype/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/Prototype_autogen/mocs_compilation.cpp	c8ac5236a8e4608e
-208	2481	7703261647688603	CMakeFiles/Prototype.dir/mainwindow.cpp.obj	3a8b281b8269e81b
-211	2662	7703261647718691	CMakeFiles/Prototype.dir/second.cpp.obj	9a936cb180fdbcb8
-2662	2883	7703261672232494	Prototype.exe	49ba4fd7b71130c1
-43	206	7703262324957120	Prototype_autogen/timestamp	c8ac5236a8e4608e
-43	206	7703262324957120	Prototype_autogen/mocs_compilation.cpp	c8ac5236a8e4608e
-43	206	7703262324957120	C:/Users/Denis/Documents/Qt projects/Prototype/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/Prototype_autogen/timestamp	c8ac5236a8e4608e
-43	206	7703262324957120	C:/Users/Denis/Documents/Qt projects/Prototype/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/Prototype_autogen/mocs_compilation.cpp	c8ac5236a8e4608e
-207	2476	7703262326603515	CMakeFiles/Prototype.dir/mainwindow.cpp.obj	3a8b281b8269e81b
-46	203	7703263703397248	Prototype_autogen/timestamp	c8ac5236a8e4608e
-46	203	7703263703397248	Prototype_autogen/mocs_compilation.cpp	c8ac5236a8e4608e
-46	203	7703263703397248	C:/Users/Denis/Documents/Qt projects/Prototype/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/Prototype_autogen/timestamp	c8ac5236a8e4608e
-46	203	7703263703397248	C:/Users/Denis/Documents/Qt projects/Prototype/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/Prototype_autogen/mocs_compilation.cpp	c8ac5236a8e4608e
-204	2409	7703263704971652	CMakeFiles/Prototype.dir/mainwindow.cpp.obj	3a8b281b8269e81b
-207	2633	7703263705001499	CMakeFiles/Prototype.dir/second.cpp.obj	9a936cb180fdbcb8
-2633	2847	7703263729271538	Prototype.exe	49ba4fd7b71130c1
-44	228	7703264715843733	Prototype_autogen/timestamp	c8ac5236a8e4608e
-44	228	7703264715843733	Prototype_autogen/mocs_compilation.cpp	c8ac5236a8e4608e
-44	228	7703264715843733	C:/Users/Denis/Documents/Qt projects/Prototype/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/Prototype_autogen/timestamp	c8ac5236a8e4608e
-44	228	7703264715843733	C:/Users/Denis/Documents/Qt projects/Prototype/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/Prototype_autogen/mocs_compilation.cpp	c8ac5236a8e4608e
-229	2348	7703264717690850	CMakeFiles/Prototype.dir/mainwindow.cpp.obj	3a8b281b8269e81b
-233	2544	7703264717729739	CMakeFiles/Prototype.dir/second.cpp.obj	9a936cb180fdbcb8
-2544	2753	7703264740842283	Prototype.exe	49ba4fd7b71130c1
-8	179	7703265338598844	Prototype_autogen/timestamp	c8ac5236a8e4608e
-8	179	7703265338598844	Prototype_autogen/mocs_compilation.cpp	c8ac5236a8e4608e
-8	179	7703265338598844	C:/Users/Denis/Documents/Qt projects/Prototype/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/Prototype_autogen/timestamp	c8ac5236a8e4608e
-8	179	7703265338598844	C:/Users/Denis/Documents/Qt projects/Prototype/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/Prototype_autogen/mocs_compilation.cpp	c8ac5236a8e4608e
-180	2301	7703265340321547	CMakeFiles/Prototype.dir/mainwindow.cpp.obj	3a8b281b8269e81b
-183	2488	7703265340352023	CMakeFiles/Prototype.dir/second.cpp.obj	9a936cb180fdbcb8
-2488	2703	7703265363344201	Prototype.exe	49ba4fd7b71130c1
-55	228	7703266372879194	Prototype_autogen/timestamp	c8ac5236a8e4608e
-55	228	7703266372879194	Prototype_autogen/mocs_compilation.cpp	c8ac5236a8e4608e
-55	228	7703266372879194	C:/Users/Denis/Documents/Qt projects/Prototype/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/Prototype_autogen/timestamp	c8ac5236a8e4608e
-55	228	7703266372879194	C:/Users/Denis/Documents/Qt projects/Prototype/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/Prototype_autogen/mocs_compilation.cpp	c8ac5236a8e4608e
-228	2316	7703266374653474	CMakeFiles/Prototype.dir/mainwindow.cpp.obj	3a8b281b8269e81b
-232	2495	7703266374691121	CMakeFiles/Prototype.dir/second.cpp.obj	9a936cb180fdbcb8
-2495	2709	7703266397301633	Prototype.exe	49ba4fd7b71130c1
-43	212	7703268259712440	Prototype_autogen/timestamp	c8ac5236a8e4608e
-43	212	7703268259712440	Prototype_autogen/mocs_compilation.cpp	c8ac5236a8e4608e
-43	212	7703268259712440	C:/Users/Denis/Documents/Qt projects/Prototype/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/Prototype_autogen/timestamp	c8ac5236a8e4608e
-43	212	7703268259712440	C:/Users/Denis/Documents/Qt projects/Prototype/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/Prototype_autogen/mocs_compilation.cpp	c8ac5236a8e4608e
-213	2172	7703268261415316	CMakeFiles/Prototype.dir/mainwindow.cpp.obj	3a8b281b8269e81b
-215	2366	7703268261445269	CMakeFiles/Prototype.dir/second.cpp.obj	9a936cb180fdbcb8
-2366	2596	7703268282877077	Prototype.exe	49ba4fd7b71130c1
-43	200	7703269510124931	Prototype_autogen/timestamp	c8ac5236a8e4608e
-43	200	7703269510124931	Prototype_autogen/mocs_compilation.cpp	c8ac5236a8e4608e
-43	200	7703269510124931	C:/Users/Denis/Documents/Qt projects/Prototype/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/Prototype_autogen/timestamp	c8ac5236a8e4608e
-43	200	7703269510124931	C:/Users/Denis/Documents/Qt projects/Prototype/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/Prototype_autogen/mocs_compilation.cpp	c8ac5236a8e4608e
-201	2162	7703269511707293	CMakeFiles/Prototype.dir/mainwindow.cpp.obj	3a8b281b8269e81b
-204	2338	7703269511734798	CMakeFiles/Prototype.dir/second.cpp.obj	9a936cb180fdbcb8
-2338	2566	7703269533017790	Prototype.exe	49ba4fd7b71130c1
+61	220	7706627658771149	Prototype_autogen/timestamp	c8ac5236a8e4608e
+61	220	7706627658771149	Prototype_autogen/mocs_compilation.cpp	c8ac5236a8e4608e
+61	220	7706627658771149	C:/Users/Denis/Documents/Qt projects/Prototype/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/Prototype_autogen/timestamp	c8ac5236a8e4608e
+61	220	7706627658771149	C:/Users/Denis/Documents/Qt projects/Prototype/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/Prototype_autogen/mocs_compilation.cpp	c8ac5236a8e4608e
+221	2423	7706627660365473	CMakeFiles/Prototype.dir/mainwindow.cpp.obj	3a8b281b8269e81b
+224	2732	7706627660395470	CMakeFiles/Prototype.dir/second.cpp.obj	9a936cb180fdbcb8
+2732	2970	7706627685478781	Prototype.exe	49ba4fd7b71130c1
+47	192	7706638094257963	Prototype_autogen/timestamp	c8ac5236a8e4608e
+47	192	7706638094257963	Prototype_autogen/mocs_compilation.cpp	c8ac5236a8e4608e
+47	192	7706638094257963	C:/Users/Denis/Documents/Qt projects/Prototype/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/Prototype_autogen/timestamp	c8ac5236a8e4608e
+47	192	7706638094257963	C:/Users/Denis/Documents/Qt projects/Prototype/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/Prototype_autogen/mocs_compilation.cpp	c8ac5236a8e4608e
+193	2351	7706638095720374	CMakeFiles/Prototype.dir/mainwindow.cpp.obj	3a8b281b8269e81b
+196	2684	7706638095751065	CMakeFiles/Prototype.dir/second.cpp.obj	9a936cb180fdbcb8
+2684	2917	7706638120629561	Prototype.exe	49ba4fd7b71130c1
+44	219	7706639114669314	Prototype_autogen/timestamp	c8ac5236a8e4608e
+44	219	7706639114669314	Prototype_autogen/mocs_compilation.cpp	c8ac5236a8e4608e
+44	219	7706639114669314	C:/Users/Denis/Documents/Qt projects/Prototype/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/Prototype_autogen/timestamp	c8ac5236a8e4608e
+44	219	7706639114669314	C:/Users/Denis/Documents/Qt projects/Prototype/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/Prototype_autogen/mocs_compilation.cpp	c8ac5236a8e4608e
+220	2245	7706639116422569	CMakeFiles/Prototype.dir/mainwindow.cpp.obj	3a8b281b8269e81b
+223	2547	7706639116445350	CMakeFiles/Prototype.dir/second.cpp.obj	9a936cb180fdbcb8
+2547	2777	7706639139699561	Prototype.exe	49ba4fd7b71130c1
+43	187	7706641661817875	Prototype_autogen/timestamp	c8ac5236a8e4608e
+43	187	7706641661817875	Prototype_autogen/mocs_compilation.cpp	c8ac5236a8e4608e
+43	187	7706641661817875	C:/Users/Denis/Documents/Qt projects/Prototype/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/Prototype_autogen/timestamp	c8ac5236a8e4608e
+43	187	7706641661817875	C:/Users/Denis/Documents/Qt projects/Prototype/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/Prototype_autogen/mocs_compilation.cpp	c8ac5236a8e4608e
+188	2258	7706641663270227	CMakeFiles/Prototype.dir/mainwindow.cpp.obj	3a8b281b8269e81b
+191	2544	7706641663300352	CMakeFiles/Prototype.dir/second.cpp.obj	9a936cb180fdbcb8
+2544	2772	7706641686829841	Prototype.exe	49ba4fd7b71130c1
+46	193	7706641893761437	Prototype_autogen/timestamp	c8ac5236a8e4608e
+46	193	7706641893761437	Prototype_autogen/mocs_compilation.cpp	c8ac5236a8e4608e
+46	193	7706641893761437	C:/Users/Denis/Documents/Qt projects/Prototype/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/Prototype_autogen/timestamp	c8ac5236a8e4608e
+46	193	7706641893761437	C:/Users/Denis/Documents/Qt projects/Prototype/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/Prototype_autogen/mocs_compilation.cpp	c8ac5236a8e4608e
+194	2197	7706641895241566	CMakeFiles/Prototype.dir/mainwindow.cpp.obj	3a8b281b8269e81b
+197	2499	7706641895271435	CMakeFiles/Prototype.dir/second.cpp.obj	9a936cb180fdbcb8
+2499	2723	7706641918207482	Prototype.exe	49ba4fd7b71130c1
+47	207	7706692741136020	Prototype_autogen/timestamp	c8ac5236a8e4608e
+47	207	7706692741136020	Prototype_autogen/mocs_compilation.cpp	c8ac5236a8e4608e
+47	207	7706692741136020	C:/Users/Denis/Documents/Qt projects/Prototype/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/Prototype_autogen/timestamp	c8ac5236a8e4608e
+47	207	7706692741136020	C:/Users/Denis/Documents/Qt projects/Prototype/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/Prototype_autogen/mocs_compilation.cpp	c8ac5236a8e4608e
+208	2384	7706692742750124	CMakeFiles/Prototype.dir/mainwindow.cpp.obj	3a8b281b8269e81b
+211	2656	7706692742780144	CMakeFiles/Prototype.dir/second.cpp.obj	9a936cb180fdbcb8
+2656	2904	7706692767231197	Prototype.exe	49ba4fd7b71130c1
+49	647	7706695636323060	Prototype_autogen/timestamp	c8ac5236a8e4608e
+49	647	7706695636323060	Prototype_autogen/mocs_compilation.cpp	c8ac5236a8e4608e
+49	647	7706695636323060	C:/Users/Denis/Documents/Qt projects/Prototype/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/Prototype_autogen/timestamp	c8ac5236a8e4608e
+49	647	7706695636323060	C:/Users/Denis/Documents/Qt projects/Prototype/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/Prototype_autogen/mocs_compilation.cpp	c8ac5236a8e4608e
+651	2623	7706695637107339	CMakeFiles/Prototype.dir/main.cpp.obj	45b054c36e269581
+648	2631	7706695637077272	CMakeFiles/Prototype.dir/Prototype_autogen/mocs_compilation.cpp.obj	147a62a47e69df98
+654	3072	7706695637147347	CMakeFiles/Prototype.dir/mainwindow.cpp.obj	3a8b281b8269e81b
+657	3341	7706695637177348	CMakeFiles/Prototype.dir/second.cpp.obj	9a936cb180fdbcb8
+51	203	7706696238537513	Prototype_autogen/timestamp	c8ac5236a8e4608e
+51	203	7706696238537513	Prototype_autogen/mocs_compilation.cpp	c8ac5236a8e4608e
+51	203	7706696238537513	C:/Users/Denis/Documents/Qt projects/Prototype/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/Prototype_autogen/timestamp	c8ac5236a8e4608e
+51	203	7706696238537513	C:/Users/Denis/Documents/Qt projects/Prototype/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/Prototype_autogen/mocs_compilation.cpp	c8ac5236a8e4608e
+204	2331	7706696240061946	CMakeFiles/Prototype.dir/mainwindow.cpp.obj	3a8b281b8269e81b
+207	2608	7706696240092033	CMakeFiles/Prototype.dir/second.cpp.obj	9a936cb180fdbcb8
+45	195	7706696821780416	Prototype_autogen/timestamp	c8ac5236a8e4608e
+45	195	7706696821780416	Prototype_autogen/mocs_compilation.cpp	c8ac5236a8e4608e
+45	195	7706696821780416	C:/Users/Denis/Documents/Qt projects/Prototype/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/Prototype_autogen/timestamp	c8ac5236a8e4608e
+45	195	7706696821780416	C:/Users/Denis/Documents/Qt projects/Prototype/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/Prototype_autogen/mocs_compilation.cpp	c8ac5236a8e4608e
+196	2292	7706696823295088	CMakeFiles/Prototype.dir/mainwindow.cpp.obj	3a8b281b8269e81b
+199	2557	7706696823315106	CMakeFiles/Prototype.dir/second.cpp.obj	9a936cb180fdbcb8
+50	199	7706697221208974	Prototype_autogen/timestamp	c8ac5236a8e4608e
+50	199	7706697221208974	Prototype_autogen/mocs_compilation.cpp	c8ac5236a8e4608e
+50	199	7706697221208974	C:/Users/Denis/Documents/Qt projects/Prototype/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/Prototype_autogen/timestamp	c8ac5236a8e4608e
+50	199	7706697221208974	C:/Users/Denis/Documents/Qt projects/Prototype/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/Prototype_autogen/mocs_compilation.cpp	c8ac5236a8e4608e
+199	2337	7706697222704655	CMakeFiles/Prototype.dir/mainwindow.cpp.obj	3a8b281b8269e81b
+202	2596	7706697222729204	CMakeFiles/Prototype.dir/second.cpp.obj	9a936cb180fdbcb8
+48	196	7706698290558550	Prototype_autogen/timestamp	c8ac5236a8e4608e
+48	196	7706698290558550	Prototype_autogen/mocs_compilation.cpp	c8ac5236a8e4608e
+48	196	7706698290558550	C:/Users/Denis/Documents/Qt projects/Prototype/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/Prototype_autogen/timestamp	c8ac5236a8e4608e
+48	196	7706698290558550	C:/Users/Denis/Documents/Qt projects/Prototype/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/Prototype_autogen/mocs_compilation.cpp	c8ac5236a8e4608e
+196	2201	7706698292049099	CMakeFiles/Prototype.dir/mainwindow.cpp.obj	3a8b281b8269e81b
+199	2496	7706698292079100	CMakeFiles/Prototype.dir/second.cpp.obj	9a936cb180fdbcb8

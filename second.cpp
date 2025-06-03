@@ -48,12 +48,20 @@ void Second::on_onLoadPhoto_clicked()
 
 void Second::on_onSaveData_clicked()
 {
-    QString name = ui->lineEdit->text();
-    QString age = ui->lineEdit_2->text();
-    QString hobbies = ui->textEdit->toPlainText();
-    QString city = ui->lineEdit_4->text();
+    // QRegularExpressionValidator *textValidator = new QRegularExpressionValidator(
+    //     QRegularExpression(R"(^[a-zA-Zа-яА-ЯёЁ\s-]+$)"), this);
 
-    if (name.isEmpty() || age.isEmpty() || hobbies.isEmpty() || city.isEmpty())
+
+    QString name = ui->lineEdit->text().trimmed();
+    int age = ui->spinBox->value();
+    QString hobbies = ui->textEdit->toPlainText();
+    QString city = ui->lineEdit_4->text().trimmed();
+    QString sex = ui->comboBox->currentText();
+
+    // ui->lineEdit->setValidator(textValidator);
+    // ui->lineEdit_4->setValidator(textValidator);
+
+    if (name.isEmpty() || age == 0 || hobbies.isEmpty() || city.isEmpty())
     {
         QMessageBox::warning(this, "Ошибка", "Все поля должны быть заполнены!");
         return;
@@ -70,7 +78,8 @@ void Second::on_onSaveData_clicked()
         {
             QTextStream stream(&file);
             stream << "Анкета пользователя\n";
-            stream << "Имя, пол: " << name << "\n";
+            stream << "Имя: " << name << "\n";
+            stream << "Пол: "<< sex<<"\n";
             stream << "Возраст: " << age << "\n";
             stream << "Увлечения: " << hobbies << "\n";
             stream << "Город проживания: " << city << "\n";
@@ -88,4 +97,23 @@ void Second::on_onSaveData_clicked()
             QMessageBox::critical(this, "Ошибка", "Не удалось сохранить файл!");
         }
     }
+
+
+
+    QRegularExpression validText("^[a-zA-Zа-яА-ЯёЁ\\s-]+$");
+
+    if (!validText.match(name).hasMatch() || name.isEmpty())
+    {
+        QMessageBox::warning(this, "Ошибка", "Имя содержит недопустимые символы");
+        ui->lineEdit->setFocus();
+        return;
+    }
+
+    if (!validText.match(city).hasMatch() || city.isEmpty())
+    {
+        QMessageBox::warning(this, "Ошибка", "Город содержит недопустимые символы");
+        ui->lineEdit_4->setFocus();
+        return;
+    }
 }
+

@@ -53,6 +53,7 @@ C:/Users/Denis/Documents/Qt\ projects/Prototype/build/Desktop_Qt_6_9_0_MinGW_64_
   C:/Qt/6.9.0/mingw_64/include/QtCore/qlatin1stringview.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qline.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qlist.h \
+  C:/Qt/6.9.0/mingw_64/include/QtCore/qlocale.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qlogging.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qmalloc.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qmap.h \
@@ -73,6 +74,7 @@ C:/Users/Denis/Documents/Qt\ projects/Prototype/build/Desktop_Qt_6_9_0_MinGW_64_
   C:/Qt/6.9.0/mingw_64/include/QtCore/qprocessordetection.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qrect.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qrefcount.h \
+  C:/Qt/6.9.0/mingw_64/include/QtCore/qregularexpression.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qscopedpointer.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qscopeguard.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qset.h \
@@ -125,6 +127,7 @@ C:/Users/Denis/Documents/Qt\ projects/Prototype/build/Desktop_Qt_6_9_0_MinGW_64_
   C:/Qt/6.9.0/mingw_64/include/QtCore/qversiontagging.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qxptype_traits.h \
   C:/Qt/6.9.0/mingw_64/include/QtCore/qyieldcpu.h \
+  C:/Qt/6.9.0/mingw_64/include/QtGui/QRegularExpressionValidator \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qaction.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qbitmap.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qbrush.h \
@@ -149,6 +152,7 @@ C:/Users/Denis/Documents/Qt\ projects/Prototype/build/Desktop_Qt_6_9_0_MinGW_64_
   C:/Qt/6.9.0/mingw_64/include/QtGui/qtguiexports.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qtguiglobal.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qtransform.h \
+  C:/Qt/6.9.0/mingw_64/include/QtGui/qvalidator.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qwindowdefs.h \
   C:/Qt/6.9.0/mingw_64/include/QtGui/qwindowdefs_win.h \
   C:/Qt/6.9.0/mingw_64/include/QtWidgets/QDialog \

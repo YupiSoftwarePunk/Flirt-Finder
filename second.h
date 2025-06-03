@@ -2,6 +2,7 @@
 #define SECOND_H
 
 #include <QDialog>
+#include <QRegularExpressionValidator>
 
 namespace Ui {
 class Second;
@@ -23,6 +24,8 @@ private slots:
 private:
     Ui::Second *ui;
     QString m_photoPath;
+
+    bool eventFilter(QObject *watched, QEvent *event) override;
 };
 
 #endif // SECOND_H

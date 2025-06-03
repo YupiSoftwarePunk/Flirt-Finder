@@ -61,7 +61,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -82,19 +82,26 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit_5">
+      <widget class="QComboBox" name="comboBox">
        <property name="placeholderText">
         <string>Пол</string>
        </property>
+       <item>
+        <property name="text">
+         <string>Мужской</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Женский</string>
+        </property>
+       </item>
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit_2">
-       <property name="text">
-        <string/>
-       </property>
-       <property name="placeholderText">
-        <string>Возраст</string>
+      <widget class="QSpinBox" name="spinBox">
+       <property name="minimum">
+        <number>16</number>
        </property>
       </widget>
      </item>

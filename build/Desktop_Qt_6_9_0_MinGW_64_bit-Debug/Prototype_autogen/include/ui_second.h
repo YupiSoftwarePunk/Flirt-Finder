@@ -11,11 +11,13 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QComboBox>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QGraphicsView>
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QSpinBox>
 #include <QtWidgets/QTextEdit>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
@@ -29,11 +31,11 @@ public:
     QPushButton *onSaveData;
     QPushButton *onLoadPhoto;
     QGraphicsView *graphicsView;
-    QWidget *widget;
+    QWidget *layoutWidget;
     QVBoxLayout *verticalLayout;
     QLineEdit *lineEdit;
-    QLineEdit *lineEdit_5;
-    QLineEdit *lineEdit_2;
+    QComboBox *comboBox;
+    QSpinBox *spinBox;
     QTextEdit *textEdit;
     QLineEdit *lineEdit_4;
 
@@ -54,33 +56,36 @@ public:
         graphicsView = new QGraphicsView(groupBox);
         graphicsView->setObjectName("graphicsView");
         graphicsView->setGeometry(QRect(250, 30, 121, 101));
-        widget = new QWidget(groupBox);
-        widget->setObjectName("widget");
-        widget->setGeometry(QRect(10, 30, 231, 222));
-        verticalLayout = new QVBoxLayout(widget);
+        layoutWidget = new QWidget(groupBox);
+        layoutWidget->setObjectName("layoutWidget");
+        layoutWidget->setGeometry(QRect(10, 30, 231, 222));
+        verticalLayout = new QVBoxLayout(layoutWidget);
         verticalLayout->setObjectName("verticalLayout");
         verticalLayout->setContentsMargins(0, 0, 0, 0);
-        lineEdit = new QLineEdit(widget);
+        lineEdit = new QLineEdit(layoutWidget);
         lineEdit->setObjectName("lineEdit");
 
         verticalLayout->addWidget(lineEdit);
 
-        lineEdit_5 = new QLineEdit(widget);
-        lineEdit_5->setObjectName("lineEdit_5");
+        comboBox = new QComboBox(layoutWidget);
+        comboBox->addItem(QString());
+        comboBox->addItem(QString());
+        comboBox->setObjectName("comboBox");
 
-        verticalLayout->addWidget(lineEdit_5);
+        verticalLayout->addWidget(comboBox);
 
-        lineEdit_2 = new QLineEdit(widget);
-        lineEdit_2->setObjectName("lineEdit_2");
+        spinBox = new QSpinBox(layoutWidget);
+        spinBox->setObjectName("spinBox");
+        spinBox->setMinimum(16);
 
-        verticalLayout->addWidget(lineEdit_2);
+        verticalLayout->addWidget(spinBox);
 
-        textEdit = new QTextEdit(widget);
+        textEdit = new QTextEdit(layoutWidget);
         textEdit->setObjectName("textEdit");
 
         verticalLayout->addWidget(textEdit);
 
-        lineEdit_4 = new QLineEdit(widget);
+        lineEdit_4 = new QLineEdit(layoutWidget);
         lineEdit_4->setObjectName("lineEdit_4");
 
         verticalLayout->addWidget(lineEdit_4);
@@ -99,9 +104,10 @@ public:
         onLoadPhoto->setText(QCoreApplication::translate("Second", "\320\224\320\276\320\261\320\260\320\262\320\270\321\202\321\214 \321\204\320\276\321\202\320\276", nullptr));
         lineEdit->setText(QString());
         lineEdit->setPlaceholderText(QCoreApplication::translate("Second", "\320\230\320\274\321\217", nullptr));
-        lineEdit_5->setPlaceholderText(QCoreApplication::translate("Second", "\320\237\320\276\320\273", nullptr));
-        lineEdit_2->setText(QString());
-        lineEdit_2->setPlaceholderText(QCoreApplication::translate("Second", "\320\222\320\276\320\267\321\200\320\260\321\201\321\202", nullptr));
+        comboBox->setItemText(0, QCoreApplication::translate("Second", "\320\234\321\203\320\266\321\201\320\272\320\276\320\271", nullptr));
+        comboBox->setItemText(1, QCoreApplication::translate("Second", "\320\226\320\265\320\275\321\201\320\272\320\270\320\271", nullptr));
+
+        comboBox->setPlaceholderText(QCoreApplication::translate("Second", "\320\237\320\276\320\273", nullptr));
         textEdit->setPlaceholderText(QCoreApplication::translate("Second", "\320\243\320\262\320\273\320\265\321\207\320\265\320\275\320\270\321\217", nullptr));
         lineEdit_4->setText(QString());
         lineEdit_4->setPlaceholderText(QCoreApplication::translate("Second", "\320\223\320\276\321\200\320\276\320\264 \320\277\321\200\320\276\320\266\320\270\320\262\320\260\320\275\320\270\321\217", nullptr));
