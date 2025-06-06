@@ -22,8 +22,8 @@ QMap<QString, QString> userDatabase;
 // Enter
 void MainWindow::on_pushButton_clicked()
 {
-    QString login = ui->login->text();
-    QString password = ui->password->text();
+    QString login = ui->login->text().trimmed();
+    QString password = ui->password->text().trimmed();
 
     if (userDatabase.contains(login) && userDatabase[login] == password)
     {
@@ -44,8 +44,8 @@ void MainWindow::on_pushButton_clicked()
 // Registration
 void MainWindow::on_pushButton_2_clicked()
 {
-    QString login = ui->login->text();
-    QString password = ui->password->text();
+    QString login = ui->login->text().trimmed();
+    QString password = ui->password->text().trimmed();
 
     if (userDatabase.contains(login))
     {

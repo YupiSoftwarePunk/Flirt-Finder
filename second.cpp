@@ -8,6 +8,7 @@
 #include <QGraphicsPixmapItem>
 #include <QGraphicsScene>
 #include <QKeyEvent>
+#include <QSqlQuery>
 
 Second::Second(QWidget *parent)
     : QDialog(parent)
@@ -55,47 +56,16 @@ void Second::on_onSaveData_clicked()
 {
     QString name = ui->lineEdit->text().trimmed();
     int age = ui->spinBox->value();
-    QString hobbies = ui->textEdit->toPlainText();
+    QString hobbies = ui->textEdit->toPlainText().trimmed();
     QString city = ui->lineEdit_4->text().trimmed();
     QString sex = ui->comboBox->currentText();
+    QString photo = m_photoPath;
 
     if (name.isEmpty() || age == 0 || hobbies.isEmpty() || city.isEmpty())
     {
         QMessageBox::warning(this, "Ошибка", "Все поля должны быть заполнены!");
         return;
     }
-
-    QString fileName = QFileDialog::getSaveFileName(this,
-                                                    tr("Сохранить анкету"),
-                                                    QDir::homePath() + "/" + name + "_анкета.txt",
-                                                    tr("Текстовые файлы (*.txt)"));
-
-    if (!fileName.isEmpty()) {
-        QFile file(fileName);
-        if (file.open(QIODevice::WriteOnly | QIODevice::Text))
-        {
-            QTextStream stream(&file);
-            stream << "Анкета пользователя\n";
-            stream << "Имя: " << name << "\n";
-            stream << "Пол: "<< sex<<"\n";
-            stream << "Возраст: " << age << "\n";
-            stream << "Увлечения: " << hobbies << "\n";
-            stream << "Город проживания: " << city << "\n";
-
-            if (!m_photoPath.isEmpty())
-            {
-                stream << "Фото: " << m_photoPath << "\n";
-            }
-
-            file.close();
-            QMessageBox::information(this, "Сохранено", "Анкета успешно сохранена!");
-        }
-        else
-        {
-            QMessageBox::critical(this, "Ошибка", "Не удалось сохранить файл!");
-        }
-    }
-
 
 
     QRegularExpression validText("^[a-zA-Zа-яА-ЯёЁ\\s-]+$");
@@ -113,7 +83,20 @@ void Second::on_onSaveData_clicked()
         ui->lineEdit_4->setFocus();
         return;
     }
+
+
+
+    // нужно как-то добавить сюда поля из первого окна логин и пароль пользователя
+    if (saveUserData(login, password, name, sex, age, hobbies, city, photo))
+    {
+        QMessageBox::information(this, "Успех", "Данные успешно сохранены!");
+    } else
+    {
+        QMessageBox::warning(this, "Ошибка", "Не удалось сохранить данные!");
+    }
 }
+
+
 
 
 bool Second::eventFilter(QObject *watched, QEvent *event)
@@ -144,4 +127,50 @@ bool Second::eventFilter(QObject *watched, QEvent *event)
     }
 
     return QDialog::eventFilter(watched, event);
+}
+
+
+
+
+
+
+bool saveUserData(const QString &login, const QString &password,
+                  const QString &name, const QString &gender, int age,
+                  const QString &hobbies, const QString &city, const QString &photoPath)
+{
+    QSqlQuery query;
+
+
+    // Сохранение в users
+    query.prepare("INSERT INTO users (login, password, name, gender, age, hobbies, city) "
+                  "VALUES (:login, :password, :name, :gender, :age, :hobbies, :city)");
+
+    query.bindValue(":login", login);
+    query.bindValue(":password", password);
+    query.bindValue(":name", name);
+    query.bindValue(":gender", gender);
+    query.bindValue(":age", age);
+    query.bindValue(":hobbies", hobbies);
+    query.bindValue(":city", city);
+
+    if (!query.exec()) {
+        qDebug() << "Ошибка записи данных пользователя:";
+        return false;
+    }
+
+    int userId = query.lastInsertId().toInt();
+
+
+    // Сохранение в photos
+    QSqlQuery photoQuery;
+    photoQuery.prepare("INSERT INTO photos (user_id, photo_path) VALUES (:user_id, :photo_path)");
+    photoQuery.bindValue(":user_id", userId);
+    photoQuery.bindValue(":photo_path", photoPath);
+
+    if (!photoQuery.exec()) {
+        qDebug() << "Ошибка записи изображения:";
+        return false;
+    }
+
+    return true;
 }
