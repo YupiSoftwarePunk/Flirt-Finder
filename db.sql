@@ -1,1 +1,0 @@
-Create table LoveApp(Id INT, name varchar(15))

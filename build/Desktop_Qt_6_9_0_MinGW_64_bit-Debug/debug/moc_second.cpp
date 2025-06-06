@@ -1,12 +1,12 @@
 /****************************************************************************
-** Meta object code from reading C++ file 'secondwindow.h'
+** Meta object code from reading C++ file 'second.h'
 **
 ** Created by: The Qt Meta Object Compiler version 69 (Qt 6.9.0)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "../../../../secondwindow.h"
+#include "../../../second.h"
 #include <QtCore/qmetatype.h>
 
 #include <QtCore/qtmochelpers.h>
@@ -16,7 +16,7 @@
 
 #include <QtCore/qxptype_traits.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
-#error "The header file 'secondwindow.h' doesn't include <QObject>."
+#error "The header file 'second.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 69
 #error "This file was generated using the moc from 6.9.0. It"
 #error "cannot be used with the include files from this version of Qt."
@@ -31,69 +31,69 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 QT_WARNING_DISABLE_GCC("-Wuseless-cast")
 namespace {
-struct qt_meta_tag_ZN12SecondWindowE_t {};
+struct qt_meta_tag_ZN6SecondE_t {};
 } // unnamed namespace
 
-template <> constexpr inline auto SecondWindow::qt_create_metaobjectdata<qt_meta_tag_ZN12SecondWindowE_t>()
+template <> constexpr inline auto Second::qt_create_metaobjectdata<qt_meta_tag_ZN6SecondE_t>()
 {
     namespace QMC = QtMocConstants;
     QtMocHelpers::StringRefStorage qt_stringData {
-        "SecondWindow",
-        "onSaveData",
+        "Second",
+        "on_onLoadPhoto_clicked",
         "",
-        "onLoadPhoto"
+        "on_onSaveData_clicked"
     };
 
     QtMocHelpers::UintData qt_methods {
-        // Slot 'onSaveData'
+        // Slot 'on_onLoadPhoto_clicked'
         QtMocHelpers::SlotData<void()>(1, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'onLoadPhoto'
+        // Slot 'on_onSaveData_clicked'
         QtMocHelpers::SlotData<void()>(3, 2, QMC::AccessPrivate, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
     QtMocHelpers::UintData qt_enums {
     };
-    return QtMocHelpers::metaObjectData<SecondWindow, qt_meta_tag_ZN12SecondWindowE_t>(QMC::MetaObjectFlag{}, qt_stringData,
+    return QtMocHelpers::metaObjectData<Second, qt_meta_tag_ZN6SecondE_t>(QMC::MetaObjectFlag{}, qt_stringData,
             qt_methods, qt_properties, qt_enums);
 }
-Q_CONSTINIT const QMetaObject SecondWindow::staticMetaObject = { {
+Q_CONSTINIT const QMetaObject Second::staticMetaObject = { {
     QMetaObject::SuperData::link<QDialog::staticMetaObject>(),
-    qt_staticMetaObjectStaticContent<qt_meta_tag_ZN12SecondWindowE_t>.stringdata,
-    qt_staticMetaObjectStaticContent<qt_meta_tag_ZN12SecondWindowE_t>.data,
+    qt_staticMetaObjectStaticContent<qt_meta_tag_ZN6SecondE_t>.stringdata,
+    qt_staticMetaObjectStaticContent<qt_meta_tag_ZN6SecondE_t>.data,
     qt_static_metacall,
     nullptr,
-    qt_staticMetaObjectRelocatingContent<qt_meta_tag_ZN12SecondWindowE_t>.metaTypes,
+    qt_staticMetaObjectRelocatingContent<qt_meta_tag_ZN6SecondE_t>.metaTypes,
     nullptr
 } };
 
-void SecondWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+void Second::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
-    auto *_t = static_cast<SecondWindow *>(_o);
+    auto *_t = static_cast<Second *>(_o);
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
-        case 0: _t->onSaveData(); break;
-        case 1: _t->onLoadPhoto(); break;
+        case 0: _t->on_onLoadPhoto_clicked(); break;
+        case 1: _t->on_onSaveData_clicked(); break;
         default: ;
         }
     }
     (void)_a;
 }
 
-const QMetaObject *SecondWindow::metaObject() const
+const QMetaObject *Second::metaObject() const
 {
     return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
 }
 
-void *SecondWindow::qt_metacast(const char *_clname)
+void *Second::qt_metacast(const char *_clname)
 {
     if (!_clname) return nullptr;
-    if (!strcmp(_clname, qt_staticMetaObjectStaticContent<qt_meta_tag_ZN12SecondWindowE_t>.strings))
+    if (!strcmp(_clname, qt_staticMetaObjectStaticContent<qt_meta_tag_ZN6SecondE_t>.strings))
         return static_cast<void*>(this);
     return QDialog::qt_metacast(_clname);
 }
 
-int SecondWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+int Second::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
     _id = QDialog::qt_metacall(_c, _id, _a);
     if (_id < 0)

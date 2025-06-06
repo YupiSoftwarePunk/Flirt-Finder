@@ -1,9 +1,8 @@
-#include "mainwindow.h"
-
 #include <QApplication>
-// #include <QSqlDatabase>
-
-// QSqlDatabase db = QSqlDatabase::addDatabase("QPostgre");
+#include <QSqlDatabase>
+#include <QSqlError>
+#include <QDebug>
+#include "mainwindow.h"
 
 
 int main(int argc, char *argv[])
@@ -12,11 +11,20 @@ int main(int argc, char *argv[])
     MainWindow w;
     w.show();
 
-    // db.setHostName("localhost:5432");
-    // db.setDatabaseName("flightdb");
-    // db.setUserName("yupi");
-    // db.setPassword("admin1234");
-    // bool ok = db.open();
+    QSqlDatabase db = QSqlDatabase::addDatabase("QPSQL");
+    db.setHostName("localhost");
+    db.setDatabaseName("postgres");
+    db.setUserName("postgres");
+    db.setPassword("C0d38_50AdM1Nn6");
+    db.setPort(5432);
+
+    if (!db.open())
+    {
+        qDebug() << "Ошибка подключения:" << db.lastError().text();
+    } else
+    {
+        qDebug() << "Подключение успешно!";
+    }
 
     return a.exec();
 }
