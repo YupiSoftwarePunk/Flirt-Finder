@@ -57,6 +57,9 @@ void MainWindow::on_pushButton_2_clicked()
         QMessageBox::information(this, "Success", "Регистрация прошла успешно!");
 
         auto secondWindow = new Second();
+
+        secondWindow->setUserCredentials(login, password);
+
         secondWindow->show();
 
         this->close();

@@ -52,8 +52,11 @@ void Second::on_onLoadPhoto_clicked()
 }
 
 
+
+
 void Second::on_onSaveData_clicked()
 {
+
     QString name = ui->lineEdit->text().trimmed();
     int age = ui->spinBox->value();
     QString hobbies = ui->textEdit->toPlainText().trimmed();
@@ -98,6 +101,14 @@ void Second::on_onSaveData_clicked()
 
 
 
+void Second::setUserCredentials(const QString &login, const QString &password)
+{
+    this->login = login;
+    this->password = password;
+}
+
+
+
 
 bool Second::eventFilter(QObject *watched, QEvent *event)
 {
@@ -134,7 +145,7 @@ bool Second::eventFilter(QObject *watched, QEvent *event)
 
 
 
-bool saveUserData(const QString &login, const QString &password,
+bool Second::saveUserData(const QString &login, const QString &password,
                   const QString &name, const QString &gender, int age,
                   const QString &hobbies, const QString &city, const QString &photoPath)
 {
