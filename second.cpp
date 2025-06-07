@@ -89,7 +89,6 @@ void Second::on_onSaveData_clicked()
 
 
 
-    // нужно как-то добавить сюда поля из первого окна логин и пароль пользователя
     if (saveUserData(login, password, name, sex, age, hobbies, city, photo))
     {
         QMessageBox::information(this, "Успех", "Данные успешно сохранены!");
