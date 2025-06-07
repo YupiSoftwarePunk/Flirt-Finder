@@ -119,6 +119,11 @@ bool Second::eventFilter(QObject *watched, QEvent *event)
         QLineEdit *edit = qobject_cast<QLineEdit*>(watched);
         if (edit && (edit == ui->lineEdit || edit == ui->lineEdit_4))
         {
+            if (keyEvent->key() == Qt::Key_Backspace || keyEvent->key() == Qt::Key_Delete)
+            {
+                return false;
+            }
+
             if (!keyEvent->text().isEmpty() &&
                 !QRegularExpression("[a-zA-Zа-яА-ЯёЁ\\s-]").match(keyEvent->text()).hasMatch())
             {
@@ -129,11 +134,16 @@ bool Second::eventFilter(QObject *watched, QEvent *event)
         QTextEdit *textEditt = qobject_cast<QTextEdit *>(watched);
         if (textEditt && textEditt == ui->textEdit)
         {
-            if (!keyEvent->text().isEmpty() &&
-                !QRegularExpression("[a-zA-Zа-яА-ЯёЁ0-9\\s-]").match(keyEvent->text()).hasMatch())
+            if (keyEvent->key() == Qt::Key_Backspace || keyEvent->key() == Qt::Key_Delete)
             {
-                return true;
+                return false;
             }
+
+            // if (!keyEvent->text().isEmpty() &&
+            //     !QRegularExpression("[a-zA-Zа-яА-ЯёЁ0-9\\s-]").match(keyEvent->text()).hasMatch())
+            // {
+            //     return true;
+            // }
         }
     }
 
