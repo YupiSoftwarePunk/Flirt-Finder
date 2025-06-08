@@ -65,8 +65,12 @@ void MainWindow::on_login_button_clicked()
 // Регистрация
 void MainWindow::on_registration_button_clicked()
 {
-    QString login = ui->login->text().trimmed();
-    QString password = ui->password->text().trimmed();
+    QString login = ui->login_2->text();
+    QString password = ui->password_2->text();
+
+
+    qDebug() << "Login:" << login;
+    qDebug() << "Password:" << password;
 
 
     if (login.isEmpty() || password.isEmpty())
@@ -96,9 +100,16 @@ void MainWindow::on_registration_button_clicked()
 
 
     // Регистрация нового пользователя
-    query.prepare("INSERT INTO users (login, password) VALUES (:login, :password)");
+    query.prepare("INSERT INTO users (login, password, name, gender, age, hobbies, city) "
+                  "VALUES (:login, :password, :name, :gender, :age, :hobbies, :city, :photo_path)");
     query.bindValue(":login", login);
     query.bindValue(":password", password);
+    query.bindValue(":name", "");
+    query.bindValue(":gender", "");
+    query.bindValue(":age", 0);
+    query.bindValue(":hobbies", "");
+    query.bindValue(":city", "");
+    query.bindValue(":photo_path", "");
 
     if (!query.exec())
     {
