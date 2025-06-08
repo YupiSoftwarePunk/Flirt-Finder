@@ -29,7 +29,7 @@ class Ui_MainWindow
 public:
     QWidget *centralwidget;
     QGroupBox *groupBox;
-    QWidget *widget;
+    QWidget *layoutWidget;
     QVBoxLayout *verticalLayout_3;
     QVBoxLayout *verticalLayout;
     QHBoxLayout *horizontalLayout_2;
@@ -38,8 +38,8 @@ public:
     QHBoxLayout *horizontalLayout;
     QLabel *label;
     QLineEdit *password;
-    QPushButton *pushButton;
-    QWidget *widget1;
+    QPushButton *login_button;
+    QWidget *layoutWidget1;
     QVBoxLayout *verticalLayout_4;
     QVBoxLayout *verticalLayout_2;
     QHBoxLayout *horizontalLayout_3;
@@ -48,7 +48,7 @@ public:
     QHBoxLayout *horizontalLayout_4;
     QLabel *label_4;
     QLineEdit *password_2;
-    QPushButton *pushButton_2;
+    QPushButton *registration_button;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -62,22 +62,22 @@ public:
         groupBox = new QGroupBox(centralwidget);
         groupBox->setObjectName("groupBox");
         groupBox->setGeometry(QRect(140, 10, 291, 291));
-        widget = new QWidget(groupBox);
-        widget->setObjectName("widget");
-        widget->setGeometry(QRect(70, 30, 162, 101));
-        verticalLayout_3 = new QVBoxLayout(widget);
+        layoutWidget = new QWidget(groupBox);
+        layoutWidget->setObjectName("layoutWidget");
+        layoutWidget->setGeometry(QRect(70, 30, 162, 101));
+        verticalLayout_3 = new QVBoxLayout(layoutWidget);
         verticalLayout_3->setObjectName("verticalLayout_3");
         verticalLayout_3->setContentsMargins(0, 0, 0, 0);
         verticalLayout = new QVBoxLayout();
         verticalLayout->setObjectName("verticalLayout");
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setObjectName("horizontalLayout_2");
-        label_2 = new QLabel(widget);
+        label_2 = new QLabel(layoutWidget);
         label_2->setObjectName("label_2");
 
         horizontalLayout_2->addWidget(label_2);
 
-        login = new QLineEdit(widget);
+        login = new QLineEdit(layoutWidget);
         login->setObjectName("login");
 
         horizontalLayout_2->addWidget(login);
@@ -87,12 +87,12 @@ public:
 
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName("horizontalLayout");
-        label = new QLabel(widget);
+        label = new QLabel(layoutWidget);
         label->setObjectName("label");
 
         horizontalLayout->addWidget(label);
 
-        password = new QLineEdit(widget);
+        password = new QLineEdit(layoutWidget);
         password->setObjectName("password");
 
         horizontalLayout->addWidget(password);
@@ -103,27 +103,27 @@ public:
 
         verticalLayout_3->addLayout(verticalLayout);
 
-        pushButton = new QPushButton(widget);
-        pushButton->setObjectName("pushButton");
+        login_button = new QPushButton(layoutWidget);
+        login_button->setObjectName("login_button");
 
-        verticalLayout_3->addWidget(pushButton);
+        verticalLayout_3->addWidget(login_button);
 
-        widget1 = new QWidget(groupBox);
-        widget1->setObjectName("widget1");
-        widget1->setGeometry(QRect(70, 170, 162, 92));
-        verticalLayout_4 = new QVBoxLayout(widget1);
+        layoutWidget1 = new QWidget(groupBox);
+        layoutWidget1->setObjectName("layoutWidget1");
+        layoutWidget1->setGeometry(QRect(70, 170, 162, 92));
+        verticalLayout_4 = new QVBoxLayout(layoutWidget1);
         verticalLayout_4->setObjectName("verticalLayout_4");
         verticalLayout_4->setContentsMargins(0, 0, 0, 0);
         verticalLayout_2 = new QVBoxLayout();
         verticalLayout_2->setObjectName("verticalLayout_2");
         horizontalLayout_3 = new QHBoxLayout();
         horizontalLayout_3->setObjectName("horizontalLayout_3");
-        label_3 = new QLabel(widget1);
+        label_3 = new QLabel(layoutWidget1);
         label_3->setObjectName("label_3");
 
         horizontalLayout_3->addWidget(label_3);
 
-        login_2 = new QLineEdit(widget1);
+        login_2 = new QLineEdit(layoutWidget1);
         login_2->setObjectName("login_2");
 
         horizontalLayout_3->addWidget(login_2);
@@ -133,12 +133,12 @@ public:
 
         horizontalLayout_4 = new QHBoxLayout();
         horizontalLayout_4->setObjectName("horizontalLayout_4");
-        label_4 = new QLabel(widget1);
+        label_4 = new QLabel(layoutWidget1);
         label_4->setObjectName("label_4");
 
         horizontalLayout_4->addWidget(label_4);
 
-        password_2 = new QLineEdit(widget1);
+        password_2 = new QLineEdit(layoutWidget1);
         password_2->setObjectName("password_2");
 
         horizontalLayout_4->addWidget(password_2);
@@ -149,10 +149,10 @@ public:
 
         verticalLayout_4->addLayout(verticalLayout_2);
 
-        pushButton_2 = new QPushButton(widget1);
-        pushButton_2->setObjectName("pushButton_2");
+        registration_button = new QPushButton(layoutWidget1);
+        registration_button->setObjectName("registration_button");
 
-        verticalLayout_4->addWidget(pushButton_2);
+        verticalLayout_4->addWidget(registration_button);
 
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
@@ -174,10 +174,10 @@ public:
         groupBox->setTitle(QCoreApplication::translate("MainWindow", "\320\220\320\262\321\202\320\276\321\200\320\270\320\267\320\260\321\206\320\270\321\217", nullptr));
         label_2->setText(QCoreApplication::translate("MainWindow", "\320\237\320\260\321\200\320\276\320\273\321\214", nullptr));
         label->setText(QCoreApplication::translate("MainWindow", "\320\233\320\276\320\263\320\270\320\275", nullptr));
-        pushButton->setText(QCoreApplication::translate("MainWindow", "\320\220\320\262\321\202\320\276\321\200\320\270\320\267\320\260\321\206\320\270\321\217", nullptr));
+        login_button->setText(QCoreApplication::translate("MainWindow", "\320\220\320\262\321\202\320\276\321\200\320\270\320\267\320\260\321\206\320\270\321\217", nullptr));
         label_3->setText(QCoreApplication::translate("MainWindow", "\320\237\320\260\321\200\320\276\320\273\321\214", nullptr));
         label_4->setText(QCoreApplication::translate("MainWindow", "\320\233\320\276\320\263\320\270\320\275", nullptr));
-        pushButton_2->setText(QCoreApplication::translate("MainWindow", "\320\240\320\265\320\263\320\270\321\201\321\202\321\200\320\260\321\206\320\270\321\217", nullptr));
+        registration_button->setText(QCoreApplication::translate("MainWindow", "\320\240\320\265\320\263\320\270\321\201\321\202\321\200\320\260\321\206\320\270\321\217", nullptr));
     } // retranslateUi
 
 };

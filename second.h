@@ -22,6 +22,8 @@ public:
                       const QString &name, const QString &gender, int age,
                       const QString &hobbies, const QString &city, const QString &photoPath);
 
+    void loadUserData();
+
 private slots:
     void on_onLoadPhoto_clicked();
 

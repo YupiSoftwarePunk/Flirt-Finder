@@ -9,6 +9,8 @@
 #include <QGraphicsScene>
 #include <QKeyEvent>
 #include <QSqlQuery>
+#include <QSqlError>
+
 
 Second::Second(QWidget *parent)
     : QDialog(parent)
@@ -64,7 +66,7 @@ void Second::on_onSaveData_clicked()
     QString sex = ui->comboBox->currentText();
     QString photo = m_photoPath;
 
-    if (name.isEmpty() || age == 0 || hobbies.isEmpty() || city.isEmpty())
+    if (name.isEmpty() || hobbies.isEmpty() || city.isEmpty())
     {
         QMessageBox::warning(this, "Ошибка", "Все поля должны быть заполнены!");
         return;
@@ -158,39 +160,68 @@ bool Second::saveUserData(const QString &login, const QString &password,
                   const QString &name, const QString &gender, int age,
                   const QString &hobbies, const QString &city, const QString &photoPath)
 {
+
+
     QSqlQuery query;
-
-
-    // Сохранение в users
-    query.prepare("INSERT INTO users (login, password, name, gender, age, hobbies, city) "
-                  "VALUES (:login, :password, :name, :gender, :age, :hobbies, :city)");
-
-    query.bindValue(":login", login);
-    query.bindValue(":password", password);
+    query.prepare("UPDATE users SET name = :name, gender = :gender, age = :age, hobbies = :hobbies, city = :city "
+                  "WHERE login = :login AND password = :password");
     query.bindValue(":name", name);
     query.bindValue(":gender", gender);
     query.bindValue(":age", age);
     query.bindValue(":hobbies", hobbies);
     query.bindValue(":city", city);
+    query.bindValue(":login", login);
+    query.bindValue(":password", password);
 
-    if (!query.exec()) {
-        qDebug() << "Ошибка записи данных пользователя:";
+    if (!query.exec())
+    {
+        QMessageBox::warning(this, "Ошибка", "Ошибка сохранения данных пользователя!");
+        qDebug() << "Ошибка SQL:" << query.lastError().text();
         return false;
     }
 
-    int userId = query.lastInsertId().toInt();
 
 
-    // Сохранение в photos
     QSqlQuery photoQuery;
-    photoQuery.prepare("INSERT INTO photos (user_id, photo_path) VALUES (:user_id, :photo_path)");
-    photoQuery.bindValue(":user_id", userId);
+    photoQuery.prepare("INSERT INTO photos (user_id, photo_path) "
+                       "VALUES ((SELECT id FROM users WHERE login = :login), :photo_path)");
+    photoQuery.bindValue(":login", login);
     photoQuery.bindValue(":photo_path", photoPath);
 
-    if (!photoQuery.exec()) {
-        qDebug() << "Ошибка записи изображения:";
+    if (!photoQuery.exec())
+    {
+        QMessageBox::warning(this, "Ошибка", "Ошибка сохранения изображения!");
+        qDebug() << "Ошибка SQL:" << photoQuery.lastError().text();
         return false;
     }
 
-    return true;
+    QMessageBox::information(this, "Успех", "Данные успешно сохранены!");
+}
+
+
+
+
+
+void Second::loadUserData()
+{
+    QSqlQuery query;
+    query.prepare("SELECT name, gender, age, hobbies, city FROM users WHERE login = :login AND password = :password");
+    query.bindValue(":login", login);
+    query.bindValue(":password", password);
+
+    if (!query.exec())
+    {
+        QMessageBox::warning(this, "Ошибка", "Ошибка загрузки данных!");
+        qDebug() << "Ошибка SQL:" << query.lastError().text();
+        return;
+    }
+
+    if (query.next())
+    {
+        ui->lineEdit->setText(query.value("name").toString());
+        ui->comboBox->setCurrentText(query.value("gender").toString());
+        ui->spinBox->setValue(query.value("age").toInt());
+        ui->textEdit->setPlainText(query.value("hobbies").toString());
+        ui->lineEdit_4->setText(query.value("city").toString());
+    }
 }

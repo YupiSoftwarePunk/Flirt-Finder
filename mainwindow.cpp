@@ -3,6 +3,8 @@
 #include "second.h"
 
 #include <QMessageBox>
+#include <QSqlQuery>
+#include <QSqlError>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -16,52 +18,101 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-QMap<QString, QString> userDatabase;
 
-
-// Enter
-void MainWindow::on_pushButton_clicked()
+// Вход
+void MainWindow::on_login_button_clicked()
 {
     QString login = ui->login->text().trimmed();
     QString password = ui->password->text().trimmed();
 
-    if (userDatabase.contains(login) && userDatabase[login] == password)
-    {
-        QMessageBox::information(this, "Success", "Авторизация прошла успешно!");
 
-        auto secondWindow = new Second();
-        secondWindow->show();
+    if (login.isEmpty() || password.isEmpty()) {
+        QMessageBox::warning(this, "Fail", "Логин и пароль не могут быть пустыми!");
+        return;
+    }
 
-        this->close();
+
+    QSqlQuery query;
+    query.prepare("SELECT COUNT(*) FROM users WHERE login = :login AND password = :password");
+    query.bindValue(":login", login);
+    query.bindValue(":password", password);
+
+    if (!query.exec()) {
+        QMessageBox::warning(this, "Ошибка", "Ошибка проверки авторизации!");
+        qDebug() << "Ошибка SQL:" << query.lastError().text();
+        return;
     }
-    else
-    {
-        QMessageBox::warning(this, "Fail", "Ошибка авторизации! Неверный логин или пароль!");
+
+    query.next();
+    int count = query.value(0).toInt();
+    if (count == 0) {
+        QMessageBox::warning(this, "Ошибка", "Неверный логин или пароль!");
+        return;
     }
+
+    QMessageBox::information(this, "Успех", "Авторизация прошла успешно!");
+
+    // Переход на второе окно
+    auto secondWindow = new Second();
+    secondWindow->setUserCredentials(login, password);
+    secondWindow->loadUserData(); // Загрузить данные из базы
+    secondWindow->show();
+    this->close();
 }
 
 
-// Registration
-void MainWindow::on_pushButton_2_clicked()
+
+// Регистрация
+void MainWindow::on_registration_button_clicked()
 {
     QString login = ui->login->text().trimmed();
     QString password = ui->password->text().trimmed();
 
-    if (userDatabase.contains(login))
+
+    if (login.isEmpty() || password.isEmpty())
     {
-        QMessageBox::warning(this, "Fail", "Аккаунт с таким логином уже существует!");
+        QMessageBox::warning(this, "Fail", "Логин и пароль не могут быть пустыми!");
+        return;
     }
-    else
+
+    QSqlQuery query;
+    query.prepare("SELECT COUNT(*) FROM users WHERE login = :login");
+    query.bindValue(":login", login);
+
+    if (!query.exec())
     {
-        userDatabase.insert(login, password);
-        QMessageBox::information(this, "Success", "Регистрация прошла успешно!");
-
-        auto secondWindow = new Second();
-
-        secondWindow->setUserCredentials(login, password);
-
-        secondWindow->show();
-
-        this->close();
+        QMessageBox::warning(this, "Ошибка", "Ошибка проверки логина в базе данных!");
+        qDebug() << "Ошибка SQL:" << query.lastError().text();
+        return;
     }
+
+    query.next();
+    int count = query.value(0).toInt();
+    if (count > 0)
+    {
+        QMessageBox::warning(this, "Ошибка", "Аккаунт с таким логином уже существует!");
+        return;
+    }
+
+
+    // Регистрация нового пользователя
+    query.prepare("INSERT INTO users (login, password) VALUES (:login, :password)");
+    query.bindValue(":login", login);
+    query.bindValue(":password", password);
+
+    if (!query.exec())
+    {
+        QMessageBox::warning(this, "Ошибка", "Ошибка регистрации!");
+        qDebug() << "Ошибка SQL:" << query.lastError().text();
+        return;
+    }
+
+
+    QMessageBox::information(this, "Успех", "Регистрация прошла успешно!");
+
+    // Передача данных во вторую страницу
+    auto secondWindow = new Second();
+    secondWindow->setUserCredentials(login, password);
+    secondWindow->show();
+    this->close();
 }
