@@ -39,6 +39,8 @@ void Second::on_onLoadPhoto_clicked()
     {
         QPixmap pixmap(photoPath);
 
+        m_photoPath = photoPath;
+
         if (pixmap.isNull())
         {
             QMessageBox::warning(this, "Ошибка", "Не удалось загрузить изображение!");

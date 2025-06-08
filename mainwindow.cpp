@@ -100,6 +100,7 @@ void MainWindow::on_registration_button_clicked()
 
 
     // Регистрация нового пользователя
+    query.clear();
     query.prepare("INSERT INTO users (login, password, name, gender, age, hobbies, city) "
                   "VALUES (:login, :password, :name, :gender, :age, :hobbies, :city, :photo_path)");
     query.bindValue(":login", login);
