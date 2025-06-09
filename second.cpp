@@ -28,6 +28,20 @@ Second::~Second()
     delete ui;
 }
 
+
+
+void Second::initializeUserData()
+{
+    loadUserData();   // Загружаем данные анкеты
+    loadPhotoData(login); // Загружаем картинку пользователя
+}
+
+
+
+
+
+
+// кнопка загрузки изображения в анкету
 void Second::on_onLoadPhoto_clicked()
 {
     QString photoPath = QFileDialog::getOpenFileName(this,
@@ -58,6 +72,7 @@ void Second::on_onLoadPhoto_clicked()
 
 
 
+// кнопка сохранения в анкете
 void Second::on_onSaveData_clicked()
 {
 
@@ -68,7 +83,7 @@ void Second::on_onSaveData_clicked()
     QString sex = ui->comboBox->currentText();
     QString photo = m_photoPath;
 
-    if (name.isEmpty() || hobbies.isEmpty() || city.isEmpty())
+    if (name.isEmpty() || hobbies.isEmpty() || city.isEmpty() || photo.isEmpty())
     {
         QMessageBox::warning(this, "Ошибка", "Все поля должны быть заполнены!");
         return;
@@ -100,6 +115,9 @@ void Second::on_onSaveData_clicked()
     {
         QMessageBox::warning(this, "Ошибка", "Не удалось сохранить данные!");
     }
+
+
+
 }
 
 
@@ -113,6 +131,7 @@ void Second::setUserCredentials(const QString &login, const QString &password)
 
 
 
+// сортировка ввода в поля анкеты
 bool Second::eventFilter(QObject *watched, QEvent *event)
 {
     if (event->type() == QEvent::KeyPress)
@@ -158,6 +177,7 @@ bool Second::eventFilter(QObject *watched, QEvent *event)
 
 
 
+// сохранение данных в бд
 bool Second::saveUserData(const QString &login, const QString &password,
                   const QString &name, const QString &gender, int age,
                   const QString &hobbies, const QString &city, const QString &photoPath)
@@ -184,10 +204,24 @@ bool Second::saveUserData(const QString &login, const QString &password,
 
 
 
+    QSqlQuery getUserIdQuery;
+    getUserIdQuery.prepare("SELECT id FROM users WHERE login = :login");
+    getUserIdQuery.bindValue(":login", login);
+
+    if (!getUserIdQuery.exec() || !getUserIdQuery.next())
+    {
+        QMessageBox::warning(this, "Ошибка", "Не удалось получить ID пользователя!");
+        qDebug() << "Ошибка SQL:" << getUserIdQuery.lastError().text();
+        return false;
+    }
+
+    int userId = getUserIdQuery.value(0).toInt();
+    qDebug() << "User ID:" << userId;
+
+
     QSqlQuery photoQuery;
-    photoQuery.prepare("INSERT INTO photos (user_id, photo_path) "
-                       "VALUES ((SELECT id FROM users WHERE login = :login), :photo_path)");
-    photoQuery.bindValue(":login", login);
+    photoQuery.prepare("INSERT INTO photos (user_id, photo_path) VALUES (:user_id, :photo_path)");
+    photoQuery.bindValue(":user_id", userId);
     photoQuery.bindValue(":photo_path", photoPath);
 
     if (!photoQuery.exec())
@@ -204,6 +238,7 @@ bool Second::saveUserData(const QString &login, const QString &password,
 
 
 
+// обновление данных пользователя
 void Second::loadUserData()
 {
     QSqlQuery query;
@@ -225,5 +260,40 @@ void Second::loadUserData()
         ui->spinBox->setValue(query.value("age").toInt());
         ui->textEdit->setPlainText(query.value("hobbies").toString());
         ui->lineEdit_4->setText(query.value("city").toString());
+    }
+}
+
+
+
+
+// обновление картинки пользователя
+void Second::loadPhotoData(const QString &login)
+{
+    QSqlQuery photoQuery;
+    photoQuery.prepare("SELECT photo_path FROM photos WHERE user_id = (SELECT id FROM users WHERE login = :login)");
+    photoQuery.bindValue(":login", login);
+
+    if (!photoQuery.exec() || !photoQuery.next())
+    {
+        QMessageBox::warning(this, "Ошибка", "Не удалось загрузить изображение!");
+        qDebug() << "Ошибка SQL:" << photoQuery.lastError().text();
+        return;
+    }
+
+    QString photoPath = photoQuery.value(0).toString();
+    qDebug() << "Загруженный путь к картинке:" << photoPath;
+
+    if (!photoPath.isEmpty())
+    {
+        QPixmap pixmap(photoPath);
+        if (!pixmap.isNull())
+        {
+            QGraphicsScene *scene = new QGraphicsScene(this);
+            scene->addPixmap(pixmap.scaled(ui->graphicsView->size(), Qt::KeepAspectRatio));
+            ui->graphicsView->setScene(scene);
+        } else
+        {
+            QMessageBox::warning(this, "Ошибка", "Не удалось загрузить изображение в интерфейс!");
+        }
     }
 }

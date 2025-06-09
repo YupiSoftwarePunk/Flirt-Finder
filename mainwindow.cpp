@@ -55,7 +55,7 @@ void MainWindow::on_login_button_clicked()
     // Переход на второе окно
     auto secondWindow = new Second();
     secondWindow->setUserCredentials(login, password);
-    secondWindow->loadUserData(); // Загрузить данные из базы
+    secondWindow->initializeUserData(); // Загрузить данные из базы
     secondWindow->show();
     this->close();
 }
@@ -102,7 +102,7 @@ void MainWindow::on_registration_button_clicked()
     // Регистрация нового пользователя
     query.clear();
     query.prepare("INSERT INTO users (login, password, name, gender, age, hobbies, city) "
-                  "VALUES (:login, :password, :name, :gender, :age, :hobbies, :city, :photo_path)");
+                  "VALUES (:login, :password, :name, :gender, :age, :hobbies, :city)");
     query.bindValue(":login", login);
     query.bindValue(":password", password);
     query.bindValue(":name", "");
@@ -110,7 +110,6 @@ void MainWindow::on_registration_button_clicked()
     query.bindValue(":age", 0);
     query.bindValue(":hobbies", "");
     query.bindValue(":city", "");
-    query.bindValue(":photo_path", "");
 
     if (!query.exec())
     {
@@ -125,6 +124,7 @@ void MainWindow::on_registration_button_clicked()
     // Передача данных во вторую страницу
     auto secondWindow = new Second();
     secondWindow->setUserCredentials(login, password);
+    secondWindow->initializeUserData();     // Загружаем данные перед отображением
     secondWindow->show();
     this->close();
 }

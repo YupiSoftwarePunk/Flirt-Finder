@@ -24,6 +24,10 @@ public:
 
     void loadUserData();
 
+    void loadPhotoData(const QString &login);
+
+    void initializeUserData();
+
 private slots:
     void on_onLoadPhoto_clicked();
 
