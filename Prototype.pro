@@ -10,14 +10,17 @@ INCLUDEPATH += .
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
-    second.cpp
+    second.cpp \
+    third.cpp
 
 HEADERS += \
     mainwindow.h \
-    second.h
+    second.h \
+    third.h
 
 FORMS += \
     mainwindow.ui \
-    second.ui
+    second.ui \
+    third.ui
 
 QTPLUGIN += qsqlpsql
