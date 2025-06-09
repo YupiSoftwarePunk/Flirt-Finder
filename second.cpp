@@ -110,6 +110,7 @@ void Second::on_onSaveData_clicked()
 
     if (saveUserData(login, password, name, sex, age, hobbies, city, photo))
     {
+        loadPhotoData(login);
         QMessageBox::information(this, "Успех", "Данные успешно сохранены!");
     } else
     {
@@ -219,6 +220,17 @@ bool Second::saveUserData(const QString &login, const QString &password,
     qDebug() << "User ID:" << userId;
 
 
+    QSqlQuery deletePhotoQuery;
+    deletePhotoQuery.prepare("DELETE FROM photos WHERE user_id = :user_id");
+    deletePhotoQuery.bindValue(":user_id", userId);
+
+    if (!deletePhotoQuery.exec())
+    {
+        QMessageBox::warning(this, "Ошибка", "Не удалось удалить старую картинку!");
+        qDebug() << "Ошибка SQL:" << deletePhotoQuery.lastError().text();
+        return false;
+    }
+
     QSqlQuery photoQuery;
     photoQuery.prepare("INSERT INTO photos (user_id, photo_path) VALUES (:user_id, :photo_path)");
     photoQuery.bindValue(":user_id", userId);
@@ -232,6 +244,7 @@ bool Second::saveUserData(const QString &login, const QString &password,
     }
 
     QMessageBox::information(this, "Успех", "Данные успешно сохранены!");
+    qDebug() << "Новый путь к картинке успешно сохранён:" << photoPath;
 }
 
 
