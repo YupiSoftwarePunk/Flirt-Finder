@@ -17,12 +17,16 @@ Third::~Third()
     delete ui;
 }
 
+
+
+
 void Third::loadProfiles(const QString &login)
 {
     this->currentLogin = login;
-    profilesData.clear(); // Очищаем старые данные
+    profilesData.clear();
 
     QSqlQuery query;
+    qDebug() << "Запрос на загрузку анкет:";
     query.prepare("SELECT id, name, age, city, photo_path, hobbies FROM users WHERE login != :login");
     query.bindValue(":login", login);
 
@@ -51,23 +55,46 @@ void Third::loadProfiles(const QString &login)
     }
 }
 
+
+
+
 void Third::updateUI()
 {
-    if (profilesData.isEmpty()) return;
+    if (profilesData.isEmpty())
+    {
+        qDebug() << "Ошибка: profilesData пуст!";
+        return;
+    }
 
     QMap<QString, QString> profile = profilesData[currentIndex];
+
+    qDebug() << "Обновление профиля:" << profile["name"];
 
     ui->profileName->setText(profile["name"]);
     ui->profileAge->setText(profile["age"] + " лет");
     ui->profileCity->setText("Город: " + profile["city"]);
     ui->profileHobbies->setText(profile["hobbies"]);
 
-    QPixmap pixmap(profile["photo"]);
-    if (!pixmap.isNull())
+    QString photoPath = profile["photo"];
+    if (!photoPath.isEmpty())
     {
-        ui->profilePhoto->setPixmap(pixmap.scaled(ui->profilePhoto->size(), Qt::KeepAspectRatio));
+        QPixmap pixmap(photoPath);
+        if (!pixmap.isNull())
+        {
+            ui->profilePhoto->setPixmap(pixmap.scaled(ui->profilePhoto->size(), Qt::KeepAspectRatio));
+        }
+        else
+        {
+            qDebug() << "Ошибка загрузки картинки: " << photoPath;
+        }
+    }
+    else
+    {
+        qDebug() << "Пустой путь к картинке!";
     }
 }
+
+
 
 void Third::on_likeButton_clicked()
 {
@@ -75,11 +102,16 @@ void Third::on_likeButton_clicked()
     updateLikeStatus(userId, true);
 }
 
+
+
 void Third::on_dislikeButton_clicked()
 {
     int userId = profilesData[currentIndex]["id"].toInt();
     updateLikeStatus(userId, false);
 }
+
+
+
 
 void Third::updateLikeStatus(int targetUserId, bool isLike)
 {

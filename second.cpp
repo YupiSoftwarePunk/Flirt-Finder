@@ -1,5 +1,4 @@
 #include "second.h"
-#include "third.h"
 #include "ui_second.h"
 
 #include <QFileDialog>
@@ -117,12 +116,6 @@ void Second::on_onSaveData_clicked()
     {
         QMessageBox::warning(this, "Ошибка", "Не удалось сохранить данные!");
     }
-
-
-    auto thirdWindow = new Third();
-    thirdWindow->loadProfiles(login);
-    thirdWindow->show();
-    this->close();
 }
 
 

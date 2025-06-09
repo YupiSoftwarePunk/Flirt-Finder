@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "second.h"
+#include "third.h"
 
 #include <QMessageBox>
 #include <QSqlQuery>
@@ -58,6 +59,16 @@ void MainWindow::on_login_button_clicked()
     secondWindow->initializeUserData(); // Загрузить данные из базы
     secondWindow->show();
     this->close();
+
+
+    // переход на третье окно
+    // auto thirdWindow = new Third();
+    // auto secondWindow = new Second();
+    // secondWindow->setUserCredentials(login, password);
+    // secondWindow->initializeUserData();
+    // thirdWindow->loadProfiles(login);
+    // thirdWindow->show();
+    // this->close();
 }
 
 
