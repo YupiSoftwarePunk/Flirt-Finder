@@ -6,3 +6,6 @@ CREATE TABLE likes_dislikes (
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY (liked_by) REFERENCES users(id) ON DELETE CASCADE
 );
+
+ALTER TABLE likes_dislikes
+ADD CONSTRAINT unique_reaction UNIQUE (user_id, liked_by);

@@ -31,6 +31,7 @@ Third::~Third()
 void Third::loadProfiles(const QString &login)
 {
     profilesData.clear(); // Очищаем массив перед загрузкой
+    qDebug() << "Текущий логин для загрузки профилей:" << currentLogin;
 
     QSqlQuery query;
     query.prepare("SELECT users.id, users.name, users.age, users.city, users.hobbies, photos.photo_path "
@@ -113,15 +114,16 @@ void Third::updateUI()
 
 void Third::on_likeButton_clicked()
 {
-    if (currentIndex >= profilesData.size() || profilesData.isEmpty())
+    if (profilesData.isEmpty() || currentIndex >= profilesData.size())
     {
-        qDebug() <<"Ошибка: индекс за пределами массива или пустой массив.";
+        QMessageBox::warning(this, "Ошибка", "Нет доступных анкет для сохранения реакции!");
+        qDebug() << "Ошибка: индекс за пределами массива или массив пуст.";
         return;
     }
 
     int userId = profilesData[currentIndex]["id"].toInt();
     saveReaction(userId, true);
-    on_nextProfile(); // Переключаем на следующую анкету
+    on_nextProfile();
 }
 
 
@@ -129,15 +131,16 @@ void Third::on_likeButton_clicked()
 
 void Third::on_dislikeButton_clicked()
 {
-    if (currentIndex >= profilesData.size() || profilesData.isEmpty())
+    if (profilesData.isEmpty() || currentIndex >= profilesData.size())
     {
-        qDebug() <<"Ошибка: индекс за пределами массива или пустой массив.";
+        QMessageBox::warning(this, "Ошибка", "Нет доступных анкет для сохранения реакции!");
+        qDebug() << "Ошибка: индекс за пределами массива или массив пуст.";
         return;
     }
 
     int userId = profilesData[currentIndex]["id"].toInt();
     saveReaction(userId, false);
-    on_nextProfile(); // Переключаем на следующую анкету
+    on_nextProfile();
 }
 
 
@@ -176,22 +179,47 @@ void Third::on_prevProfile()
 
 void Third::saveReaction(int targetUserId, bool isLike)
 {
+    if (currentLogin.isEmpty())
+    {
+        QMessageBox::warning(this, "Ошибка", "Логин текущего пользователя пуст!");
+        qDebug() << "Ошибка: currentLogin пуст.";
+        return;
+    }
+
+
+    QSqlQuery getCurrentUserIdQuery;
+    getCurrentUserIdQuery.prepare("SELECT id FROM users WHERE login = :login");
+    getCurrentUserIdQuery.bindValue(":login", currentLogin);
+
+    if (!getCurrentUserIdQuery.exec() || !getCurrentUserIdQuery.next())
+    {
+        QMessageBox::warning(this, "Ошибка", "Не удалось получить ID текущего пользователя!");
+        qDebug() << "Ошибка выполнения SQL:" << getCurrentUserIdQuery.lastError().text();
+        return;
+    }
+
+    int currentUserId = getCurrentUserIdQuery.value(0).toInt();
+
+
+    // Сохраняем реакцию
     QSqlQuery query;
-    query.clear();
-    query.prepare("INSERT INTO likes (user_id, target_user_id, like_status) VALUES "
-                  "((SELECT id FROM users WHERE login = :login), :target_user_id, :like_status)"
-                  "ON CONFLICT (user_id, target_user_id) DO UPDATE SET like_status = :like_status");
-    query.bindValue(":login", currentLogin);
-    query.bindValue(":target_user_id", targetUserId);
-    query.bindValue(":like_status", isLike);
+
+    query.prepare("INSERT INTO likes_dislikes (user_id, liked_by, reaction) "
+                  "VALUES (:user_id, :liked_by_id, :reaction) "
+                  "ON CONFLICT (user_id, liked_by) DO UPDATE SET reaction = :reaction");
+
+    query.bindValue(":user_id", targetUserId);
+    query.bindValue(":liked_by_id", currentUserId);
+    query.bindValue(":reaction", isLike ? 1 : -1);   // 1 = лайк, -1 = дизлайк
 
     if (!query.exec())
     {
-        qDebug() << "Ошибка сохранения лайка/дизлайка:" << query.lastError().text();
+        QMessageBox::warning(this, "Ошибка", "Ошибка сохранения лайка/дизлайка!");
+        qDebug() << "Ошибка выполнения SQL:" << query.lastError().text();
     }
     else
     {
-        qDebug() << "Реакция сохранена: " << (isLike ? "Лайк" : "Дизлайк");
+        qDebug() << "Реакция успешно сохранена: " << (isLike ? "Лайк" : "Дизлайк");
     }
 }
 
@@ -207,4 +235,13 @@ void Third::keyPressEvent(QKeyEvent *event)
     {
         on_prevProfile();
     }
+}
+
+
+
+
+void Third::setCurrentLogin(const QString &login)
+{
+    currentLogin = login;
+    qDebug() << "Текущий логин установлен:" << currentLogin;
 }

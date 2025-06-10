@@ -17,6 +17,8 @@ public:
 
     void loadProfiles(const QString &currentLogin);
 
+    void setCurrentLogin(const QString &login);
+
 
 protected:
     void keyPressEvent(QKeyEvent *event) override;
