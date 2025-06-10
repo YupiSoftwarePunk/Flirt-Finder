@@ -1,4 +1,5 @@
 #include "second.h"
+#include "third.h"
 #include "ui_second.h"
 
 #include <QFileDialog>
@@ -83,6 +84,19 @@ void Second::on_onSaveData_clicked()
     QString sex = ui->comboBox->currentText();
     QString photo = m_photoPath;
 
+
+    if (m_photoPath.isEmpty())
+    {
+        QSqlQuery query;
+        query.prepare("SELECT photo_path FROM photos WHERE user_id = (SELECT id FROM users WHERE login = :login)");
+        query.bindValue(":login", login);
+        if (query.exec() && query.next())
+        {
+            m_photoPath = query.value(0).toString();
+        }
+    }
+
+
     if (name.isEmpty() || hobbies.isEmpty() || city.isEmpty() || photo.isEmpty())
     {
         QMessageBox::warning(this, "Ошибка", "Все поля должны быть заполнены!");
@@ -112,7 +126,13 @@ void Second::on_onSaveData_clicked()
     {
         loadPhotoData(login);
         QMessageBox::information(this, "Успех", "Данные успешно сохранены!");
-    } else
+
+        auto thirdWindow = new Third();
+        thirdWindow->loadProfiles(login); // Передаём login в метод для загрузки профилей
+        thirdWindow->show();
+        this->close();
+    }
+    else
     {
         QMessageBox::warning(this, "Ошибка", "Не удалось сохранить данные!");
     }
@@ -217,31 +237,33 @@ bool Second::saveUserData(const QString &login, const QString &password,
     qDebug() << "User ID:" << userId;
 
 
-    QSqlQuery deletePhotoQuery;
-    deletePhotoQuery.prepare("DELETE FROM photos WHERE user_id = :user_id");
-    deletePhotoQuery.bindValue(":user_id", userId);
-
-    if (!deletePhotoQuery.exec())
+    if (!photoPath.isEmpty())
     {
-        QMessageBox::warning(this, "Ошибка", "Не удалось удалить старую картинку!");
-        qDebug() << "Ошибка SQL:" << deletePhotoQuery.lastError().text();
-        return false;
+        QSqlQuery deletePhotoQuery;
+        deletePhotoQuery.prepare("DELETE FROM photos WHERE user_id = :user_id");
+        deletePhotoQuery.bindValue(":user_id", userId);
+
+        if (!deletePhotoQuery.exec())
+        {
+            QMessageBox::warning(this, "Ошибка", "Не удалось удалить старую картинку!");
+            qDebug() << "Ошибка SQL:" << deletePhotoQuery.lastError().text();
+            return false;
+        }
+
+        QSqlQuery photoQuery;
+        photoQuery.prepare("INSERT INTO photos (user_id, photo_path) VALUES (:user_id, :photo_path)");
+        photoQuery.bindValue(":user_id", userId);
+        photoQuery.bindValue(":photo_path", photoPath);
+
+        if (!photoQuery.exec())
+        {
+            QMessageBox::warning(this, "Ошибка", "Ошибка сохранения изображения!");
+            qDebug() << "Ошибка SQL:" << photoQuery.lastError().text();
+            return false;
+        }
+        qDebug() << "Новый путь к картинке успешно сохранён:" << photoPath;
     }
-
-    QSqlQuery photoQuery;
-    photoQuery.prepare("INSERT INTO photos (user_id, photo_path) VALUES (:user_id, :photo_path)");
-    photoQuery.bindValue(":user_id", userId);
-    photoQuery.bindValue(":photo_path", photoPath);
-
-    if (!photoQuery.exec())
-    {
-        QMessageBox::warning(this, "Ошибка", "Ошибка сохранения изображения!");
-        qDebug() << "Ошибка SQL:" << photoQuery.lastError().text();
-        return false;
-    }
-
-    QMessageBox::information(this, "Успех", "Данные успешно сохранены!");
-    qDebug() << "Новый путь к картинке успешно сохранён:" << photoPath;
+    return true;
 }
 
 

@@ -18,9 +18,15 @@ public:
     void loadProfiles(const QString &currentLogin);
 
 
+protected:
+    void keyPressEvent(QKeyEvent *event) override;
+
+
 private slots:
     void on_likeButton_clicked();
     void on_dislikeButton_clicked();
+    void on_nextProfile();
+    void on_prevProfile();
 
 private:
     Ui::Third *ui;
@@ -29,7 +35,7 @@ private:
     int currentIndex = 0; // Индекс текущей анкеты
     QVector<QMap<QString, QString>> profilesData;
     void updateUI();
-    void updateLikeStatus(int targetUserId, bool isLike);
+    void saveReaction(int targetUserId, bool isLike);
 };
 
 #endif // THIRD_H

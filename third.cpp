@@ -1,15 +1,20 @@
 #include "third.h"
+#include "qevent.h"
 #include "ui_third.h"
 #include <QSqlQuery>
 #include <QSqlError>
 #include <QDebug>
-#include <QKeyEvent>
+#include <QPixmap>
 
 Third::Third(QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::Third)
 {
     ui->setupUi(this);
+
+
+    connect(ui->likeButton, &QPushButton::clicked, this, &Third::on_likeButton_clicked);
+    connect(ui->dislikeButton, &QPushButton::clicked, this, &Third::on_dislikeButton_clicked);
 }
 
 Third::~Third()
@@ -20,13 +25,14 @@ Third::~Third()
 
 
 
+
+
 void Third::loadProfiles(const QString &login)
 {
     this->currentLogin = login;
     profilesData.clear();
 
     QSqlQuery query;
-    qDebug() << "Запрос на загрузку анкет:";
     query.prepare("SELECT id, name, age, city, photo_path, hobbies FROM users WHERE login != :login");
     query.bindValue(":login", login);
 
@@ -53,22 +59,21 @@ void Third::loadProfiles(const QString &login)
         currentIndex = 0;
         updateUI();
     }
+    else
+    {
+        qDebug() << "Нет анкет для отображения!";
+    }
 }
+
 
 
 
 
 void Third::updateUI()
 {
-    if (profilesData.isEmpty())
-    {
-        qDebug() << "Ошибка: profilesData пуст!";
-        return;
-    }
+    if (profilesData.isEmpty()) return;
 
     QMap<QString, QString> profile = profilesData[currentIndex];
-
-    qDebug() << "Обновление профиля:" << profile["name"];
 
     ui->profileName->setText(profile["name"]);
     ui->profileAge->setText(profile["age"] + " лет");
@@ -85,35 +90,72 @@ void Third::updateUI()
         }
         else
         {
-            qDebug() << "Ошибка загрузки картинки: " << photoPath;
+            ui->profilePhoto->clear();
+            qDebug() << "Ошибка загрузки картинки:" << photoPath;
         }
     }
     else
     {
-        qDebug() << "Пустой путь к картинке!";
+        ui->profilePhoto->clear();
+        qDebug() << "Фото отсутствует!";
     }
 }
+
 
 
 
 void Third::on_likeButton_clicked()
 {
     int userId = profilesData[currentIndex]["id"].toInt();
-    updateLikeStatus(userId, true);
+    saveReaction(userId, true);
+    on_nextProfile(); // Переключаем на следующую анкету
 }
+
 
 
 
 void Third::on_dislikeButton_clicked()
 {
     int userId = profilesData[currentIndex]["id"].toInt();
-    updateLikeStatus(userId, false);
+    saveReaction(userId, false);
+    on_nextProfile(); // Переключаем на следующую анкету
 }
 
 
 
 
-void Third::updateLikeStatus(int targetUserId, bool isLike)
+void Third::on_nextProfile()
+{
+    if (currentIndex < profilesData.size() - 1)
+    {
+        currentIndex++;
+        updateUI();
+    }
+    else
+    {
+        qDebug() << "Вы достигли конца анкет.";
+    }
+}
+
+
+
+
+void Third::on_prevProfile()
+{
+    if (currentIndex > 0)
+    {
+        currentIndex--;
+        updateUI();
+    }
+    else
+    {
+        qDebug() << "Вы достигли начала анкет.";
+    }
+}
+
+
+
+void Third::saveReaction(int targetUserId, bool isLike)
 {
     QSqlQuery query;
     query.prepare("INSERT INTO likes (user_id, target_user_id, like_status) VALUES "
@@ -124,10 +166,24 @@ void Third::updateLikeStatus(int targetUserId, bool isLike)
 
     if (!query.exec())
     {
-        qDebug() << "Ошибка лайка/дизлайка:" << query.lastError().text();
-    } else
+        qDebug() << "Ошибка сохранения лайка/дизлайка:" << query.lastError().text();
+    }
+    else
     {
-        qDebug() << "Лайк поставлен: " << isLike;
-        /*on_nextProfile_clicked();*/ // Переключаем анкету после лайка/дизлайка
+        qDebug() << "Реакция сохранена: " << (isLike ? "Лайк" : "Дизлайк");
+    }
+}
+
+
+
+void Third::keyPressEvent(QKeyEvent *event)
+{
+    if (event->key() == Qt::Key_Right)
+    {
+        on_nextProfile();
+    }
+    else if (event->key() == Qt::Key_Left)
+    {
+        on_prevProfile();
     }
 }
