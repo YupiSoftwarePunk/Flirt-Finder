@@ -106,6 +106,12 @@ void Third::updateUI()
 
 void Third::on_likeButton_clicked()
 {
+    if (currentIndex >= profilesData.size())
+    {
+        qDebug() << "Ошибка: индекс за пределами массива.";
+        return;
+    }
+
     int userId = profilesData[currentIndex]["id"].toInt();
     saveReaction(userId, true);
     on_nextProfile(); // Переключаем на следующую анкету
@@ -116,6 +122,12 @@ void Third::on_likeButton_clicked()
 
 void Third::on_dislikeButton_clicked()
 {
+    if (currentIndex >= profilesData.size())
+    {
+        qDebug() << "Ошибка: индекс за пределами массива.";
+        return;
+    }
+
     int userId = profilesData[currentIndex]["id"].toInt();
     saveReaction(userId, false);
     on_nextProfile(); // Переключаем на следующую анкету
@@ -158,8 +170,10 @@ void Third::on_prevProfile()
 void Third::saveReaction(int targetUserId, bool isLike)
 {
     QSqlQuery query;
+    query.clear();
     query.prepare("INSERT INTO likes (user_id, target_user_id, like_status) VALUES "
-                  "((SELECT id FROM users WHERE login = :login), :target_user_id, :like_status)");
+                  "((SELECT id FROM users WHERE login = :login), :target_user_id, :like_status)"
+                  "ON CONFLICT (user_id, target_user_id) DO UPDATE SET like_status = :like_status");
     query.bindValue(":login", currentLogin);
     query.bindValue(":target_user_id", targetUserId);
     query.bindValue(":like_status", isLike);

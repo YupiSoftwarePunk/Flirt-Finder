@@ -82,7 +82,7 @@ void Second::on_onSaveData_clicked()
     QString hobbies = ui->textEdit->toPlainText().trimmed();
     QString city = ui->lineEdit_4->text().trimmed();
     QString sex = ui->comboBox->currentText();
-    QString photo = m_photoPath;
+    // QString photo = m_photoPath;
 
 
     if (m_photoPath.isEmpty())
@@ -97,7 +97,7 @@ void Second::on_onSaveData_clicked()
     }
 
 
-    if (name.isEmpty() || hobbies.isEmpty() || city.isEmpty() || photo.isEmpty())
+    if (name.isEmpty() || hobbies.isEmpty() || city.isEmpty() || m_photoPath.isEmpty())
     {
         QMessageBox::warning(this, "Ошибка", "Все поля должны быть заполнены!");
         return;
@@ -122,7 +122,7 @@ void Second::on_onSaveData_clicked()
 
 
 
-    if (saveUserData(login, password, name, sex, age, hobbies, city, photo))
+    if (saveUserData(login, password, name, sex, age, hobbies, city, m_photoPath))
     {
         loadPhotoData(login);
         QMessageBox::information(this, "Успех", "Данные успешно сохранены!");
