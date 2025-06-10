@@ -72,7 +72,6 @@ void Third::loadProfiles(const QString &login)
 
 
 
-
 void Third::updateUI()
 {
     if (profilesData.isEmpty() || currentIndex >= profilesData.size())
@@ -155,6 +154,7 @@ void Third::on_nextProfile()
     }
     else
     {
+        QMessageBox::information(this, "Конец", "Это последняя анкета.");
         qDebug() << "Вы достигли конца анкет.";
     }
 }
@@ -171,6 +171,7 @@ void Third::on_prevProfile()
     }
     else
     {
+        QMessageBox::information(this, "Начало", "Это первая анкета.");
         qDebug() << "Вы достигли начала анкет.";
     }
 }
@@ -230,10 +231,12 @@ void Third::keyPressEvent(QKeyEvent *event)
     if (event->key() == Qt::Key_Right)
     {
         on_nextProfile();
+        event->accept();
     }
     else if (event->key() == Qt::Key_Left)
     {
         on_prevProfile();
+        event->accept();
     }
 }
 
