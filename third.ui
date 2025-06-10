@@ -31,7 +31,7 @@
     <rect>
      <x>10</x>
      <y>60</y>
-     <width>49</width>
+     <width>121</width>
      <height>16</height>
     </rect>
    </property>
@@ -44,7 +44,7 @@
     <rect>
      <x>10</x>
      <y>20</y>
-     <width>49</width>
+     <width>131</width>
      <height>16</height>
     </rect>
    </property>
@@ -55,24 +55,14 @@
   <widget class="QLabel" name="profileCity">
    <property name="geometry">
     <rect>
-     <x>30</x>
+     <x>10</x>
      <y>200</y>
-     <width>49</width>
-     <height>16</height>
+     <width>111</width>
+     <height>20</height>
     </rect>
    </property>
    <property name="text">
     <string>TextLabel</string>
-   </property>
-  </widget>
-  <widget class="QTextEdit" name="profileHobbies">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>100</y>
-     <width>104</width>
-     <height>70</height>
-    </rect>
    </property>
   </widget>
   <widget class="QPushButton" name="likeButton">
@@ -114,14 +104,24 @@
     <number>1</number>
    </property>
    <widget class="QWidget" name="page"/>
-   <widget class="QWidget" name="page_2"/>
+   <widget class="QWidget" name="page_2">
+    <widget class="QTextEdit" name="profileHobbies">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>100</y>
+       <width>121</width>
+       <height>91</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
   </widget>
   <zorder>stackedWidget</zorder>
   <zorder>profilePhoto</zorder>
   <zorder>profileAge</zorder>
   <zorder>profileName</zorder>
   <zorder>profileCity</zorder>
-  <zorder>profileHobbies</zorder>
   <zorder>likeButton</zorder>
   <zorder>dislikeButton</zorder>
  </widget>

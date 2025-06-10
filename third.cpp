@@ -5,6 +5,7 @@
 #include <QSqlError>
 #include <QDebug>
 #include <QPixmap>
+#include <QMessageBox>
 
 Third::Third(QWidget *parent)
     : QDialog(parent)
@@ -29,16 +30,16 @@ Third::~Third()
 
 void Third::loadProfiles(const QString &login)
 {
-    this->currentLogin = login;
-    profilesData.clear();
+    profilesData.clear(); // Очищаем массив перед загрузкой
 
     QSqlQuery query;
-    query.prepare("SELECT id, name, age, city, photo_path, hobbies FROM users WHERE login != :login");
+    query.prepare("SELECT users.id, users.name, users.age, users.city, users.hobbies, photos.photo_path "
+                  "FROM users LEFT JOIN photos ON users.id = photos.user_id WHERE users.login != :login");
     query.bindValue(":login", login);
 
     if (!query.exec())
     {
-        qDebug() << "Ошибка загрузки анкет:" << query.lastError().text();
+        qDebug() << "Ошибка выполнения SQL:" << query.lastError().text();
         return;
     }
 
@@ -49,19 +50,21 @@ void Third::loadProfiles(const QString &login)
         profile["name"] = query.value("name").toString();
         profile["age"] = query.value("age").toString();
         profile["city"] = query.value("city").toString();
-        profile["photo"] = query.value("photo_path").toString();
         profile["hobbies"] = query.value("hobbies").toString();
+        profile["photo"] = query.value("photo_path").toString(); // Путь к фото
         profilesData.append(profile);
     }
+
+    qDebug() << "Загружено анкет:" << profilesData.size();
 
     if (!profilesData.isEmpty())
     {
         currentIndex = 0;
-        updateUI();
+        updateUI(); // Отображаем первую анкету
     }
     else
     {
-        qDebug() << "Нет анкет для отображения!";
+        QMessageBox::information(this, "Информация", "Нет доступных анкет для отображения.");
     }
 }
 
@@ -71,7 +74,11 @@ void Third::loadProfiles(const QString &login)
 
 void Third::updateUI()
 {
-    if (profilesData.isEmpty()) return;
+    if (profilesData.isEmpty() || currentIndex >= profilesData.size())
+    {
+        qDebug() << "Ошибка: нет данных для отображения.";
+        return;
+    }
 
     QMap<QString, QString> profile = profilesData[currentIndex];
 
@@ -91,13 +98,13 @@ void Third::updateUI()
         else
         {
             ui->profilePhoto->clear();
-            qDebug() << "Ошибка загрузки картинки:" << photoPath;
+            qDebug() << "Ошибка загрузки картинки: " << photoPath;
         }
     }
     else
     {
         ui->profilePhoto->clear();
-        qDebug() << "Фото отсутствует!";
+        qDebug() << "Фото отсутствует.";
     }
 }
 
@@ -106,9 +113,9 @@ void Third::updateUI()
 
 void Third::on_likeButton_clicked()
 {
-    if (currentIndex >= profilesData.size())
+    if (currentIndex >= profilesData.size() || profilesData.isEmpty())
     {
-        qDebug() << "Ошибка: индекс за пределами массива.";
+        qDebug() <<"Ошибка: индекс за пределами массива или пустой массив.";
         return;
     }
 
@@ -122,9 +129,9 @@ void Third::on_likeButton_clicked()
 
 void Third::on_dislikeButton_clicked()
 {
-    if (currentIndex >= profilesData.size())
+    if (currentIndex >= profilesData.size() || profilesData.isEmpty())
     {
-        qDebug() << "Ошибка: индекс за пределами массива.";
+        qDebug() <<"Ошибка: индекс за пределами массива или пустой массив.";
         return;
     }
 

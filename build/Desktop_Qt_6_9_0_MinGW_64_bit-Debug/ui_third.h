@@ -27,12 +27,12 @@ public:
     QLabel *profileAge;
     QLabel *profileName;
     QLabel *profileCity;
-    QTextEdit *profileHobbies;
     QPushButton *likeButton;
     QPushButton *dislikeButton;
     QStackedWidget *stackedWidget;
     QWidget *page;
     QWidget *page_2;
+    QTextEdit *profileHobbies;
 
     void setupUi(QDialog *Third)
     {
@@ -44,16 +44,13 @@ public:
         profilePhoto->setGeometry(QRect(150, 10, 231, 211));
         profileAge = new QLabel(Third);
         profileAge->setObjectName("profileAge");
-        profileAge->setGeometry(QRect(10, 60, 49, 16));
+        profileAge->setGeometry(QRect(10, 60, 121, 16));
         profileName = new QLabel(Third);
         profileName->setObjectName("profileName");
-        profileName->setGeometry(QRect(10, 20, 49, 16));
+        profileName->setGeometry(QRect(10, 20, 131, 16));
         profileCity = new QLabel(Third);
         profileCity->setObjectName("profileCity");
-        profileCity->setGeometry(QRect(30, 200, 49, 16));
-        profileHobbies = new QTextEdit(Third);
-        profileHobbies->setObjectName("profileHobbies");
-        profileHobbies->setGeometry(QRect(10, 100, 104, 70));
+        profileCity->setGeometry(QRect(10, 200, 111, 20));
         likeButton = new QPushButton(Third);
         likeButton->setObjectName("likeButton");
         likeButton->setGeometry(QRect(80, 250, 80, 24));
@@ -68,13 +65,15 @@ public:
         stackedWidget->addWidget(page);
         page_2 = new QWidget();
         page_2->setObjectName("page_2");
+        profileHobbies = new QTextEdit(page_2);
+        profileHobbies->setObjectName("profileHobbies");
+        profileHobbies->setGeometry(QRect(10, 100, 121, 91));
         stackedWidget->addWidget(page_2);
         stackedWidget->raise();
         profilePhoto->raise();
         profileAge->raise();
         profileName->raise();
         profileCity->raise();
-        profileHobbies->raise();
         likeButton->raise();
         dislikeButton->raise();
 
