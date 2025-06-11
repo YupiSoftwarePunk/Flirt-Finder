@@ -28,6 +28,8 @@ public:
 
     void initializeUserData();
 
+    void initializeUserData2();
+
 private slots:
     void on_onLoadPhoto_clicked();
 

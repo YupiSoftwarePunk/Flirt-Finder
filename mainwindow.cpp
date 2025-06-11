@@ -146,7 +146,7 @@ void MainWindow::on_registration_button_clicked()
     // Передача данных во вторую страницу
     auto secondWindow = new Second();
     secondWindow->setUserCredentials(login, password);
-    secondWindow->initializeUserData();     // Загружаем данные перед отображением
+    secondWindow->initializeUserData2();     // Загружаем данные перед отображением
     secondWindow->show();
     this->close();
 }

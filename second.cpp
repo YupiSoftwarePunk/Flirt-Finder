@@ -31,10 +31,49 @@ Second::~Second()
 
 
 
+// это для загрузки всех данных пользователя
 void Second::initializeUserData()
 {
     loadUserData();   // Загружаем данные анкеты
     loadPhotoData(login); // Загружаем картинку пользователя
+}
+
+
+
+
+
+
+// это для регистрации, когда фото еще нет
+void Second::initializeUserData2()
+{
+    loadUserData();   // Загружаем данные анкеты
+
+    QSqlQuery photoQuery;
+    photoQuery.prepare("SELECT photo_path FROM photos WHERE user_id = (SELECT id FROM users WHERE login = :login)");
+    photoQuery.bindValue(":login", login);
+
+    if (!photoQuery.exec())
+    {
+        qDebug() << "Ошибка выполнения SQL при загрузке фото:" << photoQuery.lastError().text();
+        return;
+    }
+
+    if (photoQuery.next())
+    {
+        QString photoPath = photoQuery.value(0).toString();
+        if (!photoPath.isEmpty())
+        {
+            loadPhotoData(photoPath);
+        }
+        else
+        {
+            qDebug() << "Фото отсутствует для пользователя.";
+        }
+    }
+    else
+    {
+        qDebug() << "Фото для пользователя не найдено.";
+    }
 }
 
 
