@@ -20,6 +20,7 @@ MainWindow::~MainWindow()
 }
 
 
+
 // Вход
 void MainWindow::on_login_button_clicked()
 {
@@ -38,7 +39,8 @@ void MainWindow::on_login_button_clicked()
     query.bindValue(":login", login);
     query.bindValue(":password", password);
 
-    if (!query.exec()) {
+    if (!query.exec())
+    {
         QMessageBox::warning(this, "Ошибка", "Ошибка проверки авторизации!");
         qDebug() << "Ошибка SQL:" << query.lastError().text();
         return;
@@ -46,8 +48,12 @@ void MainWindow::on_login_button_clicked()
 
     query.next();
     int count = query.value(0).toInt();
-    if (count == 0) {
+    if (count == 0)
+    {
         QMessageBox::warning(this, "Ошибка", "Неверный логин или пароль!");
+        ui->login->clear();
+        ui->password->clear();
+        ui->login->setFocus();
         return;
     }
 
@@ -70,6 +76,8 @@ void MainWindow::on_login_button_clicked()
     // thirdWindow->show();
     // this->close();
 }
+
+
 
 
 
@@ -106,6 +114,9 @@ void MainWindow::on_registration_button_clicked()
     if (count > 0)
     {
         QMessageBox::warning(this, "Ошибка", "Аккаунт с таким логином уже существует!");
+        ui->login_2->clear();
+        ui->password_2->clear();
+        ui->login_2->setFocus();
         return;
     }
 
