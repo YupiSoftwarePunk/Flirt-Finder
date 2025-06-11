@@ -34,7 +34,7 @@ void Third::loadProfiles(const QString &login)
     qDebug() << "Текущий логин для загрузки профилей:" << currentLogin;
 
     QSqlQuery query;
-    query.prepare("SELECT users.id, users.name, users.age, users.city, users.hobbies, photos.photo_path "
+    query.prepare("SELECT DISTINCT users.id, users.name, users.age, users.city, users.hobbies, photos.photo_path "
                   "FROM users LEFT JOIN photos ON users.id = photos.user_id WHERE users.login != :login");
     query.bindValue(":login", login);
 
@@ -44,15 +44,23 @@ void Third::loadProfiles(const QString &login)
         return;
     }
 
+    QSet<QString> uniqueIds; // Храним уникальные ID пользователей
     while (query.next())
     {
+        QString userId = query.value("id").toString();
+        if (uniqueIds.contains(userId))
+        {
+            continue; // Пропускаем дубликаты
+        }
+        uniqueIds.insert(userId);
+
         QMap<QString, QString> profile;
-        profile["id"] = query.value("id").toString();
+        profile["id"] = userId;
         profile["name"] = query.value("name").toString();
         profile["age"] = query.value("age").toString();
         profile["city"] = query.value("city").toString();
         profile["hobbies"] = query.value("hobbies").toString();
-        profile["photo"] = query.value("photo_path").toString(); // Путь к фото
+        profile["photo"] = query.value("photo_path").toString();
         profilesData.append(profile);
     }
 
@@ -81,6 +89,8 @@ void Third::updateUI()
     }
 
     QMap<QString, QString> profile = profilesData[currentIndex];
+
+    qDebug() << "Отображение анкеты с индексом:" << currentIndex << "ID пользователя:" << profile["id"];
 
     ui->profileName->setText(profile["name"]);
     ui->profileAge->setText(profile["age"] + " лет");
@@ -115,14 +125,27 @@ void Third::on_likeButton_clicked()
 {
     if (profilesData.isEmpty() || currentIndex >= profilesData.size())
     {
-        QMessageBox::warning(this, "Ошибка", "Нет доступных анкет для сохранения реакции!");
+        QMessageBox::information(this, "Информация", "Это была последняя анкета!");
         qDebug() << "Ошибка: индекс за пределами массива или массив пуст.";
         return;
     }
 
     int userId = profilesData[currentIndex]["id"].toInt();
     saveReaction(userId, true);
-    on_nextProfile();
+
+    currentIndex++;
+
+    if (currentIndex < profilesData.size())
+    {
+        updateUI();
+    }
+    else
+    {
+        QMessageBox::information(this, "Информация", "Это была последняя анкета!");
+        qDebug() << "Последняя анкета обработана.";
+        currentIndex--;
+        this->close();
+    }
 }
 
 
@@ -132,14 +155,27 @@ void Third::on_dislikeButton_clicked()
 {
     if (profilesData.isEmpty() || currentIndex >= profilesData.size())
     {
-        QMessageBox::warning(this, "Ошибка", "Нет доступных анкет для сохранения реакции!");
+        QMessageBox::information(this, "Информация", "Это была последняя анкета!");
         qDebug() << "Ошибка: индекс за пределами массива или массив пуст.";
         return;
     }
 
     int userId = profilesData[currentIndex]["id"].toInt();
     saveReaction(userId, false);
-    on_nextProfile();
+
+    currentIndex++;
+
+    if (currentIndex < profilesData.size())
+    {
+        updateUI();
+    }
+    else
+    {
+        QMessageBox::information(this, "Информация", "Это была последняя анкета!");
+        qDebug() << "Последняя анкета обработана.";
+        currentIndex--;
+        this->close();
+    }
 }
 
 
@@ -147,15 +183,21 @@ void Third::on_dislikeButton_clicked()
 
 void Third::on_nextProfile()
 {
-    if (currentIndex < profilesData.size() - 1)
+    if (currentIndex < profilesData.size())
     {
         currentIndex++;
         updateUI();
     }
-    else
+    else if (currentIndex == profilesData.size()-1)
     {
         QMessageBox::information(this, "Конец", "Это последняя анкета.");
         qDebug() << "Вы достигли конца анкет.";
+        currentIndex++;
+    }
+    else
+    {
+        qDebug() << "Нет действий, анкеты закончились.";
+        this->close();
     }
 }
 
