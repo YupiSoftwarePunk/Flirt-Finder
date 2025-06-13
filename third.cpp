@@ -183,7 +183,7 @@ void Third::on_dislikeButton_clicked()
 
 void Third::on_nextProfile()
 {
-    if (currentIndex < profilesData.size())
+    if (currentIndex < profilesData.size()-1)
     {
         currentIndex++;
         updateUI();
@@ -279,6 +279,10 @@ void Third::keyPressEvent(QKeyEvent *event)
     {
         on_prevProfile();
         event->accept();
+    }
+    else
+    {
+        QDialog::keyPressEvent(event);
     }
 }
 
