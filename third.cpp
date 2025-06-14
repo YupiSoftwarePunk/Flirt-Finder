@@ -28,9 +28,6 @@ Third::~Third()
 
 
 
-
-
-
 void Third::loadProfiles(const QString &login)
 {
     profilesData.clear(); // Очищаем массив перед загрузкой
@@ -139,9 +136,9 @@ void Third::on_likeButton_clicked()
     {
         QMessageBox::information(this, "Информация", "Это была последняя анкета!");
         qDebug() << "Последняя анкета обработана.";
-        currentIndex--;
-        this->close();
-        return;
+        // currentIndex--;
+        // this->close();
+        // return;
     }
 }
 
@@ -170,9 +167,9 @@ void Third::on_dislikeButton_clicked()
     {
         QMessageBox::information(this, "Информация", "Это была последняя анкета!");
         qDebug() << "Последняя анкета обработана.";
-        currentIndex--;
-        this->close();
-        return;
+        // currentIndex--;
+        // this->close();
+        // return;
     }
 }
 
@@ -269,13 +266,11 @@ void Third::keyPressEvent(QKeyEvent *event)
 {
     if (event->key() == Qt::Key_Right)
     {
-        qDebug()<<"нажата кнопка вправо";
         on_nextProfile();
         event->accept();
     }
     else if (event->key() == Qt::Key_Left)
     {
-        qDebug()<<"нажата кнопка влево";
         on_prevProfile();
         event->accept();
     }
@@ -291,5 +286,4 @@ void Third::keyPressEvent(QKeyEvent *event)
 void Third::setCurrentLogin(const QString &login)
 {
     currentLogin = login;
-    qDebug() << "Текущий логин установлен:" << currentLogin;
 }

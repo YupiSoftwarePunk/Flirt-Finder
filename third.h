@@ -23,6 +23,7 @@ public:
 private slots:
     void on_likeButton_clicked();
     void on_dislikeButton_clicked();
+
     void on_nextProfile();
     void on_prevProfile();
 
@@ -33,8 +34,11 @@ private:
 
     QString currentLogin;
     int currentIndex = 0; // Индекс текущей анкеты
+
     QVector<QMap<QString, QString>> profilesData;
+
     void updateUI();
+
     void saveReaction(int targetUserId, bool isLike);
 };
 

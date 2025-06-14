@@ -37,6 +37,7 @@ private slots:
 
 private:
     Ui::Second *ui;
+
     QString m_photoPath;
 
     bool eventFilter(QObject *watched, QEvent *event) override;
