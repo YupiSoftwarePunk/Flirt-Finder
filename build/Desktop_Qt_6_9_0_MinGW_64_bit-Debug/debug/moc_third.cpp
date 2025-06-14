@@ -43,7 +43,10 @@ template <> constexpr inline auto Third::qt_create_metaobjectdata<qt_meta_tag_ZN
         "",
         "on_dislikeButton_clicked",
         "on_nextProfile",
-        "on_prevProfile"
+        "on_prevProfile",
+        "keyPressEvent",
+        "QKeyEvent*",
+        "event"
     };
 
     QtMocHelpers::UintData qt_methods {
@@ -55,6 +58,10 @@ template <> constexpr inline auto Third::qt_create_metaobjectdata<qt_meta_tag_ZN
         QtMocHelpers::SlotData<void()>(4, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'on_prevProfile'
         QtMocHelpers::SlotData<void()>(5, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'keyPressEvent'
+        QtMocHelpers::SlotData<void(QKeyEvent *)>(6, 2, QMC::AccessPrivate, QMetaType::Void, {{
+            { 0x80000000 | 7, 8 },
+        }}),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -82,10 +89,10 @@ void Third::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void 
         case 1: _t->on_dislikeButton_clicked(); break;
         case 2: _t->on_nextProfile(); break;
         case 3: _t->on_prevProfile(); break;
+        case 4: _t->keyPressEvent((*reinterpret_cast< std::add_pointer_t<QKeyEvent*>>(_a[1]))); break;
         default: ;
         }
     }
-    (void)_a;
 }
 
 const QMetaObject *Third::metaObject() const
@@ -107,14 +114,14 @@ int Third::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 4)
+        if (_id < 5)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 4;
+        _id -= 5;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 4)
+        if (_id < 5)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 4;
+        _id -= 5;
     }
     return _id;
 }

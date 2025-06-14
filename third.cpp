@@ -13,6 +13,9 @@ Third::Third(QWidget *parent)
 {
     ui->setupUi(this);
 
+    this->setFocusPolicy(Qt::StrongFocus);
+    this->setFocus();
+
 
     connect(ui->likeButton, &QPushButton::clicked, this, &Third::on_likeButton_clicked);
     connect(ui->dislikeButton, &QPushButton::clicked, this, &Third::on_dislikeButton_clicked);
@@ -143,8 +146,9 @@ void Third::on_likeButton_clicked()
     {
         QMessageBox::information(this, "Информация", "Это была последняя анкета!");
         qDebug() << "Последняя анкета обработана.";
-        currentIndex--;
-        this->close();
+        // currentIndex--;
+        // this->close();
+        // return;
     }
 }
 
@@ -173,8 +177,9 @@ void Third::on_dislikeButton_clicked()
     {
         QMessageBox::information(this, "Информация", "Это была последняя анкета!");
         qDebug() << "Последняя анкета обработана.";
-        currentIndex--;
-        this->close();
+        // currentIndex--;
+        // this->close();
+        // return;
     }
 }
 
@@ -192,12 +197,11 @@ void Third::on_nextProfile()
     {
         QMessageBox::information(this, "Конец", "Это последняя анкета.");
         qDebug() << "Вы достигли конца анкет.";
-        currentIndex++;
     }
     else
     {
         qDebug() << "Нет действий, анкеты закончились.";
-        this->close();
+        // this->close();
     }
 }
 
@@ -272,11 +276,13 @@ void Third::keyPressEvent(QKeyEvent *event)
 {
     if (event->key() == Qt::Key_Right)
     {
+        qDebug()<<"нажата кнопка вправо";
         on_nextProfile();
         event->accept();
     }
     else if (event->key() == Qt::Key_Left)
     {
+        qDebug()<<"нажата кнопка влево";
         on_prevProfile();
         event->accept();
     }

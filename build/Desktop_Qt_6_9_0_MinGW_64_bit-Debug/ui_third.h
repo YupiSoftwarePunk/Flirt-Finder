@@ -39,6 +39,7 @@ public:
         if (Third->objectName().isEmpty())
             Third->setObjectName("Third");
         Third->resize(400, 300);
+        Third->setFocusPolicy(Qt::FocusPolicy::StrongFocus);
         profilePhoto = new QLabel(Third);
         profilePhoto->setObjectName("profilePhoto");
         profilePhoto->setGeometry(QRect(150, 10, 231, 211));
@@ -68,6 +69,7 @@ public:
         profileHobbies = new QTextEdit(page_2);
         profileHobbies->setObjectName("profileHobbies");
         profileHobbies->setGeometry(QRect(10, 100, 121, 91));
+        profileHobbies->setFocusPolicy(Qt::FocusPolicy::NoFocus);
         stackedWidget->addWidget(page_2);
         stackedWidget->raise();
         profilePhoto->raise();
@@ -79,7 +81,7 @@ public:
 
         retranslateUi(Third);
 
-        stackedWidget->setCurrentIndex(1);
+        stackedWidget->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(Third);

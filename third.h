@@ -21,7 +21,7 @@ public:
 
 
 protected:
-    void keyPressEvent(QKeyEvent *event) override;
+    // void keyPressEvent(QKeyEvent *event) override;
 
 
 private slots:
@@ -29,6 +29,8 @@ private slots:
     void on_dislikeButton_clicked();
     void on_nextProfile();
     void on_prevProfile();
+
+    void keyPressEvent(QKeyEvent *event);
 
 private:
     Ui::Third *ui;
