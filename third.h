@@ -20,10 +20,6 @@ public:
     void setCurrentLogin(const QString &login);
 
 
-protected:
-    // void keyPressEvent(QKeyEvent *event) override;
-
-
 private slots:
     void on_likeButton_clicked();
     void on_dislikeButton_clicked();

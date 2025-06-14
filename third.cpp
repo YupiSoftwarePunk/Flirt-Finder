@@ -126,13 +126,6 @@ void Third::updateUI()
 
 void Third::on_likeButton_clicked()
 {
-    if (profilesData.isEmpty() || currentIndex >= profilesData.size())
-    {
-        QMessageBox::information(this, "Информация", "Это была последняя анкета!");
-        qDebug() << "Ошибка: индекс за пределами массива или массив пуст.";
-        return;
-    }
-
     int userId = profilesData[currentIndex]["id"].toInt();
     saveReaction(userId, true);
 
@@ -146,9 +139,9 @@ void Third::on_likeButton_clicked()
     {
         QMessageBox::information(this, "Информация", "Это была последняя анкета!");
         qDebug() << "Последняя анкета обработана.";
-        // currentIndex--;
-        // this->close();
-        // return;
+        currentIndex--;
+        this->close();
+        return;
     }
 }
 
@@ -177,9 +170,9 @@ void Third::on_dislikeButton_clicked()
     {
         QMessageBox::information(this, "Информация", "Это была последняя анкета!");
         qDebug() << "Последняя анкета обработана.";
-        // currentIndex--;
-        // this->close();
-        // return;
+        currentIndex--;
+        this->close();
+        return;
     }
 }
 
