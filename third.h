@@ -37,6 +37,8 @@ private:
 
     QVector<QMap<QString, QString>> profilesData;
 
+    QSet<int> viewedProfiles;
+
     void updateUI();
 
     void saveReaction(int targetUserId, bool isLike);
