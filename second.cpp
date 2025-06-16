@@ -30,7 +30,6 @@ Second::~Second()
 }
 
 
-
 // это для загрузки всех данных пользователя
 void Second::initializeUserData()
 {

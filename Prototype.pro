@@ -24,3 +24,6 @@ FORMS += \
     third.ui
 
 QTPLUGIN += qsqlpsql
+
+RESOURCES += \
+    resources.qrc
