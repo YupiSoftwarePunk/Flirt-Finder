@@ -44,7 +44,7 @@ public:
         Third->setFocusPolicy(Qt::FocusPolicy::StrongFocus);
         profilePhoto = new QLabel(Third);
         profilePhoto->setObjectName("profilePhoto");
-        profilePhoto->setGeometry(QRect(150, 10, 231, 211));
+        profilePhoto->setGeometry(QRect(150, 10, 231, 181));
         profileAge = new QLabel(Third);
         profileAge->setObjectName("profileAge");
         profileAge->setGeometry(QRect(10, 60, 121, 16));
@@ -53,7 +53,7 @@ public:
         profileName->setGeometry(QRect(10, 20, 131, 16));
         profileCity = new QLabel(Third);
         profileCity->setObjectName("profileCity");
-        profileCity->setGeometry(QRect(10, 200, 111, 20));
+        profileCity->setGeometry(QRect(10, 200, 271, 20));
         likeButton = new QPushButton(Third);
         likeButton->setObjectName("likeButton");
         likeButton->setGeometry(QRect(80, 250, 80, 24));
@@ -76,7 +76,7 @@ public:
         settingsButton->setObjectName("settingsButton");
         settingsButton->setGeometry(QRect(370, 20, 32, 32));
         QIcon icon;
-        icon.addFile(QString::fromUtf8("images/settings (1).png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
+        icon.addFile(QString::fromUtf8("images/settings.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
         settingsButton->setIcon(icon);
         settingsButton->setIconSize(QSize(32, 32));
         stackedWidget->addWidget(page_2);

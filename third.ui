@@ -22,7 +22,7 @@
      <x>150</x>
      <y>10</y>
      <width>231</width>
-     <height>211</height>
+     <height>181</height>
     </rect>
    </property>
    <property name="text">
@@ -60,7 +60,7 @@
     <rect>
      <x>10</x>
      <y>200</y>
-     <width>111</width>
+     <width>271</width>
      <height>20</height>
     </rect>
    </property>
@@ -135,7 +135,7 @@
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>images/settings (1).png</normaloff>images/settings (1).png</iconset>
+       <normaloff>images/settings.png</normaloff>images/settings.png</iconset>
      </property>
      <property name="iconSize">
       <size>
