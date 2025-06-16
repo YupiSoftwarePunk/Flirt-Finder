@@ -1,7 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "second.h"
-#include "third.h"
 
 #include <QMessageBox>
 #include <QSqlQuery>

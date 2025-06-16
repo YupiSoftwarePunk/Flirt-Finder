@@ -6,6 +6,8 @@
 #include <QDebug>
 #include <QPixmap>
 #include <QMessageBox>
+#include <QThread>
+
 
 Third::Third(QWidget *parent)
     : QDialog(parent)
@@ -15,10 +17,6 @@ Third::Third(QWidget *parent)
 
     this->setFocusPolicy(Qt::StrongFocus);
     this->setFocus();
-
-
-    connect(ui->likeButton, &QPushButton::clicked, this, &Third::on_likeButton_clicked);
-    connect(ui->dislikeButton, &QPushButton::clicked, this, &Third::on_dislikeButton_clicked);
 }
 
 Third::~Third()
@@ -158,7 +156,6 @@ void Third::on_dislikeButton_clicked()
     saveReaction(userId, false);
 
     currentIndex++;
-
     if (currentIndex < profilesData.size())
     {
         updateUI();

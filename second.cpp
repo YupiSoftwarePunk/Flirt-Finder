@@ -166,9 +166,21 @@ void Second::on_onSaveData_clicked()
         loadPhotoData(login);
         QMessageBox::information(this, "Успех", "Данные успешно сохранены!");
 
-        auto thirdWindow = new Third();
-        thirdWindow->setCurrentLogin(login);
-        thirdWindow->loadProfiles(login); // Передаём login в метод для загрузки профилей
+        // auto thirdWindow = new Third();
+        // thirdWindow->setCurrentLogin(login);
+        // thirdWindow->loadProfiles(login); // Передаём login в метод для загрузки профилей
+        // thirdWindow->show();
+        // this->close();
+
+
+        Third* thirdWindow = nullptr;
+        if (!thirdWindow)
+        {
+            thirdWindow = new Third();
+            thirdWindow->setCurrentLogin(login);
+            thirdWindow->loadProfiles(login);
+            /*connect(thirdWindow, &QObject::destroyed, this, [this]() { thirdWindow = nullptr; });*/ // Удаляем объект при закрытии окна
+        }
         thirdWindow->show();
         this->close();
     }
