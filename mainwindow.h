@@ -23,6 +23,8 @@ private slots:
 
     void on_registration_button_clicked();
 
+    void keyPressEvent(QKeyEvent *event);
+
 private:
     Ui::MainWindow *ui;
     // SecondWindow *sWindow;

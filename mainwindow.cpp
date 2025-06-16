@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+#include "qevent.h"
 #include "ui_mainwindow.h"
 #include "second.h"
 
@@ -148,4 +149,28 @@ void MainWindow::on_registration_button_clicked()
     secondWindow->initializeUserData2();     // Загружаем данные перед отображением
     secondWindow->show();
     this->close();
+}
+
+
+
+
+
+void MainWindow::keyPressEvent(QKeyEvent *event)
+{
+    if (event->key() == Qt::Key_Return || event->key() == Qt::Key_Enter)
+    {
+        if (ui->login->hasFocus() || ui->password->hasFocus())
+        {
+            ui->login_button->click();
+        }
+        else if (ui->login_2->hasFocus() || ui->password_2->hasFocus())
+        {
+            ui->registration_button->click();
+        }
+        event->accept();
+    }
+    else
+    {
+        QMainWindow::keyPressEvent(event);
+    }
 }
