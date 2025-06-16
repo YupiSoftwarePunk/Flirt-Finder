@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "qevent.h"
+#include "third.h"
 #include "ui_mainwindow.h"
 #include "second.h"
 
@@ -60,21 +61,22 @@ void MainWindow::on_login_button_clicked()
     QMessageBox::information(this, "Успех", "Авторизация прошла успешно!");
 
     // Переход на второе окно
-    auto secondWindow = new Second();
-    secondWindow->setUserCredentials(login, password);
-    secondWindow->initializeUserData(); // Загрузить данные из базы
-    secondWindow->show();
-    this->close();
+    // auto secondWindow = new Second();
+    // secondWindow->setUserCredentials(login, password);
+    // secondWindow->initializeUserData(); // Загрузить данные из базы
+    // secondWindow->show();
+    // this->close();
 
 
     // переход на третье окно
-    // auto thirdWindow = new Third();
-    // auto secondWindow = new Second();
-    // secondWindow->setUserCredentials(login, password);
-    // secondWindow->initializeUserData();
-    // thirdWindow->loadProfiles(login);
-    // thirdWindow->show();
-    // this->close();
+    auto thirdWindow = new Third();
+    auto secondWindow = new Second();
+    secondWindow->setUserCredentials(login, password);
+    secondWindow->initializeUserData();
+    thirdWindow->loadProfiles(login);
+    thirdWindow->setCurrentUserData(login, password);
+    thirdWindow->show();
+    this->close();
 }
 
 

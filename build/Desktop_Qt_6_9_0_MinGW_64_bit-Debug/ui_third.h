@@ -10,6 +10,7 @@
 #define UI_THIRD_H
 
 #include <QtCore/QVariant>
+#include <QtGui/QIcon>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QLabel>
@@ -33,6 +34,7 @@ public:
     QWidget *page;
     QWidget *page_2;
     QTextEdit *profileHobbies;
+    QPushButton *settingsButton;
 
     void setupUi(QDialog *Third)
     {
@@ -70,6 +72,13 @@ public:
         profileHobbies->setObjectName("profileHobbies");
         profileHobbies->setGeometry(QRect(10, 100, 121, 91));
         profileHobbies->setFocusPolicy(Qt::FocusPolicy::NoFocus);
+        settingsButton = new QPushButton(page_2);
+        settingsButton->setObjectName("settingsButton");
+        settingsButton->setGeometry(QRect(370, 20, 32, 32));
+        QIcon icon;
+        icon.addFile(QString::fromUtf8("images/settings (1).png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
+        settingsButton->setIcon(icon);
+        settingsButton->setIconSize(QSize(32, 32));
         stackedWidget->addWidget(page_2);
         stackedWidget->raise();
         profilePhoto->raise();
@@ -96,6 +105,7 @@ public:
         profileCity->setText(QCoreApplication::translate("Third", "TextLabel", nullptr));
         likeButton->setText(QCoreApplication::translate("Third", "Like", nullptr));
         dislikeButton->setText(QCoreApplication::translate("Third", "Dislike", nullptr));
+        settingsButton->setText(QString());
     } // retranslateUi
 
 };

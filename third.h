@@ -17,7 +17,7 @@ public:
 
     void loadProfiles(const QString &currentLogin);
 
-    void setCurrentLogin(const QString &login);
+    void setCurrentUserData(const QString &login, const QString &password);
 
 
 private slots:
@@ -29,10 +29,13 @@ private slots:
 
     void keyPressEvent(QKeyEvent *event);
 
+    void on_settingsButton_clicked();
+
 private:
     Ui::Third *ui;
 
     QString currentLogin;
+    QString currentPassword;
     int currentIndex = 0; // Индекс текущей анкеты
 
     QVector<QMap<QString, QString>> profilesData;

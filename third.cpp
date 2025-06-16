@@ -1,5 +1,6 @@
 #include "third.h"
 #include "qevent.h"
+#include "second.h"
 #include "ui_third.h"
 #include <QSqlQuery>
 #include <QSqlError>
@@ -280,7 +281,20 @@ void Third::keyPressEvent(QKeyEvent *event)
 
 
 
-void Third::setCurrentLogin(const QString &login)
+void Third::setCurrentUserData(const QString &login, const QString &password)
 {
     currentLogin = login;
+    currentPassword = password;
 }
+
+
+
+void Third::on_settingsButton_clicked()
+{
+    auto secondWindow = new Second();
+    secondWindow->setUserCredentials(currentLogin, currentPassword);
+    secondWindow->initializeUserData();
+    secondWindow->show();
+    this->close();
+}
+

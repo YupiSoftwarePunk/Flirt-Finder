@@ -167,7 +167,7 @@ void Second::on_onSaveData_clicked()
         QMessageBox::information(this, "Успех", "Данные успешно сохранены!");
 
         auto thirdWindow = new Third();
-        thirdWindow->setCurrentLogin(login);
+        thirdWindow->setCurrentUserData(login, password);
         thirdWindow->loadProfiles(login); // Передаём login в метод для загрузки профилей
         thirdWindow->show();
         this->close();
