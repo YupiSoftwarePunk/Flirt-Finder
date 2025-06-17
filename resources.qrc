@@ -1,5 +1,5 @@
 <RCC>
-    <qresource prefix="/\images">
+    <qresource prefix="/images">
         <file>images/settings.png</file>
     </qresource>
 </RCC>
