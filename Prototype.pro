@@ -8,17 +8,20 @@ TARGET = project_name
 INCLUDEPATH += .
 
 SOURCES += \
+    fourth.cpp \
     main.cpp \
     mainwindow.cpp \
     second.cpp \
     third.cpp
 
 HEADERS += \
+    fourth.h \
     mainwindow.h \
     second.h \
     third.h
 
 FORMS += \
+    fourth.ui \
     mainwindow.ui \
     second.ui \
     third.ui
