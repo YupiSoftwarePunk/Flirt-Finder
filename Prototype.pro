@@ -8,23 +8,23 @@ TARGET = project_name
 INCLUDEPATH += .
 
 SOURCES += \
-    fourth.cpp \
+    .\src\fourth.cpp \
     main.cpp \
-    mainwindow.cpp \
-    second.cpp \
-    third.cpp
+    .\src\mainwindow.cpp \
+    .\src\second.cpp \
+    .\src\third.cpp
 
 HEADERS += \
-    fourth.h \
-    mainwindow.h \
-    second.h \
-    third.h
+    .\include\fourth.h \
+    .\include\mainwindow.h \
+    .\include\second.h \
+    .\include\third.h
 
 FORMS += \
-    fourth.ui \
-    mainwindow.ui \
-    second.ui \
-    third.ui
+    .\forms\fourth.ui \
+    .\forms\mainwindow.ui \
+    .\forms\second.ui \
+    .\forms\third.ui
 
 QTPLUGIN += qsqlpsql
 
