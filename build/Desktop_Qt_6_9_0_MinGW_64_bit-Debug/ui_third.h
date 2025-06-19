@@ -85,7 +85,7 @@ public:
         settingsButton_2->setIconSize(QSize(32, 32));
         profilePhoto = new QLabel(page_2);
         profilePhoto->setObjectName("profilePhoto");
-        profilePhoto->setGeometry(QRect(140, 40, 221, 181));
+        profilePhoto->setGeometry(QRect(140, 10, 221, 181));
         stackedWidget->addWidget(page_2);
         stackedWidget->raise();
         profileAge->raise();
