@@ -1,8 +1,8 @@
-#include "mainwindow.h"
+#include "include/mainwindow.h"
 #include "qevent.h"
-#include "third.h"
+#include "include/third.h"
 #include "ui_mainwindow.h"
-#include "second.h"
+#include "include/second.h"
 
 #include <QMessageBox>
 #include <QSqlQuery>
@@ -13,6 +13,17 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+
+    // Создаём валидатор с разрешёнными символами
+    QRegularExpression regex("^[a-zA-Z0-9@.,]*$"); // Только буквы, цифры, @, ., запятая
+    QRegularExpressionValidator *validator = new QRegularExpressionValidator(regex, this);
+
+    // Устанавливаем валидатор для полей ввода логина и пароля
+    ui->login->setValidator(validator);
+    ui->password->setValidator(validator);
+    ui->login_2->setValidator(validator);
+    ui->password_2->setValidator(validator);
 }
 
 MainWindow::~MainWindow()

@@ -1,5 +1,5 @@
-#include "second.h"
-#include "third.h"
+#include "include/second.h"
+#include "include/third.h"
 #include "ui_second.h"
 
 #include <QFileDialog>
