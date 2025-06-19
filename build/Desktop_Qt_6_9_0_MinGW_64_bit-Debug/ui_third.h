@@ -24,7 +24,6 @@ QT_BEGIN_NAMESPACE
 class Ui_Third
 {
 public:
-    QLabel *profilePhoto;
     QLabel *profileAge;
     QLabel *profileName;
     QLabel *profileCity;
@@ -35,6 +34,8 @@ public:
     QWidget *page_2;
     QTextEdit *profileHobbies;
     QPushButton *settingsButton;
+    QPushButton *settingsButton_2;
+    QLabel *profilePhoto;
 
     void setupUi(QDialog *Third)
     {
@@ -42,9 +43,6 @@ public:
             Third->setObjectName("Third");
         Third->resize(400, 300);
         Third->setFocusPolicy(Qt::FocusPolicy::StrongFocus);
-        profilePhoto = new QLabel(Third);
-        profilePhoto->setObjectName("profilePhoto");
-        profilePhoto->setGeometry(QRect(140, 10, 221, 181));
         profileAge = new QLabel(Third);
         profileAge->setObjectName("profileAge");
         profileAge->setGeometry(QRect(10, 60, 121, 16));
@@ -79,9 +77,17 @@ public:
         icon.addFile(QString::fromUtf8(":/images/images/settings.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
         settingsButton->setIcon(icon);
         settingsButton->setIconSize(QSize(32, 32));
+        settingsButton_2 = new QPushButton(page_2);
+        settingsButton_2->setObjectName("settingsButton_2");
+        settingsButton_2->setGeometry(QRect(370, 70, 32, 32));
+        QIcon icon1(QIcon::fromTheme(QIcon::ThemeIcon::MailForward));
+        settingsButton_2->setIcon(icon1);
+        settingsButton_2->setIconSize(QSize(32, 32));
+        profilePhoto = new QLabel(page_2);
+        profilePhoto->setObjectName("profilePhoto");
+        profilePhoto->setGeometry(QRect(140, 40, 221, 181));
         stackedWidget->addWidget(page_2);
         stackedWidget->raise();
-        profilePhoto->raise();
         profileAge->raise();
         profileName->raise();
         profileCity->raise();
@@ -99,7 +105,6 @@ public:
     void retranslateUi(QDialog *Third)
     {
         Third->setWindowTitle(QCoreApplication::translate("Third", "Dialog", nullptr));
-        profilePhoto->setText(QCoreApplication::translate("Third", "TextLabel", nullptr));
         profileAge->setText(QCoreApplication::translate("Third", "TextLabel", nullptr));
         profileName->setText(QCoreApplication::translate("Third", "TextLabel", nullptr));
         profileCity->setText(QCoreApplication::translate("Third", "TextLabel", nullptr));
@@ -109,6 +114,11 @@ public:
         settingsButton->setToolTip(QCoreApplication::translate("Third", "\320\235\320\260\321\201\321\202\321\200\320\276\320\271\320\272\320\270", nullptr));
 #endif // QT_CONFIG(tooltip)
         settingsButton->setText(QString());
+#if QT_CONFIG(tooltip)
+        settingsButton_2->setToolTip(QCoreApplication::translate("Third", "\320\257\321\211\320\270\320\272 \321\201\320\276\320\276\320\261\321\211\320\265\320\275\320\270\320\271", nullptr));
+#endif // QT_CONFIG(tooltip)
+        settingsButton_2->setText(QString());
+        profilePhoto->setText(QCoreApplication::translate("Third", "TextLabel", nullptr));
     } // retranslateUi
 
 };

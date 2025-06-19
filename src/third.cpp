@@ -1,7 +1,8 @@
-#include "third.h"
+#include "include/third.h"
 #include "qevent.h"
-#include "second.h"
+#include "include/second.h"
 #include "ui_third.h"
+
 #include <QSqlQuery>
 #include <QSqlError>
 #include <QDebug>
