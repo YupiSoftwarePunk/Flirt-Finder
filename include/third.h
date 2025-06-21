@@ -45,6 +45,8 @@ private:
     void updateUI();
 
     void saveReaction(int targetUserId, bool isLike);
+
+    void sortProfiles();
 };
 
 #endif // THIRD_H

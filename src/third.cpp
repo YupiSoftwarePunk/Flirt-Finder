@@ -73,6 +73,9 @@ void Third::loadProfiles(const QString &login)
 
     qDebug() << "Загружено анкет:" << profilesData.size();
 
+    // Сортировка профилей
+    sortProfiles();
+
     if (!profilesData.isEmpty())
     {
         currentIndex = 0;
@@ -306,3 +309,47 @@ void Third::on_settingsButton_clicked()
     this->close();
 }
 
+
+
+void Third::sortProfiles()
+{
+    // Получаем данные текущего пользователя
+    QSqlQuery userQuery;
+    userQuery.prepare("SELECT age, city, hobbies FROM users WHERE login = :login");
+    userQuery.bindValue(":login", currentLogin);
+
+    if (!userQuery.exec() || !userQuery.next())
+    {
+        qDebug() << "Ошибка выполнения SQL-запроса для текущего пользователя:" << userQuery.lastError().text();
+        return;
+    }
+
+    int currentAge = userQuery.value("age").toInt();
+    QString currentCity = userQuery.value("city").toString();
+    QString currentHobbies = userQuery.value("hobbies").toString();
+
+    // Сортировка
+    std::sort(profilesData.begin(), profilesData.end(), [&](const QMap<QString, QString> &a, const QMap<QString, QString> &b) {
+        bool isSameCityA = a["city"] == currentCity;
+        bool isSameCityB = b["city"] == currentCity;
+
+        bool isSimilarHobbiesA = a["hobbies"].contains(currentHobbies, Qt::CaseInsensitive);
+        bool isSimilarHobbiesB = b["hobbies"].contains(currentHobbies, Qt::CaseInsensitive);
+
+        int ageDiffA = abs(a["age"].toInt() - currentAge);
+        int ageDiffB = abs(b["age"].toInt() - currentAge);
+
+        // Сначала город, потом увлечения, затем возраст
+        if (isSameCityA != isSameCityB)
+            return isSameCityA > isSameCityB;
+        if (isSimilarHobbiesA != isSimilarHobbiesB)
+            return isSimilarHobbiesA > isSimilarHobbiesB;
+        if (ageDiffA != ageDiffB)
+            return ageDiffA < ageDiffB;
+
+        // В конце — сортировка по увеличению возраста
+        return a["age"].toInt() < b["age"].toInt();
+    });
+
+    qDebug() << "Профили отсортированы по релевантности и возрасту.";
+}

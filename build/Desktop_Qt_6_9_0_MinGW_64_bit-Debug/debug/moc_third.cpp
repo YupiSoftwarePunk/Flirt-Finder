@@ -6,7 +6,7 @@
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "../../../third.h"
+#include "../../../include/third.h"
 #include <QtCore/qmetatype.h>
 
 #include <QtCore/qtmochelpers.h>
