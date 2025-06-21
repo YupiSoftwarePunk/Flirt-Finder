@@ -76,13 +76,15 @@ void Third::loadProfiles(const QString &login)
     qDebug() << "Загружено анкет:" << profilesData.size();
 
 
-    // Сортировка профилей
-    sortProfiles();
+    // // Сортировка профилей
+    // sortProfiles();
 
 
     if (!profilesData.isEmpty())
     {
         currentIndex = 0;
+        // Сортировка профилей
+        sortProfiles();
         updateUI(); // Отображаем первую анкету
     }
     else
@@ -349,7 +351,7 @@ void Third::sortProfiles()
         int ageDiffA = abs(a["age"].toInt() - currentAge);
         int ageDiffB = abs(b["age"].toInt() - currentAge);
 
-        // Сначала возраст, затем город, потом увлечения
+
         if (isOppositeGenderA != isOppositeGenderB)
             return isOppositeGenderA > isOppositeGenderB;
         if (ageDiffA != ageDiffB)
