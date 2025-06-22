@@ -84,8 +84,8 @@ void MainWindow::on_login_button_clicked()
     auto secondWindow = new Second();
     secondWindow->setUserCredentials(login, password);
     secondWindow->initializeUserData();
-    thirdWindow->loadProfiles(login);
     thirdWindow->setCurrentUserData(login, password);
+    thirdWindow->loadProfiles(login);
     thirdWindow->show();
     this->close();
 }
