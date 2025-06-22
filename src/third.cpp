@@ -37,20 +37,38 @@ Third::~Third()
 
 void Third::loadProfiles(const QString &login)
 {
-    profilesData.clear(); // Очищаем массив перед загрузкой
-    qDebug() << "Текущий логин для загрузки профилей:" << currentLogin;
+    profilesData.clear();
+    qDebug() << "Текущий логин для загрузки профилей:" << login;
 
-    QSqlQuery query;
-    query.prepare("SELECT DISTINCT users.id, users.name, users.age, users.city, users.hobbies, users.gender, photos.photo_path "
-                  "FROM users LEFT JOIN photos ON users.id = photos.user_id WHERE users.login != :login");
-    query.bindValue(":login", login);
+    // Получаем пол текущего пользователя
+    QSqlQuery userQuery;
+    userQuery.prepare("SELECT gender FROM users WHERE login = :login");
+    userQuery.bindValue(":login", login);
 
-    if (!query.exec())
+    if (!userQuery.exec() || !userQuery.next())
     {
-        qDebug() << "Ошибка выполнения SQL:" << query.lastError().text();
+        qDebug() << "Ошибка выполнения SQL-запроса для текущего пользователя:" << userQuery.lastError().text();
         return;
     }
 
+    QString currentGender = userQuery.value("gender").toString();
+    QString oppositeGender = (currentGender == "Мужской") ? "Женский" : "Мужской";
+
+    // Выполняем основной запрос для получения профилей противоположного пола
+    QSqlQuery query;
+    query.prepare(
+        "SELECT DISTINCT users.id, users.name, users.age, users.city, users.hobbies, users.gender, photos.photo_path "
+        "FROM users LEFT JOIN photos ON users.id = photos.user_id "
+        "WHERE users.login != :login AND users.gender = :gender"
+        );
+    query.bindValue(":login", login);
+    query.bindValue(":gender", oppositeGender); // Применяем фильтр по противоположному полу
+
+    if (!query.exec())
+    {
+        qDebug() << "Ошибка выполнения SQL-запроса:" << query.lastError().text();
+        return;
+    }
 
     QSet<QString> uniqueIds; // Храним уникальные ID пользователей
     while (query.next())
@@ -75,17 +93,11 @@ void Third::loadProfiles(const QString &login)
 
     qDebug() << "Загружено анкет:" << profilesData.size();
 
-
-    // // Сортировка профилей
-    // sortProfiles();
-
-
     if (!profilesData.isEmpty())
     {
         currentIndex = 0;
-        // Сортировка профилей
-        sortProfiles();
-        updateUI(); // Отображаем первую анкету
+        sortProfiles(); // Сортировка профилей после загрузки
+        updateUI();     // Отображаем первую анкету
     }
     else
     {
@@ -321,7 +333,7 @@ void Third::sortProfiles()
 {
     // Получаем данные текущего пользователя
     QSqlQuery userQuery;
-    userQuery.prepare("SELECT age, city, hobbies, gender FROM users WHERE login = :login");
+    userQuery.prepare("SELECT age, city, hobbies FROM users WHERE login = :login");
     userQuery.bindValue(":login", currentLogin);
 
     if (!userQuery.exec() || !userQuery.next())
@@ -333,14 +345,11 @@ void Third::sortProfiles()
     int currentAge = userQuery.value("age").toInt();
     QString currentCity = userQuery.value("city").toString();
     QString currentHobbies = userQuery.value("hobbies").toString();
-    QString cerrentSex = userQuery.value("gender").toString();QString currentGender = userQuery.value("gender").toString();
-    QString oppositeGender = (currentGender.toLower() == "мужской") ? "женский" : "мужской";
 
-
-    // Сортировка
+    // Сортировка профилей
     std::sort(profilesData.begin(), profilesData.end(), [&](const QMap<QString, QString> &a, const QMap<QString, QString> &b) {
-        bool isOppositeGenderA = a["gender"] == oppositeGender;
-        bool isOppositeGenderB = b["gender"] == oppositeGender;
+        bool isSameAgeA = a["age"].toInt() == currentAge;
+        bool isSameAgeB = b["age"].toInt() == currentAge;
 
         bool isSameCityA = a["city"] == currentCity;
         bool isSameCityB = b["city"] == currentCity;
@@ -348,22 +357,25 @@ void Third::sortProfiles()
         bool isSimilarHobbiesA = a["hobbies"].contains(currentHobbies, Qt::CaseInsensitive);
         bool isSimilarHobbiesB = b["hobbies"].contains(currentHobbies, Qt::CaseInsensitive);
 
-        int ageDiffA = abs(a["age"].toInt() - currentAge);
-        int ageDiffB = abs(b["age"].toInt() - currentAge);
-
-
-        if (isOppositeGenderA != isOppositeGenderB)
-            return isOppositeGenderA > isOppositeGenderB;
-        if (ageDiffA != ageDiffB)
-            return ageDiffA < ageDiffB;
+        // 1. Приоритет по возрасту
+        if (isSameAgeA != isSameAgeB)
+        {
+            return isSameAgeA > isSameAgeB;
+        }
+        // 2. Приоритет по городу
         if (isSameCityA != isSameCityB)
+        {
             return isSameCityA > isSameCityB;
+        }
+        // 3. Приоритет по увлечениям
         if (isSimilarHobbiesA != isSimilarHobbiesB)
+        {
             return isSimilarHobbiesA > isSimilarHobbiesB;
+        }
 
-        // В конце — сортировка по увеличению возраста
+        // В конце сортировка по увеличению возраста
         return a["age"].toInt() < b["age"].toInt();
     });
 
-    qDebug() << "Профили отсортированы";
+    qDebug() << "Профили отсортированы.";
 }
