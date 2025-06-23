@@ -1,7 +1,6 @@
 #include "include/fourth.h"
 #include "include/fifth.h"
 #include "qsqlerror.h"
-#include "include/second.h"
 #include "include/third.h"
 #include "ui_fourth.h"
 
@@ -20,6 +19,8 @@ Fourth::Fourth(QWidget *parent)
 
 
     connect(ui->listWidget, &QListWidget::itemSelectionChanged, this, &Fourth::checkMutualLike);
+
+    connect(ui->BackButton, &QPushButton::clicked, this, &::Fourth::on_BackButton_Clicked);
 }
 
 Fourth::~Fourth()
@@ -135,7 +136,7 @@ void Fourth::on_ChatButton_clicked()
 
 
 // Нажатие кнопки "Назад"
-void Fourth::onBackButtonClicked()
+void Fourth::on_BackButton_Clicked()
 {
     auto thirdWindow = new Third();
     thirdWindow->setCurrentUserData(currentLogin, currentPassword);

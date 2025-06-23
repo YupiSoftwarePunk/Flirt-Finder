@@ -25,7 +25,7 @@ public:
 
 private slots:
     void on_ChatButton_clicked();
-    void onBackButtonClicked();
+    void on_BackButton_Clicked();
     void on_LikeButton_clicked();
 
 private:
