@@ -60,6 +60,10 @@
     <property name="text">
      <string/>
     </property>
+    <property name="icon">
+     <iconset resource="../resources.qrc">
+      <normaloff>:/images/images/like.png</normaloff>:/images/images/like.png</iconset>
+    </property>
    </widget>
    <widget class="QPushButton" name="ChatButton">
     <property name="geometry">
@@ -79,6 +83,8 @@
    </widget>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="../resources.qrc"/>
+ </resources>
  <connections/>
 </ui>

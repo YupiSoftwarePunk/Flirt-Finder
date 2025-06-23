@@ -28,6 +28,8 @@ private slots:
     void onBackButtonClicked();
     void on_LikeButton_clicked();   // int userId
 
+    void on_BackButton_clicked();
+
 private:
     Ui::Fourth *ui;
 

@@ -9,6 +9,7 @@ INCLUDEPATH += .
 
 SOURCES += \
     .\src\fourth.cpp \
+    .\src\fifth.cpp \
     main.cpp \
     .\src\mainwindow.cpp \
     .\src\second.cpp \
@@ -18,13 +19,15 @@ HEADERS += \
     .\include\fourth.h \
     .\include\mainwindow.h \
     .\include\second.h \
-    .\include\third.h
+    .\include\third.h \
+    .\include\fifth.h
 
 FORMS += \
     .\forms\fourth.ui \
     .\forms\mainwindow.ui \
     .\forms\second.ui \
-    .\forms\third.ui
+    .\forms\third.ui \
+    .\forms\fifth.ui
 
 QTPLUGIN += qsqlpsql
 
