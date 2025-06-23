@@ -24,9 +24,9 @@ public:
 
 
 private slots:
-    void onChatButtonClicked();   // int userId
+    void on_ChatButton_clicked();
     void onBackButtonClicked();
-    void on_LikeButton_clicked();   // int userId
+    void on_LikeButton_clicked();
 
 private:
     Ui::Fourth *ui;

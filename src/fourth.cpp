@@ -17,6 +17,9 @@ Fourth::Fourth(QWidget *parent)
     , ui(new Ui::Fourth)
 {
     ui->setupUi(this);
+
+
+    connect(ui->listWidget, &QListWidget::itemSelectionChanged, this, &Fourth::checkMutualLike);
 }
 
 Fourth::~Fourth()
@@ -80,7 +83,7 @@ void Fourth::loadNotifications()
 
 
 // Нажатие кнопки "Перейти в чат"
-void Fourth::onChatButtonClicked()
+void Fourth::on_ChatButton_clicked()
 {
     QListWidgetItem *currentItem = ui->listWidget->currentItem();
     if (!currentItem)
@@ -89,14 +92,44 @@ void Fourth::onChatButtonClicked()
         return;
     }
 
-    int targetUserId = currentItem->data(Qt::UserRole).toInt();
-    qDebug() << "Открытие чата с userId:" << targetUserId;
+    int targetUserId = currentItem->data(Qt::UserRole).toInt(); // Извлекаем ID целевого пользователя
+    qDebug() << "Проверка взаимного лайка для targetUserId:" << targetUserId;
 
-    auto fifthWindow = new Fifth(); // Открываем пятый экран
-    fifthWindow->setUserCredentials(currentLogin, currentPassword);
-    fifthWindow->show();
+    // Проверяем взаимный лайк в базе данных
+    QSqlQuery query;
+    query.prepare(
+        "SELECT COUNT(*) "
+        "FROM likes_dislikes AS l1 "
+        "INNER JOIN likes_dislikes AS l2 "
+        "ON l1.user_id = l2.liked_by AND l1.liked_by = l2.user_id "
+        "WHERE l1.user_id = :currentUserId AND l2.user_id = :targetUserId "
+        "AND l1.reaction = 1 AND l2.reaction = 1"
+        );
+    query.bindValue(":currentUserId", getCurrentUserId(currentLogin)); // ID текущего пользователя
+    query.bindValue(":targetUserId", targetUserId); // ID целевого пользователя
 
-    this->close();
+    if (!query.exec() || !query.next())
+    {
+        QMessageBox::warning(this, "Ошибка", "Не удалось проверить взаимный лайк.");
+        qDebug() << "Ошибка выполнения SQL запроса:" << query.lastError().text();
+        return;
+    }
+
+    int mutualLikeCount = query.value(0).toInt();
+    if (mutualLikeCount == 1)
+    {
+        // Успешный мэтч, открываем пятый экран
+        qDebug() << "Взаимный лайк подтверждён!";
+        auto fifthWindow = new Fifth();
+        fifthWindow->setUserCredentials(currentLogin, currentPassword); // Передача данных
+        fifthWindow->show();
+        this->close(); // Закрываем четвёртое окно
+    }
+    else
+    {
+        // Мэтч отсутствует, выводим сообщение
+        QMessageBox::warning(this, "Ошибка", "У вас нет взаимного лайка с этим пользователем.");
+    }
 }
 
 
@@ -105,9 +138,6 @@ void Fourth::onChatButtonClicked()
 void Fourth::onBackButtonClicked()
 {
     auto thirdWindow = new Third();
-    auto secondWindow = new Second();
-    secondWindow->setUserCredentials(currentLogin, currentPassword);
-    secondWindow->initializeUserData();
     thirdWindow->setCurrentUserData(currentLogin, currentPassword);
     thirdWindow->loadProfiles(currentLogin);
     thirdWindow->show();
@@ -190,18 +220,17 @@ int Fourth::getCurrentUserId(const QString &login)
 
 void Fourth::checkMutualLike()
 {
-    // Получаем выделенный элемент
     QListWidgetItem *currentItem = ui->listWidget->currentItem();
     if (!currentItem)
     {
-        ui->ChatButton->setEnabled(false); // Если ничего не выбрано, отключаем кнопку
+        ui->ChatButton->setEnabled(false);
+        qDebug() << "Элемент не выбран. Отключаем кнопку.";
         return;
     }
 
     int targetUserId = currentItem->data(Qt::UserRole).toInt();
     qDebug() << "Проверка взаимного лайка для userId:" << targetUserId;
 
-    // Проверяем взаимный лайк в базе данных
     QSqlQuery query;
     query.prepare(
         "SELECT COUNT(*) "
@@ -224,10 +253,12 @@ void Fourth::checkMutualLike()
     int mutualLikeCount = query.value(0).toInt();
     if (mutualLikeCount == 1)
     {
-        ui->ChatButton->setEnabled(true); // Активируем кнопку
+        ui->ChatButton->setEnabled(true);
+        qDebug() << "Взаимный лайк подтверждён. Кнопка активирована.";
     }
     else
     {
-        ui->ChatButton->setEnabled(false); // Отключаем кнопку
+        ui->ChatButton->setEnabled(false);
+        qDebug() << "Взаимный лайк отсутствует. Кнопка отключена.";
     }
 }

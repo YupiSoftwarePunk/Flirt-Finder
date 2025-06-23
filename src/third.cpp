@@ -387,5 +387,6 @@ void Third::on_messageBox_clicked()
     fourthWindow->setUserCredentials(currentLogin, currentPassword);
     fourthWindow->loadNotifications();
     fourthWindow->show();
+    // this->close();
 }
 
