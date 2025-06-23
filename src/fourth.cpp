@@ -38,7 +38,7 @@ void Fourth::loadNotifications()
 
     QSqlQuery query;
     query.prepare(
-        "SELECT u.name, u.age, u.city, p.photo_path "
+        "SELECT u.id, u.name, u.age, u.city, p.photo_path "
         "FROM users u "
         "INNER JOIN likes_dislikes l ON u.id = l.user_id "
         "LEFT JOIN photos p ON u.id = p.user_id "
@@ -68,6 +68,7 @@ void Fourth::loadNotifications()
             QPixmap pixmap(photoPath);
             item->setIcon(QIcon(pixmap.scaled(50, 50, Qt::KeepAspectRatio)));
         }
+        item->setData(Qt::UserRole, currentUserId);
 
         ui->listWidget->addItem(item);
     }
@@ -88,14 +89,14 @@ void Fourth::onChatButtonClicked()
 // Нажатие кнопки "Назад"
 void Fourth::onBackButtonClicked()
 {
-    // auto thirdWindow = new Third();
-    // auto secondWindow = new Second();
-    // secondWindow->setUserCredentials(login, password);
-    // secondWindow->initializeUserData();
-    // thirdWindow->setCurrentUserData(login, password);
-    // thirdWindow->loadProfiles(login);
-    // thirdWindow->show();
-    // this->close();
+    auto thirdWindow = new Third();
+    auto secondWindow = new Second();
+    secondWindow->setUserCredentials(currentLogin, currentPassword);
+    secondWindow->initializeUserData();
+    thirdWindow->setCurrentUserData(currentLogin, currentPassword);
+    thirdWindow->loadProfiles(currentLogin);
+    thirdWindow->show();
+    this->close();
 }
 
 
@@ -112,6 +113,12 @@ void Fourth::on_LikeButton_clicked()
     }
 
     int userId = currentItem->data(Qt::UserRole).toInt();
+    if (userId <= 0)
+    {
+        QMessageBox::warning(this, "Ошибка", "ID пользователя некорректен.");
+        qDebug() << "userId = "<<userId;
+        return;
+    }
 
     QSqlQuery query;
     query.prepare(
@@ -155,11 +162,11 @@ int Fourth::getCurrentUserId(const QString &login)
 
     if (!query.exec() || !query.next())
     {
-        qDebug() << "Не удалось получить ID пользователя.";
-        return -1; // Возврат ошибки
+        qDebug() << "Ошибка: ID пользователя для логина " << login << " не найден.";
+        return -1;
     }
 
-    return query.value(0).toInt(); // Возвращаем ID пользователя
+    return query.value(0).toInt();
 }
 
 
