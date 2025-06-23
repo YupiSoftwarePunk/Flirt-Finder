@@ -134,7 +134,7 @@
       </size>
      </property>
     </widget>
-    <widget class="QPushButton" name="settingsButton_2">
+    <widget class="QPushButton" name="messageBox">
      <property name="geometry">
       <rect>
        <x>370</x>

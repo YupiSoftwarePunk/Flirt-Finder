@@ -2,6 +2,8 @@
 #define FOURTH_H
 
 #include <QDialog>
+#include <QListWidget>
+#include <QPushButton>
 
 namespace Ui {
 class Fourth;
@@ -15,8 +17,30 @@ public:
     explicit Fourth(QWidget *parent = nullptr);
     ~Fourth();
 
+    void loadNotifications();
+
+
+    void setUserCredentials(const QString &login, const QString &password);
+
+
+private slots:
+    void onChatButtonClicked();   // int userId
+    void onBackButtonClicked();
+    void on_LikeButton_clicked();   // int userId
+
 private:
     Ui::Fourth *ui;
+
+    QListWidget *notificationList;
+    QPushButton *backButton;
+
+    QString currentUser;
+
+    QString currentLogin;
+    QString currentPassword;
+
+
+    int getCurrentUserId(const QString &login);
 };
 
 #endif // FOURTH_H

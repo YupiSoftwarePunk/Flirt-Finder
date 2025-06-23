@@ -31,6 +31,8 @@ private slots:
 
     void on_settingsButton_clicked();
 
+    void on_messageBox_clicked();
+
 private:
     Ui::Third *ui;
 

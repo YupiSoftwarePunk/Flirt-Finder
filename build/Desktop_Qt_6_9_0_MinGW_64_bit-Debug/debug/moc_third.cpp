@@ -47,7 +47,8 @@ template <> constexpr inline auto Third::qt_create_metaobjectdata<qt_meta_tag_ZN
         "keyPressEvent",
         "QKeyEvent*",
         "event",
-        "on_settingsButton_clicked"
+        "on_settingsButton_clicked",
+        "on_messageBox_clicked"
     };
 
     QtMocHelpers::UintData qt_methods {
@@ -65,6 +66,8 @@ template <> constexpr inline auto Third::qt_create_metaobjectdata<qt_meta_tag_ZN
         }}),
         // Slot 'on_settingsButton_clicked'
         QtMocHelpers::SlotData<void()>(9, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_messageBox_clicked'
+        QtMocHelpers::SlotData<void()>(10, 2, QMC::AccessPrivate, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -94,6 +97,7 @@ void Third::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void 
         case 3: _t->on_prevProfile(); break;
         case 4: _t->keyPressEvent((*reinterpret_cast< std::add_pointer_t<QKeyEvent*>>(_a[1]))); break;
         case 5: _t->on_settingsButton_clicked(); break;
+        case 6: _t->on_messageBox_clicked(); break;
         default: ;
         }
     }
@@ -118,14 +122,14 @@ int Third::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 6)
+        if (_id < 7)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 6;
+        _id -= 7;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 6)
+        if (_id < 7)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 6;
+        _id -= 7;
     }
     return _id;
 }

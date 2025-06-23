@@ -1,4 +1,5 @@
 #include "include/third.h"
+#include "include/fourth.h"
 #include "qevent.h"
 #include "include/second.h"
 #include "ui_third.h"
@@ -379,3 +380,12 @@ void Third::sortProfiles()
 
     qDebug() << "Профили отсортированы.";
 }
+
+void Third::on_messageBox_clicked()
+{
+    auto fourthWindow = new Fourth();
+    fourthWindow->setUserCredentials(currentLogin, currentPassword);
+    fourthWindow->loadNotifications();
+    fourthWindow->show();
+}
+
