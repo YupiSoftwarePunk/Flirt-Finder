@@ -28,8 +28,6 @@ private slots:
     void onBackButtonClicked();
     void on_LikeButton_clicked();   // int userId
 
-    void on_BackButton_clicked();
-
 private:
     Ui::Fourth *ui;
 
@@ -43,6 +41,8 @@ private:
 
 
     int getCurrentUserId(const QString &login);
+
+    void checkMutualLike();
 };
 
 #endif // FOURTH_H

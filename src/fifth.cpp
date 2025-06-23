@@ -12,3 +12,12 @@ Fifth::~Fifth()
 {
     delete ui;
 }
+
+
+
+
+void Fifth::setUserCredentials(const QString &login, const QString &password)
+{
+    currentLogin = login;
+    currentPassword = password;
+}

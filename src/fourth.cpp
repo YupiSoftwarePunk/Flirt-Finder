@@ -1,4 +1,5 @@
 #include "include/fourth.h"
+#include "include/fifth.h"
 #include "qsqlerror.h"
 #include "include/second.h"
 #include "include/third.h"
@@ -81,7 +82,21 @@ void Fourth::loadNotifications()
 // Нажатие кнопки "Перейти в чат"
 void Fourth::onChatButtonClicked()
 {
-    QMessageBox::information(this, "Чат", "Вы вошли в чат с пользователем!");
+    QListWidgetItem *currentItem = ui->listWidget->currentItem();
+    if (!currentItem)
+    {
+        QMessageBox::warning(this, "Ошибка", "Выберите пользователя для входа в чат.");
+        return;
+    }
+
+    int targetUserId = currentItem->data(Qt::UserRole).toInt();
+    qDebug() << "Открытие чата с userId:" << targetUserId;
+
+    auto fifthWindow = new Fifth(); // Открываем пятый экран
+    fifthWindow->setUserCredentials(currentLogin, currentPassword);
+    fifthWindow->show();
+
+    this->close();
 }
 
 
@@ -170,3 +185,49 @@ int Fourth::getCurrentUserId(const QString &login)
 }
 
 
+
+
+
+void Fourth::checkMutualLike()
+{
+    // Получаем выделенный элемент
+    QListWidgetItem *currentItem = ui->listWidget->currentItem();
+    if (!currentItem)
+    {
+        ui->ChatButton->setEnabled(false); // Если ничего не выбрано, отключаем кнопку
+        return;
+    }
+
+    int targetUserId = currentItem->data(Qt::UserRole).toInt();
+    qDebug() << "Проверка взаимного лайка для userId:" << targetUserId;
+
+    // Проверяем взаимный лайк в базе данных
+    QSqlQuery query;
+    query.prepare(
+        "SELECT COUNT(*) "
+        "FROM likes_dislikes AS l1 "
+        "INNER JOIN likes_dislikes AS l2 "
+        "ON l1.user_id = l2.liked_by AND l1.liked_by = l2.user_id "
+        "WHERE l1.user_id = :currentUserId AND l2.user_id = :targetUserId "
+        "AND l1.reaction = 1 AND l2.reaction = 1"
+        );
+    query.bindValue(":currentUserId", getCurrentUserId(currentLogin));
+    query.bindValue(":targetUserId", targetUserId);
+
+    if (!query.exec() || !query.next())
+    {
+        qDebug() << "Ошибка выполнения SQL запроса:" << query.lastError().text();
+        ui->ChatButton->setEnabled(false);
+        return;
+    }
+
+    int mutualLikeCount = query.value(0).toInt();
+    if (mutualLikeCount == 1)
+    {
+        ui->ChatButton->setEnabled(true); // Активируем кнопку
+    }
+    else
+    {
+        ui->ChatButton->setEnabled(false); // Отключаем кнопку
+    }
+}
