@@ -35,6 +35,8 @@ private:
 
     int senderId;
     int receiverId;
+
+    void keyPressEvent(QKeyEvent *event);
 };
 
 #endif // FIFTH_H

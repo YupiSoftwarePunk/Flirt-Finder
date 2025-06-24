@@ -1,5 +1,6 @@
 #include "include/fifth.h"
 #include "qdatetime.h"
+#include "qevent.h"
 #include "ui_fifth.h"
 
 #include "qsqlerror.h"
@@ -46,7 +47,12 @@ void Fifth::setUserCredentials(const QString &login, const QString &password, QL
     if (selectedItem)
     {
         receiverId = selectedItem->data(Qt::UserRole).toInt();
-        qDebug() << "ReceiverId для чата: " << receiverId;
+        if (receiverId <= 0 || receiverId == senderId)
+        {
+            QMessageBox::warning(this, "Ошибка", "Некорректный или совпадающий ID целевого пользователя.");
+            receiverId = -1;
+            return;
+        }
     }
     else
     {
@@ -67,7 +73,9 @@ void Fifth::on_sendButton_clicked()
         return;
     }
 
-    // Вставляем сообщение в базу данных
+    qDebug() << "Отправка сообщения от senderId:" << senderId << " к receiverId:" << receiverId;
+
+
     QSqlQuery query;
     query.prepare(
         "INSERT INTO messages (sender_id, receiver_id, message_text) "
@@ -90,6 +98,7 @@ void Fifth::on_sendButton_clicked()
     ui->listWidget->addItem(item);
 
     ui->textEdit->clear();
+    ui->textEdit->setFocus();
 }
 
 
@@ -136,4 +145,20 @@ void Fifth::loadChatHistory(int senderId, int receiverId)
         ui->listWidget->addItem(item);
     }
 }
+
+
+
+
+void Fifth::keyPressEvent(QKeyEvent *event)
+{
+    if (event->key() == Qt::Key_Return || event->key() == Qt::Key_Enter) // Проверяем клавишу Enter
+    {
+        on_sendButton_clicked(); // Вызываем метод отправки сообщения
+    }
+    else
+    {
+        QDialog::keyPressEvent(event); // Обрабатываем другие события
+    }
+}
+
 

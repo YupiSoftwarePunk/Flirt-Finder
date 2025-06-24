@@ -60,6 +60,7 @@ void Fourth::loadNotifications()
 
     while (query.next())
     {
+        int userId = query.value("id").toInt();
         QString name = query.value("name").toString();
         int age = query.value("age").toInt();
         QString city = query.value("city").toString();
@@ -73,7 +74,7 @@ void Fourth::loadNotifications()
             QPixmap pixmap(photoPath);
             item->setIcon(QIcon(pixmap.scaled(50, 50, Qt::KeepAspectRatio)));
         }
-        item->setData(Qt::UserRole, currentUserId);
+        item->setData(Qt::UserRole, userId);
 
         ui->listWidget->addItem(item);
     }
@@ -95,6 +96,13 @@ void Fourth::on_ChatButton_clicked()
 
     int targetUserId = currentItem->data(Qt::UserRole).toInt(); // Извлекаем ID целевого пользователя
     qDebug() << "Проверка взаимного лайка для targetUserId:" << targetUserId;
+
+
+    if (targetUserId <= 0 || targetUserId == getCurrentUserId(currentLogin))
+    {
+        QMessageBox::warning(this, "Ошибка", "Некорректный или совпадающий ID целевого пользователя.");
+        return;
+    }
 
     // Проверяем взаимный лайк в базе данных
     QSqlQuery query;
