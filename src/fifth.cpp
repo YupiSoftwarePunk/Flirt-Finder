@@ -1,6 +1,7 @@
 #include "include/fifth.h"
 #include "qdatetime.h"
 #include "qevent.h"
+#include "qtimezone.h"
 #include "ui_fifth.h"
 
 #include "qsqlerror.h"
@@ -132,6 +133,8 @@ void Fifth::loadChatHistory(int senderId, int receiverId)
         int msgSenderId = query.value("sender_id").toInt();
         QString messageText = query.value("message_text").toString();
         QDateTime timestamp = query.value("send_time").toDateTime();
+        timestamp.setTimeSpec(Qt::LocalTime);
+        timestamp.setTimeZone(QTimeZone("Asia/Yekaterinburg"));
 
         QString displayMessage = QString("[%1] %2: %3")
                                      .arg(timestamp.toString("hh:mm"))
@@ -152,13 +155,34 @@ void Fifth::loadChatHistory(int senderId, int receiverId)
 
 void Fifth::keyPressEvent(QKeyEvent *event)
 {
-    if (event->key() == Qt::Key_Return || event->key() == Qt::Key_Enter) // Проверяем клавишу Enter
+    if (event->key() == Qt::Key_Return || event->key() == Qt::Key_Enter)
     {
-        on_sendButton_clicked(); // Вызываем метод отправки сообщения
+        // Если фокус находится в textEdit
+        if (ui->textEdit->hasFocus())
+        {
+            if (event->modifiers() & Qt::ShiftModifier)
+            {
+                // Shift+Enter: Добавляем перенос строки
+                QTextCursor cursor = ui->textEdit->textCursor();
+                cursor.insertText("\n");
+            }
+            else
+            {
+                // Обычный Enter: отправляем сообщение
+                on_sendButton_clicked();
+            }
+        }
+        else
+        {
+            // Если фокус не в textEdit, отправляем сообщение
+            on_sendButton_clicked();
+        }
+
+        event->accept(); // Завершаем обработку события Enter
     }
     else
     {
-        QDialog::keyPressEvent(event); // Обрабатываем другие события
+        QDialog::keyPressEvent(event); // Для остальных клавиш вызываем стандартное поведение
     }
 }
 
