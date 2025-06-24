@@ -23,7 +23,7 @@
     </rect>
    </property>
    <property name="title">
-    <string>Ящик уведомлений</string>
+    <string>Ящик уведомлений (Полученные лайки)</string>
    </property>
    <widget class="QPushButton" name="BackButton">
     <property name="geometry">
