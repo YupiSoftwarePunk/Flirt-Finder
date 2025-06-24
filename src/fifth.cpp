@@ -45,13 +45,13 @@ void Fifth::setUserCredentials(const QString &login, const QString &password, QL
     // Извлечение ID целевого пользователя из выбранного элемента
     if (selectedItem)
     {
-        receiverId = selectedItem->data(Qt::UserRole).toInt(); // Получаем receiverId из пользовательских данных элемента
+        receiverId = selectedItem->data(Qt::UserRole).toInt();
         qDebug() << "ReceiverId для чата: " << receiverId;
     }
     else
     {
         QMessageBox::warning(this, "Ошибка", "Не удалось извлечь ID целевого пользователя.");
-        receiverId = -1; // Установим некорректное значение для предотвращения отправки сообщений
+        receiverId = -1;
     }
 }
 
@@ -89,7 +89,7 @@ void Fifth::on_sendButton_clicked()
     item->setTextAlignment(Qt::AlignRight);
     ui->listWidget->addItem(item);
 
-    ui->textEdit->clear(); // Очищаем поле ввода
+    ui->textEdit->clear();
 }
 
 
@@ -97,14 +97,15 @@ void Fifth::on_sendButton_clicked()
 
 void Fifth::loadChatHistory(int senderId, int receiverId)
 {
-    ui->listWidget->clear(); // Очищаем список сообщений
+    ui->listWidget->clear();
 
     QSqlQuery query;
     query.prepare(
-        "SELECT sender_id, message_text, timestamp FROM messages "
+        "SELECT sender_id, message_text, send_time "
+        "FROM messages "
         "WHERE (sender_id = :senderId AND receiver_id = :receiverId) "
         "   OR (sender_id = :receiverId AND receiver_id = :senderId) "
-        "ORDER BY timestamp ASC"
+        "ORDER BY send_time ASC"
         );
     query.bindValue(":senderId", senderId);
     query.bindValue(":receiverId", receiverId);
@@ -112,7 +113,7 @@ void Fifth::loadChatHistory(int senderId, int receiverId)
     if (!query.exec())
     {
         QMessageBox::warning(this, "Ошибка", "Не удалось загрузить историю чата.");
-        qDebug() << "Ошибка SQL:" << query.lastError().text();
+        qDebug() << "Ошибка выполнения SQL запроса:" << query.lastError().text();
         return;
     }
 
@@ -120,7 +121,7 @@ void Fifth::loadChatHistory(int senderId, int receiverId)
     {
         int msgSenderId = query.value("sender_id").toInt();
         QString messageText = query.value("message_text").toString();
-        QDateTime timestamp = query.value("timestamp").toDateTime();
+        QDateTime timestamp = query.value("send_time").toDateTime();
 
         QString displayMessage = QString("[%1] %2: %3")
                                      .arg(timestamp.toString("hh:mm"))
@@ -130,7 +131,7 @@ void Fifth::loadChatHistory(int senderId, int receiverId)
         QListWidgetItem *item = new QListWidgetItem(displayMessage, ui->listWidget);
         if (msgSenderId == senderId)
         {
-            item->setTextAlignment(Qt::AlignRight); // Выравнивание для ваших сообщений
+            item->setTextAlignment(Qt::AlignRight); // Ваши сообщения выравниваются вправо
         }
         ui->listWidget->addItem(item);
     }
