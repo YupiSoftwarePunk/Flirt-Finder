@@ -21,7 +21,7 @@ Fifth::~Fifth()
 
 
 
-void Fifth::setUserCredentials(const QString &login, const QString &password)
+void Fifth::setUserCredentials(const QString &login, const QString &password, QListWidgetItem *selectedItem)
 {
     currentLogin = login;
     currentPassword = password;
@@ -40,6 +40,19 @@ void Fifth::setUserCredentials(const QString &login, const QString &password)
     }
 
     senderId = query.value(0).toInt();
+
+
+    // Извлечение ID целевого пользователя из выбранного элемента
+    if (selectedItem)
+    {
+        receiverId = selectedItem->data(Qt::UserRole).toInt(); // Получаем receiverId из пользовательских данных элемента
+        qDebug() << "ReceiverId для чата: " << receiverId;
+    }
+    else
+    {
+        QMessageBox::warning(this, "Ошибка", "Не удалось извлечь ID целевого пользователя.");
+        receiverId = -1; // Установим некорректное значение для предотвращения отправки сообщений
+    }
 }
 
 

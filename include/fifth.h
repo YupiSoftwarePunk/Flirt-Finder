@@ -1,6 +1,7 @@
 #ifndef FIFTH_H
 #define FIFTH_H
 
+#include "qlistwidget.h"
 #include <QDialog>
 
 namespace Ui {
@@ -16,7 +17,7 @@ public:
     explicit Fifth(QWidget *parent = nullptr);
     ~Fifth();
 
-    void setUserCredentials(const QString &login, const QString &password);
+    void setUserCredentials(const QString &login, const QString &password, QListWidgetItem *selectedItem);
 
     void loadChatHistory(int senderId, int receiverId);
 

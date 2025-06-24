@@ -122,9 +122,12 @@ void Fourth::on_ChatButton_clicked()
         // Успешный мэтч, открываем пятый экран
         qDebug() << "Взаимный лайк подтверждён!";
         auto fifthWindow = new Fifth();
-        fifthWindow->setUserCredentials(currentLogin, currentPassword); // Передача данных
+
+        fifthWindow->setUserCredentials(currentLogin, currentPassword, currentItem); // Передача данных
+        fifthWindow->loadChatHistory(getCurrentUserId(currentLogin), targetUserId);
         fifthWindow->show();
-        this->close(); // Закрываем четвёртое окно
+
+        this->close();
     }
     else
     {
