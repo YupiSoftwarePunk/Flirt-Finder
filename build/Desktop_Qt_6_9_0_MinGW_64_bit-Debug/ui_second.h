@@ -99,7 +99,7 @@ public:
     void retranslateUi(QDialog *Second)
     {
         Second->setWindowTitle(QCoreApplication::translate("Second", "Dialog", nullptr));
-        groupBox->setTitle(QCoreApplication::translate("Second", "\320\241\320\276\320\267\320\264\320\260\320\275\320\270\320\265 \320\270 \320\267\320\260\320\277\320\276\320\273\320\275\320\265\320\275\320\270\320\265 \320\260\320\275\320\272\320\265\321\202\321\213", nullptr));
+        groupBox->setTitle(QCoreApplication::translate("Second", "\320\227\320\260\320\277\320\276\320\273\320\275\320\265\320\275\320\270\320\265 \320\270\320\273\320\270 \321\200\320\265\320\264\320\260\320\272\321\202\320\270\321\200\320\276\320\262\320\260\320\275\320\270\320\265 \320\260\320\275\320\272\320\265\321\202\321\213", nullptr));
         onSaveData->setText(QCoreApplication::translate("Second", "\320\241\320\276\321\205\321\200\320\260\320\275\320\270\321\202\321\214", nullptr));
         onLoadPhoto->setText(QCoreApplication::translate("Second", "\320\224\320\276\320\261\320\260\320\262\320\270\321\202\321\214 \321\204\320\276\321\202\320\276", nullptr));
         lineEdit->setText(QString());

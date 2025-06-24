@@ -135,7 +135,7 @@ void Fourth::on_ChatButton_clicked()
         fifthWindow->loadChatHistory(getCurrentUserId(currentLogin), targetUserId);
         fifthWindow->show();
 
-        this->close();
+        // this->close();
     }
     else
     {

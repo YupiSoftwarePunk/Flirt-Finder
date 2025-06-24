@@ -67,6 +67,7 @@ void Fifth::setUserCredentials(const QString &login, const QString &password, QL
 void Fifth::on_sendButton_clicked()
 {
     QString messageText = ui->textEdit->toPlainText();
+
     if (messageText.isEmpty())
     {
         QMessageBox::warning(this, "Ошибка", "Сообщение не может быть пустым.");

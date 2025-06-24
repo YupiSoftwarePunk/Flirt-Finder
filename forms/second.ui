@@ -23,7 +23,7 @@
     </rect>
    </property>
    <property name="title">
-    <string>Создание и заполнение анкеты</string>
+    <string>Заполнение или редактирование анкеты</string>
    </property>
    <widget class="QPushButton" name="onSaveData">
     <property name="geometry">
