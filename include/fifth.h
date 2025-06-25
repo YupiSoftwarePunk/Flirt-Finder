@@ -41,6 +41,11 @@ protected:
             }
 
             on_sendButton_clicked();
+
+            if (ui->listWidget->count() > 0)
+            {
+                ui->listWidget->scrollToBottom();
+            }
         }
     }
 

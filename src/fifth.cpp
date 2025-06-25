@@ -151,7 +151,10 @@ void Fifth::loadChatHistory(int senderId, int receiverId)
         ui->listWidget->addItem(item);
     }
 
-    // сделать чтоб автоматом прокатывалось к последнему сообщению в чате,
-    // либо полосой прокрутки, либо курсором на ласт сообщение
+
+    if (ui->listWidget->count() > 0)
+    {
+        ui->listWidget->scrollToBottom();
+    }
 }
 
