@@ -1,7 +1,9 @@
 #ifndef FIFTH_H
 #define FIFTH_H
 
+#include "qevent.h"
 #include "qlistwidget.h"
+#include "ui_fifth.h"
 #include <QDialog>
 
 namespace Ui {
@@ -22,6 +24,27 @@ public:
     void loadChatHistory(int senderId, int receiverId);
 
 
+
+protected:
+    void keyReleaseEvent(QKeyEvent* e)
+    {
+        if (e->key() == Qt::Key_Return || e->key() == Qt::Key_Enter)
+        {
+            QTextCursor cursor = ui->textEdit->textCursor();
+            QString text = ui->textEdit->toPlainText();
+
+            if (text.endsWith('\n'))
+            {
+                cursor.movePosition(QTextCursor::End);
+                cursor.deletePreviousChar();
+                ui->textEdit->setTextCursor(cursor);
+            }
+
+            on_sendButton_clicked();
+        }
+    }
+
+
 private slots:
     void on_sendButton_clicked();
 
@@ -35,8 +58,6 @@ private:
 
     int senderId;
     int receiverId;
-
-    void keyPressEvent(QKeyEvent *event);
 };
 
 #endif // FIFTH_H

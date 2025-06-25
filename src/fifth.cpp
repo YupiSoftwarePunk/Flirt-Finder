@@ -150,65 +150,8 @@ void Fifth::loadChatHistory(int senderId, int receiverId)
         }
         ui->listWidget->addItem(item);
     }
+
+    // сделать чтоб автоматом прокатывалось к последнему сообщению в чате,
+    // либо полосой прокрутки, либо курсором на ласт сообщение
 }
 
-
-
-
-void Fifth::keyPressEvent(QKeyEvent *event)
-{
-    if (event->key() == Qt::Key_Return || event->key() == Qt::Key_Enter)
-    {
-
-
-        // event->ignore();
-        // // Если фокус находится в textEdit
-        // if (ui->textEdit->hasFocus())
-        // {
-        //     // if (event->modifiers() & Qt::ShiftModifier)
-        //     // {
-        //     //     // Shift+Enter: Добавляем перенос строки
-        //     //     QTextCursor cursor = ui->textEdit->textCursor();
-        //     //     cursor.insertText("\n");
-        //     // }
-        //     // else
-        //     // {
-        //     //     // Обычный Enter: отправляем сообщение
-        //     //     on_sendButton_clicked();
-        //     // }
-
-        //     QTextCursor cursor = ui->textEdit->textCursor();
-        //     QString text = ui->textEdit->toPlainText();
-
-        //     if (text.endsWith('\n'))
-        //     {
-        //         cursor.movePosition(QTextCursor::End);
-        //         cursor.deletePreviousChar();
-        //         ui->textEdit->setTextCursor(cursor);
-        //     }
-        //     on_sendButton_clicked();
-
-        //     // прверить добавил ли последний символ в виде \n, если добавляет, то удалить и вызвать нажатие на кнопку
-
-        // }
-        // else
-        // {
-        //     // Если фокус не в textEdit, отправляем сообщение
-        //     on_sendButton_clicked();
-        // }
-
-        // event->accept(); // Завершаем обработку события Enter
-    }
-    else
-    {
-        QDialog::keyPressEvent(event); // Для остальных клавиш вызываем стандартное поведение
-    }
-}
-
-
-void QTextEdit::keyPressEvent(QKeyEvent *e)
-{
-    if (e->key() == Qt::Key_Return || e->key() == Qt::Key_Enter)
-        insertPlainText("");
-    QTextEdit::keyPressEvent(e);
-}
