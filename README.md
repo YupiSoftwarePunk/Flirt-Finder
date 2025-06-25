@@ -130,6 +130,8 @@
  ## Пояснительная записка к проекту
 
  Все записи о том в каком виде сделан проект, как велась разработка и множество подробностей можно прочитать [тут](https://docs.google.com/document/d/1kQkTSiFUqxe8ZBNM_KlLb0pza1GOoKi_I9IiYqqRpbU/edit?usp=sharing)
+
+ Также создана презентация, где представлены основые компоненты приложения и основная информация о структуре, разработке, тестировании и финальном результате [тут](https://docs.google.com/presentation/d/1MYJuEd3nVk0vsTHlw1a87WVtaMgxmjwxFpXuyejWTDs/edit?slide=id.p#slide=id.p)
     
 
 ## Информация для контрибьюторов
