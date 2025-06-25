@@ -132,7 +132,9 @@ void Fifth::loadChatHistory(int senderId, int receiverId)
     {
         int msgSenderId = query.value("sender_id").toInt();
         QString messageText = query.value("message_text").toString();
+
         QDateTime timestamp = query.value("send_time").toDateTime();
+        timestamp = timestamp.addSecs(18000);
         timestamp.setTimeSpec(Qt::LocalTime);
         timestamp.setTimeZone(QTimeZone("Asia/Yekaterinburg"));
 
@@ -157,28 +159,45 @@ void Fifth::keyPressEvent(QKeyEvent *event)
 {
     if (event->key() == Qt::Key_Return || event->key() == Qt::Key_Enter)
     {
-        // Если фокус находится в textEdit
-        if (ui->textEdit->hasFocus())
-        {
-            if (event->modifiers() & Qt::ShiftModifier)
-            {
-                // Shift+Enter: Добавляем перенос строки
-                QTextCursor cursor = ui->textEdit->textCursor();
-                cursor.insertText("\n");
-            }
-            else
-            {
-                // Обычный Enter: отправляем сообщение
-                on_sendButton_clicked();
-            }
-        }
-        else
-        {
-            // Если фокус не в textEdit, отправляем сообщение
-            on_sendButton_clicked();
-        }
 
-        event->accept(); // Завершаем обработку события Enter
+
+        // event->ignore();
+        // // Если фокус находится в textEdit
+        // if (ui->textEdit->hasFocus())
+        // {
+        //     // if (event->modifiers() & Qt::ShiftModifier)
+        //     // {
+        //     //     // Shift+Enter: Добавляем перенос строки
+        //     //     QTextCursor cursor = ui->textEdit->textCursor();
+        //     //     cursor.insertText("\n");
+        //     // }
+        //     // else
+        //     // {
+        //     //     // Обычный Enter: отправляем сообщение
+        //     //     on_sendButton_clicked();
+        //     // }
+
+        //     QTextCursor cursor = ui->textEdit->textCursor();
+        //     QString text = ui->textEdit->toPlainText();
+
+        //     if (text.endsWith('\n'))
+        //     {
+        //         cursor.movePosition(QTextCursor::End);
+        //         cursor.deletePreviousChar();
+        //         ui->textEdit->setTextCursor(cursor);
+        //     }
+        //     on_sendButton_clicked();
+
+        //     // прверить добавил ли последний символ в виде \n, если добавляет, то удалить и вызвать нажатие на кнопку
+
+        // }
+        // else
+        // {
+        //     // Если фокус не в textEdit, отправляем сообщение
+        //     on_sendButton_clicked();
+        // }
+
+        // event->accept(); // Завершаем обработку события Enter
     }
     else
     {
@@ -187,3 +206,9 @@ void Fifth::keyPressEvent(QKeyEvent *event)
 }
 
 
+void QTextEdit::keyPressEvent(QKeyEvent *e)
+{
+    if (e->key() == Qt::Key_Return || e->key() == Qt::Key_Enter)
+        insertPlainText("");
+    QTextEdit::keyPressEvent(e);
+}
