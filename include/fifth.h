@@ -30,6 +30,13 @@ protected:
     {
         if (e->key() == Qt::Key_Return || e->key() == Qt::Key_Enter)
         {
+            if (e->modifiers() & Qt::ShiftModifier)
+            {
+                // Shift+Enter - вставляем перенос строки
+                QTextCursor cursor = ui->textEdit->textCursor();
+                cursor.insertText("\n");
+            }
+
             QTextCursor cursor = ui->textEdit->textCursor();
             QString text = ui->textEdit->toPlainText();
 
