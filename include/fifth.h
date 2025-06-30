@@ -41,20 +41,37 @@ protected:
                 }
                 else
                 {
-                    // Обычный Enter отправляет сообщение
                     QTextCursor cursor = ui->textEdit->textCursor();
                     QString text = ui->textEdit->toPlainText();
+                    QStringList lines = text.split("\n");
+                    QStringList updatedLines;
 
-                    if (text.endsWith('\n'))
+                    for (QString &line : lines)
                     {
-                        cursor.movePosition(QTextCursor::End);
-                        cursor.deletePreviousChar();
-                        ui->textEdit->setTextCursor(cursor);
+                        while (line.length() > 20)
+                        {
+                            // Разбиваем строку на блоки по 20 символов
+                            QString chunk = line.left(20);
+                            updatedLines.append(chunk);
+                            line = line.mid(20);
+                        }
+
+                        if (!line.isEmpty())
+                        {
+                            updatedLines.append(line);
+                        }
                     }
 
+                    // Обновляем текст перед отправкой
+                    ui->textEdit->blockSignals(true);
+                    ui->textEdit->setPlainText(updatedLines.join("\n"));
+                    ui->textEdit->blockSignals(false);
+
+                    // Отправляем сообщение
                     on_sendButton_clicked();
                     e->accept();
                     return;
+
                 }
             }
             else

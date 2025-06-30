@@ -15,34 +15,34 @@ Fifth::Fifth(QWidget *parent)
     ui->setupUi(this);
 
 
-    connect(ui->textEdit, &QTextEdit::textChanged, this, [=]() {
-        QString text = ui->textEdit->toPlainText();
-        QStringList lines = text.split("\n");
-        QStringList updatedLines;
+    // connect(ui->textEdit, &QTextEdit::textChanged, this, [=]() {
+    //     QString text = ui->textEdit->toPlainText();
+    //     QStringList lines = text.split("\n");
+    //     QStringList updatedLines;
 
-        for (QString &line : lines)
-        {
-            while (line.length() > 20)
-            {
-                // Отрезаем первые 20 символов
-                QString chunk = line.left(20);
-                updatedLines.append(chunk); // Добавляем отрезанную часть как новую строку
-                line = line.mid(20); // Убираем первые 20 символов из строки
-            }
+    //     for (QString &line : lines)
+    //     {
+    //         while (line.length() > 20)
+    //         {
+    //             // Отрезаем первые 20 символов
+    //             QString chunk = line.left(20);
+    //             updatedLines.append(chunk); // Добавляем отрезанную часть как новую строку
+    //             line = line.mid(20); // Убираем первые 20 символов из строки
+    //         }
 
-            // Добавляем оставшийся текст, если есть
-            if (!line.isEmpty())
-            {
-                updatedLines.append(line);
-            }
-        }
+    //         // Добавляем оставшийся текст, если есть
+    //         if (!line.isEmpty())
+    //         {
+    //             updatedLines.append(line);
+    //         }
+    //     }
 
-        // Обновляем текст в `textEdit` с разбиением на строки по 20 символов
-        ui->textEdit->blockSignals(true); // Блокируем сигнал, чтобы избежать рекурсии
-        ui->textEdit->setPlainText(updatedLines.join("\n"));
-        ui->textEdit->moveCursor(QTextCursor::End); // Перемещаем курсор в конец текста
-        ui->textEdit->blockSignals(false); // Снимаем блокировку сигналов
-    });
+    //     // Обновляем текст в `textEdit` с разбиением на строки по 20 символов
+    //     ui->textEdit->blockSignals(true); // Блокируем сигнал, чтобы избежать рекурсии
+    //     ui->textEdit->setPlainText(updatedLines.join("\n"));
+    //     ui->textEdit->moveCursor(QTextCursor::End); // Перемещаем курсор в конец текста
+    //     ui->textEdit->blockSignals(false); // Снимаем блокировку сигналов
+    // });
 }
 
 Fifth::~Fifth()
@@ -98,6 +98,7 @@ void Fifth::setUserCredentials(const QString &login, const QString &password, QL
 void Fifth::on_sendButton_clicked()
 {
     QString messageText = ui->textEdit->toPlainText();
+
 
     if (messageText.isEmpty())
     {
