@@ -22,6 +22,12 @@
      <height>241</height>
     </rect>
    </property>
+   <property name="isWrapping" stdset="0">
+    <bool>false</bool>
+   </property>
+   <property name="wordWrap">
+    <bool>true</bool>
+   </property>
   </widget>
   <widget class="QPushButton" name="sendButton">
    <property name="geometry">
@@ -50,6 +56,12 @@
    </property>
    <property name="focusPolicy">
     <enum>Qt::FocusPolicy::StrongFocus</enum>
+   </property>
+   <property name="horizontalScrollBarPolicy">
+    <enum>Qt::ScrollBarPolicy::ScrollBarAsNeeded</enum>
+   </property>
+   <property name="sizeAdjustPolicy">
+    <enum>QAbstractScrollArea::SizeAdjustPolicy::AdjustIgnored</enum>
    </property>
   </widget>
  </widget>
