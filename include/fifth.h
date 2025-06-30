@@ -30,29 +30,51 @@ protected:
     {
         if (e->key() == Qt::Key_Return || e->key() == Qt::Key_Enter)
         {
-            if (e->modifiers() & Qt::ShiftModifier)
+            if (ui->textEdit->hasFocus()) // Если фокус на textEdit
             {
-                // Shift+Enter - вставляем перенос строки
-                QTextCursor cursor = ui->textEdit->textCursor();
-                cursor.insertText("\n");
+                if (e->modifiers() & Qt::ShiftModifier)
+                {
+                    // Shift+Enter - вставляем перенос строки
+                    QTextCursor cursor = ui->textEdit->textCursor();
+                    e->accept();
+                    return;
+                }
+                else
+                {
+                    // Обычный Enter отправляет сообщение
+                    QTextCursor cursor = ui->textEdit->textCursor();
+                    QString text = ui->textEdit->toPlainText();
+
+                    if (text.endsWith('\n'))
+                    {
+                        cursor.movePosition(QTextCursor::End);
+                        cursor.deletePreviousChar();
+                        ui->textEdit->setTextCursor(cursor);
+                    }
+
+                    on_sendButton_clicked();
+                    e->accept();
+                    return;
+                }
             }
-
-            QTextCursor cursor = ui->textEdit->textCursor();
-            QString text = ui->textEdit->toPlainText();
-
-            if (text.endsWith('\n'))
+            else
             {
-                cursor.movePosition(QTextCursor::End);
-                cursor.deletePreviousChar();
-                ui->textEdit->setTextCursor(cursor);
+                // Если фокус НЕ на textEdit, Enter всегда отправляет сообщение
+                on_sendButton_clicked();
+                e->accept();
+                return;
             }
+        }
+        else
+        {
+            QDialog::keyReleaseEvent(e); // Обрабатываем остальные клавиши
+        }
 
-            on_sendButton_clicked();
 
-            if (ui->listWidget->count() > 0)
-            {
-                ui->listWidget->scrollToBottom();
-            }
+
+        if (ui->listWidget->count() > 0)
+        {
+            ui->listWidget->scrollToBottom();
         }
     }
 
