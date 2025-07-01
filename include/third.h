@@ -19,6 +19,9 @@ public:
 
     void setCurrentUserData(const QString &login, const QString &password);
 
+    void setProfileData(const QString &name, int age, const QString &city, const QString &photoPath, const QString & hobby);
+
+    void hideAllButtons();
 
 private slots:
     void on_likeButton_clicked();

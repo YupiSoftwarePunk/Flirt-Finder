@@ -28,6 +28,8 @@ private slots:
     void on_BackButton_Clicked();
     void on_LikeButton_clicked();
 
+    void on_listWidget_itemDoubleClicked(QListWidgetItem *item);
+
 private:
     Ui::Fourth *ui;
 

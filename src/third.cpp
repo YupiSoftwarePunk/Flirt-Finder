@@ -390,3 +390,34 @@ void Third::on_messageBox_clicked()
     this->close();
 }
 
+
+
+
+
+void Third::setProfileData(const QString &name, int age, const QString &city, const QString &photoPath, const QString & hobby)
+{
+    ui->profileName->setText(name); // Отображение имени
+    ui->profileAge->setText(QString::number(age) + " лет"); // Отображение возраста
+    ui->profileCity->setText(city); // Отображение города
+    ui->profileHobbies->setText(hobby);
+
+    if (!photoPath.isEmpty())
+    {
+        QPixmap pixmap(photoPath);
+        ui->profilePhoto->setPixmap(pixmap.scaled(150, 150, Qt::KeepAspectRatio)); // Отображение фото
+    }
+    else
+    {
+        ui->profilePhoto->setText("Фото отсутствует"); // Если фото нет
+    }
+}
+
+
+
+void Third::hideAllButtons()
+{
+    ui->likeButton->hide();
+    ui->dislikeButton->hide();
+    ui->settingsButton->hide();
+    ui->messageBox->hide();
+}

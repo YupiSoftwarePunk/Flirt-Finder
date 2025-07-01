@@ -274,3 +274,56 @@ void Fourth::checkMutualLike()
         qDebug() << "Взаимный лайк отсутствует. Кнопка отключена.";
     }
 }
+
+
+
+
+void Fourth::on_listWidget_itemDoubleClicked(QListWidgetItem *item)
+{
+    if (!item)
+    {
+        QMessageBox::warning(this, "Ошибка", "Не удалось извлечь данные для перехода.");
+        return;
+    }
+
+    // Извлекаем ID выбранного пользователя
+    int targetUserId = item->data(Qt::UserRole).toInt();
+    if (targetUserId <= 0)
+    {
+        QMessageBox::warning(this, "Ошибка", "Некорректный ID пользователя.");
+        return;
+    }
+
+    qDebug() << "Открытие анкеты для targetUserId: " << targetUserId;
+
+    // Выполняем запрос в БД, чтобы загрузить данные пользователя
+    QSqlQuery query;
+    query.prepare(
+        "SELECT u.name, u.age, u.city, u.hobbies, p.photo_path "
+        "FROM users u "
+        "LEFT JOIN photos p ON u.id = p.user_id "
+        "WHERE u.id = :userId"
+        );
+    query.bindValue(":userId", targetUserId);
+
+    if (!query.exec() || !query.next())
+    {
+        QMessageBox::warning(this, "Ошибка", "Не удалось загрузить данные анкеты.");
+        qDebug() << "Ошибка SQL: " << query.lastError().text();
+        return;
+    }
+
+    // Извлекаем данные пользователя
+    QString name = query.value("name").toString();
+    int age = query.value("age").toInt();
+    QString city = query.value("city").toString();
+    QString photoPath = query.value("photo_path").toString();
+    QString hobby = query.value("hobbies").toString();
+
+    // Открываем вторую страницу (например, Third) для отображения данных пользователя
+    auto thirdWindow = new Third();
+    thirdWindow->hideAllButtons();
+    thirdWindow->setProfileData(name, age, city, photoPath, hobby);
+    thirdWindow->show();
+}
+

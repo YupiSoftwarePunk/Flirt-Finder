@@ -48,12 +48,12 @@ protected:
 
                     for (QString &line : lines)
                     {
-                        while (line.length() > 20)
+                        while (line.length() > 30)
                         {
                             // Разбиваем строку на блоки по 20 символов
-                            QString chunk = line.left(20);
+                            QString chunk = line.left(30);
                             updatedLines.append(chunk);
-                            line = line.mid(20);
+                            line = line.mid(30);
                         }
 
                         if (!line.isEmpty())
