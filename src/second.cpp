@@ -45,7 +45,7 @@ void Second::initializeUserData()
 // это для регистрации, когда фото еще нет
 void Second::initializeUserData2()
 {
-    loadUserData();   // Загружаем данные анкеты
+    loadUserData();
 
     QSqlQuery photoQuery;
     photoQuery.prepare("SELECT photo_path FROM photos WHERE user_id = (SELECT id FROM users WHERE login = :login)");
@@ -120,7 +120,6 @@ void Second::on_onSaveData_clicked()
     QString hobbies = ui->textEdit->toPlainText().trimmed();
     QString city = ui->lineEdit_4->text().trimmed();
     QString sex = ui->comboBox->currentText();
-    // QString photo = m_photoPath;
 
 
     if (m_photoPath.isEmpty())
@@ -167,20 +166,9 @@ void Second::on_onSaveData_clicked()
 
         auto thirdWindow = new Third();
         thirdWindow->setCurrentUserData(login, password);
-        thirdWindow->loadProfiles(login); // Передаём login в метод для загрузки профилей
+        thirdWindow->loadProfiles(login);
         thirdWindow->show();
         this->close();
-
-
-        // Third* thirdWindow = nullptr;
-        // if (!thirdWindow)
-        // {
-        //     thirdWindow = new Third();
-        //     thirdWindow->setCurrentLogin(login);
-        //     thirdWindow->loadProfiles(login);
-        // }
-        // thirdWindow->show();
-        // this->close();
     }
     else
     {
@@ -228,12 +216,6 @@ bool Second::eventFilter(QObject *watched, QEvent *event)
             {
                 return false;
             }
-
-            // if (!keyEvent->text().isEmpty() &&
-            //     !QRegularExpression("[a-zA-Zа-яА-ЯёЁ0-9\\s-]").match(keyEvent->text()).hasMatch())
-            // {
-            //     return true;
-            // }
         }
     }
 

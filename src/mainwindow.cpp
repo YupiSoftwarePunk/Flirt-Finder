@@ -71,13 +71,6 @@ void MainWindow::on_login_button_clicked()
 
     QMessageBox::information(this, "Успех", "Авторизация прошла успешно!");
 
-    // Переход на второе окно
-    // auto secondWindow = new Second();
-    // secondWindow->setUserCredentials(login, password);
-    // secondWindow->initializeUserData(); // Загрузить данные из базы
-    // secondWindow->show();
-    // this->close();
-
 
     // переход на третье окно
     auto thirdWindow = new Third();
@@ -134,7 +127,6 @@ void MainWindow::on_registration_button_clicked()
     }
 
 
-    // Регистрация нового пользователя
     query.clear();
     query.prepare("INSERT INTO users (login, password, name, gender, age, hobbies, city) "
                   "VALUES (:login, :password, :name, :gender, :age, :hobbies, :city)");
@@ -159,7 +151,7 @@ void MainWindow::on_registration_button_clicked()
     // Передача данных во вторую страницу
     auto secondWindow = new Second();
     secondWindow->setUserCredentials(login, password);
-    secondWindow->initializeUserData2();     // Загружаем данные перед отображением
+    secondWindow->initializeUserData2();
     secondWindow->show();
     this->close();
 }

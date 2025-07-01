@@ -27,14 +27,6 @@ Third::~Third()
     delete ui;
 }
 
-/*
- необходимо сделать на этой странице фильтры для поиска и выдачи анкет
-
-пусть сначала выпадают анкеты из одного города и с общими увлечениями
-и люди одного возраста что и залогининый пользователь
-потом все остальные
-*/
-
 
 void Third::loadProfiles(const QString &login)
 {
@@ -63,7 +55,7 @@ void Third::loadProfiles(const QString &login)
         "WHERE users.login != :login AND users.gender = :gender"
         );
     query.bindValue(":login", login);
-    query.bindValue(":gender", oppositeGender); // Применяем фильтр по противоположному полу
+    query.bindValue(":gender", oppositeGender);
 
     if (!query.exec())
     {
@@ -71,13 +63,13 @@ void Third::loadProfiles(const QString &login)
         return;
     }
 
-    QSet<QString> uniqueIds; // Храним уникальные ID пользователей
+    QSet<QString> uniqueIds;
     while (query.next())
     {
         QString userId = query.value("id").toString();
         if (uniqueIds.contains(userId))
         {
-            continue; // Пропускаем дубликаты
+            continue;
         }
         uniqueIds.insert(userId);
 
@@ -165,9 +157,6 @@ void Third::on_likeButton_clicked()
     {
         QMessageBox::information(this, "Информация", "Это была последняя анкета!");
         qDebug() << "Последняя анкета обработана.";
-        // currentIndex--;
-        // this->close();
-        // return;
     }
 }
 
@@ -195,9 +184,6 @@ void Third::on_dislikeButton_clicked()
     {
         QMessageBox::information(this, "Информация", "Это была последняя анкета!");
         qDebug() << "Последняя анкета обработана.";
-        // currentIndex--;
-        // this->close();
-        // return;
     }
 }
 
@@ -219,7 +205,6 @@ void Third::on_nextProfile()
     else
     {
         qDebug() << "Нет действий, анкеты закончились.";
-        // this->close();
     }
 }
 
@@ -396,19 +381,19 @@ void Third::on_messageBox_clicked()
 
 void Third::setProfileData(const QString &name, int age, const QString &city, const QString &photoPath, const QString & hobby)
 {
-    ui->profileName->setText(name); // Отображение имени
-    ui->profileAge->setText(QString::number(age) + " лет"); // Отображение возраста
-    ui->profileCity->setText(city); // Отображение города
+    ui->profileName->setText(name);
+    ui->profileAge->setText(QString::number(age) + " лет");
+    ui->profileCity->setText(city);
     ui->profileHobbies->setText(hobby);
 
     if (!photoPath.isEmpty())
     {
         QPixmap pixmap(photoPath);
-        ui->profilePhoto->setPixmap(pixmap.scaled(150, 150, Qt::KeepAspectRatio)); // Отображение фото
+        ui->profilePhoto->setPixmap(pixmap.scaled(150, 150, Qt::KeepAspectRatio));
     }
     else
     {
-        ui->profilePhoto->setText("Фото отсутствует"); // Если фото нет
+        ui->profilePhoto->setText("Фото отсутствует");
     }
 }
 
