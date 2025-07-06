@@ -47,6 +47,9 @@ private:
     void checkMutualLike();
 
     void performSearch();
+
+
+    void keyPressEvent(QKeyEvent *event);
 };
 
 #endif // FOURTH_H

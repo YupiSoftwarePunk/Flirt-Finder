@@ -26,11 +26,15 @@ Fourth::Fourth(QWidget *parent)
 
 
     // Создаём валидатор с разрешёнными символами
-    QRegularExpression regex("^[a-zA-Zа-яА-ЯёЁ0-9.,]*$");
+    QRegularExpression regex("^[a-zA-Zа-яА-ЯёЁ0-9.,\\n]*$");
     QRegularExpressionValidator *validator = new QRegularExpressionValidator(regex, this);
 
     // Устанавливаем валидатор для поля поиска
     ui->searchInput->setValidator(validator);
+
+
+    // поиск по нажатию на enter
+    connect(ui->searchInput, &QLineEdit::returnPressed, ui->searchButton, &QPushButton::click);
 }
 
 Fourth::~Fourth()
@@ -375,3 +379,22 @@ void Fourth::performSearch()
         }
     }
 }
+
+
+
+
+void Fourth::keyPressEvent(QKeyEvent *event)
+{
+    if (event->key() == Qt::Key_Return || event->key() == Qt::Key_Enter)
+    {
+        if (ui->searchInput->hasFocus())
+        {
+            ui->searchButton->click();
+        }
+    }
+    else
+    {
+        QDialog::keyPressEvent(event);
+    }
+}
+
