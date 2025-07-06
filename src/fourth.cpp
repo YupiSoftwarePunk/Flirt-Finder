@@ -21,6 +21,16 @@ Fourth::Fourth(QWidget *parent)
     connect(ui->listWidget, &QListWidget::itemSelectionChanged, this, &Fourth::checkMutualLike);
 
     connect(ui->BackButton, &QPushButton::clicked, this, &::Fourth::on_BackButton_Clicked);
+
+    connect(ui->searchButton, &QPushButton::clicked, this, &::Fourth::performSearch);
+
+
+    // Создаём валидатор с разрешёнными символами
+    QRegularExpression regex("^[a-zA-Zа-яА-ЯёЁ0-9.,]*$");
+    QRegularExpressionValidator *validator = new QRegularExpressionValidator(regex, this);
+
+    // Устанавливаем валидатор для поля поиска
+    ui->searchInput->setValidator(validator);
 }
 
 Fourth::~Fourth()
@@ -327,3 +337,41 @@ void Fourth::on_listWidget_itemDoubleClicked(QListWidgetItem *item)
     thirdWindow->show();
 }
 
+
+
+
+
+void Fourth::performSearch()
+{
+    QString searchText = ui->searchInput->text().trimmed();
+
+    // выше ^
+
+    // Если строка пустая, показываем все элементы
+    if (searchText.isEmpty())
+    {
+        for (int i = 0; i < ui->listWidget->count(); ++i)
+        {
+            QListWidgetItem *item = ui->listWidget->item(i);
+            item->setHidden(false);
+        }
+        return;
+    }
+
+    // Фильтруем элементы в listWidget
+    for (int i = 0; i < ui->listWidget->count(); ++i)
+    {
+        QListWidgetItem *item = ui->listWidget->item(i);
+        QString itemText = item->text();
+
+        // Проверяем вхождение текста
+        if (itemText.contains(searchText, Qt::CaseInsensitive))
+        {
+            item->setHidden(false);
+        }
+        else
+        {
+            item->setHidden(true);
+        }
+    }
+}

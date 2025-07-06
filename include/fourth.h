@@ -45,6 +45,8 @@ private:
     int getCurrentUserId(const QString &login);
 
     void checkMutualLike();
+
+    void performSearch();
 };
 
 #endif // FOURTH_H
