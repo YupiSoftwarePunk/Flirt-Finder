@@ -397,4 +397,3 @@ void Fourth::keyPressEvent(QKeyEvent *event)
         QDialog::keyPressEvent(event);
     }
 }
-

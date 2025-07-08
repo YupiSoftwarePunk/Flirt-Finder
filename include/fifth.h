@@ -24,7 +24,6 @@ public:
     void loadChatHistory(int senderId, int receiverId);
 
 
-
 protected:
     void keyReleaseEvent(QKeyEvent* e)
     {

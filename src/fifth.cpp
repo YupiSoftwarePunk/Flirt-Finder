@@ -158,4 +158,3 @@ void Fifth::loadChatHistory(int senderId, int receiverId)
         ui->listWidget->scrollToBottom();
     }
 }
-
