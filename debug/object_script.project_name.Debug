@@ -1,0 +1,12 @@
+debug/fourth.o
+debug/fifth.o
+debug/main.o
+debug/mainwindow.o
+debug/second.o
+debug/third.o
+debug/qrc_resources.o
+debug/moc_fourth.o
+debug/moc_mainwindow.o
+debug/moc_second.o
+debug/moc_third.o
+debug/moc_fifth.o
