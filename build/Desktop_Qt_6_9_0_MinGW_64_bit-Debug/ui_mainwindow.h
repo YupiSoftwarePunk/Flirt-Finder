@@ -24,7 +24,7 @@
 
 QT_BEGIN_NAMESPACE
 
-class Ui_MainWindow
+class Ui_FlirtFinder
 {
 public:
     QWidget *centralwidget;
@@ -52,12 +52,12 @@ public:
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
-    void setupUi(QMainWindow *MainWindow)
+    void setupUi(QMainWindow *FlirtFinder)
     {
-        if (MainWindow->objectName().isEmpty())
-            MainWindow->setObjectName("MainWindow");
-        MainWindow->resize(598, 366);
-        centralwidget = new QWidget(MainWindow);
+        if (FlirtFinder->objectName().isEmpty())
+            FlirtFinder->setObjectName("FlirtFinder");
+        FlirtFinder->resize(598, 366);
+        centralwidget = new QWidget(FlirtFinder);
         centralwidget->setObjectName("centralwidget");
         groupBox = new QGroupBox(centralwidget);
         groupBox->setObjectName("groupBox");
@@ -154,36 +154,36 @@ public:
 
         verticalLayout_4->addWidget(registration_button);
 
-        MainWindow->setCentralWidget(centralwidget);
-        menubar = new QMenuBar(MainWindow);
+        FlirtFinder->setCentralWidget(centralwidget);
+        menubar = new QMenuBar(FlirtFinder);
         menubar->setObjectName("menubar");
         menubar->setGeometry(QRect(0, 0, 598, 21));
-        MainWindow->setMenuBar(menubar);
-        statusbar = new QStatusBar(MainWindow);
+        FlirtFinder->setMenuBar(menubar);
+        statusbar = new QStatusBar(FlirtFinder);
         statusbar->setObjectName("statusbar");
-        MainWindow->setStatusBar(statusbar);
+        FlirtFinder->setStatusBar(statusbar);
 
-        retranslateUi(MainWindow);
+        retranslateUi(FlirtFinder);
 
-        QMetaObject::connectSlotsByName(MainWindow);
+        QMetaObject::connectSlotsByName(FlirtFinder);
     } // setupUi
 
-    void retranslateUi(QMainWindow *MainWindow)
+    void retranslateUi(QMainWindow *FlirtFinder)
     {
-        MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
-        groupBox->setTitle(QCoreApplication::translate("MainWindow", "\320\220\320\262\321\202\320\276\321\200\320\270\320\267\320\260\321\206\320\270\321\217", nullptr));
-        label_2->setText(QCoreApplication::translate("MainWindow", "\320\237\320\260\321\200\320\276\320\273\321\214", nullptr));
-        label->setText(QCoreApplication::translate("MainWindow", "\320\233\320\276\320\263\320\270\320\275", nullptr));
-        login_button->setText(QCoreApplication::translate("MainWindow", "\320\220\320\262\321\202\320\276\321\200\320\270\320\267\320\260\321\206\320\270\321\217", nullptr));
-        label_3->setText(QCoreApplication::translate("MainWindow", "\320\237\320\260\321\200\320\276\320\273\321\214", nullptr));
-        label_4->setText(QCoreApplication::translate("MainWindow", "\320\233\320\276\320\263\320\270\320\275", nullptr));
-        registration_button->setText(QCoreApplication::translate("MainWindow", "\320\240\320\265\320\263\320\270\321\201\321\202\321\200\320\260\321\206\320\270\321\217", nullptr));
+        FlirtFinder->setWindowTitle(QCoreApplication::translate("FlirtFinder", "MainWindow", nullptr));
+        groupBox->setTitle(QCoreApplication::translate("FlirtFinder", "\320\220\320\262\321\202\320\276\321\200\320\270\320\267\320\260\321\206\320\270\321\217", nullptr));
+        label_2->setText(QCoreApplication::translate("FlirtFinder", "\320\237\320\260\321\200\320\276\320\273\321\214", nullptr));
+        label->setText(QCoreApplication::translate("FlirtFinder", "\320\233\320\276\320\263\320\270\320\275", nullptr));
+        login_button->setText(QCoreApplication::translate("FlirtFinder", "\320\220\320\262\321\202\320\276\321\200\320\270\320\267\320\260\321\206\320\270\321\217", nullptr));
+        label_3->setText(QCoreApplication::translate("FlirtFinder", "\320\237\320\260\321\200\320\276\320\273\321\214", nullptr));
+        label_4->setText(QCoreApplication::translate("FlirtFinder", "\320\233\320\276\320\263\320\270\320\275", nullptr));
+        registration_button->setText(QCoreApplication::translate("FlirtFinder", "\320\240\320\265\320\263\320\270\321\201\321\202\321\200\320\260\321\206\320\270\321\217", nullptr));
     } // retranslateUi
 
 };
 
 namespace Ui {
-    class MainWindow: public Ui_MainWindow {};
+    class FlirtFinder: public Ui_FlirtFinder {};
 } // namespace Ui
 
 QT_END_NAMESPACE

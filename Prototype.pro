@@ -29,6 +29,9 @@ FORMS += \
     .\forms\third.ui \
     .\forms\fifth.ui
 
+
+win32:RC_FILE = file.rc
+
 QTPLUGIN += qsqlpsql
 
 RESOURCES += \
