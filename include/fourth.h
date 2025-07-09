@@ -22,6 +22,8 @@ public:
 
     void setUserCredentials(const QString &login, const QString &password);
 
+    void initializeSupportLike(int currentUserId);
+
 
 private slots:
     void on_ChatButton_clicked();

@@ -370,6 +370,7 @@ void Third::on_messageBox_clicked()
 {
     auto fourthWindow = new Fourth();
     fourthWindow->setUserCredentials(currentLogin, currentPassword);
+    fourthWindow->initializeSupportLike(currentLogin.toInt());
     fourthWindow->loadNotifications();
     fourthWindow->show();
     this->close();
