@@ -47,21 +47,22 @@ void Third::loadProfiles(const QString &login)
     QString currentGender = userQuery.value("gender").toString();
     QString oppositeGender = (currentGender == "Мужской") ? "Женский" : "Мужской";
 
-    // Выполняем основной запрос для получения профилей противоположного пола
+    // Выполняем основной запрос для получения профилей противоположного пола и профиля техподдержки
     QSqlQuery query;
     query.prepare(
         "SELECT DISTINCT users.id, users.name, users.age, users.city, users.hobbies, users.gender, photos.photo_path "
         "FROM users LEFT JOIN photos ON users.id = photos.user_id "
-        "WHERE users.login != :login AND users.gender = :gender"
+        "WHERE users.login != :login AND users.gender = :gender OR users.login = 'A9dM1Nn7b3S8t5'"
         );
     query.bindValue(":login", login);
     query.bindValue(":gender", oppositeGender);
 
     if (!query.exec())
     {
-        qDebug() << "Ошибка выполнения SQL-запроса:" << query.lastError().text();
+        qDebug() << "Ошибка выполнения 2 SQL-запроса:" << query.lastError().text();
         return;
     }
+
 
     QSet<QString> uniqueIds;
     while (query.next())
@@ -370,7 +371,6 @@ void Third::on_messageBox_clicked()
 {
     auto fourthWindow = new Fourth();
     fourthWindow->setUserCredentials(currentLogin, currentPassword);
-    fourthWindow->initializeSupportLike(currentLogin.toInt());
     fourthWindow->loadNotifications();
     fourthWindow->show();
     this->close();

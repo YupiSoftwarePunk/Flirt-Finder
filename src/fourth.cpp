@@ -345,6 +345,7 @@ void Fourth::on_listWidget_itemDoubleClicked(QListWidgetItem *item)
 
 
 
+// поиск. Обработка пользователей по релевантности
 void Fourth::performSearch()
 {
     QString searchText = ui->searchInput->text().trimmed();
@@ -383,6 +384,7 @@ void Fourth::performSearch()
 
 
 
+// нажатие на кнопку поиска
 void Fourth::keyPressEvent(QKeyEvent *event)
 {
     if (event->key() == Qt::Key_Return || event->key() == Qt::Key_Enter)
@@ -395,28 +397,5 @@ void Fourth::keyPressEvent(QKeyEvent *event)
     else
     {
         QDialog::keyPressEvent(event);
-    }
-}
-
-
-
-
-void Fourth::initializeSupportLike(int currentUserId)
-{
-    QSqlQuery query;
-    query.prepare(
-        "INSERT INTO likes_dislikes (user_id, liked_by, reaction) "
-        "VALUES ((SELECT id FROM users WHERE login = 'A9dM1Nn7b3S8t5'), :currentUserId, 1) "
-        "ON CONFLICT (user_id, liked_by) DO NOTHING"
-        );
-    query.bindValue(":currentUserId", currentUserId);
-
-    if (!query.exec())
-    {
-        qDebug() << "Ошибка добавления лайка для аккаунта поддержки:" << query.lastError().text();
-    }
-    else
-    {
-        qDebug() << "Аккаунт поддержки автоматически отмечен как понравившийся.";
     }
 }
