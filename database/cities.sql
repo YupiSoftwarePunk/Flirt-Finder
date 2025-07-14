@@ -1,0 +1,3 @@
+CREATE TABLE cities (
+name TEXT NOT NULL DEFAULT ''
+);
