@@ -159,6 +159,29 @@ void Second::on_onSaveData_clicked()
 
 
 
+    // Проверка наличия города в базе данных
+    QSqlQuery cityQuery;
+    cityQuery.prepare("SELECT COUNT(*) FROM cities WHERE name = :city");
+    cityQuery.bindValue(":city", city);
+
+    if (!cityQuery.exec())
+    {
+        QMessageBox::warning(this, "Ошибка", "Не удалось выполнить запрос к базе данных!");
+        return;
+    }
+
+    cityQuery.next();
+    int cityCount = cityQuery.value(0).toInt();
+    if (cityCount == 0)
+    {
+        QMessageBox::warning(this, "Ошибка", "Город не найден в базе данных! Проверьте правильность ввода.");
+        ui->lineEdit_4->setFocus();
+        return;
+    }
+
+
+
+
     if (saveUserData(login, password, name, sex, age, hobbies, city, m_photoPath))
     {
         loadPhotoData(login);

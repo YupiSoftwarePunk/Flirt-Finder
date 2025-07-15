@@ -1,3 +1,4 @@
 CREATE TABLE cities (
-name TEXT NOT NULL DEFAULT ''
+    id SERIAL PRIMARY KEY,
+    name TEXT NOT NULL DEFAULT ''
 );
