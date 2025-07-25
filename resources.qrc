@@ -2,5 +2,6 @@
     <qresource prefix="/images">
         <file>images/settings.png</file>
         <file>images/like.png</file>
+        <file>styles/style.css</file>
     </qresource>
 </RCC>

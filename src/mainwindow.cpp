@@ -1,4 +1,5 @@
 #include "include/mainwindow.h"
+#include "qdir.h"
 #include "qevent.h"
 #include "include/third.h"
 #include "ui_mainwindow.h"
@@ -15,6 +16,17 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
 
+    // Загрузка стилей
+    QString sCssMain;
+    QFile styleFile(":/styles/style.css");
+    if (styleFile.open(QIODevice::ReadOnly))
+    {
+        sCssMain = styleFile.readAll();
+        styleFile.close();
+    }
+    qApp->setStyleSheet(sCssMain);
+
+
     // Создаём валидатор с разрешёнными символами
     QRegularExpression regex("^[a-zA-Z0-9@.,]*$"); // Только буквы, цифры, @, ., запятая
     QRegularExpressionValidator *validator = new QRegularExpressionValidator(regex, this);
@@ -26,6 +38,9 @@ MainWindow::MainWindow(QWidget *parent)
     ui->password_2->setValidator(validator);
 
     setWindowTitle("FlirtFinder");
+
+
+
 }
 
 MainWindow::~MainWindow()

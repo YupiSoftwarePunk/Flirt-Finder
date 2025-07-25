@@ -1,0 +1,115 @@
+/* Общие стили для всех окон */
+QMainWindow, QDialog {
+    background-color: #ffffff; /* --secondary */
+    font-family: "Arial";
+}
+
+/* Заголовок окна */
+QMainWindow::title {
+    color: #2c3e50; /* --dark */
+    font-size: 16px;
+    font-weight: bold;
+    padding-left: 10px;
+}
+
+/* Групповые рамки (GroupBox) */
+QGroupBox {
+    border: 2px solid #e74c3c; /* --primary */
+    border-radius: 8px;
+    margin-top: 10px;
+    padding-top: 15px;
+    font-weight: bold;
+    color: #2c3e50; /* --dark */
+}
+
+/* QGroupBox::title {
+    subcontrol-origin: margin;
+    left: 10px;
+    padding: 0 5px;
+} */
+
+/* Кнопки */
+QPushButton {
+    background-color: #e74c3c; /* --primary */
+    color: #ffffff; /* --secondary */
+    border: none;
+    border-radius: 5px;
+    padding: 8px 16px;
+    font-weight: bold;
+}
+
+QPushButton:hover {
+    background-color: #c0392b; /* --accent */
+}
+
+QPushButton:pressed {
+    background-color: #2c3e50; /* --dark */
+}
+
+/* Текстовые поля */
+QLineEdit, QTextEdit, QComboBox, QSpinBox {
+    border: 1px solid #e74c3c; /* --primary */
+    border-radius: 5px;
+    padding: 5px;
+    background: #ffffff; /* --secondary */
+}
+
+QLineEdit:focus, QTextEdit:focus {
+    border: 2px solid #e74c3c; /* --primary */
+}
+
+/* Список */
+QListWidget {
+    border: 1px solid #e74c3c; /* --primary */
+    border-radius: 5px;
+    background: #ffffff; /* --secondary */
+    background-color: #ecf0f1; /* --light-gray */
+}
+
+QListWidget::item:hover {
+    background: #ecf0f1; /* --light-gray */
+}
+
+/* Иконки кнопок */
+QPushButton[icon] {
+    min-width: 32px;
+    min-height: 32px;
+    background: transparent;
+    border: none;
+}
+
+/* Текстовые метки */
+QLabel {
+    color: #2c3e50; /* --dark */
+    font-size: 14px;
+}
+
+/* Скроллбары */
+QScrollBar:vertical {
+    width: 10px;
+    background: #ecf0f1; /* --light-gray */
+}
+
+QScrollBar::handle:vertical {
+    background: #e74c3c; /* --primary */
+    min-height: 20px;
+}
+
+QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
+    background: none;
+}
+
+/* Специальные стили для кнопок Like/Dislike (если нужно) */
+#likeButton {
+    background-color: #2ecc71; /* Зеленый для Like */
+}
+
+#dislikeButton {
+    background-color: #e74c3c; /* Красный для Dislike */
+}
+
+/* Стиль для выбранных элементов списка */
+QListWidget::item:selected {
+    background: #e74c3c; /* --primary */
+    color: #ffffff; /* --secondary */
+}
