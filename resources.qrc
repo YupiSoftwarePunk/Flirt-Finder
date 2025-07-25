@@ -2,6 +2,12 @@
     <qresource prefix="/images">
         <file>images/settings.png</file>
         <file>images/like.png</file>
+        <file>images/arrow_up.svg</file>
+        <file>images/arrow_down.svg</file>
+    </qresource>
+
+    <qresource prefix="/">
         <file>styles/style.css</file>
+        <file>styles/style2.css</file>
     </qresource>
 </RCC>

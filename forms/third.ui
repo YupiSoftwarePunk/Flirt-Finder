@@ -17,43 +17,7 @@
    <string>Dialog</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: #ffffff;
-
-QLabel {
-    color: #2c3e50;
-    font-size: 14px;
-}
-
-#likeButton {
-    background-color: #2ecc71;
-    color: #ffffff;
-    border: none;
-    border-radius: 5px;
-    padding: 8px 16px;
-    font-weight: bold;
-}
-
-#dislikeButton {
-    background-color: #e74c3c;
-    color: #ffffff;
-    border: none;
-    border-radius: 5px;
-    padding: 8px 16px;
-    font-weight: bold;
-}
-
-QPushButton[icon] {
-    min-width: 32px;
-    min-height: 32px;
-    background: transparent;
-    border: none;
-}
-
-QTextEdit {
-    background: #ecf0f1;
-    border-radius: 10px;
-    padding: 5px;
-}</string>
+   <string notr="true"/>
   </property>
   <widget class="QLabel" name="profileAge">
    <property name="geometry">

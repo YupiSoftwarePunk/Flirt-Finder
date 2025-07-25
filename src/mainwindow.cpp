@@ -38,9 +38,6 @@ MainWindow::MainWindow(QWidget *parent)
     ui->password_2->setValidator(validator);
 
     setWindowTitle("FlirtFinder");
-
-
-
 }
 
 MainWindow::~MainWindow()

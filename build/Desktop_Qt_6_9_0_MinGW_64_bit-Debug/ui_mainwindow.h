@@ -57,46 +57,7 @@ public:
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName("MainWindow");
         MainWindow->resize(598, 366);
-        MainWindow->setStyleSheet(QString::fromUtf8("/* \320\236\321\201\320\275\320\276\320\262\320\275\321\213\320\265 \321\201\321\202\320\270\320\273\320\270 */\n"
-"background-color: #ffffff;\n"
-"\n"
-"QGroupBox {\n"
-"    border: 2px solid #e74c3c;\n"
-"    border-radius: 8px;\n"
-"    margin-top: 10px;\n"
-"    padding-top: 15px;\n"
-"    font-weight: bold;\n"
-"    color: #2c3e50;\n"
-"}\n"
-"\n"
-"QPushButton {\n"
-"    background-color: #e74c3c;\n"
-"    color: #ffffff;\n"
-"    border: none;\n"
-"    border-radius: 5px;\n"
-"    padding: 8px 16px;\n"
-"    font-weight: bold;\n"
-"}\n"
-"\n"
-"QPushButton:hover {\n"
-"    background-color: #c0392b;\n"
-"}\n"
-"\n"
-"QLineEdit {\n"
-"    border: 1px solid #e74c3c;\n"
-"    border-radius: 5px;\n"
-"    padding: 5px;\n"
-"    background: #ffffff;\n"
-"}\n"
-"\n"
-"QLineEdit:focus {\n"
-"    border: 2px solid #e74c3c;\n"
-"}\n"
-"\n"
-"QLabel {\n"
-"    color: #2c3e50;\n"
-"    font-size: 14px;\n"
-"}"));
+        MainWindow->setStyleSheet(QString::fromUtf8(""));
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName("centralwidget");
         groupBox = new QGroupBox(centralwidget);

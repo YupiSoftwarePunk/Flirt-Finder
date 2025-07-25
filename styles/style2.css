@@ -1,0 +1,110 @@
+/* Общие стили */
+QMainWindow, QDialog {
+    background-color: #f8f9fa;
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 13px;
+}
+
+/* Улучшенные отступы между элементами */
+QWidget {
+    spacing: 8px; /* Общий отступ между элементами */
+}
+
+/* Группы с увеличенными отступами */
+QGroupBox {
+    border: 2px solid #a3c4f3;
+    border-radius: 8px;
+    margin-top: 10px;
+    padding: 15px 12px 12px 12px; /* Увеличенные отступы внутри группы */
+    font-weight: bold;
+    color: #495057;
+    background-color: #ffffff;
+}
+
+/* Поля ввода с увеличенными отступами */
+QLineEdit, QTextEdit, QComboBox, QSpinBox {
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    padding: 6px 8px;
+    background: #ffffff;
+    color: #495057;
+    margin-bottom: 8px; /* Отступ снизу */
+    min-height: 28px;
+}
+
+/* Кастомные стрелки для SpinBox и ComboBox */
+QSpinBox::up-button, QSpinBox::down-button,
+QComboBox::drop-down {
+    width: 20px;
+    border-left: 1px solid #ced4da;
+    background: #f1f3f5;
+}
+
+QSpinBox::up-button {
+    subcontrol-origin: border;
+    subcontrol-position: top right;
+    border-bottom: 1px solid #ced4da;
+    border-radius: 0 3px 0 0;
+}
+
+QSpinBox::down-button {
+    subcontrol-origin: border;
+    subcontrol-position: bottom right;
+    border-radius: 0 0 3px 0;
+}
+
+QSpinBox::up-arrow, QSpinBox::down-arrow {
+    width: 12px;
+    height: 12px;
+    image: url(:/images/arrow_up.svg); /* Ваша кастомная стрелка */
+}
+
+QComboBox::down-arrow {
+    image: url(:/images/arrow_down.png); /* Кастомная стрелка */
+    width: 12px;
+    height: 12px;
+}
+
+/* Кнопки с фиксированной шириной текста */
+QPushButton {
+    min-width: 80px; /* Минимальная ширина */
+    padding: 6px 12px;
+}
+
+/* Специальные стили для кнопок с текстом */
+#onSaveData, #onLoadPhoto {
+    min-width: 120px; /* Ширина для кнопок "Сохранить" и "Загрузить фото" */
+}
+
+/* Улучшенный ListWidget */
+QListWidget {
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    background: #ffffff;
+    padding: 4px;
+}
+
+QListWidget::item {
+    padding: 6px 8px;
+    margin-bottom: 4px; /* Отступ между элементами */
+}
+
+/* Яркие кнопки Like/Dislike */
+#likeButton {
+    background-color: #77dd77;
+    color: white;
+    min-width: 90px;
+}
+
+#dislikeButton {
+    background-color: #ff6961;
+    color: white;
+    min-width: 90px;
+}
+
+
+QSpinBox:hover::up-arrow, QSpinBox:hover::down-arrow,
+QComboBox:hover::down-arrow {
+    image: url(:/images/arrow_up.svg);
+    fill: #e74c3c; /* Красный при наведении */
+}

@@ -133,7 +133,10 @@ compiler_rcc_clean:
 release/qrc_resources.cpp: ../../resources.qrc \
 		C:/Qt/6.9.0/mingw_64/bin/rcc.exe \
 		../../images/settings.png \
+		../../images/arrow_up.svg \
 		../../images/like.png \
+		../../images/arrow_down.svg \
+		../../styles/style2.css \
 		../../styles/style.css
 	C:\Qt\6.9.0\mingw_64\bin\rcc.exe -name resources --no-zstd ..\..\resources.qrc -o release\qrc_resources.cpp
 
