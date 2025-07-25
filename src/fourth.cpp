@@ -35,6 +35,8 @@ Fourth::Fourth(QWidget *parent)
 
     // поиск по нажатию на enter
     connect(ui->searchInput, &QLineEdit::returnPressed, ui->searchButton, &QPushButton::click);
+
+    setWindowTitle("FlirtFinder");
 }
 
 Fourth::~Fourth()

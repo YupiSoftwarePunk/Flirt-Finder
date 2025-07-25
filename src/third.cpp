@@ -20,6 +20,8 @@ Third::Third(QWidget *parent)
 
     this->setFocusPolicy(Qt::StrongFocus);
     this->setFocus();
+
+    setWindowTitle("FlirtFinder");
 }
 
 Third::~Third()

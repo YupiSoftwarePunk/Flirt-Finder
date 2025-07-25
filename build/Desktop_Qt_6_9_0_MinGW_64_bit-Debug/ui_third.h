@@ -43,6 +43,43 @@ public:
             Third->setObjectName("Third");
         Third->resize(400, 300);
         Third->setFocusPolicy(Qt::FocusPolicy::StrongFocus);
+        Third->setStyleSheet(QString::fromUtf8("background-color: #ffffff;\n"
+"\n"
+"QLabel {\n"
+"    color: #2c3e50;\n"
+"    font-size: 14px;\n"
+"}\n"
+"\n"
+"#likeButton {\n"
+"    background-color: #2ecc71;\n"
+"    color: #ffffff;\n"
+"    border: none;\n"
+"    border-radius: 5px;\n"
+"    padding: 8px 16px;\n"
+"    font-weight: bold;\n"
+"}\n"
+"\n"
+"#dislikeButton {\n"
+"    background-color: #e74c3c;\n"
+"    color: #ffffff;\n"
+"    border: none;\n"
+"    border-radius: 5px;\n"
+"    padding: 8px 16px;\n"
+"    font-weight: bold;\n"
+"}\n"
+"\n"
+"QPushButton[icon] {\n"
+"    min-width: 32px;\n"
+"    min-height: 32px;\n"
+"    background: transparent;\n"
+"    border: none;\n"
+"}\n"
+"\n"
+"QTextEdit {\n"
+"    background: #ecf0f1;\n"
+"    border-radius: 10px;\n"
+"    padding: 5px;\n"
+"}"));
         profileAge = new QLabel(Third);
         profileAge->setObjectName("profileAge");
         profileAge->setGeometry(QRect(10, 60, 121, 16));

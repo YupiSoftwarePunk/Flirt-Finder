@@ -3,11 +3,15 @@
 #include <QSqlError>
 #include <QDebug>
 #include "include/mainwindow.h"
+#include "qdir.h"
 
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+
+    a.setApplicationName("FlirtFinder");
+
     MainWindow w;
     w.show();
 

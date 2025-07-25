@@ -13,6 +13,30 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: #ffffff;
+
+QListWidget {
+    border: 1px solid #e74c3c;
+    border-radius: 5px;
+    background: #ffffff;
+    alternate-background-color: #ecf0f1;
+}
+
+QTextEdit {
+    background: #ecf0f1;
+    border-radius: 10px;
+    padding: 5px;
+    border: 1px solid #e74c3c;
+}
+
+QPushButton[icon] {
+    min-width: 32px;
+    min-height: 32px;
+    background: transparent;
+    border: none;
+}</string>
+  </property>
   <widget class="QListWidget" name="listWidget">
    <property name="geometry">
     <rect>

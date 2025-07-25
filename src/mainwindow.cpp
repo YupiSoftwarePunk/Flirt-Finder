@@ -24,6 +24,8 @@ MainWindow::MainWindow(QWidget *parent)
     ui->password->setValidator(validator);
     ui->login_2->setValidator(validator);
     ui->password_2->setValidator(validator);
+
+    setWindowTitle("FlirtFinder");
 }
 
 MainWindow::~MainWindow()

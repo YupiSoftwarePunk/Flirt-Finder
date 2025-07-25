@@ -36,3 +36,4 @@ QTPLUGIN += qsqlpsql
 
 RESOURCES += \
     resources.qrc
+

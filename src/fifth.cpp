@@ -13,6 +13,8 @@ Fifth::Fifth(QWidget *parent)
     , ui(new Ui::Fifth)
 {
     ui->setupUi(this);
+
+    setWindowTitle("FlirtFinder");
 }
 
 Fifth::~Fifth()

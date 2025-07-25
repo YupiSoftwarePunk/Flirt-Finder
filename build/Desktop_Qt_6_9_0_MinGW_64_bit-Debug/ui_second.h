@@ -44,6 +44,37 @@ public:
         if (Second->objectName().isEmpty())
             Second->setObjectName("Second");
         Second->resize(400, 300);
+        Second->setStyleSheet(QString::fromUtf8("background-color: #ffffff;\n"
+"\n"
+"QGroupBox {\n"
+"    border: 2px solid #e74c3c;\n"
+"    border-radius: 8px;\n"
+"    margin-top: 10px;\n"
+"    padding-top: 15px;\n"
+"    font-weight: bold;\n"
+"    color: #2c3e50;\n"
+"}\n"
+"\n"
+"QPushButton {\n"
+"    background-color: #e74c3c;\n"
+"    color: #ffffff;\n"
+"    border: none;\n"
+"    border-radius: 5px;\n"
+"    padding: 8px 16px;\n"
+"    font-weight: bold;\n"
+"}\n"
+"\n"
+"QGraphicsView {\n"
+"    border: 2px dashed #e74c3c;\n"
+"    background: #ecf0f1;\n"
+"}\n"
+"\n"
+"QComboBox, QSpinBox, QTextEdit, QLineEdit {\n"
+"    border: 1px solid #e74c3c;\n"
+"    border-radius: 5px;\n"
+"    padding: 5px;\n"
+"    background: #ffffff;\n"
+"}"));
         groupBox = new QGroupBox(Second);
         groupBox->setObjectName("groupBox");
         groupBox->setGeometry(QRect(10, 0, 381, 291));

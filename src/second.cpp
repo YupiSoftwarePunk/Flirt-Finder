@@ -22,6 +22,8 @@ Second::Second(QWidget *parent)
     ui->lineEdit->installEventFilter(this);
     ui->lineEdit_4->installEventFilter(this);
     ui->textEdit->installEventFilter(this);
+
+    setWindowTitle("FlirtFinder");
 }
 
 Second::~Second()
