@@ -386,7 +386,7 @@ void Fourth::performSearch()
 
 
 
-// нажатие на кнопку поиска
+// нажатие на кнопку поиска и перейти в чат
 void Fourth::keyPressEvent(QKeyEvent *event)
 {
     if (event->key() == Qt::Key_Return || event->key() == Qt::Key_Enter)
@@ -394,6 +394,14 @@ void Fourth::keyPressEvent(QKeyEvent *event)
         if (ui->searchInput->hasFocus())
         {
             ui->searchButton->click();
+            event->accept();
+            return;
+        }
+        else if (ui->listWidget->hasFocus())
+        {
+            ui->ChatButton->click();
+            event->accept();
+            return;
         }
     }
     else

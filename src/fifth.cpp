@@ -72,6 +72,11 @@ void Fifth::on_sendButton_clicked()
     QString messageText = ui->textEdit->toPlainText();
 
 
+    if (!ui->textEdit->hasFocus())
+    {
+        return;
+    }
+
     if (messageText.isEmpty())
     {
         QMessageBox::warning(this, "Ошибка", "Сообщение не может быть пустым.");
@@ -160,3 +165,4 @@ void Fifth::loadChatHistory(int senderId, int receiverId)
         ui->listWidget->scrollToBottom();
     }
 }
+
