@@ -50,10 +50,10 @@ public:
         groupBox->setGeometry(QRect(10, 0, 381, 291));
         onSaveData = new QPushButton(groupBox);
         onSaveData->setObjectName("onSaveData");
-        onSaveData->setGeometry(QRect(170, 260, 80, 24));
+        onSaveData->setGeometry(QRect(160, 260, 101, 24));
         onLoadPhoto = new QPushButton(groupBox);
         onLoadPhoto->setObjectName("onLoadPhoto");
-        onLoadPhoto->setGeometry(QRect(270, 150, 91, 24));
+        onLoadPhoto->setGeometry(QRect(250, 150, 121, 31));
         graphicsView = new QGraphicsView(groupBox);
         graphicsView->setObjectName("graphicsView");
         graphicsView->setGeometry(QRect(250, 30, 121, 101));

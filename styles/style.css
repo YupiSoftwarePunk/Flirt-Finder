@@ -1,16 +1,16 @@
 /* Общие стили для всех окон */
 QMainWindow, QDialog {
     background-color: #f8f9fa;
-    font-family: "Segoe UI", Arial, sans-serif; /* Более современный шрифт */
-    font-size: 13px; /* Уменьшенный базовый размер */
+    font-family: "Segoe UI", Arial, sans-serif; 
+    font-size: 13px; 
 }
 
 /* Заголовок окна */
 QMainWindow::title {
     color: #495057;
-    font-size: 14px; /* Уменьшен для компактности */
+    font-size: 14px; 
     font-weight: bold;
-    padding: 3px 0 3px 10px; /* Улучшенные отступы */
+    padding: 3px 0 3px 10px; 
 }
 
 /* Групповые рамки (GroupBox) */
@@ -18,11 +18,11 @@ QGroupBox {
     border: 2px solid #a3c4f3;
     border-radius: 8px;
     margin-top: 8px;
-    padding-top: 12px; /* Уменьшенный отступ */
+    padding-top: 12px; 
     font-weight: bold;
     color: #495057;
     background-color: #ffffff;
-    font-size: 12px; /* Уменьшен для заголовков */
+    font-size: 12px; 
 }
 
 /* Кнопки */
@@ -31,9 +31,9 @@ QPushButton {
     color: #ffffff;
     border: none;
     border-radius: 5px;
-    padding: 6px 12px; /* Уменьшенные отступы */
+    padding: 6px 6px; 
     font-weight: bold;
-    min-height: 24px; /* Фиксированная высота */
+    min-height: 20px; 
 }
 
 QPushButton:hover {
@@ -52,7 +52,7 @@ QLineEdit, QTextEdit, QComboBox, QSpinBox {
     background: #ffffff;
     color: #495057;
     font-size: 12px; /* Уменьшен для полей ввода */
-    min-height: 24px; /* Фиксированная высота */
+    min-height: 22px; /* Фиксированная высота */
 }
 
 QLineEdit:focus, QTextEdit:focus {
