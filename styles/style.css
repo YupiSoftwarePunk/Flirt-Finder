@@ -31,7 +31,7 @@ QPushButton {
     color: #ffffff;
     border: none;
     border-radius: 5px;
-    padding: 6px 6px; 
+    padding: 6px 6px; /* можно эту строчку просто закоментить, но тогда у сообщения где ок будет некрасиво */
     font-weight: bold;
     min-height: 20px; 
 }
@@ -48,11 +48,11 @@ QPushButton:pressed {
 QLineEdit, QTextEdit, QComboBox, QSpinBox {
     border: 1px solid #ced4da;
     border-radius: 5px;
-    padding: 4px 6px; /* Уменьшенные отступы */
+    padding: 4px 6px; 
     background: #ffffff;
     color: #495057;
-    font-size: 12px; /* Уменьшен для полей ввода */
-    min-height: 22px; /* Фиксированная высота */
+    font-size: 12px;
+    min-height: 22px; 
 }
 
 QLineEdit:focus, QTextEdit:focus {
@@ -65,11 +65,11 @@ QListWidget {
     border-radius: 5px;
     background: #ffffff;
     color: #495057;
-    font-size: 12px; /* Уменьшен для списка */
+    font-size: 12px; 
 }
 
 QListWidget::item {
-    padding: 4px 6px; /* Отступы элементов списка */
+    padding: 4px 6px; 
 }
 
 QListWidget::item:hover {
@@ -78,7 +78,7 @@ QListWidget::item:hover {
 
 /* Иконки кнопок */
 QPushButton[icon] {
-    min-width: 28px; /* Уменьшенные размеры */
+    min-width: 28px; 
     min-height: 28px;
     background: transparent;
     border: none;
@@ -87,13 +87,13 @@ QPushButton[icon] {
 /* Текстовые метки */
 QLabel {
     color: #495057;
-    font-size: 12px; /* Уменьшен для меток */
-    padding: 2px 0; /* Вертикальные отступы */
+    font-size: 12px; 
+    padding: 2px 0; 
 }
 
 /* Скроллбары */
 QScrollBar:vertical {
-    width: 8px; /* Уменьшенная ширина */
+    width: 8px; 
     background: #e9ecef;
 }
 
@@ -105,14 +105,14 @@ QScrollBar::handle:vertical {
 
 /* Яркие кнопки Like/Dislike */
 #likeButton {
-    background-color: #77dd77; /* Яркий пастельно-зеленый */
+    background-color: #77dd77; 
     color: #ffffff;
     font-weight: bold;
     padding: 6px 15px;
 }
 
 #dislikeButton {
-    background-color: #ff6961; /* Яркий пастельно-красный */
+    background-color: #ff6961; 
     color: #ffffff;
     font-weight: bold;
     padding: 6px 15px;
@@ -136,16 +136,16 @@ QListWidget::item:selected {
 QComboBox QAbstractItemView {
     background: #ffffff;
     color: #495057;
-    font-size: 12px; /* Уменьшен для выпадающих списков */
+    font-size: 12px; 
     padding: 4px;
 }
 
 /* Улучшенные спинбоксы */
 QSpinBox {
-    padding-right: 15px; /* Место для стрелок */
+    padding-right: 15px; 
 }
 
 /* Текстовые редакторы */
 QTextEdit {
-    line-height: 1.3; /* Улучшенный межстрочный интервал */
+    line-height: 1.3; 
 }

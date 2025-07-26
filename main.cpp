@@ -10,7 +10,7 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-    // // Загрузка стилей
+    // Загрузка стилей
     QFile styleFile(":/styles/style.css");
     if (!styleFile.open(QIODevice::ReadOnly | QIODevice::Text))
     {

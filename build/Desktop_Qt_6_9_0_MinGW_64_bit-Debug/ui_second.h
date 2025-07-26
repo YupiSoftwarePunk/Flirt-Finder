@@ -53,7 +53,7 @@ public:
         onSaveData->setGeometry(QRect(160, 260, 101, 24));
         onLoadPhoto = new QPushButton(groupBox);
         onLoadPhoto->setObjectName("onLoadPhoto");
-        onLoadPhoto->setGeometry(QRect(250, 150, 121, 31));
+        onLoadPhoto->setGeometry(QRect(240, 150, 141, 31));
         graphicsView = new QGraphicsView(groupBox);
         graphicsView->setObjectName("graphicsView");
         graphicsView->setGeometry(QRect(250, 30, 121, 101));
