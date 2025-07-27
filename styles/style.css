@@ -35,6 +35,11 @@ QGroupBox {
     background-color: #ffffff;
 }
 
+QGroupBox QLineEdit {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
 /* Кнопки */
 QPushButton {
     background-color: #a3c4f3;
@@ -85,6 +90,7 @@ QLineEdit:focus, QTextEdit:focus {
     margin-top: 10px;
 }
 
+
 /* Список */
 QListWidget {
     border: 1px solid #ced4da;
@@ -116,11 +122,12 @@ QLabel {
     font-size: 12px; 
     padding: 2px 0; 
 }
-
-#label::after { content: "Логин"; }  /* Было "Логин" */
-#label_2::after { content: "Пароль"; } /* Было "Пароль" */
-#label_3::after { content: "Пароль"; } /* Было "Логин" */
-#label_4::after { content: "Логин"; }  /* Было "Пароль" */
+/* 
+#label::after { content: "Логин"; }   Было "Логин" 
+#label_2::after { content: "Пароль"; }  Было "Пароль" 
+#label_3::after { content: "Пароль"; }  Было "Логин" 
+#label_4::after { content: "Логин"; }  Было "Пароль" 
+*/
 
 /* Скроллбары */
 QScrollBar:vertical {

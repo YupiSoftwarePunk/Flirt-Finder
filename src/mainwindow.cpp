@@ -19,11 +19,13 @@ MainWindow::MainWindow(QWidget *parent)
     // Загрузка стилей
     QString sCssMain;
     QFile styleFile(":/styles/style.css");
+
     if (styleFile.open(QIODevice::ReadOnly))
     {
         sCssMain = styleFile.readAll();
         styleFile.close();
     }
+
     qApp->setStyleSheet(sCssMain);
 
 
@@ -89,11 +91,14 @@ void MainWindow::on_login_button_clicked()
     // переход на третье окно
     auto thirdWindow = new Third();
     auto secondWindow = new Second();
+
     secondWindow->setUserCredentials(login, password);
     secondWindow->initializeUserData();
+
     thirdWindow->setCurrentUserData(login, password);
     thirdWindow->loadProfiles(login);
     thirdWindow->show();
+
     this->close();
 }
 
