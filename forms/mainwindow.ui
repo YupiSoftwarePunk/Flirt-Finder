@@ -20,10 +20,10 @@
    <widget class="QGroupBox" name="groupBox">
     <property name="geometry">
      <rect>
-      <x>140</x>
-      <y>10</y>
-      <width>291</width>
-      <height>291</height>
+      <x>130</x>
+      <y>0</y>
+      <width>331</width>
+      <height>331</height>
      </rect>
     </property>
     <property name="title">
@@ -46,7 +46,7 @@
           <item>
            <widget class="QLabel" name="label_2">
             <property name="text">
-             <string>Пароль</string>
+             <string>Логин</string>
             </property>
            </widget>
           </item>
@@ -60,7 +60,7 @@
           <item>
            <widget class="QLabel" name="label">
             <property name="text">
-             <string>Логин</string>
+             <string>Пароль</string>
             </property>
            </widget>
           </item>
@@ -97,7 +97,7 @@
           <item>
            <widget class="QLabel" name="label_3">
             <property name="text">
-             <string>Пароль</string>
+             <string>Логин</string>
             </property>
            </widget>
           </item>
@@ -111,7 +111,7 @@
           <item>
            <widget class="QLabel" name="label_4">
             <property name="text">
-             <string>Логин</string>
+             <string>Пароль</string>
             </property>
            </widget>
           </item>

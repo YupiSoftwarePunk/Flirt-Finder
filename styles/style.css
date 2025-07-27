@@ -25,6 +25,16 @@ QGroupBox {
     font-size: 12px; 
 }
 
+#groupBox {
+    border: 2px solid #a3c4f3;
+    border-radius: 8px;
+    margin-top: 10px;
+    padding-top: 15px;
+    font-weight: bold;
+    color: #495057;
+    background-color: #ffffff;
+}
+
 /* Кнопки */
 QPushButton {
     background-color: #a3c4f3;
@@ -34,6 +44,13 @@ QPushButton {
     padding: 6px 6px; /* можно эту строчку просто закоментить, но тогда у сообщения где ок будет некрасиво */
     font-weight: bold;
     min-height: 20px; 
+}
+
+#onLoadPhoto {
+    padding: 0px;  
+    font-weight: bold;
+    height: -40px; 
+    width: 100px;
 }
 
 QPushButton:hover {
@@ -57,6 +74,15 @@ QLineEdit, QTextEdit, QComboBox, QSpinBox {
 
 QLineEdit:focus, QTextEdit:focus {
     border: 2px solid #a3c4f3;
+}
+
+#login, #password, #login_2,  #password_2 {
+    margin-bottom: 15px;  /* Увеличиваем вертикальный отступ */
+    min-width: 80px;     /* Фиксированная ширина полей */
+}
+
+#login_button, #registration_button {
+    margin-top: 10px;
 }
 
 /* Список */
@@ -90,6 +116,11 @@ QLabel {
     font-size: 12px; 
     padding: 2px 0; 
 }
+
+#label::after { content: "Логин"; }  /* Было "Логин" */
+#label_2::after { content: "Пароль"; } /* Было "Пароль" */
+#label_3::after { content: "Пароль"; } /* Было "Логин" */
+#label_4::after { content: "Логин"; }  /* Было "Пароль" */
 
 /* Скроллбары */
 QScrollBar:vertical {
