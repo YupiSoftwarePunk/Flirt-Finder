@@ -187,3 +187,141 @@ QSpinBox {
 QTextEdit {
     line-height: 1.3; 
 }
+
+
+/* Стиль для QComboBox (пол)
+QComboBox {
+    padding-right: 20px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    min-height: 28px;
+}
+
+QComboBox::drop-down {
+    width: 20px;
+    border-left: 1px solid #ced4da;
+    background: #f8f9fa;
+}
+
+QComboBox::down-arrow {
+    image: url(:/images/arrow_down.svg);
+    width: 12px;
+    height: 12px;
+}
+
+/* Стиль для QSpinBox (возраст) 
+QSpinBox {
+    padding-right: 20px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+}
+
+QSpinBox::up-button, QSpinBox::down-button {
+    width: 20px;
+    background: #f8f9fa;
+}
+
+QSpinBox::up-button {
+    subcontrol-origin: border;
+    subcontrol-position: top right;
+    border-bottom: 1px solid #ced4da;
+}
+
+QSpinBox::down-button {
+    subcontrol-origin: border;
+    subcontrol-position: bottom right;
+}
+
+QSpinBox::up-arrow {
+    image: url(:/images/arrow_up.svg);
+    width: 12px;
+    height: 12px;
+}
+
+QSpinBox::down-arrow {
+    image: url(:/images/arrow_down.svg);
+    width: 12px;
+    height: 12px;
+} */
+
+
+
+/*
+или тоже самое можно сделать так:
+*/
+
+/* Стиль для QComboBox (пол)
+QComboBox {
+    padding-right: 20px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    min-height: 28px;
+}
+
+QComboBox::drop-down {
+    width: 20px;
+    border-left: 1px solid #ced4da;
+    background: #f8f9fa;
+    subcontrol-origin: padding;
+    subcontrol-position: center right;
+}
+
+/* Стиль для QSpinBox (возраст) 
+QSpinBox {
+    padding-right: 20px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+}
+
+QSpinBox::up-button, QSpinBox::down-button {
+    width: 20px;
+    background: #f8f9fa;
+    subcontrol-origin: border;
+}
+
+QSpinBox::up-button {
+    subcontrol-position: top right;
+    border-bottom: 1px solid #ced4da;
+}
+
+QSpinBox::down-button {
+    subcontrol-position: bottom right;
+}
+
+/* Альтернатива без изображений - используем символы Unicode 
+QSpinBox::up-arrow, QComboBox::down-arrow {
+    /* Стрелка вверх (▲) 
+    content: "\25B2";
+    color: #495057;
+    font-size: 10px;
+}
+
+QSpinBox::down-arrow {
+    /* Стрелка вниз (▼) 
+    content: "\25BC";
+    color: #495057;
+    font-size: 10px;
+} */
+
+
+
+/*  Весь этот закоменченнный код выше не работает, так что тут нужно думать как это делать, проблема вся со стрелками, 
+они не встают куда нада. Не получается ни изображением, ни юникод символами
+*/
+
+
+
+
+/* Состояния при наведении
+QComboBox:hover::drop-down, 
+QSpinBox:hover::up-button, 
+QSpinBox:hover::down-button {
+    background: #e9ecef;
+}
+
+/* Состояния при нажатии 
+QComboBox::drop-down:pressed, 
+QSpinBox::up-button:pressed, 
+QSpinBox::down-button:pressed {
+    background: #dee2e6;
+} */
