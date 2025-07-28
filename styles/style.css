@@ -157,7 +157,7 @@ QScrollBar::handle:vertical {
     border-radius: 4px;
 }
 
-/* Яркие кнопки Like/Dislike */
+/* кнопки Like/Dislike */
 #likeButton {
     background-color: #77dd77; 
     color: #ffffff;
@@ -261,30 +261,6 @@ QSpinBox::down-arrow {
 } */
 
 
-
-/*
-или тоже самое можно сделать так:
-*/
-
-
-
 /*  Весь этот закоменченнный код выше не работает, так что тут нужно думать как это делать, проблема вся со стрелками, 
 они не встают куда нада. Не получается ни изображением, ни юникод символами
 */
-
-
-
-
-/* Состояния при наведении
-QComboBox:hover::drop-down, 
-QSpinBox:hover::up-button, 
-QSpinBox:hover::down-button {
-    background: #e9ecef;
-}
-
-/* Состояния при нажатии 
-QComboBox::drop-down:pressed, 
-QSpinBox::up-button:pressed, 
-QSpinBox::down-button:pressed {
-    background: #dee2e6;
-} */
