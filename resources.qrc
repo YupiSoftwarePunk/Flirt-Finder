@@ -8,6 +8,5 @@
 
     <qresource prefix="/">
         <file>styles/style.css</file>
-        <file>styles/style2.css</file>
     </qresource>
 </RCC>

@@ -62,7 +62,7 @@ public:
         centralwidget->setObjectName("centralwidget");
         groupBox = new QGroupBox(centralwidget);
         groupBox->setObjectName("groupBox");
-        groupBox->setGeometry(QRect(130, 0, 331, 331));
+        groupBox->setGeometry(QRect(130, 0, 331, 321));
         layoutWidget = new QWidget(groupBox);
         layoutWidget->setObjectName("layoutWidget");
         layoutWidget->setGeometry(QRect(70, 30, 162, 101));

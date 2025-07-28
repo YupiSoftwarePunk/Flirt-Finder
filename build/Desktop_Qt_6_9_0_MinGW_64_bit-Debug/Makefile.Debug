@@ -136,7 +136,6 @@ debug/qrc_resources.cpp: ../../resources.qrc \
 		../../images/arrow_up.svg \
 		../../images/like.png \
 		../../images/arrow_down.svg \
-		../../styles/style2.css \
 		../../styles/style.css
 	C:\Qt\6.9.0\mingw_64\bin\rcc.exe -name resources --no-zstd ..\..\resources.qrc -o debug\qrc_resources.cpp
 
