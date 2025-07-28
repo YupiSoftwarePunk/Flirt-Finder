@@ -135,6 +135,22 @@ QScrollBar:vertical {
     background: #e9ecef;
 }
 
+/* фотографии */
+QGraphicsView {
+    border: none; 
+    align-content: align-left;
+}
+
+#graphicsView QScrollBar {
+    width: 0px;
+    height: 0px;
+}
+
+#profileHobbies QScrollBar {
+    width: 0px;
+    height: 0px;
+}
+
 QScrollBar::handle:vertical {
     background: #a3c4f3;
     min-height: 20px;
