@@ -198,8 +198,19 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
 
     if (selectedAction == replyAction)
     {
+        QString truncatedMessage = item->text().left(50); // Оставляем первые 50 символов
+        if (item->text().length() > 50)
+        {
+            truncatedMessage.append("...");
+        }
+
+        QListWidgetItem *replyItem = new QListWidgetItem(QString("Ответ на: %1").arg(truncatedMessage), ui->listWidget);
+        replyItem->setBackground(QBrush(Qt::lightGray));
+        replyItem->setTextAlignment(Qt::AlignLeft);
+
+        ui->listWidget->addItem(replyItem);
+
         ui->textEdit->setFocus();
-        ui->textEdit->setText(QString("Ответ на: %1").arg(item->text()));
     }
     else if (selectedAction == forwardAction)
     {
