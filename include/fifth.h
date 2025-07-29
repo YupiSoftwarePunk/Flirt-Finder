@@ -108,6 +108,8 @@ private:
 
     int senderId;
     int receiverId;
+
+    void onContextMenuRequested(const QPoint &pos);
 };
 
 #endif // FIFTH_H

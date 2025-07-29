@@ -1,12 +1,14 @@
 #include "include/fifth.h"
 #include "qdatetime.h"
 #include "qevent.h"
+#include "qmenu.h"
 #include "qtimezone.h"
 #include "ui_fifth.h"
 
 #include "qsqlerror.h"
 #include "qsqlquery.h"
 #include <QMessageBox>
+#include <QClipboard>
 
 Fifth::Fifth(QWidget *parent)
     : QDialog(parent)
@@ -15,6 +17,10 @@ Fifth::Fifth(QWidget *parent)
     ui->setupUi(this);
 
     setWindowTitle("FlirtFinder");
+
+    // Установка события на контекстное меню
+    ui->listWidget->setContextMenuPolicy(Qt::CustomContextMenu);
+    connect(ui->listWidget, &QListWidget::customContextMenuRequested, this, &Fifth::onContextMenuRequested);
 }
 
 Fifth::~Fifth()
@@ -166,3 +172,43 @@ void Fifth::loadChatHistory(int senderId, int receiverId)
     }
 }
 
+
+
+
+// Контекстное меню
+void Fifth::onContextMenuRequested(const QPoint &pos)
+{
+    QListWidgetItem *item = ui->listWidget->itemAt(pos);
+    if (!item)
+    {
+        return;
+    }
+
+    QMenu contextMenu(this);
+
+    QAction *replyAction = contextMenu.addAction("Ответить");
+    QAction *forwardAction = contextMenu.addAction("Переслать");
+    QAction *copyAction = contextMenu.addAction("Копировать");
+
+    QAction *selectedAction = contextMenu.exec(ui->listWidget->mapToGlobal(pos));
+    if (!selectedAction)
+    {
+        return;
+    }
+
+    if (selectedAction == replyAction)
+    {
+        ui->textEdit->setFocus();
+        ui->textEdit->setText(QString("Ответ на: %1").arg(item->text()));
+    }
+    else if (selectedAction == forwardAction)
+    {
+        QMessageBox::information(this, "Пересылка", QString("Сообщение '%1' переслано!").arg(item->text()));
+    }
+    else if (selectedAction == copyAction)
+    {
+        QClipboard *clipboard = QApplication::clipboard();
+        clipboard->setText(item->text());
+        QMessageBox::information(this, "Копирование", "Сообщение скопировано в буфер обмена!");
+    }
+}
