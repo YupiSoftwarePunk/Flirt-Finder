@@ -198,7 +198,7 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
 
     if (selectedAction == replyAction)
     {
-        QString truncatedMessage = item->text().left(50); // Оставляем первые 50 символов
+        QString truncatedMessage = item->text().left(50); //первые 50 символов
         if (item->text().length() > 50)
         {
             truncatedMessage.append("...");
@@ -218,8 +218,21 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
     }
     else if (selectedAction == copyAction)
     {
-        QClipboard *clipboard = QApplication::clipboard();
-        clipboard->setText(item->text());
-        QMessageBox::information(this, "Копирование", "Сообщение скопировано в буфер обмена!");
+        QString messageText = item->text();
+
+        int colonIndex = messageText.indexOf(": ");
+        if (colonIndex != -1)
+        {
+            QString textToCopy = messageText.mid(colonIndex + 2);
+
+            QClipboard *clipboard = QApplication::clipboard();
+            clipboard->setText(textToCopy);
+
+            QMessageBox::information(this, "Копирование", "Текст сообщения скопирован в буфер обмена!");
+        }
+        else
+        {
+            QMessageBox::warning(this, "Ошибка", "Не удалось определить текст сообщения для копирования.");
+        }
     }
 }
