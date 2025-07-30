@@ -205,62 +205,6 @@ QTextEdit {
 }
 
 
-/* Стиль для QComboBox (пол)
-QComboBox {
-    padding-right: 20px;
-    border: 1px solid #ced4da;
-    border-radius: 4px;
-    min-height: 28px;
-}
-
-QComboBox::drop-down {
-    width: 20px;
-    border-left: 1px solid #ced4da;
-    background: #f8f9fa;
-}
-
-QComboBox::down-arrow {
-    image: url(:/images/arrow_down.svg);
-    width: 12px;
-    height: 12px;
-}
-
-/* Стиль для QSpinBox (возраст) 
-QSpinBox {
-    padding-right: 20px;
-    border: 1px solid #ced4da;
-    border-radius: 4px;
-}
-
-QSpinBox::up-button, QSpinBox::down-button {
-    width: 20px;
-    background: #f8f9fa;
-}
-
-QSpinBox::up-button {
-    subcontrol-origin: border;
-    subcontrol-position: top right;
-    border-bottom: 1px solid #ced4da;
-}
-
-QSpinBox::down-button {
-    subcontrol-origin: border;
-    subcontrol-position: bottom right;
-}
-
-QSpinBox::up-arrow {
-    image: url(:/images/arrow_up.svg);
-    width: 12px;
-    height: 12px;
-}
-
-QSpinBox::down-arrow {
-    image: url(:/images/arrow_down.svg);
-    width: 12px;
-    height: 12px;
-} */
-
-
-/*  Весь этот закоменченнный код выше не работает, так что тут нужно думать как это делать, проблема вся со стрелками, 
-они не встают куда нада. Не получается ни изображением, ни юникод символами
+/*  Проблема со стрелками во втором окне и проблема вся со стрелками, 
+они не встают куда нада. И я пока не знаю как их туда прикрутить чтобы выглядело нормально
 */
