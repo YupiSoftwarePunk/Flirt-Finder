@@ -187,7 +187,7 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
     QMenu contextMenu(this);
 
     QAction *replyAction = contextMenu.addAction("Ответить");
-    QAction *forwardAction = contextMenu.addAction("Переслать");
+    // QAction *forwardAction = contextMenu.addAction("Переслать");
     QAction *copyAction = contextMenu.addAction("Копировать");
 
     QAction *selectedAction = contextMenu.exec(ui->listWidget->mapToGlobal(pos));
@@ -212,10 +212,10 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
 
         ui->textEdit->setFocus();
     }
-    else if (selectedAction == forwardAction)
-    {
-        QMessageBox::information(this, "Пересылка", QString("Сообщение '%1' переслано!").arg(item->text()));
-    }
+    // else if (selectedAction == forwardAction)
+    // {
+    //     QMessageBox::information(this, "Пересылка", QString("Сообщение '%1' переслано!").arg(item->text()));
+    // }
     else if (selectedAction == copyAction)
     {
         QString messageText = item->text();
