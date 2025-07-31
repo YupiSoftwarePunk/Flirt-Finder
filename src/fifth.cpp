@@ -105,6 +105,8 @@ void Fifth::on_sendButton_clicked()
     if (referenceMessageId != -1)
     {
         query.bindValue(":referenceMessageId", referenceMessageId);
+        qDebug() << "referenceMessageId при отправке:" << referenceMessageId;
+
     }
     else
     {
@@ -142,7 +144,7 @@ void Fifth::loadChatHistory(int senderId, int receiverId)
 
     QSqlQuery query;
     query.prepare(
-        "SELECT sender_id, message_text, send_time, reference_message_id "
+        "SELECT id, sender_id, message_text, send_time, reference_message_id "
         "FROM messages "
         "WHERE (sender_id = :senderId AND receiver_id = :receiverId) "
         "   OR (sender_id = :receiverId AND receiver_id = :senderId) "
@@ -162,6 +164,7 @@ void Fifth::loadChatHistory(int senderId, int receiverId)
 
     while (query.next())
     {
+        int messageId = query.value("id").toInt();
         int msgSenderId = query.value("sender_id").toInt();
         QString messageText = query.value("message_text").toString();
         int referenceMessageId = query.value("reference_message_id").toInt();
@@ -177,6 +180,8 @@ void Fifth::loadChatHistory(int senderId, int receiverId)
                                      .arg(messageText);
 
         QListWidgetItem *item = new QListWidgetItem(displayMessage, ui->listWidget);
+        item->setData(Qt::UserRole, messageId);
+
         if (msgSenderId == senderId)
         {
             item->setTextAlignment(Qt::AlignRight); // Ваши сообщения выравниваются вправо
@@ -184,12 +189,12 @@ void Fifth::loadChatHistory(int senderId, int receiverId)
         if (referenceMessageId > 0)
         {
             item->setData(Qt::UserRole, referenceMessageId);
+
             item->setBackground(QBrush(Qt::lightGray)); // Серый фон для ответа
             item->setToolTip("Ответ на сообщение ID: " + QString::number(referenceMessageId));
         }
         ui->listWidget->addItem(item);
     }
-
 
     if (ui->listWidget->count() > 0)
     {
@@ -231,7 +236,6 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
 
         // Сохраняем ID сообщения для referenceMessageId
         referenceMessageId = item->data(Qt::UserRole).toInt(); // Предполагается, что ID хранится в UserRole
-        qDebug() << "referenceMessageId установлен как:" << referenceMessageId;
 
         QListWidgetItem *replyItem = new QListWidgetItem(QString("Ответ на: %1").arg(truncatedMessage), ui->listWidget);
         replyItem->setBackground(QBrush(Qt::lightGray));
@@ -239,6 +243,7 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
 
         ui->listWidget->addItem(replyItem);
 
+        ui->textEdit->setText(QString("Ответ на: %1\n").arg(truncatedMessage));
         ui->textEdit->setFocus();
     }
     // else if (selectedAction == forwardAction)
