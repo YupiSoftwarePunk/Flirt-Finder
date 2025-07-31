@@ -94,12 +94,22 @@ void Fifth::on_sendButton_clicked()
 
     QSqlQuery query;
     query.prepare(
-        "INSERT INTO messages (sender_id, receiver_id, message_text) "
-        "VALUES (:senderId, :receiverId, :messageText)"
+        "INSERT INTO messages (sender_id, receiver_id, message_text, reference_message_id) "
+        "VALUES (:senderId, :receiverId, :messageText, :referenceMessageId)"
         );
     query.bindValue(":senderId", senderId);
     query.bindValue(":receiverId", receiverId);
     query.bindValue(":messageText", messageText);
+
+    // Проверяем, есть ли ссылка на другое сообщение
+    if (referenceMessageId != -1)
+    {
+        query.bindValue(":referenceMessageId", referenceMessageId);
+    }
+    else
+    {
+        query.bindValue(":referenceMessageId", QVariant(QVariant::Int));
+    }
 
     if (!query.exec())
     {
@@ -111,10 +121,16 @@ void Fifth::on_sendButton_clicked()
     // Добавляем сообщение в список
     QListWidgetItem *item = new QListWidgetItem(QString("Вы: %1").arg(messageText), ui->listWidget);
     item->setTextAlignment(Qt::AlignRight);
+    if (referenceMessageId != -1)
+    {
+        item->setData(Qt::UserRole, referenceMessageId);
+    }
     ui->listWidget->addItem(item);
 
     ui->textEdit->clear();
     ui->textEdit->setFocus();
+
+    referenceMessageId = -1;
 }
 
 
@@ -126,12 +142,14 @@ void Fifth::loadChatHistory(int senderId, int receiverId)
 
     QSqlQuery query;
     query.prepare(
-        "SELECT sender_id, message_text, send_time "
+        "SELECT sender_id, message_text, send_time, reference_message_id "
         "FROM messages "
         "WHERE (sender_id = :senderId AND receiver_id = :receiverId) "
         "   OR (sender_id = :receiverId AND receiver_id = :senderId) "
         "ORDER BY send_time ASC"
         );
+
+
     query.bindValue(":senderId", senderId);
     query.bindValue(":receiverId", receiverId);
 
@@ -146,6 +164,7 @@ void Fifth::loadChatHistory(int senderId, int receiverId)
     {
         int msgSenderId = query.value("sender_id").toInt();
         QString messageText = query.value("message_text").toString();
+        int referenceMessageId = query.value("reference_message_id").toInt();
 
         QDateTime timestamp = query.value("send_time").toDateTime();
         timestamp = timestamp.addSecs(18000);
@@ -161,6 +180,12 @@ void Fifth::loadChatHistory(int senderId, int receiverId)
         if (msgSenderId == senderId)
         {
             item->setTextAlignment(Qt::AlignRight); // Ваши сообщения выравниваются вправо
+        }
+        if (referenceMessageId > 0)
+        {
+            item->setData(Qt::UserRole, referenceMessageId);
+            item->setBackground(QBrush(Qt::lightGray)); // Серый фон для ответа
+            item->setToolTip("Ответ на сообщение ID: " + QString::number(referenceMessageId));
         }
         ui->listWidget->addItem(item);
     }
@@ -197,12 +222,16 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
     }
 
     if (selectedAction == replyAction)
-    {
+    {       
         QString truncatedMessage = item->text().left(50); //первые 50 символов
         if (item->text().length() > 50)
         {
             truncatedMessage.append("...");
         }
+
+        // Сохраняем ID сообщения для referenceMessageId
+        referenceMessageId = item->data(Qt::UserRole).toInt(); // Предполагается, что ID хранится в UserRole
+        qDebug() << "referenceMessageId установлен как:" << referenceMessageId;
 
         QListWidgetItem *replyItem = new QListWidgetItem(QString("Ответ на: %1").arg(truncatedMessage), ui->listWidget);
         replyItem->setBackground(QBrush(Qt::lightGray));

@@ -108,6 +108,7 @@ private:
 
     int senderId;
     int receiverId;
+    int referenceMessageId;
 
     void onContextMenuRequested(const QPoint &pos);
 };
