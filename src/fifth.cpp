@@ -266,14 +266,30 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
         fourthWindow->setUserCredentials(currentLogin, currentPassword);
         fourthWindow->loadNotifications();
         fourthWindow->show();
-        this->close();
 
-        if (fourthWindow->switch_)
+        connect(fourthWindow, &Fourth::switchStateChanged, this, [this, &messageText, &fourthWindow](bool switchState) {
+        if (switchState)
         {
-            ui->textEdit->setFocus();
-            ui->textEdit->setText(messageText);
-            on_sendButton_clicked();
+            qDebug() << "Переключение в чат активировано. Вставка текста.";
+
+            QMetaObject::invokeMethod(this, [=]()
+            {
+                ui->textEdit->setFocus();
+                ui->textEdit->setText(messageText);
+                on_sendButton_clicked();
+            });
+
+            fourthWindow->deleteLater();
+
+            qDebug() << "Сообщение отправлено: " << messageText;
         }
+        else
+        {
+            qDebug() << "Switch_ не активирован.";
+        }
+        });
+
+        this->close();
     }
     else if (selectedAction == copyAction)
     {

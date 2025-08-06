@@ -26,6 +26,9 @@ public:
 
     bool switch_;
 
+signals:
+    void switchStateChanged(bool switchState);
+
 
 private slots:
     void on_ChatButton_clicked();

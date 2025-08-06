@@ -152,6 +152,7 @@ void Fourth::on_ChatButton_clicked()
         fifthWindow->show();
 
         switch_ = true;
+        emit switchStateChanged(switch_);
         // this->close();
     }
     else
