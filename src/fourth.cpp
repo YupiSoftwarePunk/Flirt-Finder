@@ -153,6 +153,9 @@ void Fourth::on_ChatButton_clicked()
 
         switch_ = true;
         emit switchStateChanged(switch_);
+
+
+        // если в 5 окне будет кнопка назад, тогда можно раскоментить данную строчку, а пока так
         // this->close();
     }
     else

@@ -163,6 +163,20 @@ void Fifth::loadChatHistory(int senderId, int receiverId)
         return;
     }
 
+
+    QString receiverName; // Получение имени собеседника
+    QSqlQuery userQuery;
+    userQuery.prepare("SELECT name FROM users WHERE id = :receiverId");
+    userQuery.bindValue(":receiverId", receiverId);
+
+    if (userQuery.exec() && userQuery.next()) {
+        receiverName = userQuery.value("name").toString();
+    }
+    else
+    {
+        receiverName = "Собеседник";
+    }
+
     while (query.next())
     {
         int messageId = query.value("id").toInt();
@@ -177,7 +191,7 @@ void Fifth::loadChatHistory(int senderId, int receiverId)
 
         QString displayMessage = QString("[%1] %2: %3")
                                      .arg(timestamp.toString("hh:mm"))
-                                     .arg(msgSenderId == senderId ? "Вы" : "Собеседник")
+                                     .arg(msgSenderId == senderId ? "Вы" : receiverName)
                                      .arg(messageText);
 
         QListWidgetItem *item = new QListWidgetItem(displayMessage, ui->listWidget);
@@ -251,6 +265,14 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
     {
         // QMessageBox::information(this, "Пересылка", QString("Сообщение '%1' переслано!").arg(item->text()));
 
+        // хотелось бы чтобы была именно вот такая запись ниже, но приложение крашится, поэтому пока так
+        // QString messageText = item->text();
+        // QClipboard *clipboard = QApplication::clipboard();
+        // clipboard->setText(messageText);
+
+
+        // хотелось бы сделать  так, чтобы было видно кто отправил сообщение, то есть полное сообщение,
+        // а не просто его текст, но приложение крашится и пока оставлю так
         QString messageText = item->text();
 
         int colonIndex = messageText.indexOf(": ");
