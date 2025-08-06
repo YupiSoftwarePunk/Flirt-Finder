@@ -1,4 +1,5 @@
 #include "include/fifth.h"
+#include "include/fourth.h"
 #include "qdatetime.h"
 #include "qevent.h"
 #include "qmenu.h"
@@ -217,7 +218,7 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
     QMenu contextMenu(this);
 
     QAction *replyAction = contextMenu.addAction("Ответить");
-    // QAction *forwardAction = contextMenu.addAction("Переслать");
+    QAction *forwardAction = contextMenu.addAction("Переслать");
     QAction *copyAction = contextMenu.addAction("Копировать");
 
     QAction *selectedAction = contextMenu.exec(ui->listWidget->mapToGlobal(pos));
@@ -246,10 +247,34 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
         ui->textEdit->setText(QString("Ответ на: %1\n").arg(truncatedMessage));
         ui->textEdit->setFocus();
     }
-    // else if (selectedAction == forwardAction)
-    // {
-    //     QMessageBox::information(this, "Пересылка", QString("Сообщение '%1' переслано!").arg(item->text()));
-    // }
+    else if (selectedAction == forwardAction)
+    {
+        // QMessageBox::information(this, "Пересылка", QString("Сообщение '%1' переслано!").arg(item->text()));
+
+        QString messageText = item->text();
+
+        int colonIndex = messageText.indexOf(": ");
+        if (colonIndex != -1)
+        {
+            QString textToCopy = messageText.mid(colonIndex + 2);
+
+            QClipboard *clipboard = QApplication::clipboard();
+            clipboard->setText(textToCopy);
+        }
+
+        auto fourthWindow = new Fourth();
+        fourthWindow->setUserCredentials(currentLogin, currentPassword);
+        fourthWindow->loadNotifications();
+        fourthWindow->show();
+        this->close();
+
+        if (fourthWindow->switch_)
+        {
+            ui->textEdit->setFocus();
+            ui->textEdit->setText(messageText);
+            on_sendButton_clicked();
+        }
+    }
     else if (selectedAction == copyAction)
     {
         QString messageText = item->text();

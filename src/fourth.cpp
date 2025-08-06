@@ -151,12 +151,14 @@ void Fourth::on_ChatButton_clicked()
         fifthWindow->loadChatHistory(getCurrentUserId(currentLogin), targetUserId);
         fifthWindow->show();
 
+        switch_ = true;
         // this->close();
     }
     else
     {
         // Мэтч отсутствует, выводим сообщение
         QMessageBox::warning(this, "Ошибка", "У вас нет взаимного лайка с этим пользователем.");
+        switch_ = false;
     }
 }
 

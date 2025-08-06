@@ -24,6 +24,8 @@ public:
 
     void initializeSupportLike(int currentUserId);
 
+    bool switch_;
+
 
 private slots:
     void on_ChatButton_clicked();
