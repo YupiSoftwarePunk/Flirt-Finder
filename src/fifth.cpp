@@ -243,7 +243,10 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
     }
 
     if (selectedAction == replyAction)
-    {       
+    {
+        // иногда возникает ошибка что неправильно определяется id сообщения
+        // и ответ идет не только на последнее выделенное сообщение, но и идет после него
+
         QString truncatedMessage = item->text().left(50); //первые 50 символов
         if (item->text().length() > 50)
         {
@@ -261,6 +264,8 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
 
         ui->textEdit->setText(QString("Ответ на: %1\n").arg(truncatedMessage));
         ui->textEdit->setFocus();
+
+        //... Тут нужно бы обновить отображение loadChatHistory(); но как-то нужно поставить сюда параметры
 
 
     }
@@ -310,6 +315,8 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
 
         this->deleteLater();
 
+        //... Тут нужно бы обновить отображение loadChatHistory(); но как-то нужно поставить сюда параметры
+
 
     }
     else if (selectedAction == copyAction)
@@ -331,11 +338,24 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
             QMessageBox::warning(this, "Ошибка", "Не удалось определить текст сообщения для копирования.");
         }
 
+        //... Тут нужно бы обновить отображение loadChatHistory(); но как-то нужно поставить сюда параметры
+
 
     }
     else if (selectedAction == deleteAction)
     {
+        // иногда возникает ошибка что неправильно определяется id сообщения и удаления не происходит
+        // необходимо найти решение этой проблемы
+
         int messageId = item->data(Qt::UserRole).toInt();
+        qDebug() << "Сообщение с ID:" << messageId;
+
+        if (messageId <= 0)
+        {
+            QMessageBox::warning(this, "Ошибка", "ID сообщения недействителен.");
+            qDebug() << "Недействительный ID сообщения:" << messageId;
+            return;
+        }
 
         QSqlQuery query;
         query.prepare("DELETE FROM messages WHERE id = :messageId");
@@ -350,6 +370,8 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
         qDebug() << "Сообщение успешно удалено с ID:" << messageId;
 
         QMessageBox::information(this, "Удаление", "Сообщение успешно удалено!");
+
+        //... Тут нужно бы обновить отображение loadChatHistory(); но как-то нужно поставить сюда параметры
     }
 }
 
