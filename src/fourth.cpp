@@ -175,8 +175,7 @@ void Fourth::on_BackButton_Clicked()
     thirdWindow->setCurrentUserData(currentLogin, currentPassword);
     thirdWindow->loadProfiles(currentLogin);
     thirdWindow->show();
-    // this->close();
-    this->hide();
+    this->close();
 }
 
 

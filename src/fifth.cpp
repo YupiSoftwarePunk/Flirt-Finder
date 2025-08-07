@@ -234,6 +234,7 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
     QAction *replyAction = contextMenu.addAction("Ответить");
     QAction *forwardAction = contextMenu.addAction("Переслать");
     QAction *copyAction = contextMenu.addAction("Копировать");
+    // QAction *deleteAction = contextMenu.addAction("Удалить");
 
     QAction *selectedAction = contextMenu.exec(ui->listWidget->mapToGlobal(pos));
     if (!selectedAction)
@@ -260,11 +261,11 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
 
         ui->textEdit->setText(QString("Ответ на: %1\n").arg(truncatedMessage));
         ui->textEdit->setFocus();
+
+
     }
     else if (selectedAction == forwardAction)
     {
-        // QMessageBox::information(this, "Пересылка", QString("Сообщение '%1' переслано!").arg(item->text()));
-
         QString messageText = item->text();
 
         if (messageText.isEmpty())
@@ -283,6 +284,7 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
         fourthWindow->loadNotifications();
         fourthWindow->show();
 
+
         connect(fourthWindow, &Fourth::switchStateChanged, this, [this, &messageText, &fourthWindow](bool switchState) {
         if (switchState)
         {
@@ -292,7 +294,6 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
             {
                 ui->textEdit->setFocus();
                 ui->textEdit->setText(messageText );
-                qDebug() << "Сообщение: " << messageText;
                 on_sendButton_clicked();
             });
 
@@ -308,6 +309,8 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
         });
 
         this->deleteLater();
+
+
     }
     else if (selectedAction == copyAction)
     {
@@ -329,3 +332,4 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
         }
     }
 }
+
