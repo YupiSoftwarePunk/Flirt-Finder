@@ -265,24 +265,18 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
     {
         // QMessageBox::information(this, "Пересылка", QString("Сообщение '%1' переслано!").arg(item->text()));
 
-        // хотелось бы чтобы была именно вот такая запись ниже, но приложение крашится, поэтому пока так
-        // QString messageText = item->text();
-        // QClipboard *clipboard = QApplication::clipboard();
-        // clipboard->setText(messageText);
-
-
-        // хотелось бы сделать  так, чтобы было видно кто отправил сообщение, то есть полное сообщение,
-        // а не просто его текст, но приложение крашится и пока оставлю так
         QString messageText = item->text();
 
-        int colonIndex = messageText.indexOf(": ");
-        if (colonIndex != -1)
+        if (messageText.isEmpty())
         {
-            QString textToCopy = messageText.mid(colonIndex + 2);
-
-            QClipboard *clipboard = QApplication::clipboard();
-            clipboard->setText(textToCopy);
+            QMessageBox::warning(this, "Ошибка", "Сообщение пустое. Нечего копировать.");
+            return;
         }
+
+        QClipboard *clipboard = QApplication::clipboard();
+        clipboard->setText(messageText);
+        qDebug() << "Сообщение: " << messageText;
+
 
         auto fourthWindow = new Fourth();
         fourthWindow->setUserCredentials(currentLogin, currentPassword);
@@ -297,7 +291,8 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
             QMetaObject::invokeMethod(this, [=]()
             {
                 ui->textEdit->setFocus();
-                ui->textEdit->setText(messageText);
+                ui->textEdit->setText(messageText );
+                qDebug() << "Сообщение: " << messageText;
                 on_sendButton_clicked();
             });
 
@@ -307,11 +302,12 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
         }
         else
         {
+            qDebug() << "Ошибка: ui->textEdit недоступен.";
             qDebug() << "Switch_ не активирован.";
         }
         });
 
-        this->close();
+        this->deleteLater();
     }
     else if (selectedAction == copyAction)
     {
