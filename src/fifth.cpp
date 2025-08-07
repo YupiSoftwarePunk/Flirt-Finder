@@ -234,7 +234,7 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
     QAction *replyAction = contextMenu.addAction("Ответить");
     QAction *forwardAction = contextMenu.addAction("Переслать");
     QAction *copyAction = contextMenu.addAction("Копировать");
-    // QAction *deleteAction = contextMenu.addAction("Удалить");
+    QAction *deleteAction = contextMenu.addAction("Удалить");
 
     QAction *selectedAction = contextMenu.exec(ui->listWidget->mapToGlobal(pos));
     if (!selectedAction)
@@ -330,6 +330,26 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
         {
             QMessageBox::warning(this, "Ошибка", "Не удалось определить текст сообщения для копирования.");
         }
+
+
+    }
+    else if (selectedAction == deleteAction)
+    {
+        int messageId = item->data(Qt::UserRole).toInt();
+
+        QSqlQuery query;
+        query.prepare("DELETE FROM messages WHERE id = :messageId");
+        query.bindValue(":messageId", messageId);
+
+        if (!query.exec()) {
+            QMessageBox::warning(this, "Ошибка", "Не удалось удалить сообщение.");
+            qDebug() << "Ошибка выполнения SQL запроса:" << query.lastError().text();
+            return;
+        }
+
+        qDebug() << "Сообщение успешно удалено с ID:" << messageId;
+
+        QMessageBox::information(this, "Удаление", "Сообщение успешно удалено!");
     }
 }
 
