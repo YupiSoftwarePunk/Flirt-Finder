@@ -82,8 +82,9 @@ QLineEdit:focus, QTextEdit:focus {
 }
 
 #login, #password, #login_2,  #password_2 {
-    margin-bottom: 15px;  /* Увеличиваем вертикальный отступ */
-    min-width: 80px;     /* Фиксированная ширина полей */
+    margin-bottom: 25px;  
+    min-width: 80px;    
+    margin-top: 5px;
 }
 
 #login_button, #registration_button {
