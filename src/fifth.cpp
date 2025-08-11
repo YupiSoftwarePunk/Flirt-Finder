@@ -262,10 +262,11 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
 
         ui->listWidget->addItem(replyItem);
 
-        ui->textEdit->setText(QString("Ответ на: %1\n").arg(truncatedMessage));
+        ui->textEdit->setText(QString("➤ Ответ на: %1\n──────────────────────────────\n").arg(truncatedMessage));
+        ui->textEdit->moveCursor(QTextCursor::End);
         ui->textEdit->setFocus();
 
-        //... Тут нужно бы обновить отображение loadChatHistory(); но как-то нужно поставить сюда параметры
+        loadChatHistory(senderId, receiverId);
 
 
     }
@@ -315,7 +316,7 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
 
         this->deleteLater();
 
-        //... Тут нужно бы обновить отображение loadChatHistory(); но как-то нужно поставить сюда параметры
+        loadChatHistory(senderId, receiverId);
 
 
     }
@@ -337,8 +338,6 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
         {
             QMessageBox::warning(this, "Ошибка", "Не удалось определить текст сообщения для копирования.");
         }
-
-        //... Тут нужно бы обновить отображение loadChatHistory(); но как-то нужно поставить сюда параметры
 
 
     }
@@ -371,7 +370,7 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
 
         QMessageBox::information(this, "Удаление", "Сообщение успешно удалено!");
 
-        //... Тут нужно бы обновить отображение loadChatHistory(); но как-то нужно поставить сюда параметры
+        loadChatHistory(senderId, receiverId);
     }
 }
 
