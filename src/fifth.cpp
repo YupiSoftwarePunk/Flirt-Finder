@@ -1,4 +1,5 @@
 #include "include/fifth.h"
+#include "include/CustomMenuStyle.h"
 #include "include/fourth.h"
 #include "qdatetime.h"
 #include "qevent.h"
@@ -231,35 +232,15 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
 
     QMenu contextMenu(this);
 
-    // contextMenu.setStyleSheet(
-    //     "QMenu {"
-    //     "   background-color: white;"
-    //     "   border-radius: 4px;"
-    //     "   border: 1px solid #e0e0e0;"
-    //     "   padding: 8px 0;"
-    //     "   font-size: 14px;"
-    //     "}"
-    //     "QMenu::item {"
-    //     "   padding: 8px 32px;"
-    //     "   color: #333;"
-    //     "}"
-    //     "QMenu::item:selected {"
-    //     "   background-color: #f5f5f5;"
-    //     "}"
-    //     "QMenu::separator {"
-    //     "   height: 1px;"
-    //     "   background: #e0e0e0;"
-    //     "   margin: 4px 0;"
-    //     "}"
-    //     );
-
-
     QAction *replyAction = contextMenu.addAction("Ответить");
     QAction *forwardAction = contextMenu.addAction("Переслать");
     QAction *copyAction = contextMenu.addAction("Копировать");
     QAction *deleteAction = contextMenu.addAction("Удалить");
 
+    deleteAction->setObjectName("dangerAction");
+
     QAction *selectedAction = contextMenu.exec(ui->listWidget->mapToGlobal(pos));
+
     if (!selectedAction)
     {
         return;
