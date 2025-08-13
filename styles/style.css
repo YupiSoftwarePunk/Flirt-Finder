@@ -67,7 +67,7 @@ QPushButton:pressed {
 }
 
 /* Текстовые поля */
-QLineEdit, QTextEdit, QComboBox, QSpinBox {
+QLineEdit, QTextEdit, QComboBox {
     border: 1px solid #ced4da;
     border-radius: 5px;
     padding: 4px 6px; 
@@ -251,4 +251,70 @@ QMenu QAction#dangerAction {
 QMenu QAction#dangerAction:hover {
     background-color: #ffebee;
     color: #b71c1c;
+}
+
+/* Стили для QSpinBox (отдельно от текстовых полей) */
+QSpinBox {
+    border: 1px solid #a3c4f3;         /* Голубая граница как у кнопок */
+    border-radius: 5px;
+    padding: 4px 25px 4px 8px;         /* Увеличил правый отступ для стрелок */
+    background: #ffffff;
+    color: #495057;
+    font-size: 12px;
+    min-height: 22px;
+    min-width: 60px;                   /* Фиксированная минимальная ширина */
+}
+
+/* Стиль при фокусе */
+QSpinBox:focus {
+    border: 2px solid #8ab2f0;         /* Утолщенная граница */
+    background-color: #f8fafc;          /* Слегка светлый фон */
+}
+
+/* Стиль стрелок вверх/вниз */
+QSpinBox::up-button, QSpinBox::down-button {
+    subcontrol-origin: border;
+    width: 20px;                       /* Ширина области стрелок */
+    border-left: 1px solid #8ab2f0;    /* Разделитель */
+}
+
+QSpinBox::up-button {
+    subcontrol-position: top right;
+    height: 50%;                       /* Половина высоты */
+    border-bottom: 1px solid #d1e0fb;  /* Разделитель между стрелками */
+}
+
+QSpinBox::down-button {
+    subcontrol-position: bottom right;
+    height: 50%;
+}
+
+/* Иконки стрелок */
+QSpinBox::up-arrow {
+    image: url(:/icons/up-arrow.svg);   /* Можно заменить на свой SVG */
+    width: 8px;
+    height: 8px;
+}
+
+QSpinBox::down-arrow {
+    image: url(:/icons/down-arrow.svg); /* Можно заменить на свой SVG */
+    width: 8px;
+    height: 8px;
+}
+
+/* Стиль при наведении на стрелки */
+QSpinBox::up-button:hover, QSpinBox::down-button:hover {
+    background-color: #e9f0fd;
+}
+
+/* Стиль при нажатии */
+QSpinBox::up-button:pressed, QSpinBox::down-button:pressed {
+    background-color: #d1e0fb;
+}
+
+/* Отключенное состояние */
+QSpinBox:disabled {
+    background-color: #f1f5f9;
+    color: #94a3b8;
+    border-color: #e2e8f0;
 }
