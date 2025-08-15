@@ -276,6 +276,13 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
     }
     else if (selectedAction == forwardAction)
     {
+        QListWidgetItem *item = ui->listWidget->currentItem();
+        if (!item)
+        {
+            QMessageBox::warning(this, "Ошибка", "Выберите сообщение для пересылки.");
+            return;
+        }
+
         QString messageText = item->text();
 
         if (messageText.isEmpty())
@@ -321,6 +328,9 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
         this->deleteLater();
 
         loadChatHistory(senderId, receiverId);
+
+        // здесь проблема в том что еще кроме сигнала на кнопку перейти в чат нужен еще сигнал для кнопки перейти назад
+        // хоть сигнал есть, хоть его нет это не работает как нужно и я пока не знаю как это починить
 
 
     }
