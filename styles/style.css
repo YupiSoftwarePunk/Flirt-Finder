@@ -229,7 +229,7 @@ QMenu::item {
 }
 
 QMenu::item:selected {
-    background-color: #f5f5f5;
+    background-color: #cdc9c9;
     color: #000;
 }
 
