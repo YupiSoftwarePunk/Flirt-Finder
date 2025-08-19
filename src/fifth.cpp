@@ -362,6 +362,23 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
         // иногда возникает ошибка что неправильно определяется id сообщения и удаления не происходит
         // необходимо найти решение этой проблемы
 
+
+        // Сначала показываем диалог подтверждения
+        QMessageBox::StandardButton reply;
+        reply = QMessageBox::question(this,
+                                      "Подтверждение удаления",
+                                      "Вы точно хотите удалить это сообщение?",
+                                      QMessageBox::Yes | QMessageBox::No,
+                                      QMessageBox::No);
+
+        // Если пользователь выбрал "Нет" или закрыл диалог - отменяем удаление
+        if (reply != QMessageBox::Yes)
+        {
+            qDebug() << "Удаление отменено пользователем";
+            return;
+        }
+
+
         int messageId = item->data(Qt::UserRole).toInt();
         qDebug() << "Сообщение с ID:" << messageId;
 
