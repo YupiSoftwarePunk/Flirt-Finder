@@ -246,11 +246,13 @@ QMenu::separator {
 /* Стиль для опасных действий  */
 QMenu QAction#dangerAction {
     color: #d32f2f;
+    font-weight: bold;
 }
 
 QMenu QAction#dangerAction:hover {
     background-color: #ffebee;
     color: #b71c1c;
+    font-weight: bold;
 }
 
 /* Стили для QSpinBox (отдельно от текстовых полей) */

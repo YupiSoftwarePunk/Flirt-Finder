@@ -232,10 +232,15 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
 
     QMenu contextMenu(this);
 
-    QAction *replyAction = contextMenu.addAction("Ответить");
-    QAction *forwardAction = contextMenu.addAction("Переслать");
-    QAction *copyAction = contextMenu.addAction("Копировать");
-    QAction *deleteAction = contextMenu.addAction("Удалить");
+    QAction *replyAction = contextMenu.addAction("↩️ Ответить");
+    QAction *forwardAction = contextMenu.addAction("↪️ Переслать");
+    QAction *copyAction = contextMenu.addAction("📋 Копировать");
+    contextMenu.addSeparator();
+    QAction *deleteAction = contextMenu.addAction("🗑️ Удалить");
+
+    QFont font = deleteAction->font();
+    font.setBold(true);
+    deleteAction->setFont(font);
 
     deleteAction->setObjectName("dangerAction");
 
