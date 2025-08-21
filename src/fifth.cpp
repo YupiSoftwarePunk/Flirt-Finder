@@ -364,15 +364,49 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
 
 
         // Сначала показываем диалог подтверждения
-        QMessageBox::StandardButton reply;
-        reply = QMessageBox::question(this,
-                                      "Подтверждение удаления",
-                                      "Вы точно хотите удалить это сообщение?",
-                                      QMessageBox::Yes | QMessageBox::No,
-                                      QMessageBox::No);
+        QMessageBox msgBox(this);
+        msgBox.setWindowTitle("Подтверждение удаления");
+        msgBox.setText("Удаление сообщения");
+        msgBox.setInformativeText("Вы уверены, что хотите удалить это сообщение?");
+        msgBox.setIcon(QMessageBox::Question);
 
-        // Если пользователь выбрал "Нет" или закрыл диалог - отменяем удаление
-        if (reply != QMessageBox::Yes)
+        QPushButton *yesButton = new QPushButton("Да, удалить");
+        QPushButton *noButton = new QPushButton("Нет, отменить");
+
+        // Стилизуем кнопки
+        yesButton->setStyleSheet(
+            "QPushButton {"
+            "   background-color: #d32f2f;"
+            "   color: white;"
+            "   padding: 8px 16px;"
+            "   border-radius: 4px;"
+            "   min-width: 80px;"
+            "}"
+            "QPushButton:hover {"
+            "   background-color: #b71c1c;"
+            "}"
+            );
+
+        noButton->setStyleSheet(
+            "QPushButton {"
+            "   background-color: #f0f0f0;"
+            "   color: #333;"
+            "   padding: 8px 16px;"
+            "   border-radius: 4px;"
+            "   min-width: 80px;"
+            "}"
+            "QPushButton:hover {"
+            "   background-color: #e0e0e0;"
+            "}"
+            );
+
+        msgBox.addButton(yesButton, QMessageBox::YesRole);
+        msgBox.addButton(noButton, QMessageBox::NoRole);
+        msgBox.setDefaultButton(noButton);
+
+        msgBox.exec();
+
+        if (msgBox.clickedButton() != yesButton)
         {
             qDebug() << "Удаление отменено пользователем";
             return;
@@ -400,8 +434,6 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
         }
 
         qDebug() << "Сообщение успешно удалено с ID:" << messageId;
-
-        QMessageBox::information(this, "Удаление", "Сообщение успешно удалено!");
 
         loadChatHistory(senderId, receiverId);
     }
