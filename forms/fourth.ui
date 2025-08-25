@@ -22,11 +22,11 @@
      <x>0</x>
      <y>0</y>
      <width>401</width>
-     <height>301</height>
+     <height>291</height>
     </rect>
    </property>
    <property name="title">
-    <string>Ящик уведомлений (Полученные лайки)</string>
+    <string>Ящик уведомлений</string>
    </property>
    <widget class="QPushButton" name="BackButton">
     <property name="geometry">
