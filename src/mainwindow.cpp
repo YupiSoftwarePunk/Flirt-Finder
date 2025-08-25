@@ -15,6 +15,8 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    this->resize(550, 350);
+
 
     // Загрузка стилей
     QString sCssMain;
