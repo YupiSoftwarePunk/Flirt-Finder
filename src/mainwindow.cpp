@@ -32,7 +32,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 
     // Создаём валидатор с разрешёнными символами
-    QRegularExpression regex("^[a-zA-Z0-9@.,]*$"); // Только буквы, цифры, @, ., запятая
+    QRegularExpression regex("^[a-zA-Zа-яА-Я0-9@.,]*$"); // Только буквы, цифры, @, ., запятая
     QRegularExpressionValidator *validator = new QRegularExpressionValidator(regex, this);
 
     // Устанавливаем валидатор для полей ввода логина и пароля
@@ -58,8 +58,30 @@ void MainWindow::on_login_button_clicked()
     QString password = ui->password->text().trimmed();
 
 
-    if (login.isEmpty() || password.isEmpty()) {
+    if (login.isEmpty() || password.isEmpty())
+    {
         QMessageBox::warning(this, "Fail", "Логин и пароль не могут быть пустыми!");
+        return;
+    }
+
+
+    // Ограничение длины логина
+    if (login.length() < 3 || login.length() > 20)
+    {
+        QMessageBox::warning(this, "Ошибка", "Логин должен содержать от 3 до 20 символов!");
+        ui->login->clear();
+        ui->password->clear();
+        ui->login->setFocus();
+        return;
+    }
+
+    // Ограничение длины пароля
+    if (password.length() < 6 || password.length() > 20)
+    {
+        QMessageBox::warning(this, "Ошибка", "Пароль должен содержать от 6 до 30 символов!");
+        ui->login->clear();
+        ui->password->clear();
+        ui->login->setFocus();
         return;
     }
 
@@ -122,6 +144,27 @@ void MainWindow::on_registration_button_clicked()
     if (login.isEmpty() || password.isEmpty())
     {
         QMessageBox::warning(this, "Fail", "Логин и пароль не могут быть пустыми!");
+        return;
+    }
+
+
+    // Ограничение длины логина
+    if (login.length() < 3 || login.length() > 20)
+    {
+        QMessageBox::warning(this, "Ошибка", "Логин должен содержать от 3 до 20 символов!");
+        ui->login_2->clear();
+        ui->password_2->clear();
+        ui->login_2->setFocus();
+        return;
+    }
+
+    // Ограничение длины пароля
+    if (password.length() < 6 || password.length() > 20)
+    {
+        QMessageBox::warning(this, "Ошибка", "Пароль должен содержать от 6 до 30 символов!");
+        ui->login_2->clear();
+        ui->password_2->clear();
+        ui->login_2->setFocus();
         return;
     }
 
