@@ -148,6 +148,7 @@ void Second::on_onSaveData_clicked()
     if (!validText.match(name).hasMatch() || name.isEmpty())
     {
         QMessageBox::warning(this, "Ошибка", "Имя содержит недопустимые символы");
+        ui->lineEdit->clear();
         ui->lineEdit->setFocus();
         return;
     }
@@ -155,6 +156,7 @@ void Second::on_onSaveData_clicked()
     if (!validText.match(city).hasMatch() || city.isEmpty())
     {
         QMessageBox::warning(this, "Ошибка", "Город содержит недопустимые символы");
+        ui->lineEdit_4->clear();
         ui->lineEdit_4->setFocus();
         return;
     }
@@ -182,8 +184,6 @@ void Second::on_onSaveData_clicked()
     }
 
 
-
-
     if (saveUserData(login, password, name, sex, age, hobbies, city, m_photoPath))
     {
         loadPhotoData(login);
@@ -203,12 +203,12 @@ void Second::on_onSaveData_clicked()
 
 
 
+
 void Second::setUserCredentials(const QString &login, const QString &password)
 {
     this->login = login;
     this->password = password;
 }
-
 
 
 
@@ -251,13 +251,11 @@ bool Second::eventFilter(QObject *watched, QEvent *event)
 
 
 
-
 // сохранение данных в бд
 bool Second::saveUserData(const QString &login, const QString &password,
                   const QString &name, const QString &gender, int age,
                   const QString &hobbies, const QString &city, const QString &photoPath)
 {
-
 
     QSqlQuery query;
     query.prepare("UPDATE users SET name = :name, gender = :gender, age = :age, hobbies = :hobbies, city = :city "
@@ -276,7 +274,6 @@ bool Second::saveUserData(const QString &login, const QString &password,
         qDebug() << "Ошибка SQL:" << query.lastError().text();
         return false;
     }
-
 
 
     QSqlQuery getUserIdQuery;
