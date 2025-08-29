@@ -273,17 +273,17 @@ QSpinBox:focus {
     background-color: #f8fafc;          /* Слегка светлый фон */
 }
 
-/* Стиль стрелок вверх/вниз */
-QSpinBox::up-button, QSpinBox::down-button {
+/* Стиль стрелок вверх/вниз 
+/* QSpinBox::up-button, QSpinBox::down-button {
     subcontrol-origin: border;
-    width: 20px;                       /* Ширина области стрелок */
-    border-left: 1px solid #8ab2f0;    /* Разделитель */
+    width: 20px;                       /* Ширина области стрелок 
+    border-left: 1px solid #8ab2f0;    /* Разделитель 
 }
 
 QSpinBox::up-button {
     subcontrol-position: top right;
-    height: 50%;                       /* Половина высоты */
-    border-bottom: 1px solid #d1e0fb;  /* Разделитель между стрелками */
+    height: 50%;                       /* Половина высоты 
+    border-bottom: 1px solid #d1e0fb;  /* Разделитель между стрелками 
 }
 
 QSpinBox::down-button {
@@ -291,32 +291,32 @@ QSpinBox::down-button {
     height: 50%;
 }
 
-/* Иконки стрелок */
+/* Иконки стрелок 
 QSpinBox::up-arrow {
-    image: url(:/icons/up-arrow.svg);   /* Можно заменить на свой SVG */
+    image: url(:/icons/up-arrow.svg);   /* Можно заменить на свой SVG 
     width: 8px;
     height: 8px;
 }
 
 QSpinBox::down-arrow {
-    image: url(:/icons/down-arrow.svg); /* Можно заменить на свой SVG */
+    image: url(:/icons/down-arrow.svg); /* Можно заменить на свой SVG 
     width: 8px;
     height: 8px;
 }
 
-/* Стиль при наведении на стрелки */
+/* Стиль при наведении на стрелки 
 QSpinBox::up-button:hover, QSpinBox::down-button:hover {
     background-color: #e9f0fd;
 }
 
-/* Стиль при нажатии */
+/* Стиль при нажатии 
 QSpinBox::up-button:pressed, QSpinBox::down-button:pressed {
     background-color: #d1e0fb;
 }
 
-/* Отключенное состояние */
+/* Отключенное состояние 
 QSpinBox:disabled {
     background-color: #f1f5f9;
     color: #94a3b8;
     border-color: #e2e8f0;
-}
+} */
