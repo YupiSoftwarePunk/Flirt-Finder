@@ -20,8 +20,7 @@ HEADERS += \
     .\include\mainwindow.h \
     .\include\second.h \
     .\include\third.h \
-    .\include\fifth.h \
-    include/CustomMenuStyle.h
+    .\include\fifth.h
 
 FORMS += \
     .\forms\fourth.ui \
