@@ -29,7 +29,7 @@ protected:
     {
         if (e->key() == Qt::Key_Return || e->key() == Qt::Key_Enter)
         {
-            if (ui->textEdit->hasFocus()) // Если фокус на textEdit
+            if (ui->textEdit->hasFocus())
             {
                 if (e->modifiers() & Qt::ShiftModifier)
                 {
@@ -66,7 +66,6 @@ protected:
                     ui->textEdit->setPlainText(updatedLines.join("\n"));
                     ui->textEdit->blockSignals(false);
 
-                    // Отправляем сообщение
                     on_sendButton_clicked();
                     e->accept();
                     return;
@@ -83,7 +82,7 @@ protected:
         }
         else
         {
-            QDialog::keyReleaseEvent(e); // Обрабатываем остальные клавиши
+            QDialog::keyReleaseEvent(e);
         }
 
 

@@ -1,5 +1,4 @@
 #include "include/fifth.h"
-#include "include/CustomMenuStyle.h"
 #include "include/fourth.h"
 #include "qdatetime.h"
 #include "qevent.h"
@@ -20,7 +19,7 @@ Fifth::Fifth(QWidget *parent)
 
     setWindowTitle("FlirtFinder");
 
-    // Установка события на контекстное меню
+    // Установка контекстного меню
     ui->listWidget->setContextMenuPolicy(Qt::CustomContextMenu);
     connect(ui->listWidget, &QListWidget::customContextMenuRequested, this, &Fifth::onContextMenuRequested);
 }
@@ -262,8 +261,8 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
             truncatedMessage.append("...");
         }
 
-        // Сохраняем ID сообщения для referenceMessageId
-        referenceMessageId = item->data(Qt::UserRole).toInt(); // Предполагается, что ID хранится в UserRole
+        // Сохраняем ID сообщения
+        referenceMessageId = item->data(Qt::UserRole).toInt();
 
         QListWidgetItem *replyItem = new QListWidgetItem(QString("Ответ на: %1").arg(truncatedMessage), ui->listWidget);
         replyItem->setBackground(QBrush(Qt::lightGray));
@@ -368,7 +367,6 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
         // необходимо найти решение этой проблемы
 
 
-        // Сначала показываем диалог подтверждения
         QMessageBox msgBox(this);
         msgBox.setWindowTitle("Подтверждение удаления");
         msgBox.setText("Удаление сообщения");
@@ -378,7 +376,7 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
         QPushButton *yesButton = new QPushButton("Да, удалить");
         QPushButton *noButton = new QPushButton("Нет, отменить");
 
-        // Стилизуем кнопки
+
         yesButton->setStyleSheet(
             "QPushButton {"
             "   background-color: #d32f2f;"
@@ -404,6 +402,7 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
             "   background-color: #e0e0e0;"
             "}"
             );
+
 
         msgBox.addButton(yesButton, QMessageBox::YesRole);
         msgBox.addButton(noButton, QMessageBox::NoRole);
