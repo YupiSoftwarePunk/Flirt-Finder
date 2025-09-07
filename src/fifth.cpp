@@ -318,6 +318,7 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
                 on_sendButton_clicked();
             });
 
+            fourthWindow->close();
             fourthWindow->deleteLater();
 
             qDebug() << "Сообщение отправлено: " << messageText;
@@ -329,7 +330,18 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
         }
         });
 
-        this->deleteLater();
+
+        // connect(fourthWindow, &Fourth::on_BackButton_Clicked, this, [this, fourthWindow]() {
+        //     qDebug() << "Кнопка 'Назад' нажата";
+        //     fourthWindow->close();
+        //     fourthWindow->deleteLater();
+        //     // Показываем текущее окно снова
+        //     this->show();
+        // });
+
+        this->hide();
+
+        // this->deleteLater();
 
         loadChatHistory(senderId, receiverId);
 
