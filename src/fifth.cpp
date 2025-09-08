@@ -295,8 +295,13 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
             return;
         }
 
+
+        // Форматируем сообщение для пересылки
+        QString sender = messageText.mid(0, 11);
+        QString message = messageText.mid(11, messageText.length());
+
         QClipboard *clipboard = QApplication::clipboard();
-        clipboard->setText(messageText);
+        clipboard->setText("➤ Переслано от: " + sender + "\n──────────────────────────────\n" + message);
         qDebug() << "Сообщение: " << messageText;
 
 
@@ -331,17 +336,15 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
         });
 
 
-        // connect(fourthWindow, &Fourth::on_BackButton_Clicked, this, [this, fourthWindow]() {
-        //     qDebug() << "Кнопка 'Назад' нажата";
-        //     fourthWindow->close();
-        //     fourthWindow->deleteLater();
-        //     // Показываем текущее окно снова
-        //     this->show();
-        // });
+        connect(fourthWindow, &::Fourth::windowRole, this, [this, fourthWindow]() {
+            qDebug() << "Окно Fourth закрыто";
+            fourthWindow->deleteLater();
+            this->show(); // Показываем текущее окно снова
+        });
 
-        this->hide();
+        //this->hide();
 
-        // this->deleteLater();
+        this->deleteLater();
 
         loadChatHistory(senderId, receiverId);
 
