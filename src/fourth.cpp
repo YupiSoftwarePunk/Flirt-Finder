@@ -171,6 +171,8 @@ void Fourth::on_ChatButton_clicked()
 // Нажатие кнопки "Назад"
 void Fourth::on_BackButton_Clicked()
 {
+    emit backButtonClicked();
+
     auto thirdWindow = new Third();
     thirdWindow->setCurrentUserData(currentLogin, currentPassword);
     thirdWindow->loadProfiles(currentLogin);

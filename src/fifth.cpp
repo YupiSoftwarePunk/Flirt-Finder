@@ -458,3 +458,19 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
     }
 }
 
+
+
+void Fifth::connectToFourth(Fourth* fourthWindow)
+{
+    if (m_connectedFourth) {
+        disconnect(m_connectedFourth, &Fourth::backButtonClicked, this, &Fifth::fourthBackButtonClicked);
+    }
+
+    m_connectedFourth = fourthWindow;
+
+    // Подключаем сигнал из Fourth к Fifth
+    connect(fourthWindow, &Fourth::backButtonClicked, this, [this]() {
+        qDebug() << "Сигнал от Fourth получен в Fifth";
+        emit fourthBackButtonClicked();
+    });
+}

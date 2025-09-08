@@ -1,6 +1,7 @@
 #ifndef FIFTH_H
 #define FIFTH_H
 
+#include "include/fourth.h"
 #include "qevent.h"
 #include "qlistwidget.h"
 #include "ui_fifth.h"
@@ -22,6 +23,12 @@ public:
     void setUserCredentials(const QString &login, const QString &password, QListWidgetItem *selectedItem);
 
     void loadChatHistory(int senderId, int receiverId);
+
+    void connectToFourth(Fourth* fourthWindow);
+
+
+signals:
+    void fourthBackButtonClicked();
 
 
 protected:
@@ -110,6 +117,9 @@ private:
     int referenceMessageId;
 
     void onContextMenuRequested(const QPoint &pos);
+
+
+    Fourth* m_connectedFourth;
 };
 
 #endif // FIFTH_H
