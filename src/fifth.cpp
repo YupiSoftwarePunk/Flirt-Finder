@@ -306,9 +306,27 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
 
 
         auto fourthWindow = new Fourth();
+        auto fifthWindow = new Fifth();
+
         fourthWindow->setUserCredentials(currentLogin, currentPassword);
         fourthWindow->loadNotifications();
+
+        fifthWindow->connectToFourth(fourthWindow);
+
+         connect(fifthWindow, &Fifth::fourthBackButtonClicked, this, [this, fourthWindow, fifthWindow]() {
+        qDebug() << "Back button handled in main window";
+
+            if (fourthWindow) {
+                fourthWindow->deleteLater();
+            }
+            if (fifthWindow) {
+                fifthWindow->deleteLater();
+            }
+            this->show();
+        });
+
         fourthWindow->show();
+        fifthWindow->show();
 
 
         connect(fourthWindow, &Fourth::switchStateChanged, this, [this, &messageText, &fourthWindow](bool switchState) {
@@ -336,15 +354,15 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
         });
 
 
-        connect(fourthWindow, &::Fourth::windowRole, this, [this, fourthWindow]() {
-            qDebug() << "Окно Fourth закрыто";
-            fourthWindow->deleteLater();
-            this->show(); // Показываем текущее окно снова
-        });
+        // connect(fourthWindow, &::Fourth::windowRole, this, [this, fourthWindow]() {
+        //     qDebug() << "Окно Fourth закрыто";
+        //     fourthWindow->deleteLater();
+        //     this->show(); // Показываем текущее окно снова
+        // });
 
-        //this->hide();
+        this->hide();
 
-        this->deleteLater();
+        // this->deleteLater();
 
         loadChatHistory(senderId, receiverId);
 
@@ -469,8 +487,10 @@ void Fifth::connectToFourth(Fourth* fourthWindow)
     m_connectedFourth = fourthWindow;
 
     // Подключаем сигнал из Fourth к Fifth
-    connect(fourthWindow, &Fourth::backButtonClicked, this, [this]() {
-        qDebug() << "Сигнал от Fourth получен в Fifth";
-        emit fourthBackButtonClicked();
-    });
+    if (fourthWindow) {
+        connect(fourthWindow, &Fourth::backButtonClicked, this, [this]() {
+            qDebug() << "Received backButtonClicked from Fourth";
+            emit fourthBackButtonClicked();
+        });
+    }
 }
