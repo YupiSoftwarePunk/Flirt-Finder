@@ -29,6 +29,7 @@ public:
 signals:
     void switchStateChanged(bool switchState);
     void backButtonClicked();
+    void destroyed();
 
 
 private slots:

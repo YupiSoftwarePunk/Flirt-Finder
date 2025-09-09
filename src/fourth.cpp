@@ -41,6 +41,7 @@ Fourth::Fourth(QWidget *parent)
 
 Fourth::~Fourth()
 {
+    emit destroyed();
     delete ui;
 }
 

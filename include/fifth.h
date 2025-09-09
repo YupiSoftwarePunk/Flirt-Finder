@@ -29,6 +29,7 @@ public:
 
 signals:
     void fourthBackButtonClicked();
+    void destroyed();
 
 
 protected:

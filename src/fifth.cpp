@@ -27,6 +27,7 @@ Fifth::Fifth(QWidget *parent)
 Fifth::~Fifth()
 {
     delete ui;
+    emit destroyed();
 }
 
 
@@ -325,14 +326,17 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
             this->show();
         });
 
-        fourthWindow->show();
-        fifthWindow->show();
 
-
-        connect(fourthWindow, &Fourth::switchStateChanged, this, [this, &messageText, &fourthWindow](bool switchState) {
+        connect(fourthWindow, &Fourth::switchStateChanged, this, [this, &messageText, &fourthWindow, &fifthWindow](bool switchState) {
         if (switchState)
         {
             qDebug() << "Переключение в чат активировано. Вставка текста.";
+
+            if (!fourthWindow || !fifthWindow)
+            {
+                qDebug() << "Окна уже удалены";
+                return;
+            }
 
             QMetaObject::invokeMethod(this, [=]()
             {
@@ -342,7 +346,9 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
             });
 
             fourthWindow->close();
-            fourthWindow->deleteLater();
+            fifthWindow->close();
+            this->show();
+            // fourthWindow->deleteLater();
 
             qDebug() << "Сообщение отправлено: " << messageText;
         }
@@ -354,12 +360,18 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
         });
 
 
-        // connect(fourthWindow, &::Fourth::windowRole, this, [this, fourthWindow]() {
-        //     qDebug() << "Окно Fourth закрыто";
-        //     fourthWindow->deleteLater();
-        //     this->show(); // Показываем текущее окно снова
-        // });
+        // Подключаем сигналы уничтожения окон
+        connect(fourthWindow, &Fourth::destroyed, this, [this]() {
+            qDebug() << "Fourth window destroyed";
+        });
 
+        connect(fifthWindow, &Fifth::destroyed, this, [this]() {
+            qDebug() << "Fifth window destroyed";
+        });
+
+        // Показываем окна
+        fourthWindow->show();
+        fifthWindow->show();
         this->hide();
 
         // this->deleteLater();
@@ -464,7 +476,8 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
         query.prepare("DELETE FROM messages WHERE id = :messageId");
         query.bindValue(":messageId", messageId);
 
-        if (!query.exec()) {
+        if (!query.exec())
+        {
             QMessageBox::warning(this, "Ошибка", "Не удалось удалить сообщение.");
             qDebug() << "Ошибка выполнения SQL запроса:" << query.lastError().text();
             return;
@@ -478,16 +491,18 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
 
 
 
+
 void Fifth::connectToFourth(Fourth* fourthWindow)
 {
-    if (m_connectedFourth) {
+    if (m_connectedFourth)
+    {
         disconnect(m_connectedFourth, &Fourth::backButtonClicked, this, &Fifth::fourthBackButtonClicked);
     }
 
     m_connectedFourth = fourthWindow;
 
-    // Подключаем сигнал из Fourth к Fifth
-    if (fourthWindow) {
+    if (fourthWindow)
+    {
         connect(fourthWindow, &Fourth::backButtonClicked, this, [this]() {
             qDebug() << "Received backButtonClicked from Fourth";
             emit fourthBackButtonClicked();
