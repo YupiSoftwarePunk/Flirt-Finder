@@ -238,6 +238,30 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
         }
         event->accept();
     }
+    else if (event->key() == Qt::Key_Down)
+    {
+        if (ui->login->hasFocus())
+        {
+            ui->password->setFocus();
+        }
+        else if (ui->login_2->hasFocus())
+        {
+            ui->password_2->setFocus();
+        }
+        event->accept();
+    }
+    else if (event->key() == Qt::Key_Up)
+    {
+        if (ui->password->hasFocus())
+        {
+            ui->login->setFocus();
+        }
+        else if (ui->password_2->hasFocus())
+        {
+           ui->login_2->setFocus();
+        }
+        event->accept();
+    }
     else
     {
         QMainWindow::keyPressEvent(event);
