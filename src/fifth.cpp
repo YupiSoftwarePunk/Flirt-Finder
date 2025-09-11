@@ -314,20 +314,23 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
 
         fifthWindow->connectToFourth(fourthWindow);
 
-         connect(fifthWindow, &Fifth::fourthBackButtonClicked, this, [this, fourthWindow, fifthWindow]() {
+        connect(fifthWindow, &Fifth::fourthBackButtonClicked, this, [this, fourthWindow, fifthWindow]() {
         qDebug() << "Back button handled in main window";
 
-            if (fourthWindow) {
+            if (fourthWindow)
+            {
                 fourthWindow->deleteLater();
             }
-            if (fifthWindow) {
+            if (fifthWindow)
+            {
                 fifthWindow->deleteLater();
             }
             this->show();
         });
 
 
-        connect(fourthWindow, &Fourth::switchStateChanged, this, [this, &messageText, &fourthWindow, &fifthWindow](bool switchState) {
+        connect(fourthWindow, &Fourth::switchStateChanged, this, [this, messageText, fourthWindow,
+                                                                  fifthWindow](bool switchState) {
         if (switchState)
         {
             qDebug() << "Переключение в чат активировано. Вставка текста.";
@@ -343,6 +346,7 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
                 ui->textEdit->setFocus();
                 ui->textEdit->setText(messageText );
                 on_sendButton_clicked();
+                qDebug() << "Сообщение отправлено: " << messageText;
             });
 
             fourthWindow->close();
@@ -361,13 +365,13 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
 
 
         // Подключаем сигналы уничтожения окон
-        connect(fourthWindow, &Fourth::destroyed, this, [this]() {
-            qDebug() << "Fourth window destroyed";
-        });
+        // connect(fourthWindow, &Fourth::destroyed, this, [this]() {
+        //     qDebug() << "Fourth window destroyed";
+        // });
 
-        connect(fifthWindow, &Fifth::destroyed, this, [this]() {
-            qDebug() << "Fifth window destroyed";
-        });
+        // connect(fifthWindow, &Fifth::destroyed, this, [this]() {
+        //     qDebug() << "Fifth window destroyed";
+        // });
 
         // Показываем окна
         fourthWindow->show();

@@ -123,12 +123,7 @@ QLabel {
     font-size: 12px; 
     padding: 2px 0; 
 }
-/* 
-#label::after { content: "Логин"; }   Было "Логин" 
-#label_2::after { content: "Пароль"; }  Было "Пароль" 
-#label_3::after { content: "Пароль"; }  Было "Логин" 
-#label_4::after { content: "Логин"; }  Было "Пароль" 
-*/
+
 
 /* Скроллбары */
 QScrollBar:vertical {
@@ -139,7 +134,6 @@ QScrollBar:vertical {
 /* фотографии */
 QGraphicsView {
     border: none; 
-    align-content: align-left;
 }
 
 #graphicsView QScrollBar {
@@ -219,7 +213,6 @@ QMenu {
     border: 1px solid #e0e0e0;
     padding: 8px 0;
     font-size: 14px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 QMenu::item {
