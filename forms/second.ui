@@ -111,7 +111,7 @@
      <item>
       <widget class="QTextEdit" name="textEdit">
        <property name="placeholderText">
-        <string>Увлечения</string>
+        <string>Раздел о себе. Здесь вы можете рассказать об увлечениях и др. информацию</string>
        </property>
       </widget>
      </item>

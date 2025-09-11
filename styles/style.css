@@ -83,8 +83,16 @@ QLineEdit:focus, QTextEdit:focus {
 
 #login, #password, #login_2,  #password_2 {
     margin-bottom: 25px;  
-    min-width: 80px;    
+    min-width: 60px;    
     margin-top: 5px;
+}
+
+#login_2 {
+    margin-top: 1px;
+}
+
+#password_2 {
+    margin-top: 5px; 
 }
 
 #login_button, #registration_button {
