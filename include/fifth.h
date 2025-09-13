@@ -69,7 +69,6 @@ protected:
                         }
                     }
 
-                    // Обновляем текст перед отправкой
                     ui->textEdit->blockSignals(true);
                     ui->textEdit->setPlainText(updatedLines.join("\n"));
                     ui->textEdit->blockSignals(false);
@@ -77,7 +76,6 @@ protected:
                     on_sendButton_clicked();
                     e->accept();
                     return;
-
                 }
             }
             else
@@ -92,7 +90,6 @@ protected:
         {
             QDialog::keyReleaseEvent(e);
         }
-
 
 
         if (ui->listWidget->count() > 0)
@@ -118,7 +115,6 @@ private:
     int referenceMessageId;
 
     void onContextMenuRequested(const QPoint &pos);
-
 
     Fourth* m_connectedFourth;
 };

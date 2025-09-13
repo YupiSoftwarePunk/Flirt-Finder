@@ -13,18 +13,19 @@ class Fourth : public QDialog
 {
     Q_OBJECT
 
+
 public:
     explicit Fourth(QWidget *parent = nullptr);
     ~Fourth();
 
     void loadNotifications();
 
-
     void setUserCredentials(const QString &login, const QString &password);
 
     void initializeSupportLike(int currentUserId);
 
     bool switch_;
+
 
 signals:
     void switchStateChanged(bool switchState);
@@ -39,6 +40,7 @@ private slots:
 
     void on_listWidget_itemDoubleClicked(QListWidgetItem *item);
 
+
 private:
     Ui::Fourth *ui;
 
@@ -46,7 +48,6 @@ private:
     QPushButton *backButton;
 
     QString currentUser;
-
     QString currentLogin;
     QString currentPassword;
 
@@ -56,7 +57,6 @@ private:
     void checkMutualLike();
 
     void performSearch();
-
 
     void keyPressEvent(QKeyEvent *event);
 };

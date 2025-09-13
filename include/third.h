@@ -18,10 +18,10 @@ public:
     void loadProfiles(const QString &currentLogin);
 
     void setCurrentUserData(const QString &login, const QString &password);
-
     void setProfileData(const QString &name, int age, const QString &city, const QString &photoPath, const QString & hobby);
 
     void hideAllButtons();
+
 
 private slots:
     void on_likeButton_clicked();
@@ -33,8 +33,8 @@ private slots:
     void keyPressEvent(QKeyEvent *event);
 
     void on_settingsButton_clicked();
-
     void on_messageBox_clicked();
+
 
 private:
     Ui::Third *ui;

@@ -13,18 +13,21 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
+
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+
 private slots:
     void on_login_button_clicked();
-
     void on_registration_button_clicked();
 
     void keyPressEvent(QKeyEvent *event);
 
+
 private:
     Ui::MainWindow *ui;
 };
+
 #endif // MAINWINDOW_H

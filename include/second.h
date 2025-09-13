@@ -23,17 +23,16 @@ public:
                       const QString &hobbies, const QString &city, const QString &photoPath);
 
     void loadUserData();
-
     void loadPhotoData(const QString &login);
 
     void initializeUserData();
-
     void initializeUserData2();
+
 
 private slots:
     void on_onLoadPhoto_clicked();
-
     void on_onSaveData_clicked();
+
 
 private:
     Ui::Second *ui;
