@@ -30,6 +30,8 @@ Third::~Third()
 }
 
 
+
+// загрузка профилей
 void Third::loadProfiles(const QString &login)
 {
     profilesData.clear();
@@ -104,6 +106,7 @@ void Third::loadProfiles(const QString &login)
 
 
 
+// обновление анкет
 void Third::updateUI()
 {
     if (profilesData.isEmpty() || currentIndex >= profilesData.size())
@@ -230,6 +233,7 @@ void Third::on_prevProfile()
 
 
 
+// Сохраняем реакцию
 void Third::saveReaction(int targetUserId, bool isLike)
 {
     if (currentLogin.isEmpty())
@@ -307,6 +311,7 @@ void Third::setCurrentUserData(const QString &login, const QString &password)
 
 
 
+// настройки
 void Third::on_settingsButton_clicked()
 {
     auto secondWindow = new Second();
@@ -318,6 +323,7 @@ void Third::on_settingsButton_clicked()
 
 
 
+// Сортировка профилей
 void Third::sortProfiles()
 {
     // Получаем данные текущего пользователя
@@ -369,6 +375,9 @@ void Third::sortProfiles()
     qDebug() << "Профили отсортированы.";
 }
 
+
+
+// перейти в ящик уведомлений
 void Third::on_messageBox_clicked()
 {
     auto fourthWindow = new Fourth();
@@ -402,6 +411,7 @@ void Third::setProfileData(const QString &name, int age, const QString &city, co
 
 
 
+// метод для подробного просмотра анкеты
 void Third::hideAllButtons()
 {
     ui->likeButton->hide();

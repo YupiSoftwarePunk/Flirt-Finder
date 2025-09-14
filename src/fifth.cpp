@@ -75,6 +75,7 @@ void Fifth::setUserCredentials(const QString &login, const QString &password, QL
 
 
 
+// отправка сообщения
 void Fifth::on_sendButton_clicked()
 {
     QString messageText = ui->textEdit->toPlainText();
@@ -140,6 +141,7 @@ void Fifth::on_sendButton_clicked()
 
 
 
+// подгрузка истории чата
 void Fifth::loadChatHistory(int senderId, int receiverId)
 {
     ui->listWidget->clear();
@@ -151,7 +153,7 @@ void Fifth::loadChatHistory(int senderId, int receiverId)
         "WHERE (sender_id = :senderId AND receiver_id = :receiverId) "
         "   OR (sender_id = :receiverId AND receiver_id = :senderId) "
         "ORDER BY send_time ASC"
-        );
+    );
 
 
     query.bindValue(":senderId", senderId);

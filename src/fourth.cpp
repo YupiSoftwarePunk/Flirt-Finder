@@ -154,14 +154,10 @@ void Fourth::on_ChatButton_clicked()
 
         switch_ = true;
         emit switchStateChanged(switch_);
-
-
-        // если в 5 окне будет кнопка назад, тогда можно раскоментить данную строчку, а пока так
-        // this->close();
     }
     else
     {
-        // Мэтч отсутствует, выводим сообщение
+        // Мэтч отсутствует
         QMessageBox::warning(this, "Ошибка", "У вас нет взаимного лайка с этим пользователем.");
         switch_ = false;
     }
@@ -236,6 +232,7 @@ void Fourth::setUserCredentials(const QString &login, const QString &password)
 
 
 
+// получить id пользователя
 int Fourth::getCurrentUserId(const QString &login)
 {
     QSqlQuery query;
@@ -255,6 +252,7 @@ int Fourth::getCurrentUserId(const QString &login)
 
 
 
+// проверка взаимного лайка
 void Fourth::checkMutualLike()
 {
     QListWidgetItem *currentItem = ui->listWidget->currentItem();
@@ -277,6 +275,7 @@ void Fourth::checkMutualLike()
         "WHERE l1.user_id = :currentUserId AND l2.user_id = :targetUserId "
         "AND l1.reaction = 1 AND l2.reaction = 1"
         );
+
     query.bindValue(":currentUserId", getCurrentUserId(currentLogin));
     query.bindValue(":targetUserId", targetUserId);
 
@@ -303,6 +302,7 @@ void Fourth::checkMutualLike()
 
 
 
+// подробная информация о пользователе
 void Fourth::on_listWidget_itemDoubleClicked(QListWidgetItem *item)
 {
     if (!item)
@@ -345,7 +345,7 @@ void Fourth::on_listWidget_itemDoubleClicked(QListWidgetItem *item)
     QString photoPath = query.value("photo_path").toString();
     QString hobby = query.value("hobbies").toString();
 
-    // Открываем вторую страницу (например, Third) для отображения данных пользователя
+    // Открываем 3 страницу для отображения данных пользователя
     auto thirdWindow = new Third();
     thirdWindow->hideAllButtons();
     thirdWindow->setProfileData(name, age, city, photoPath, hobby);
@@ -380,7 +380,6 @@ void Fourth::performSearch()
         QListWidgetItem *item = ui->listWidget->item(i);
         QString itemText = item->text();
 
-        // Проверяем вхождение текста
         if (itemText.contains(searchText, Qt::CaseInsensitive))
         {
             item->setHidden(false);
