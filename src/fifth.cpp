@@ -303,7 +303,7 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
         QString sender = messageText.mid(0, 11);
         QString message = messageText.mid(11, messageText.length());
 
-        QClipboard *clipboard = QApplication::clipboard();
+        QClipboard *clipboard = QApplication::clipboard(); // можно записать это в бд и перейти в др. чат и отправит, без сигналов
         clipboard->setText("➤ Переслано от: " + sender + "\n──────────────────────────────\n" + message);
         qDebug() << "Сообщение: " << messageText;
 
