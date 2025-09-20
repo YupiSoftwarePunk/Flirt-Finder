@@ -1,6 +1,7 @@
 #ifndef SECOND_H
 #define SECOND_H
 
+#include "qspinbox.h"
 #include <QDialog>
 #include <QRegularExpressionValidator>
 
@@ -43,6 +44,10 @@ private:
 
     QString login;
     QString password;
+
+    void setupSpinBoxWithIcons();
+    QString getUpArrowSVG();
+    QString getDownArrowSVG();
 };
 
 #endif // SECOND_H
