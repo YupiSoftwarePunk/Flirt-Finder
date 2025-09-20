@@ -24,13 +24,6 @@ public:
 
     void loadChatHistory(int senderId, int receiverId);
 
-    void connectToFourth(Fourth* fourthWindow);
-
-
-signals:
-    void fourthBackButtonClicked();
-    void destroyed();
-
 
 protected:
     void keyReleaseEvent(QKeyEvent* e)
@@ -115,8 +108,6 @@ private:
     int referenceMessageId;
 
     void onContextMenuRequested(const QPoint &pos);
-
-    Fourth* m_connectedFourth;
 };
 
 #endif // FIFTH_H

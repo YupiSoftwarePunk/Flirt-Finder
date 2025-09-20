@@ -25,93 +25,12 @@ Second::Second(QWidget *parent)
     ui->textEdit->installEventFilter(this);
 
     setWindowTitle("FlirtFinder");
-
-
-    setupSpinBoxWithIcons();
 }
 
 Second::~Second()
 {
     delete ui;
 }
-
-
-
-void Second::setupSpinBoxWithIcons()
-{
-    // Устанавливаем режим отображения иконок
-    ui->spinBox->setButtonSymbols(QSpinBox::UpDownArrows);
-
-    // Создаем стиль с SVG иконками через data URI
-    QString style = QString(R"(
-        QSpinBox {
-            padding-right: 40px;
-        }
-
-        QSpinBox::up-button, QSpinBox::down-button {
-            background: transparent;
-            border: 1px solid #d0d0d0;
-            border-radius: 2px;
-            margin: 1px;
-        }
-
-        QSpinBox::up-button {
-            subcontrol-origin: border;
-            subcontrol-position: top right;
-            width: 20px;
-            height: 15px;
-            border-bottom: none;
-            border-top-right-radius: 3px;
-        }
-
-        QSpinBox::down-button {
-            subcontrol-origin: border;
-            subcontrol-position: bottom right;
-            width: 20px;
-            height: 15px;
-            border-top: none;
-            border-bottom-right-radius: 3px;
-        }
-
-        QSpinBox::up-button:hover, QSpinBox::down-button:hover {
-            background: #f0f5ff;
-        }
-
-        QSpinBox::up-button:pressed, QSpinBox::down-button:pressed {
-            background: #e0e8ff;
-        }
-
-        QSpinBox::up-arrow {
-            image: url(data:image/svg+xml;utf8,%1);
-            width: 12px;
-            height: 12px;
-        }
-
-        QSpinBox::down-arrow {
-            image: url(data:image/svg+xml;utf8,%2);
-            width: 12px;
-            height: 12px;
-        }
-    )").arg(getUpArrowSVG(), getDownArrowSVG());
-
-    ui->spinBox->setStyleSheet(style);
-}
-
-QString Second::getUpArrowSVG()
-{
-    return QString(R"(<svg width='16' height='16' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
-    <path d='M7 14L12 9L17 14' stroke='%238ab2f0' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/>
-</svg>)").replace("#", "%23").replace("'", "%27");
-}
-
-QString Second::getDownArrowSVG()
-{
-    return QString(R"(<svg width='16' height='16' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
-    <path d='M7 10L12 15L17 10' stroke='%238ab2f0' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/>
-</svg>)").replace("#", "%23").replace("'", "%27");
-}
-
-
 
 
 // это для загрузки всех данных пользователя

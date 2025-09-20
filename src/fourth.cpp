@@ -41,7 +41,6 @@ Fourth::Fourth(QWidget *parent)
 
 Fourth::~Fourth()
 {
-    emit destroyed();
     delete ui;
 }
 
@@ -151,15 +150,11 @@ void Fourth::on_ChatButton_clicked()
         fifthWindow->setUserCredentials(currentLogin, currentPassword, currentItem); // Передача данных
         fifthWindow->loadChatHistory(getCurrentUserId(currentLogin), targetUserId);
         fifthWindow->show();
-
-        switch_ = true;
-        emit switchStateChanged(switch_);
     }
     else
     {
         // Мэтч отсутствует
         QMessageBox::warning(this, "Ошибка", "У вас нет взаимного лайка с этим пользователем.");
-        switch_ = false;
     }
 }
 
@@ -168,8 +163,6 @@ void Fourth::on_ChatButton_clicked()
 // Нажатие кнопки "Назад"
 void Fourth::on_BackButton_Clicked()
 {
-    emit backButtonClicked();
-
     auto thirdWindow = new Third();
     thirdWindow->setCurrentUserData(currentLogin, currentPassword);
     thirdWindow->loadProfiles(currentLogin);

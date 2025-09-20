@@ -27,7 +27,6 @@ Fifth::Fifth(QWidget *parent)
 Fifth::~Fifth()
 {
     delete ui;
-    emit destroyed();
 }
 
 
@@ -237,6 +236,7 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
     QAction *replyAction = contextMenu.addAction("↩️ Ответить");
     QAction *forwardAction = contextMenu.addAction("↪️ Переслать");
     QAction *copyAction = contextMenu.addAction("📋 Копировать");
+    QAction *editAction = contextMenu.addAction("✏️ Изменить");
     contextMenu.addSeparator();
     QAction *deleteAction = contextMenu.addAction("🗑️ Удалить");
 
@@ -314,67 +314,6 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
         fourthWindow->setUserCredentials(currentLogin, currentPassword);
         fourthWindow->loadNotifications();
 
-        fifthWindow->connectToFourth(fourthWindow);
-
-        connect(fifthWindow, &Fifth::fourthBackButtonClicked, this, [this, fourthWindow, fifthWindow]() {
-        qDebug() << "Back button handled in main window";
-
-            if (fourthWindow)
-            {
-                fourthWindow->deleteLater();
-            }
-            if (fifthWindow)
-            {
-                fifthWindow->deleteLater();
-            }
-            this->show();
-        });
-
-
-        connect(fourthWindow, &Fourth::switchStateChanged, this, [this, messageText, fourthWindow,
-                                                                  fifthWindow](bool switchState) {
-        if (switchState)
-        {
-            qDebug() << "Переключение в чат активировано. Вставка текста.";
-
-            if (!fourthWindow || !fifthWindow)
-            {
-                qDebug() << "Окна уже удалены";
-                return;
-            }
-
-            QMetaObject::invokeMethod(this, [=]()
-            {
-                ui->textEdit->setFocus();
-                ui->textEdit->setText(messageText );
-                on_sendButton_clicked();
-                qDebug() << "Сообщение отправлено: " << messageText;
-            });
-
-            fourthWindow->close();
-            fifthWindow->close();
-            this->show();
-            // fourthWindow->deleteLater();
-
-            qDebug() << "Сообщение отправлено: " << messageText;
-        }
-        else
-        {
-            qDebug() << "Ошибка: ui->textEdit недоступен.";
-            qDebug() << "Switch_ не активирован.";
-        }
-        });
-
-
-        // Подключаем сигналы уничтожения окон
-        // connect(fourthWindow, &Fourth::destroyed, this, [this]() {
-        //     qDebug() << "Fourth window destroyed";
-        // });
-
-        // connect(fifthWindow, &Fifth::destroyed, this, [this]() {
-        //     qDebug() << "Fifth window destroyed";
-        // });
-
         // Показываем окна
         fourthWindow->show();
         fifthWindow->show();
@@ -384,13 +323,9 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
 
         loadChatHistory(senderId, receiverId);
 
-        // здесь проблема в том что еще кроме сигнала на кнопку перейти в чат нужен еще сигнал для кнопки перейти назад
-        // хоть сигнал есть, хоть его нет это не работает как нужно и я пока не знаю как это починить
-
-        // 1. тут проблема в том что текст копируется, но не вставляется в нужный чат
-
-        // 2. В данный момент у меня тут другая проблема - после нажатия на кнопку копировать и когда уже
-        // выбрал нужный чат, то программа просто аварийно завершается
+        // можно записать это в бд и перейти в др. чат и отправить, без сигналов
+        // Нужно переписать этот метод чтобы он отправлял пересланное сообщение в бд как обычное с
+        // указанием отправителя и получателя и тогда все должно заработать как нужно
 
 
     }
@@ -496,25 +431,8 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
 
         loadChatHistory(senderId, receiverId);
     }
-}
-
-
-
-
-void Fifth::connectToFourth(Fourth* fourthWindow)
-{
-    if (m_connectedFourth)
+    else if (selectedAction == editAction)
     {
-        disconnect(m_connectedFourth, &Fourth::backButtonClicked, this, &Fifth::fourthBackButtonClicked);
-    }
-
-    m_connectedFourth = fourthWindow;
-
-    if (fourthWindow)
-    {
-        connect(fourthWindow, &Fourth::backButtonClicked, this, [this]() {
-            qDebug() << "Received backButtonClicked from Fourth";
-            emit fourthBackButtonClicked();
-        });
+        QMessageBox::warning(this, "Ошибка", "Действие находится в разработке");
     }
 }

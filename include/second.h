@@ -44,10 +44,6 @@ private:
 
     QString login;
     QString password;
-
-    void setupSpinBoxWithIcons();
-    QString getUpArrowSVG();
-    QString getDownArrowSVG();
 };
 
 #endif // SECOND_H

@@ -24,14 +24,6 @@ public:
 
     void initializeSupportLike(int currentUserId);
 
-    bool switch_;
-
-
-signals:
-    void switchStateChanged(bool switchState);
-    void backButtonClicked();
-    void destroyed();
-
 
 private slots:
     void on_ChatButton_clicked();
