@@ -457,10 +457,13 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
         {
             currentText = currentText.left(currentText.length() - 11);
         }
-        else if (currentText.startsWith("["))
+
+
+        if (currentText.startsWith("["))
         {
             currentText = currentText.mid(12);
         }
+
 
         QDialog editDialog(this);
         editDialog.setWindowTitle("Редактирование сообщения");
@@ -546,8 +549,9 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
 
         QSqlQuery query;
         query.prepare("UPDATE messages SET message_text  = :newText "
-                      "WHERE id = :messageId");
+                      "WHERE id = :messageId");   // AND sender_id =: senderId
         query.bindValue(":newText", newTextWithMark);
+        // query.bindValue(":senderId", senderId);   -- это чтобы можно было редачить только свои сообщения
         query.bindValue(":messageId", messageId);
 
         if (!query.exec())
