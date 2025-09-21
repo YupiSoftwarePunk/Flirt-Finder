@@ -1,8 +1,7 @@
 ## Приложение для знакомств FlirtFinder
 
 
-<!-- ![Приложение для знакомств FlirtFinder](images/icon.png) -->
-<img src="images/icon.png" alt="Приложение для знакомств FlirtFinder" width="100" height="100">
+<img src="images/icon.png" alt="Приложение для знакомств FlirtFinder" width="400" height="400">
 
 
 [📜 **Прочтите пользовательское соглашение перед использованием приложения!**](Пользовательское_соглашение.md)
