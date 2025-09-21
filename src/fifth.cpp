@@ -1,7 +1,9 @@
 #include "include/fifth.h"
 #include "include/fourth.h"
+#include "qboxlayout.h"
 #include "qdatetime.h"
 #include "qevent.h"
+#include "qlabel.h"
 #include "qmenu.h"
 #include "qtimezone.h"
 #include "ui_fifth.h"
@@ -434,9 +436,130 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
         qDebug() << "Сообщение успешно удалено с ID:" << messageId;
 
         loadChatHistory(senderId, receiverId);
+
+
     }
     else if (selectedAction == editAction)
     {
-        QMessageBox::warning(this, "Ошибка", "Действие находится в разработке");
+        int messageId = item->data(Qt::UserRole).toInt();
+        qDebug() << "Сообщение с ID:" << messageId;
+
+        if (messageId <= 0)
+        {
+            QMessageBox::warning(this, "Ошибка", "ID сообщения недействителен.");
+            qDebug() << "Недействительный ID сообщения:" << messageId;
+            return;
+        }
+
+        QString currentText = item->text();
+
+        if (currentText.endsWith(" (изменено)"))
+        {
+            currentText = currentText.left(currentText.length() - 11);
+        }
+        else if (currentText.startsWith("["))
+        {
+            currentText = currentText.mid(12);
+        }
+
+        QDialog editDialog(this);
+        editDialog.setWindowTitle("Редактирование сообщения");
+        editDialog.setMinimumWidth(400);
+
+        QVBoxLayout *layout = new QVBoxLayout(&editDialog);
+
+        QLabel *label = new QLabel("Редактируйте сообщение:", &editDialog);
+        QTextEdit *textEdit = new QTextEdit(&editDialog);
+        textEdit->setPlainText(currentText);
+        textEdit->setFocus();
+
+        QHBoxLayout *buttonLayout = new QHBoxLayout();
+        QPushButton *saveButton = new QPushButton("Сохранить", &editDialog);
+        QPushButton *cancelButton = new QPushButton("Отменить", &editDialog);
+
+
+        saveButton->setStyleSheet(
+            "QPushButton {"
+            "   background-color: #4caf50;"
+            "   color: white;"
+            "   padding: 8px 16px;"
+            "   border-radius: 4px;"
+            "   min-width: 80px;"
+            "}"
+            "QPushButton:hover {"
+            "   background-color: #388e3c;"
+            "}"
+            "QPushButton:disabled {"
+            "   background-color: #a5d6a7;"
+            "}"
+            );
+
+        cancelButton->setStyleSheet(
+            "QPushButton {"
+            "   background-color: #f0f0f0;"
+            "   color: #333;"
+            "   padding: 8px 16px;"
+            "   border-radius: 4px;"
+            "   min-width: 80px;"
+            "}"
+            "QPushButton:hover {"
+            "   background-color: #e0e0e0;"
+            "}"
+            );
+
+        buttonLayout->addWidget(saveButton);
+        buttonLayout->addWidget(cancelButton);
+
+        layout->addWidget(label);
+        layout->addWidget(textEdit);
+        layout->addLayout(buttonLayout);
+
+        connect(saveButton, &QPushButton::clicked, &editDialog, &QDialog::accept);
+        connect(cancelButton, &QPushButton::clicked, &editDialog, &QDialog::reject);
+
+        connect(textEdit, &QTextEdit::textChanged, [saveButton, textEdit]() {
+            saveButton->setEnabled(!textEdit->toPlainText().trimmed().isEmpty());
+        });
+
+        if (editDialog.exec() != QDialog::Accepted)
+        {
+            qDebug() << "Редактирование отменено пользователем";
+            return;
+        }
+
+        QString newText = textEdit->toPlainText().trimmed();
+
+        if (newText.isEmpty())
+        {
+            QMessageBox::warning(this, "Ошибка", "Сообщение не может быть пустым.");
+            return;
+        }
+
+        if (newText == currentText)
+        {
+            qDebug() << "Текст сообщения не изменился";
+            return;
+        }
+
+
+        QString newTextWithMark = textEdit->toPlainText().trimmed() + " (изменено)";
+
+        QSqlQuery query;
+        query.prepare("UPDATE messages SET message_text  = :newText "
+                      "WHERE id = :messageId");
+        query.bindValue(":newText", newTextWithMark);
+        query.bindValue(":messageId", messageId);
+
+        if (!query.exec())
+        {
+            QMessageBox::warning(this, "Ошибка", "Не удалось обновить сообщение.");
+            qDebug() << "Ошибка выполнения SQL запроса:" << query.lastError().text();
+            return;
+        }
+
+        qDebug() << "Сообщение успешно обновлено с ID:" << messageId;
+
+        loadChatHistory(senderId, receiverId);
+        QMessageBox::information(this, "Успех", "Сообщение успешно отредактировано.");
     }
 }
