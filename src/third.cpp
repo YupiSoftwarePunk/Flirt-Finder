@@ -303,6 +303,7 @@ void Third::keyPressEvent(QKeyEvent *event)
 
 
 
+// Загрузка пользовательских данных
 void Third::setCurrentUserData(const QString &login, const QString &password)
 {
     currentLogin = login;
@@ -391,6 +392,7 @@ void Third::on_messageBox_clicked()
 
 
 
+// Загрузка пользовательских данных
 void Third::setProfileData(const QString &name, int age, const QString &city, const QString &photoPath, const QString & hobby)
 {
     ui->profileName->setText(name);

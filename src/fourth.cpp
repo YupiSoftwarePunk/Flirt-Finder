@@ -214,6 +214,7 @@ void Fourth::on_LikeButton_clicked()
 
 
 
+// Загрузка пользовательских данных
 void Fourth::setUserCredentials(const QString &login, const QString &password)
 {
     currentLogin = login;

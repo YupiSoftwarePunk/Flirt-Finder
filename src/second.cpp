@@ -205,6 +205,7 @@ void Second::on_onSaveData_clicked()
 
 
 
+// Загрузка пользовательских данных
 void Second::setUserCredentials(const QString &login, const QString &password)
 {
     this->login = login;

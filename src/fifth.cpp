@@ -21,7 +21,7 @@ Fifth::Fifth(QWidget *parent)
 
     setWindowTitle("FlirtFinder");
 
-    // Установка контекстного меню
+    // Контекстное меню
     ui->listWidget->setContextMenuPolicy(Qt::CustomContextMenu);
     connect(ui->listWidget, &QListWidget::customContextMenuRequested, this, &Fifth::onContextMenuRequested);
 }
@@ -34,6 +34,7 @@ Fifth::~Fifth()
 
 
 
+// Загрузка пользовательских данных
 void Fifth::setUserCredentials(const QString &login, const QString &password, QListWidgetItem *selectedItem)
 {
     currentLogin = login;
@@ -236,17 +237,15 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
     QMenu contextMenu(this);
 
     QAction *replyAction = contextMenu.addAction("↩️ Ответить");
-    QAction *forwardAction = contextMenu.addAction("↪️ Переслать");
-    QAction *copyAction = contextMenu.addAction("📋 Копировать");
     QAction *editAction = contextMenu.addAction("✏️ Изменить");
+    QAction *copyAction = contextMenu.addAction("📋 Копировать");
+    QAction *forwardAction = contextMenu.addAction("↪️ Переслать");
     contextMenu.addSeparator();
-    QAction *deleteAction = contextMenu.addAction("🗑️ Удалить");
+    QAction *deleteAction = contextMenu.addAction("🗑️ Удалить");    // сделать цвет фона красным
 
     QFont font = deleteAction->font();
     font.setBold(true);
     deleteAction->setFont(font);
-
-    deleteAction->setObjectName("dangerAction");
 
     QAction *selectedAction = contextMenu.exec(ui->listWidget->mapToGlobal(pos));
 
@@ -254,6 +253,7 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
     {
         return;
     }
+
 
     if (selectedAction == replyAction)
     {
