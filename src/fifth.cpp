@@ -225,6 +225,9 @@ void Fifth::loadChatHistory(int senderId, int receiverId)
 
 
 
+
+
+
 // Контекстное меню
 void Fifth::onContextMenuRequested(const QPoint &pos)
 {
@@ -248,6 +251,7 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
     deleteAction->setFont(font);
 
     QAction *selectedAction = contextMenu.exec(ui->listWidget->mapToGlobal(pos));
+
 
     if (!selectedAction)
     {
@@ -280,6 +284,8 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
         ui->textEdit->setFocus();
 
         loadChatHistory(senderId, receiverId);
+
+
 
 
     }
@@ -315,11 +321,43 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
 
 
         fourthWindow->show();
-        fourthWindow->forwardMessage();
         fourthWindow->setUserCredentials(currentLogin, currentPassword);
         fourthWindow->loadNotifications();
+        fourthWindow->forwardMessage();
 
-        fifthWindow->on_sendButton_clicked();
+        if (!ui->textEdit->hasFocus())
+        {
+            return;
+        }
+
+        if (messageText.isEmpty())
+        {
+            QMessageBox::warning(this, "Ошибка", "Сообщение не может быть пустым.");
+            return;
+        }
+
+        qDebug() << "Отправка сообщения от senderId:" << senderId << " к receiverId:" << receiverId;
+
+
+        QSqlQuery query;
+        query.prepare(
+            "INSERT INTO messages (sender_id, receiver_id, message_text) "
+            "VALUES (:senderId, :receiverId, :messageText)"
+            );
+        query.bindValue(":senderId", senderId);
+        query.bindValue(":receiverId", forwardRecipientId);
+        query.bindValue(":messageText", messageText);
+
+        if (query.exec())
+        {
+            qDebug() << "Сообщение успешно переслано от" << senderId << "к" << forwardRecipientId;
+        }
+        else
+        {
+            qDebug() << "Ошибка пересылки сообщения:" << query.lastError().text();
+            QMessageBox::warning(this, "Ошибка", "Не удалось переслать сообщение");
+        }
+
         // необходимо чутка изменить метод отправки сообщения и все будет готово
         // Пока что сообщение копируется и заходит в нужный чат
 
@@ -328,7 +366,9 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
 
         // this->deleteLater();
 
-        loadChatHistory(senderId, receiverId);
+        loadChatHistory(senderId, forwardRecipientId);
+
+
 
 
     }
@@ -350,6 +390,8 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
         {
             QMessageBox::warning(this, "Ошибка", "Не удалось определить текст сообщения для копирования.");
         }
+
+
 
 
     }
@@ -437,6 +479,8 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
         qDebug() << "Сообщение успешно удалено с ID:" << messageId;
 
         loadChatHistory(senderId, receiverId);
+
+
 
 
     }
