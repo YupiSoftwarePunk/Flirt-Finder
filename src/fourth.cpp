@@ -411,3 +411,33 @@ void Fourth::keyPressEvent(QKeyEvent *event)
         QDialog::keyPressEvent(event);
     }
 }
+
+
+
+
+
+void Fourth::forwardMessage()
+{
+    QListWidgetItem *currentItem = ui->listWidget->currentItem();
+    if (!currentItem)
+    {
+        QMessageBox::warning(this, "Ошибка", "Выберите пользователя для входа в чат.");
+        return;
+    }
+
+    int targetUserId = currentItem->data(Qt::UserRole).toInt(); // Извлекаем ID целевого пользователя
+    qDebug() << "Проверка взаимного лайка для targetUserId:" << targetUserId;
+
+
+    if (targetUserId <= 0 || targetUserId == getCurrentUserId(currentLogin))
+    {
+        QMessageBox::warning(this, "Ошибка", "Некорректный или совпадающий ID целевого пользователя.");
+        return;
+    }
+
+    auto fifthWindow = new Fifth();
+    fifthWindow->setForwardRecipient(targetUserId);
+    fifthWindow->show();
+
+    this->close();
+}

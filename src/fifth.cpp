@@ -241,7 +241,7 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
     QAction *copyAction = contextMenu.addAction("📋 Копировать");
     QAction *forwardAction = contextMenu.addAction("↪️ Переслать");
     contextMenu.addSeparator();
-    QAction *deleteAction = contextMenu.addAction("🗑️ Удалить");    // сделать цвет фона красным
+    QAction *deleteAction = contextMenu.addAction("🗑️ Удалить");    // сделать цвет фона красным, но пока не знаю как
 
     QFont font = deleteAction->font();
     font.setBold(true);
@@ -313,21 +313,22 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
         auto fourthWindow = new Fourth();
         auto fifthWindow = new Fifth();
 
+
+        fourthWindow->show();
+        fourthWindow->forwardMessage();
         fourthWindow->setUserCredentials(currentLogin, currentPassword);
         fourthWindow->loadNotifications();
 
-        // Показываем окна
-        fourthWindow->show();
-        fifthWindow->show();
+        fifthWindow->on_sendButton_clicked();
+        // необходимо чутка изменить метод отправки сообщения и все будет готово
+        // Пока что сообщение копируется и заходит в нужный чат
+
+
         this->hide();
 
         // this->deleteLater();
 
         loadChatHistory(senderId, receiverId);
-
-        // можно записать это в бд и перейти в др. чат и отправить, без сигналов
-        // Нужно переписать этот метод чтобы он отправлял пересланное сообщение в бд как обычное с
-        // указанием отправителя и получателя и тогда все должно заработать как нужно
 
 
     }
@@ -524,12 +525,6 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
             saveButton->setEnabled(!textEdit->toPlainText().trimmed().isEmpty());
         });
 
-
-
-
-
-
-
         if (editDialog.exec() != QDialog::Accepted)
         {
             qDebug() << "Редактирование отменено пользователем";
@@ -577,4 +572,17 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
         loadChatHistory(senderId, receiverId);
         QMessageBox::information(this, "Успех", "Сообщение успешно отредактировано.");
     }
+
+
+}
+
+
+
+
+
+void Fifth::setForwardRecipient(int recipientId)
+{
+    forwardRecipientId = recipientId;
+
+    loadChatHistory(senderId, forwardRecipientId);
 }

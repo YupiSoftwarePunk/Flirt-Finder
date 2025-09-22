@@ -23,6 +23,8 @@ public:
 
     void loadChatHistory(int senderId, int receiverId);
 
+    void setForwardRecipient(int recipientId);
+
 
 protected:
     void keyReleaseEvent(QKeyEvent* e)
@@ -107,6 +109,8 @@ private:
     int referenceMessageId;
 
     void onContextMenuRequested(const QPoint &pos);
+
+    int forwardRecipientId;
 };
 
 #endif // FIFTH_H

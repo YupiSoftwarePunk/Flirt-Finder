@@ -24,6 +24,8 @@ public:
 
     void initializeSupportLike(int currentUserId);
 
+    void forwardMessage();
+
 
 private slots:
     void on_ChatButton_clicked();
