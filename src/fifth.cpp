@@ -549,16 +549,21 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
 
         QSqlQuery query;
         query.prepare("UPDATE messages SET message_text  = :newText "
-                      "WHERE id = :messageId");   // AND sender_id =: senderId
+                      "WHERE id = :messageId AND sender_id = :senderId");
         query.bindValue(":newText", newTextWithMark);
-        // query.bindValue(":senderId", senderId);   -- это чтобы можно было редачить только свои сообщения
         query.bindValue(":messageId", messageId);
+        query.bindValue(":senderId", senderId);
 
         if (!query.exec())
         {
             QMessageBox::warning(this, "Ошибка", "Не удалось обновить сообщение.");
             qDebug() << "Ошибка выполнения SQL запроса:" << query.lastError().text();
             return;
+        }
+
+        if (senderId == receiverId)
+        {
+            QMessageBox::warning(this, "Ошибка", "Невозможно отредактировать сообщение собеседника.");
         }
 
         qDebug() << "Сообщение успешно обновлено с ID:" << messageId;

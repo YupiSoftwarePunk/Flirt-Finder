@@ -66,24 +66,24 @@ void MainWindow::on_login_button_clicked()
 
 
     // Ограничение длины логина
-    if (login.length() < 3 || login.length() > 20)
-    {
-        QMessageBox::warning(this, "Ошибка", "Логин должен содержать от 3 до 20 символов!");
-        ui->login->clear();
-        ui->password->clear();
-        ui->login->setFocus();
-        return;
-    }
+    // if (login.length() < 3 || login.length() > 20)
+    // {
+    //     QMessageBox::warning(this, "Ошибка", "Логин должен содержать от 3 до 20 символов!");
+    //     ui->login->clear();
+    //     ui->password->clear();
+    //     ui->login->setFocus();
+    //     return;
+    // }
 
-    // Ограничение длины пароля
-    if (password.length() < 6 || password.length() > 20)
-    {
-        QMessageBox::warning(this, "Ошибка", "Пароль должен содержать от 6 до 30 символов!");
-        ui->login->clear();
-        ui->password->clear();
-        ui->login->setFocus();
-        return;
-    }
+    // // Ограничение длины пароля
+    // if (password.length() < 6 || password.length() > 20)
+    // {
+    //     QMessageBox::warning(this, "Ошибка", "Пароль должен содержать от 6 до 30 символов!");
+    //     ui->login->clear();
+    //     ui->password->clear();
+    //     ui->login->setFocus();
+    //     return;
+    // }
 
 
     QSqlQuery query;
