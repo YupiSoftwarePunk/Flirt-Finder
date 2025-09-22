@@ -524,6 +524,12 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
             saveButton->setEnabled(!textEdit->toPlainText().trimmed().isEmpty());
         });
 
+
+
+
+
+
+
         if (editDialog.exec() != QDialog::Accepted)
         {
             qDebug() << "Редактирование отменено пользователем";
