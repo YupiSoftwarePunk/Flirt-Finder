@@ -23,10 +23,6 @@ public:
 
     void loadChatHistory(int senderId, int receiverId);
 
-    void setForwardRecipient(int recipientId);
-
-    void sendForwardedMessage(int fromUserId, int toUserId, const QString &messageText);
-
 
 protected:
     void keyReleaseEvent(QKeyEvent* e)

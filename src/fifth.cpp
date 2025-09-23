@@ -330,32 +330,6 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
 
         fourthWindow->show();
 
-        fourthWindow->forwardMessage();
-
-
-        // QSqlQuery query;
-        // query.prepare(
-        //     "INSERT INTO messages (sender_id, receiver_id, message_text) "
-        //     "VALUES (:senderId, :receiverId, :messageText)"
-        //     );
-        // query.bindValue(":senderId", senderId);
-        // query.bindValue(":receiverId", forwardRecipientId);
-        // query.bindValue(":messageText", forwardedMessageText);
-
-        // if (query.exec())
-        // {
-        //     qDebug() << "Сообщение успешно переслано от" << senderId << "к" << forwardRecipientId;
-        // }
-        // else
-        // {
-        //     qDebug() << "Ошибка пересылки сообщения:" << query.lastError().text();
-        //     QMessageBox::warning(this, "Ошибка", "Не удалось переслать сообщение");
-
-        //     loadChatHistory(senderId, forwardRecipientId);
-        // }
-
-        // // Пока что сообщение копируется и заходит в нужный чат
-
         this->hide();
 
 
@@ -611,41 +585,3 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
 }
 
 
-
-
-
-void Fifth::setForwardRecipient(int recipientId)
-{
-    forwardRecipientId = recipientId;
-
-    loadChatHistory(senderId, forwardRecipientId);
-}
-
-
-
-
-void Fifth::sendForwardedMessage(int fromUserId, int toUserId, const QString &messageText)
-{
-    if (toUserId <= 0) {
-        qDebug() << "Ошибка: некорректный ID получателя";
-        return;
-    }
-
-    QSqlQuery query;
-    query.prepare("INSERT INTO messages (sender_id, receiver_id, message_text) "
-                  "VALUES (:senderId, :receiverId, :messageText)");
-    query.bindValue(":senderId", fromUserId);
-    query.bindValue(":receiverId", toUserId);
-    query.bindValue(":messageText", messageText);
-
-    if (query.exec())
-    {
-        qDebug() << "Сообщение успешно переслано от" << fromUserId << "к" << toUserId;
-        // Обновляем историю чата
-        loadChatHistory(fromUserId, toUserId);
-    }
-    else
-    {
-        qDebug() << "Ошибка пересылки сообщения:" << query.lastError().text();
-    }
-}

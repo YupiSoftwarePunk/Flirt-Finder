@@ -440,44 +440,6 @@ void Fourth::keyPressEvent(QKeyEvent *event)
 
 
 
-
-void Fourth::forwardMessage()
-{
-    QListWidgetItem *currentItem = ui->listWidget->currentItem();
-
-    if (isForwardMode)
-    {
-        QMessageBox::warning(this, "Ошибка", "Выберите пользователя для пересылки.");
-    }
-    else
-    {
-        QMessageBox::warning(this, "Ошибка", "Выберите пользователя для входа в чат.");
-    }
-    return;
-
-
-    int targetUserId = currentItem->data(Qt::UserRole).toInt(); // Извлекаем ID целевого пользователя
-    qDebug() << "Проверка взаимного лайка для targetUserId:" << targetUserId;
-
-
-    if (isForwardMode)
-    {
-        auto fifthWindow = new Fifth();
-        fifthWindow->sendForwardedMessage(forwardSenderId, targetUserId, forwardMessageText);
-        fifthWindow->loadChatHistory(forwardSenderId, targetUserId);
-        fifthWindow->show();
-        this->close();
-    }
-    else
-    {
-        auto fifthWindow = new Fifth();
-        fifthWindow->loadChatHistory(forwardSenderId, targetUserId);
-        fifthWindow->show();
-        this->close();
-    }
-}
-
-
 void Fourth::setForwardData(int senderId, const QString &messageText)
 {
     forwardSenderId = senderId;

@@ -24,8 +24,6 @@ public:
 
     void initializeSupportLike(int currentUserId);
 
-    void forwardMessage();
-
     void setForwardData(int senderId, const QString &forwardedText);
 
     void setForwardMode(bool isForward);
