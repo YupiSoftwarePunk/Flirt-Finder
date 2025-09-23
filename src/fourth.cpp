@@ -20,8 +20,6 @@ Fourth::Fourth(QWidget *parent)
 
     connect(ui->listWidget, &QListWidget::itemSelectionChanged, this, &Fourth::checkMutualLike);
 
-    connect(ui->BackButton, &QPushButton::clicked, this, &::Fourth::on_BackButton_Clicked);
-
     connect(ui->searchButton, &QPushButton::clicked, this, &::Fourth::performSearch);
 
 
@@ -161,7 +159,7 @@ void Fourth::on_ChatButton_clicked()
 
 
 // Нажатие кнопки "Назад"
-void Fourth::on_BackButton_Clicked()
+void Fourth::on_BackButton_clicked()
 {
     auto thirdWindow = new Third();
     thirdWindow->setCurrentUserData(currentLogin, currentPassword);
@@ -344,6 +342,33 @@ void Fourth::on_listWidget_itemDoubleClicked(QListWidgetItem *item)
     thirdWindow->hideAllButtons();
     thirdWindow->setProfileData(name, age, city, photoPath, hobby);
     thirdWindow->show();
+
+
+
+
+
+    if (isForwardMode)
+    {
+        if (forwardSenderId > 0 && !forwardMessageText.isEmpty())
+        {
+            QSqlQuery query;
+            query.prepare("INSERT INTO messages (sender_id, receiver_id, message_text) "
+                          "VALUES (:senderId, :receiverId, :messageText)");
+            query.bindValue(":senderId", forwardSenderId);
+            query.bindValue(":receiverId", targetUserId);
+            query.bindValue(":messageText", forwardMessageText);
+
+            if (query.exec())
+            {
+                qDebug() << "Сообщение переслано от" << forwardSenderId << "к" << targetUserId;
+            }
+
+            auto fifthWindow = new Fifth();
+            fifthWindow->loadChatHistory(forwardSenderId, targetUserId);
+            fifthWindow->show();
+            this->close();
+        }
+    }
 }
 
 
@@ -457,6 +482,8 @@ void Fourth::setForwardData(int senderId, const QString &messageText)
 {
     forwardSenderId = senderId;
     forwardMessageText = messageText;
+
+    qDebug() << "Fourth: получены данные для пересылки, senderId:" << senderId;
 }
 
 

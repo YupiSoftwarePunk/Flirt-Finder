@@ -33,7 +33,7 @@ public:
 
 private slots:
     void on_ChatButton_clicked();
-    void on_BackButton_Clicked();
+    void on_BackButton_clicked();
     void on_LikeButton_clicked();
 
     void on_listWidget_itemDoubleClicked(QListWidgetItem *item);
