@@ -447,6 +447,7 @@ void Fourth::keyPressEvent(QKeyEvent *event)
 
 
 
+// Задание полей для пересылки сообщения
 void Fourth::setForwardData(int senderId, const QString &messageText)
 {
     forwardSenderId = senderId;
@@ -458,6 +459,7 @@ void Fourth::setForwardData(int senderId, const QString &messageText)
 
 
 
+// Задание режима пересылки для double click
 void Fourth::setForwardMode(bool isForward)
 {
     isForwardMode = isForward;

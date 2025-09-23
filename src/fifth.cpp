@@ -259,6 +259,8 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
     }
 
 
+    // ---------------------------------------------------------------------------------------------
+    // ответить на сообщение
     if (selectedAction == replyAction)
     {
         // иногда возникает ошибка что неправильно определяется id сообщения
@@ -289,6 +291,8 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
 
 
     }
+    // ---------------------------------------------------------------------------------------------
+    // Переслать сообщение
     else if (selectedAction == forwardAction)
     {
         QListWidgetItem *item = ui->listWidget->currentItem();
@@ -320,11 +324,12 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
         this->forwardedMessageText = forwardedText;
 
 
+        QMessageBox::information(this, "Пересылка", "Нажмите два раза на строку с нужным пользователем");
+
         auto fourthWindow = new Fourth();
 
         fourthWindow->setUserCredentials(currentLogin, currentPassword);
         fourthWindow->loadNotifications();
-
         fourthWindow->setForwardMode(true);
         fourthWindow->setForwardData(senderId, forwardedText);
 
@@ -336,6 +341,8 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
 
 
     }
+    // ---------------------------------------------------------------------------------------------
+    // скопировать сообщение
     else if (selectedAction == copyAction)
     {
         QString messageText = item->text();
@@ -359,6 +366,8 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
 
 
     }
+    // ---------------------------------------------------------------------------------------------
+    // удалить сообщение
     else if (selectedAction == deleteAction)
     {
         // иногда возникает ошибка что неправильно определяется id сообщения и удаления не происходит
@@ -448,6 +457,8 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
 
 
     }
+    // ---------------------------------------------------------------------------------------------
+    // изменить сообщение
     else if (selectedAction == editAction)
     {
         int messageId = item->data(Qt::UserRole).toInt();
@@ -579,6 +590,8 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
 
         loadChatHistory(senderId, receiverId);
         QMessageBox::information(this, "Успех", "Сообщение успешно отредактировано.");
+
+        loadChatHistory(senderId, receiverId);
     }
 
 
