@@ -305,6 +305,40 @@ void Fourth::on_listWidget_itemDoubleClicked(QListWidgetItem *item)
 
     // Извлекаем ID выбранного пользователя
     int targetUserId = item->data(Qt::UserRole).toInt();
+
+
+
+    // пересылка сообщений
+    if (isForwardMode)
+    {
+        if (forwardSenderId > 0 && !forwardMessageText.isEmpty())
+        {
+            QSqlQuery query;
+            query.prepare("INSERT INTO messages (sender_id, receiver_id, message_text) "
+                          "VALUES (:senderId, :receiverId, :messageText)");
+            query.bindValue(":senderId", forwardSenderId);
+            query.bindValue(":receiverId", targetUserId);
+            query.bindValue(":messageText", forwardMessageText);
+
+            if (query.exec())
+            {
+                qDebug() << "Сообщение переслано от" << forwardSenderId << "к" << targetUserId;
+            }
+
+            auto fifthWindow = new Fifth();
+            fifthWindow->loadChatHistory(forwardSenderId, targetUserId);
+            fifthWindow->show();
+            this->close();
+        }
+
+        return;
+    }
+
+
+
+
+
+    // открытие анкеты пользователя
     if (targetUserId <= 0)
     {
         QMessageBox::warning(this, "Ошибка", "Некорректный ID пользователя.");
@@ -342,33 +376,6 @@ void Fourth::on_listWidget_itemDoubleClicked(QListWidgetItem *item)
     thirdWindow->hideAllButtons();
     thirdWindow->setProfileData(name, age, city, photoPath, hobby);
     thirdWindow->show();
-
-
-
-
-
-    if (isForwardMode)
-    {
-        if (forwardSenderId > 0 && !forwardMessageText.isEmpty())
-        {
-            QSqlQuery query;
-            query.prepare("INSERT INTO messages (sender_id, receiver_id, message_text) "
-                          "VALUES (:senderId, :receiverId, :messageText)");
-            query.bindValue(":senderId", forwardSenderId);
-            query.bindValue(":receiverId", targetUserId);
-            query.bindValue(":messageText", forwardMessageText);
-
-            if (query.exec())
-            {
-                qDebug() << "Сообщение переслано от" << forwardSenderId << "к" << targetUserId;
-            }
-
-            auto fifthWindow = new Fifth();
-            fifthWindow->loadChatHistory(forwardSenderId, targetUserId);
-            fifthWindow->show();
-            this->close();
-        }
-    }
 }
 
 
