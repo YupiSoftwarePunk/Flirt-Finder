@@ -25,6 +25,8 @@ public:
 
     void setForwardRecipient(int recipientId);
 
+    void sendForwardedMessage(int fromUserId, int toUserId, const QString &messageText);
+
 
 protected:
     void keyReleaseEvent(QKeyEvent* e)
@@ -111,6 +113,7 @@ private:
     void onContextMenuRequested(const QPoint &pos);
 
     int forwardRecipientId;
+    QString forwardedMessageText;
 };
 
 #endif // FIFTH_H

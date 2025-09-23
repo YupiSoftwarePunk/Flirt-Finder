@@ -26,6 +26,10 @@ public:
 
     void forwardMessage();
 
+    void setForwardData(int senderId, const QString &forwardedText);
+
+    void setForwardMode(bool isForward);
+
 
 private slots:
     void on_ChatButton_clicked();
@@ -53,6 +57,11 @@ private:
     void performSearch();
 
     void keyPressEvent(QKeyEvent *event);
+
+
+    int forwardSenderId;
+    QString forwardMessageText;
+    bool isForwardMode;
 };
 
 #endif // FOURTH_H

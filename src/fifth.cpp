@@ -310,63 +310,53 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
         // Форматируем сообщение для пересылки
         QString sender = messageText.mid(0, 11);
         QString message = messageText.mid(11, messageText.length());
+        QString forwardedText = "➤ Переслано от: " + sender + "\n──────────────────────────────\n" + message;
 
-        QClipboard *clipboard = QApplication::clipboard(); // можно записать это в бд и перейти в др. чат и отправит, без сигналов
-        clipboard->setText("➤ Переслано от: " + sender + "\n──────────────────────────────\n" + message);
-        qDebug() << "Сообщение: " << messageText;
+
+        QClipboard *clipboard = QApplication::clipboard();
+        clipboard->setText(forwardedText);
+        qDebug() << "Сообщение для пересылки: " << forwardedText;
+
+        this->forwardedMessageText = forwardedText;
 
 
         auto fourthWindow = new Fourth();
-        auto fifthWindow = new Fifth();
 
-
-        fourthWindow->show();
         fourthWindow->setUserCredentials(currentLogin, currentPassword);
         fourthWindow->loadNotifications();
+
+        fourthWindow->setForwardMode(true);
+        fourthWindow->setForwardData(senderId, forwardedText);
+
+        fourthWindow->show();
+
         fourthWindow->forwardMessage();
 
-        if (!ui->textEdit->hasFocus())
-        {
-            return;
-        }
 
-        if (messageText.isEmpty())
-        {
-            QMessageBox::warning(this, "Ошибка", "Сообщение не может быть пустым.");
-            return;
-        }
+        // QSqlQuery query;
+        // query.prepare(
+        //     "INSERT INTO messages (sender_id, receiver_id, message_text) "
+        //     "VALUES (:senderId, :receiverId, :messageText)"
+        //     );
+        // query.bindValue(":senderId", senderId);
+        // query.bindValue(":receiverId", forwardRecipientId);
+        // query.bindValue(":messageText", forwardedMessageText);
 
-        qDebug() << "Отправка сообщения от senderId:" << senderId << " к receiverId:" << receiverId;
+        // if (query.exec())
+        // {
+        //     qDebug() << "Сообщение успешно переслано от" << senderId << "к" << forwardRecipientId;
+        // }
+        // else
+        // {
+        //     qDebug() << "Ошибка пересылки сообщения:" << query.lastError().text();
+        //     QMessageBox::warning(this, "Ошибка", "Не удалось переслать сообщение");
 
+        //     loadChatHistory(senderId, forwardRecipientId);
+        // }
 
-        QSqlQuery query;
-        query.prepare(
-            "INSERT INTO messages (sender_id, receiver_id, message_text) "
-            "VALUES (:senderId, :receiverId, :messageText)"
-            );
-        query.bindValue(":senderId", senderId);
-        query.bindValue(":receiverId", forwardRecipientId);
-        query.bindValue(":messageText", messageText);
-
-        if (query.exec())
-        {
-            qDebug() << "Сообщение успешно переслано от" << senderId << "к" << forwardRecipientId;
-        }
-        else
-        {
-            qDebug() << "Ошибка пересылки сообщения:" << query.lastError().text();
-            QMessageBox::warning(this, "Ошибка", "Не удалось переслать сообщение");
-        }
-
-        // необходимо чутка изменить метод отправки сообщения и все будет готово
-        // Пока что сообщение копируется и заходит в нужный чат
-
+        // // Пока что сообщение копируется и заходит в нужный чат
 
         this->hide();
-
-        // this->deleteLater();
-
-        loadChatHistory(senderId, forwardRecipientId);
 
 
 
@@ -629,4 +619,33 @@ void Fifth::setForwardRecipient(int recipientId)
     forwardRecipientId = recipientId;
 
     loadChatHistory(senderId, forwardRecipientId);
+}
+
+
+
+
+void Fifth::sendForwardedMessage(int fromUserId, int toUserId, const QString &messageText)
+{
+    if (toUserId <= 0) {
+        qDebug() << "Ошибка: некорректный ID получателя";
+        return;
+    }
+
+    QSqlQuery query;
+    query.prepare("INSERT INTO messages (sender_id, receiver_id, message_text) "
+                  "VALUES (:senderId, :receiverId, :messageText)");
+    query.bindValue(":senderId", fromUserId);
+    query.bindValue(":receiverId", toUserId);
+    query.bindValue(":messageText", messageText);
+
+    if (query.exec())
+    {
+        qDebug() << "Сообщение успешно переслано от" << fromUserId << "к" << toUserId;
+        // Обновляем историю чата
+        loadChatHistory(fromUserId, toUserId);
+    }
+    else
+    {
+        qDebug() << "Ошибка пересылки сообщения:" << query.lastError().text();
+    }
 }
