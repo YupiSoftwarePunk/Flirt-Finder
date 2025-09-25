@@ -593,8 +593,6 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
 
         loadChatHistory(senderId, receiverId);
     }
-
-
 }
 
 
