@@ -138,6 +138,8 @@ void Fifth::on_sendButton_clicked()
     ui->textEdit->setFocus();
 
     referenceMessageId = -1;
+
+    loadChatHistory(senderId, receiverId);
 }
 
 
@@ -370,6 +372,8 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
     // удалить сообщение
     else if (selectedAction == deleteAction)
     {
+        loadChatHistory(senderId, receiverId);
+
         // иногда возникает ошибка что неправильно определяется id сообщения и удаления не происходит
         // необходимо найти решение этой проблемы
 
@@ -587,8 +591,6 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
         }
 
         qDebug() << "Сообщение успешно обновлено с ID:" << messageId;
-
-        loadChatHistory(senderId, receiverId);
         QMessageBox::information(this, "Успех", "Сообщение успешно отредактировано.");
 
         loadChatHistory(senderId, receiverId);

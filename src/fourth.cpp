@@ -387,8 +387,6 @@ void Fourth::performSearch()
 {
     QString searchText = ui->searchInput->text().trimmed();
 
-    // выше ^
-
     // Если строка пустая, показываем все элементы
     if (searchText.isEmpty())
     {

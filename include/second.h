@@ -1,7 +1,6 @@
 #ifndef SECOND_H
 #define SECOND_H
 
-#include "qspinbox.h"
 #include <QDialog>
 #include <QRegularExpressionValidator>
 
