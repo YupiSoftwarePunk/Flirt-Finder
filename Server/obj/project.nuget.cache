@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "evLqlxfpI/k=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\Server.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Denis\\.nuget\\packages\\microsoft.aspnetcore.openapi\\9.0.7\\microsoft.aspnetcore.openapi.9.0.7.nupkg.sha512",
+    "C:\\Users\\Denis\\.nuget\\packages\\microsoft.openapi\\1.6.17\\microsoft.openapi.1.6.17.nupkg.sha512"
+  ],
+  "logs": []
+}
