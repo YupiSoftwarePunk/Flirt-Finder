@@ -16,6 +16,7 @@
 - [Задачи](#Задачи)
 - [Пояснительная записка](#Пояснительная-записка-и-презентация-к-приложению)
 - [Дальнейшие планы по развитию проекта](#дальнейшие-планы-по-развитию-проекта)
+- [Методы для реализации в работе API и бд](#Методы-для-реализации-в-работе-API)
 - [Информация для контрибьюторов](#Информация-для-контрибьюторов)
 - [Информация для участников проекта](#Для-участников-проекта)
 - [Как будет вестись разработка](#Также-для-участников-проекта-По-какому-принципу-будет-вестись-разработка)
@@ -131,6 +132,40 @@
 	- Возможность выбора цветовой схемы
 - Сделать возможность заблокировать пользователя и кинуть жалобу на конкретного пользователя. Это можно сделать в ящике уведомлений, нажав правой кнопкой мыши на нужного пользователя, осталось это только реализовать
 - Также для оттачивания навыков неплохо было бы написать документацию по ГОСТу чтобы все было ка кна реальном проекте
+
+
+
+## Методы для реализации в работе API
+
+**1 Окно**
+- Вход в приложение  (void MainWindow::on_login_button_clicked())
+- Регистрация в приложение  (void MainWindow::on_registration_button_clicked())
+**2 Окно**
+- Загрузка фото профиля для регистрации  (void Second::initializeUserData2())
+- Сохранение фото в анкете  (void Second::on_onSaveData_clicked())
+- сохранение анкеты в бд  (bool Second::saveUserData(const QString &login, const QString &password,
+                  const QString &name, const QString &gender, int age,
+                  const QString &hobbies, const QString &city, const QString &photoPath))
+- Загрузка данных пользователя  (void Second::loadUserData())
+- Загрузка фото пользователя  (void Second::loadPhotoData(const QString &login))
+**3 Окно**
+- Загрузка профилей  (void Third::loadProfiles(const QString &login))
+- Обновление анкет  (void Third::updateUI())
+- Сохранение реакции  (void Third::saveReaction(int targetUserId, bool isLike))
+- Сортировка профилей  (void Third::sortProfiles())
+**4 Окно**
+- Загрузка уведомлений  (void Fourth::loadNotifications())
+- Переход в чат  (void Fourth::on_ChatButton_clicked())
+- Нажатие кнопки "Лайкнуть в ответ"  (void Fourth::on_LikeButton_clicked())
+- Получение id пользователя (int Fourth::getCurrentUserId(const QString &login))
+- Проверка взаимного лайка  (void Fourth::checkMutualLike())
+- Подробная информация о пользователе  (void Fourth::on_listWidget_itemDoubleClicked(QListWidgetItem *item))
+**5 Окно**
+- Загрузка пользовательских данных  (void Fifth::setUserCredentials(const QString &login, const QString &password, QListWidgetItem *selectedItem))
+- Отправка сообщения  (void Fifth::on_sendButton_clicked())
+- Подгрузка истории чата  (void Fifth::loadChatHistory(int senderId, int receiverId))
+- Контекстное меню, тут есть пару методов которые обращаются к бд   (void Fifth::onContextMenuRequested(const QPoint &pos))
+
 
 
     
