@@ -140,6 +140,8 @@
 **1 Окно**
 - Вход в приложение  (void MainWindow::on_login_button_clicked())
 - Регистрация в приложение  (void MainWindow::on_registration_button_clicked())
+---
+
 **2 Окно**
 - Загрузка фото профиля для регистрации  (void Second::initializeUserData2())
 - Сохранение фото в анкете  (void Second::on_onSaveData_clicked())
@@ -148,11 +150,15 @@
                   const QString &hobbies, const QString &city, const QString &photoPath))
 - Загрузка данных пользователя  (void Second::loadUserData())
 - Загрузка фото пользователя  (void Second::loadPhotoData(const QString &login))
+---
+
 **3 Окно**
 - Загрузка профилей  (void Third::loadProfiles(const QString &login))
 - Обновление анкет  (void Third::updateUI())
 - Сохранение реакции  (void Third::saveReaction(int targetUserId, bool isLike))
 - Сортировка профилей  (void Third::sortProfiles())
+---
+
 **4 Окно**
 - Загрузка уведомлений  (void Fourth::loadNotifications())
 - Переход в чат  (void Fourth::on_ChatButton_clicked())
@@ -160,11 +166,14 @@
 - Получение id пользователя (int Fourth::getCurrentUserId(const QString &login))
 - Проверка взаимного лайка  (void Fourth::checkMutualLike())
 - Подробная информация о пользователе  (void Fourth::on_listWidget_itemDoubleClicked(QListWidgetItem *item))
+---
+
 **5 Окно**
 - Загрузка пользовательских данных  (void Fifth::setUserCredentials(const QString &login, const QString &password, QListWidgetItem *selectedItem))
 - Отправка сообщения  (void Fifth::on_sendButton_clicked())
 - Подгрузка истории чата  (void Fifth::loadChatHistory(int senderId, int receiverId))
 - Контекстное меню, тут есть пару методов которые обращаются к бд   (void Fifth::onContextMenuRequested(const QPoint &pos))
+---
 
 
 
