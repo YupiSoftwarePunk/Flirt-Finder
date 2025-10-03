@@ -139,60 +139,78 @@
 
 ### **1 Окно (Аутентификация)**
 - **`on_login_button_clicked()`** - **POST /api/auth/login**
+
 Отправка учетных данных (логин/пароль) для аутентификации и создания сессии.
 - **`on_registration_button_clicked()`** - **POST /api/auth/register**
+
 Создание новой учетной записи пользователя.
 
 ---
 
 ### **2 Окно (Анкета пользователя)**
 - **`initializeUserData2()`** - **GET /api/users/me** или **GET /api/users/{id}**
+
 Получение данных текущего пользователя или пользователя по ID для заполнения формы.
 - **`on_onSaveData_clicked()`** - **PUT /api/users/me** или **PATCH /api/users/me**
+
 Полное или частичное обновление данных профиля пользователя. PUT если заменяем всю анкету, PATCH если обновляем только измененные поля.
 - **`saveUserData(...)`** - **POST /api/users** (если создает нового) или **PUT /api/users/me** (если обновляет существующего)
+
 Зависит от контекста. Если это окончательное сохранение новой анкеты после регистрации - POST. Если редактирование существующей - PUT.
 - **`loadUserData()`** - **GET /api/users/me**
+
 Получение данных текущего пользователя.
 - **`loadPhotoData(const QString &login)`** - **GET /api/users/{login}/photo** или **GET /api/assets/photos/{filename}**
+
 Получение файла фотографии пользователя.
 
 ---
 
 ### **3 Окно (Просмотр анкет)**
 - **`loadProfiles(const QString &login)`** - **GET /api/profiles**
+
 Получение списка анкет для просмотра. Логин текущего пользователя может передаваться в заголовках для исключения его из результатов.
 - **`saveReaction(int targetUserId, bool isLike)`** - **POST /api/reactions**
+
 Создание новой реакции (лайк/дизлайк) на целевую анкету. Тело запроса: `{targetUserId: 123, type: "like"}`
 - **`sortProfiles()`** - **GET /api/profiles?sort=criteria**
+
 Сортировка обычно выполняется на сервере. Клиент просто добавляет параметры сортировки к запросу на получение анкет.
 
 ---
 
 ### **4 Окно (Уведомления)**
 - **`loadNotifications()`** - **GET /api/notifications**
+
 Получение списка уведомлений для текущего пользователя.
 - **`on_LikeButton_clicked()`** - **POST /api/reactions**
+
 Аналогично saveReaction - создание реакции в ответ на уведомление.
 - **`getCurrentUserId(const QString &login)`** - **GET /api/users/me** (клиент должен хранить ID после логина)
+
 Получение ID текущего пользователя, но лучше чтобы клиент сохранял это после успешного логина.
 - **`checkMutualLike()`** - **GET /api/matches/check/{targetUserId}**
+
 Проверка наличия взаимной симпатии с конкретным пользователем.
 - **`on_listWidget_itemDoubleClicked(QListWidgetItem *item)`** - **GET /api/users/{userId}**
+
 Получение подробной информации о конкретном пользователе при клике на элемент списка.
 
 ---
 
 ### **5 Окно (Чат)**
 - **`on_sendButton_clicked()`** - **POST /api/messages**
+
 Создание и отправка нового сообщения. Тело: `{receiverId: 123, content: "Текст сообщения"}`
 - **`loadChatHistory(int senderId, int receiverId)`** - **GET /api/messages?userId={receiverId}**
+
 Получение истории сообщений между текущим пользователем и выбранным собеседником.
 - **`onContextMenuRequested(const QPoint &pos)`**
 	- **Удалить сообщение** - **DELETE /api/messages/{id}**
 	- **Ответить на сообщение** - **POST /api/messages**
 	- **Изменение сообщения** - **PATCH /api/messages/{id}**
 	- **Копировать сообщение** - **GET /api/messages/{id}**
+	
 Контекстное меню
 
 ---
