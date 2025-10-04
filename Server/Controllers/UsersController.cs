@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Server.DTOs;
 using Server.Services;
 using Server.Services.Interfaces;
 using System.Security.Claims;
@@ -45,6 +46,52 @@ namespace Server.Controllers
         {
             var photo = await _photoService.GetPhotoByLoginAsync(login);
             return File(photo.Content, photo.ContentType);
+        }
+
+
+
+        // Получение пользователя по ID
+        [Authorize]
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetUserById(string id)
+        {
+            var user = await _userService.GetByIdAsync(id);
+            return user != null ? Ok(user) : NotFound();
+        }
+
+
+
+        // Получение ID текущего пользователя
+        [Authorize]
+        [HttpGet("me/id")]
+        public IActionResult GetCurrentUserId()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            return Ok(new { userId });
+        }
+
+
+
+        // Обновление анкеты полностью
+        [Authorize]
+        [HttpPut("me")]
+        public async Task<IActionResult> UpdateUser([FromBody] UpdateUserDto dto)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var result = await _userService.UpdateAsync(userId, dto);
+            return result ? NoContent() : BadRequest("Ошибка обновления");
+        }
+
+
+
+        // Частичное обновление анкеты
+        [Authorize]
+        [HttpPatch("me")]
+        public async Task<IActionResult> PatchUser([FromBody] PatchUserDto dto)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var result = await _userService.PatchAsync(userId, dto);
+            return result ? NoContent() : BadRequest("Ошибка обновления");
         }
     }
 }
