@@ -1,6 +1,17 @@
-﻿namespace Server.Data
+﻿using Server.Models;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+
+namespace Server.Data
 {
-    public class AppDbContext
+    public class AppDbContext : DbContext
     {
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+
+        public DbSet<Message> Messages { get; set; }
+        public DbSet<User> Users { get; set; }
+        public object Chats { get; internal set; }
+        public DbSet<MessageReport> MessageReports { get; set; }
+
     }
 }

@@ -1,4 +1,6 @@
-﻿using Server.DTOs;
+﻿using Microsoft.EntityFrameworkCore;
+using Server.Data;
+using Server.DTOs;
 using Server.Models;
 using Server.Services.Interfaces;
 
@@ -6,6 +8,14 @@ namespace Server.Services
 {
     public class MessageService : IMessageService
     {
+        private readonly AppDbContext _context;
+
+        public MessageService(AppDbContext context)
+        {
+            _context = context;
+        }
+
+
         public async Task<bool> DeleteAsync(string userId, int messageId)
         {
             var message = await _context.Messages.FindAsync(messageId);
