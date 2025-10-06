@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Server.DTOs;
 using Server.Services.Interfaces;
 
 namespace Server.Controllers
@@ -18,7 +19,7 @@ namespace Server.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register(RegisterDto dto)
         {
-            var result = await _authService.RegisterAsync(dto);
+            var result = await _authService.Register(dto);
             return result.Success ? Ok(result) : BadRequest(result.Message);
         }
 
@@ -26,7 +27,7 @@ namespace Server.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginDto dto)
         {
-            var token = await _authService.LoginAsync(dto);
+            var token = await _authService.Login(dto);
             return token != null ? Ok(new { token }) : Unauthorized();
         }
     }

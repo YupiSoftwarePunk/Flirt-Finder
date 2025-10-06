@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Server.DTOs;
 
 namespace Server.Services.Interfaces
 {
     public interface IAuthService
     {
-        public async Task<IActionResult> Register(RegisterDto dto);
+        Task<AuthResultDto> Register(RegisterDto dto);
 
-        public async Task<IActionResult> Login(LoginDto dto);
+        Task<string> Login(LoginDto dto);
     }
 }
