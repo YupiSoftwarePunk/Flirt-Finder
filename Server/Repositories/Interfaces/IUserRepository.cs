@@ -6,5 +6,8 @@ namespace Server.Repositories.Interfaces
     {
         Task CreateAsync(User user);
         Task GetByUsernameAsync(string username);
+
+        Task<User> GetByIdAsync(string id);
+        Task UpdateAsync(User user);
     }
 }

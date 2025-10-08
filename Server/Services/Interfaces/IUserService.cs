@@ -1,4 +1,8 @@
-﻿using Server.DTOs;
+﻿using Microsoft.EntityFrameworkCore;
+using Server.Data;
+using Server.DTOs;
+using Server.Models;
+using Server.Repositories;
 
 namespace Server.Services.Interfaces
 {

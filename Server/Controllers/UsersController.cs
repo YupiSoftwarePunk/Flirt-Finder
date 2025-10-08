@@ -13,12 +13,13 @@ namespace Server.Controllers
     public class UsersController : ControllerBase
     {
         private readonly IUserService _userService;
+        private readonly IPhotoService _photoService;
 
-        public UsersController(IUserService userService)
+        public UsersController(IUserService userService, IPhotoService photoService)
         {
             _userService = userService;
+            _photoService = photoService;
         }
-
 
         [Authorize]
         [HttpGet("me")]

@@ -1,5 +1,7 @@
 
 using Server.Data;
+using Server.Repositories;
+using Server.Repositories.Interfaces;
 
 namespace Server
 {
@@ -18,6 +20,8 @@ namespace Server
 
             builder.Services.AddDbContext<AppDbContext>(options =>
             options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+            builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 
             var app = builder.Build();
