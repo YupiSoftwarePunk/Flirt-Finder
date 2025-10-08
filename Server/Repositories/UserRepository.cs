@@ -25,7 +25,7 @@ namespace Server.Repositories
             return await _context.Users.FindAsync(id);
         }
 
-        public async Task<User?> GetByUsernameAsync(string username)
+        public async Task<User> GetByUsernameAsync(string username)
         {
             return await _context.Users
                 .FirstOrDefaultAsync(u => u.Username == username);
@@ -35,11 +35,6 @@ namespace Server.Repositories
         {
             _context.Users.Update(user);
             await _context.SaveChangesAsync();
-        }
-
-        Task IUserRepository.GetByUsernameAsync(string username)
-        {
-            return GetByUsernameAsync(username);
         }
     }
 }
