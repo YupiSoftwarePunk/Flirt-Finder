@@ -19,10 +19,6 @@
       "RelativeMoniker": "D:0:0:{634DC8F3-D842-404A-81AC-400B4162745B}|Server.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{634DC8F3-D842-404A-81AC-400B4162745B}|Server.csproj|c:\\users\\denis\\documents\\qt projects\\prototype\\server\\.env||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{634DC8F3-D842-404A-81AC-400B4162745B}|Server.csproj|solutionrelative:.env||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{634DC8F3-D842-404A-81AC-400B4162745B}|Server.csproj|c:\\users\\denis\\documents\\qt projects\\prototype\\server\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{634DC8F3-D842-404A-81AC-400B4162745B}|Server.csproj|solutionrelative:properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
@@ -134,7 +130,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 22,
+          "SelectedChildIndex": 21,
           "Children": [
             {
               "$type": "Bookmark",
@@ -168,7 +164,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 4,
               "Title": "launchSettings.json",
               "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\Properties\\launchSettings.json",
               "RelativeDocumentMoniker": "Properties\\launchSettings.json",
@@ -181,7 +177,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 5,
               "Title": "Server.http",
               "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\Server.http",
               "RelativeDocumentMoniker": "Server.http",
@@ -190,19 +186,6 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
               "WhenOpened": "2025-10-10T15:34:26.905Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": ".env",
-              "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\.env",
-              "RelativeDocumentMoniker": ".env",
-              "ToolTip": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\.env",
-              "RelativeToolTip": ".env",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAcAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-10-10T15:27:20.707Z",
               "EditorCaption": ""
             },
             {
@@ -220,7 +203,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 9,
               "Title": "User.cs",
               "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\Models\\User.cs",
               "RelativeDocumentMoniker": "Models\\User.cs",
@@ -232,7 +215,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 10,
               "Title": "MessageReport.cs",
               "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\Models\\MessageReport.cs",
               "RelativeDocumentMoniker": "Models\\MessageReport.cs",
@@ -244,7 +227,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 11,
               "Title": "Message.cs",
               "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\Models\\Message.cs",
               "RelativeDocumentMoniker": "Models\\Message.cs",
@@ -256,7 +239,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 12,
               "Title": "Chat.cs",
               "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\Models\\Chat.cs",
               "RelativeDocumentMoniker": "Models\\Chat.cs",
@@ -268,7 +251,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 13,
               "Title": "UserProfile.cs",
               "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\Mappings\\UserProfile.cs",
               "RelativeDocumentMoniker": "Mappings\\UserProfile.cs",
@@ -280,7 +263,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 14,
               "Title": "UserDto.cs",
               "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\DTOs\\UserDto.cs",
               "RelativeDocumentMoniker": "DTOs\\UserDto.cs",
@@ -292,7 +275,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 15,
               "Title": "UpdateUserDto.cs",
               "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\DTOs\\UpdateUserDto.cs",
               "RelativeDocumentMoniker": "DTOs\\UpdateUserDto.cs",
@@ -304,7 +287,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 16,
               "Title": "ReportDto.cs",
               "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\DTOs\\ReportDto.cs",
               "RelativeDocumentMoniker": "DTOs\\ReportDto.cs",
@@ -316,7 +299,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 17,
               "Title": "RegisterDto.cs",
               "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\DTOs\\RegisterDto.cs",
               "RelativeDocumentMoniker": "DTOs\\RegisterDto.cs",
@@ -328,7 +311,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 18,
               "Title": "PinMessageDto.cs",
               "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\DTOs\\PinMessageDto.cs",
               "RelativeDocumentMoniker": "DTOs\\PinMessageDto.cs",
@@ -340,7 +323,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 19,
               "Title": "PatchUserDto.cs",
               "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\DTOs\\PatchUserDto.cs",
               "RelativeDocumentMoniker": "DTOs\\PatchUserDto.cs",
@@ -352,7 +335,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 21,
               "Title": "LoginDto.cs",
               "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\DTOs\\LoginDto.cs",
               "RelativeDocumentMoniker": "DTOs\\LoginDto.cs",
@@ -364,7 +347,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 22,
               "Title": "EditMessageDto.cs",
               "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\DTOs\\EditMessageDto.cs",
               "RelativeDocumentMoniker": "DTOs\\EditMessageDto.cs",
@@ -376,7 +359,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 23,
               "Title": "CreateUserDto.cs",
               "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\DTOs\\CreateUserDto.cs",
               "RelativeDocumentMoniker": "DTOs\\CreateUserDto.cs",
@@ -388,7 +371,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 24,
               "Title": "AuthResultDto.cs",
               "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\DTOs\\AuthResultDto.cs",
               "RelativeDocumentMoniker": "DTOs\\AuthResultDto.cs",
@@ -406,14 +389,14 @@
               "RelativeDocumentMoniker": "Data\\AppDbContext.cs",
               "ToolTip": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\Data\\AppDbContext.cs",
               "RelativeToolTip": "Data\\AppDbContext.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAAA4AAAAwAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAA9AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-08T16:20:09.975Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 7,
               "Title": "UserRepository.cs",
               "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\Repositories\\UserRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\UserRepository.cs",
@@ -426,7 +409,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 29,
               "Title": "ChatService.cs",
               "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\Services\\ChatService.cs",
               "RelativeDocumentMoniker": "Services\\ChatService.cs",
@@ -438,7 +421,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 28,
               "Title": "AuthService.cs",
               "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\Services\\AuthService.cs",
               "RelativeDocumentMoniker": "Services\\AuthService.cs",
@@ -450,7 +433,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 8,
               "Title": "IUserRepository.cs",
               "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\Repositories\\Interfaces\\IUserRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\Interfaces\\IUserRepository.cs",
@@ -462,7 +445,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 20,
               "Title": "MessageDto.cs",
               "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\DTOs\\MessageDto.cs",
               "RelativeDocumentMoniker": "DTOs\\MessageDto.cs",
@@ -474,7 +457,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 26,
               "Title": "MessagesController.cs",
               "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\Controllers\\MessagesController.cs",
               "RelativeDocumentMoniker": "Controllers\\MessagesController.cs",
@@ -486,7 +469,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 25,
               "Title": "UsersController.cs",
               "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\Controllers\\UsersController.cs",
               "RelativeDocumentMoniker": "Controllers\\UsersController.cs",
@@ -498,7 +481,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 27,
               "Title": "AuthController.cs",
               "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\Controllers\\AuthController.cs",
               "RelativeDocumentMoniker": "Controllers\\AuthController.cs",
@@ -510,7 +493,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 6,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",

@@ -1,0 +1,12 @@
+release/fourth.o
+release/fifth.o
+release/main.o
+release/mainwindow.o
+release/second.o
+release/third.o
+release/qrc_resources.o
+release/moc_fourth.o
+release/moc_mainwindow.o
+release/moc_second.o
+release/moc_third.o
+release/moc_fifth.o
