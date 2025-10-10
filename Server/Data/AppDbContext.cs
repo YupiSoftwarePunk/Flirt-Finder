@@ -12,6 +12,7 @@ namespace Server.Data
         public DbSet<User> Users { get; set; }
         public DbSet<Chat> Chats { get; internal set; }
         public DbSet<MessageReport> MessageReports { get; set; }
-
+        public DbSet<Photo> Photos { get; set; }
+        public DbSet<LikeDislike> LikesDislikes { get; set; }
     }
 }
