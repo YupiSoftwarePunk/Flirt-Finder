@@ -18,6 +18,8 @@ MainWindow::MainWindow(QWidget *parent)
     this->resize(550, 350);
 
 
+    networkManager = new QNetworkAccessManager(this);
+
     // Загрузка стилей
     QString sCssMain;
     QFile styleFile(":/styles/style.css");
@@ -86,28 +88,66 @@ void MainWindow::on_login_button_clicked()
     }
 
 
-    QSqlQuery query;
-    query.prepare("SELECT COUNT(*) FROM users WHERE login = :login AND password = :password");
-    query.bindValue(":login", login);
-    query.bindValue(":password", password);
+    // QSqlQuery query;
+    // query.prepare("SELECT COUNT(*) FROM users WHERE login = :login AND password = :password");
+    // query.bindValue(":login", login);
+    // query.bindValue(":password", password);
 
-    if (!query.exec())
-    {
-        QMessageBox::warning(this, "Ошибка", "Ошибка проверки авторизации!");
-        qDebug() << "Ошибка SQL:" << query.lastError().text();
-        return;
-    }
+    // if (!query.exec())
+    // {
+    //     QMessageBox::warning(this, "Ошибка", "Ошибка проверки авторизации!");
+    //     qDebug() << "Ошибка SQL:" << query.lastError().text();
+    //     return;
+    // }
 
-    query.next();
-    int count = query.value(0).toInt();
-    if (count == 0)
-    {
-        QMessageBox::warning(this, "Ошибка", "Неверный логин или пароль!");
-        ui->login->clear();
-        ui->password->clear();
-        ui->login->setFocus();
-        return;
-    }
+    // query.next();
+    // int count = query.value(0).toInt();
+    // if (count == 0)
+    // {
+    //     QMessageBox::warning(this, "Ошибка", "Неверный логин или пароль!");
+    //     ui->login->clear();
+    //     ui->password->clear();
+    //     ui->login->setFocus();
+    //     return;
+    // }
+
+
+// Подготовка запроса
+    QUrl url("http://localhost:5002/api/auth/login");
+    QNetworkRequest request(url);
+    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+
+    QJsonObject json;
+    json["username"] = login;
+    json["password"] = password;
+
+    QNetworkReply* reply = networkManager->post(request, QJsonDocument(json).toJson());
+
+    connect(reply, &QNetworkReply::finished, this, [=]() {
+        reply->deleteLater();
+
+        if (reply->error() != QNetworkReply::NoError)
+        {
+            QMessageBox::warning(this, "Ошибка", "Ошибка подключения к серверу!");
+            qDebug() << "Ошибка сети:" << reply->errorString();
+            return;
+        }
+
+        QByteArray responseData = reply->readAll();
+        QJsonDocument responseDoc = QJsonDocument::fromJson(responseData);
+        QJsonObject responseObj = responseDoc.object();
+
+        if (!responseObj.contains("token"))
+        {
+            QMessageBox::warning(this, "Ошибка", "Неверный логин или пароль!");
+            ui->login->clear();
+            ui->password->clear();
+            ui->login->setFocus();
+            return;
+        }
+
+        QString token = responseObj["token"].toString();
+        qDebug() << "JWT Token:" << token;
 
     QMessageBox::information(this, "Успех", "Авторизация прошла успешно!");
 
@@ -124,6 +164,7 @@ void MainWindow::on_login_button_clicked()
     thirdWindow->show();
 
     this->close();
+    });
 }
 
 

@@ -27,6 +27,11 @@ namespace Server.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginDto dto)
         {
+            if (dto == null)
+            {
+                return BadRequest("DTO is null. Проверь JSON.");
+            }
+
             var token = await _authService.Login(dto);
             return token != null ? Ok(new { token }) : Unauthorized();
         }

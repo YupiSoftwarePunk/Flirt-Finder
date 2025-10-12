@@ -7,6 +7,7 @@
 *****************************************************************************/
 
 #include "../../../include/mainwindow.h"
+#include <QtNetwork/QSslError>
 #include <QtCore/qmetatype.h>
 
 #include <QtCore/qtmochelpers.h>

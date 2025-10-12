@@ -3,6 +3,12 @@
 
 #include <QMainWindow>
 
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
+#include <QNetworkRequest>
+#include <QJsonDocument>
+#include <QJsonObject>
+
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -28,6 +34,8 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+
+    QNetworkAccessManager* networkManager;
 };
 
 #endif // MAINWINDOW_H
