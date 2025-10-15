@@ -113,7 +113,7 @@ void MainWindow::on_login_button_clicked()
 
 
 // Подготовка запроса
-    QUrl url("http://localhost:5002/api/auth/login");
+    QUrl url("https://localhost:7012/api/auth/login");
     QNetworkRequest request(url);
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
 
