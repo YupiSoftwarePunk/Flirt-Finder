@@ -7,9 +7,7 @@
       "launchBrowser": false,
       "applicationUrl": "http://localhost:5002",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development",
-        "ConnectionStrings__DefaultConnection": "Host=localhost;Port=5432;Database=postgres;Username=postgres;Password=C0d38_50AdM1Nn6",
-        "Jwt__Key": "xVEFm6j5Ru_nX3VLoszonQgkJE03On6Bl20g2iKpIP8"
+        "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
     "https": {
@@ -18,9 +16,7 @@
       "launchBrowser": false,
       "applicationUrl": "https://localhost:7012;http://localhost:5002",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development",
-        "ConnectionStrings__DefaultConnection": "Host=localhost;Port=5432;Database=postgres;Username=postgres;Password=C0d38_50AdM1Nn6",
-        "Jwt__Key": "xVEFm6j5Ru_nX3VLoszonQgkJE03On6Bl20g2iKpIP8"
+        "ASPNETCORE_ENVIRONMENT": "Development"
       }
     }
   }

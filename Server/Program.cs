@@ -1,11 +1,13 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Server.Data;
 using Server.Repositories;
 using Server.Repositories.Interfaces;
+using Server.Services;
+using Server.Services.Interfaces;
 using System.Security.Cryptography;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Text;
 
 namespace Server
@@ -14,7 +16,7 @@ namespace Server
     {
         public static void Main(string[] args)
         {
-            DotNetEnv.Env.Load();
+            
 
             //string skey = "usr-256";
             //var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(skey));
@@ -24,7 +26,15 @@ namespace Server
 
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.Services.AddDbContext<AppDbContext>(options =>
+            options.UseNpgsql(Environment.GetEnvironmentVariable("DB_CONNECTION_STRING")));
+
+            DotNetEnv.Env.Load();
             // Add services to the container.
+
+            builder.Services.AddScoped<IAuthService, AuthService>();
+
+            builder.Services.AddScoped<IUserRepository, UserRepository>();
 
             builder.Services.AddControllers();
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
