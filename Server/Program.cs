@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+using DotNetEnv;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -16,35 +16,33 @@ namespace Server
     {
         public static void Main(string[] args)
         {
-            
+
 
             //string skey = "usr-256";
             //var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(skey));
             //var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature);
             //Console.WriteLine("Key: " + key);
 
+            // Загрузить .env перед созданием builder, чтобы переменные были доступны
+            DotNetEnv.Env.Load();
 
             var builder = WebApplication.CreateBuilder(args);
 
-            builder.Services.AddDbContext<AppDbContext>(options =>
-            options.UseNpgsql(Environment.GetEnvironmentVariable("DB_CONNECTION_STRING")));
-
-            DotNetEnv.Env.Load();
-            // Add services to the container.
-
-            builder.Services.AddScoped<IAuthService, AuthService>();
-
-            builder.Services.AddScoped<IUserRepository, UserRepository>();
-
-            builder.Services.AddControllers();
-            // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-            builder.Services.AddOpenApi();
-
-            var connectionString = builder.Configuration["ConnectionStrings:DefaultConnection"];
-            var jwtKey = builder.Configuration["Jwt:Key"];
+            // Поддержка: сначала переменная окружения, затем appsettings
+            var connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING")
+                                   ?? builder.Configuration.GetConnectionString("DefaultConnection")
+                                   ?? throw new InvalidOperationException("Connection string not configured.");
 
             builder.Services.AddDbContext<AppDbContext>(options =>
-            options.UseNpgsql(connectionString));
+                options.UseNpgsql(connectionString));
+
+            // Получаем JWT ключ/issuer/audience из env или из appsettings
+            var jwtKey = Environment.GetEnvironmentVariable("JWT_KEY") ?? builder.Configuration["Jwt:Key"];
+            var jwtIssuer = Environment.GetEnvironmentVariable("JWT_ISSUER") ?? builder.Configuration["Jwt:Issuer"];
+            var jwtAudience = Environment.GetEnvironmentVariable("JWT_AUDIENCE") ?? builder.Configuration["Jwt:Audience"];
+
+            if (string.IsNullOrWhiteSpace(jwtKey))
+                throw new InvalidOperationException("JWT_KEY не задан в переменных окружения или в appsettings.");
 
             builder.Services.AddAuthentication(options =>
             {
@@ -53,33 +51,35 @@ namespace Server
             })
             .AddJwtBearer(options =>
             {
-            options.TokenValidationParameters = new TokenValidationParameters
-            {
-                ValidateIssuer = true,
-                ValidateAudience = true,
-                ValidateLifetime = true,
-                ValidateIssuerSigningKey = true,
-                ValidIssuer = builder.Configuration["Jwt:Issuer"],
-                ValidAudience = builder.Configuration["Jwt:Audience"],
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
-            };
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = jwtIssuer,
+                    ValidAudience = jwtAudience,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey))
+                };
             });
 
+            builder.Services.AddScoped<IUserRepository, UserRepository>();
+            builder.Services.AddScoped<IAuthService, AuthService>();
+
             builder.Services.AddControllers();
+            builder.Services.AddOpenApi();
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
                 app.MapOpenApi();
             }
 
             app.UseAuthentication();
-            //app.UseHttpsRedirection();
+            // app.UseHttpsRedirection();
 
             app.UseAuthorization();
-
 
             app.MapControllers();
 
