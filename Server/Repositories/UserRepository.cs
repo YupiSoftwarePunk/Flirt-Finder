@@ -20,12 +20,12 @@ namespace Server.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<User> GetByIdAsync(string id)
+        public async Task<User?> GetByIdAsync(string id)
         {
             return await _context.Users.FindAsync(id);
         }
 
-        public async Task<User> GetByUsernameAsync(string username)
+        public async Task<User?> GetByUsernameAsync(string username)
         {
             return await _context.Users
                 .FirstOrDefaultAsync(u => u.Username == username);

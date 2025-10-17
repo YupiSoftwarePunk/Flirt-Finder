@@ -23,12 +23,10 @@ namespace Server
             //var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature);
             //Console.WriteLine("Key: " + key);
 
-            // Загрузить .env перед созданием builder, чтобы переменные были доступны
             DotNetEnv.Env.Load();
 
             var builder = WebApplication.CreateBuilder(args);
 
-            // Поддержка: сначала переменная окружения, затем appsettings
             var connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING")
                                    ?? builder.Configuration.GetConnectionString("DefaultConnection")
                                    ?? throw new InvalidOperationException("Connection string not configured.");
@@ -36,7 +34,6 @@ namespace Server
             builder.Services.AddDbContext<AppDbContext>(options =>
                 options.UseNpgsql(connectionString));
 
-            // Получаем JWT ключ/issuer/audience из env или из appsettings
             var jwtKey = Environment.GetEnvironmentVariable("JWT_KEY") ?? builder.Configuration["Jwt:Key"];
             var jwtIssuer = Environment.GetEnvironmentVariable("JWT_ISSUER") ?? builder.Configuration["Jwt:Issuer"];
             var jwtAudience = Environment.GetEnvironmentVariable("JWT_AUDIENCE") ?? builder.Configuration["Jwt:Audience"];
