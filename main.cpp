@@ -26,20 +26,20 @@ int main(int argc, char *argv[])
     MainWindow w;
     w.show();
 
-    QSqlDatabase db = QSqlDatabase::addDatabase("QPSQL");
-    db.setHostName("localhost");
-    db.setDatabaseName("postgres");
-    db.setUserName("postgres");
-    db.setPassword("C0d38_50AdM1Nn6");
-    db.setPort(5432);
+    // QSqlDatabase db = QSqlDatabase::addDatabase("QPSQL");
+    // db.setHostName("localhost");
+    // db.setDatabaseName("postgres");
+    // db.setUserName("postgres");
+    // db.setPassword("C0d38_50AdM1Nn6");
+    // db.setPort(5432);
 
-    if (!db.open())
-    {
-        qDebug() << "Ошибка подключения:" << db.lastError().text();
-    } else
-    {
-        qDebug() << "Подключение успешно!";
-    }
+    // if (!db.open())
+    // {
+    //     qDebug() << "Ошибка подключения:" << db.lastError().text();
+    // } else
+    // {
+    //     qDebug() << "Подключение успешно!";
+    // }
 
     return a.exec();
 }

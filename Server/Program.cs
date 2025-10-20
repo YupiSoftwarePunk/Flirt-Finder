@@ -16,16 +16,19 @@ namespace Server
     {
         public static void Main(string[] args)
         {
-
-
             //string skey = "usr-256";
             //var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(skey));
             //var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature);
             //Console.WriteLine("Key: " + key);
 
+
             DotNetEnv.Env.Load();
 
+
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.WebHost.UseUrls("http://0.0.0.0:5000");
+
 
             var connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING")
                                    ?? builder.Configuration.GetConnectionString("DefaultConnection")
@@ -67,6 +70,8 @@ namespace Server
             builder.Services.AddOpenApi();
 
             var app = builder.Build();
+
+            app.UseCors("AllowClient");
 
             if (app.Environment.IsDevelopment())
             {
