@@ -36,7 +36,6 @@ namespace Server.Services
             var user = await _context.Users.FindAsync(id);
             if (user == null) return false;
 
-            user.FullName = dto.FullName;
             user.Bio = dto.Bio;
             user.Gender = dto.Gender;
             user.BirthDate = dto.BirthDate;

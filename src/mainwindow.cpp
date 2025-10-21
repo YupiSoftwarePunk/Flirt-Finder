@@ -118,8 +118,8 @@ void MainWindow::on_login_button_clicked()
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
 
     QJsonObject json;
-    json["username"] = login;
-    json["password"] = password;
+    json["Username"] = login;
+    json["Password"] = password;
 
     QNetworkReply* reply = networkManager->post(request, QJsonDocument(json).toJson());
 

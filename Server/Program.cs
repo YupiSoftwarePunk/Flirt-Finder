@@ -27,9 +27,6 @@ namespace Server
 
             var builder = WebApplication.CreateBuilder(args);
 
-            builder.WebHost.UseUrls("http://0.0.0.0:5000");
-
-
             var connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING")
                                    ?? builder.Configuration.GetConnectionString("DefaultConnection")
                                    ?? throw new InvalidOperationException("Connection string not configured.");
