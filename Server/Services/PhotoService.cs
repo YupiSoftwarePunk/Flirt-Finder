@@ -15,10 +15,13 @@ namespace Server.Services
 
         public async Task<(byte[] Content, string ContentType)> GetPhotoByLoginAsync(string login)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == login);
-            if (user == null || string.IsNullOrEmpty(user.PhotoUrl)) return (null, null);
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Login == login);
+            if (user == null) return (null, null);
 
-            var content = await File.ReadAllBytesAsync(user.PhotoUrl);
+            var photo = await _context.Photos.FirstOrDefaultAsync(p => p.UserId == user.Id);
+            if (photo == null || string.IsNullOrEmpty(photo.Url)) return (null, null);
+
+            var content = await File.ReadAllBytesAsync(photo.Url);
             return (content, "image/jpeg");
         }
     }

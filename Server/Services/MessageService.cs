@@ -16,7 +16,7 @@ namespace Server.Services
         }
 
 
-        public async Task<bool> DeleteAsync(string userId, int messageId)
+        public async Task<bool> DeleteAsync(int userId, int messageId)
         {
             var message = await _context.Messages.FindAsync(messageId);
             if (message == null || message.SenderId != userId) return false;
@@ -26,7 +26,7 @@ namespace Server.Services
             return true;
         }
 
-        public async Task<bool> EditAsync(string userId, int messageId, EditMessageDto dto)
+        public async Task<bool> EditAsync(int userId, int messageId, EditMessageDto dto)
         {
             var message = await _context.Messages.FindAsync(messageId);
             if (message == null || message.SenderId != userId) return false;
@@ -41,7 +41,7 @@ namespace Server.Services
             return await _context.Messages.FindAsync(messageId);
         }
 
-        public async Task<IEnumerable<Message>> GetChatHistoryAsync(string senderId, string receiverId)
+        public async Task<IEnumerable<Message>> GetChatHistoryAsync(int senderId, int receiverId)
         {
             return await _context.Messages
                 .Where(m => (m.SenderId == senderId && m.ReceiverId == receiverId) ||
@@ -50,7 +50,7 @@ namespace Server.Services
                 .ToListAsync();
         }
 
-        public async Task SendAsync(string senderId, MessageDto dto)
+        public async Task SendAsync(int senderId, MessageDto dto)
         {
             var message = new Message
             {

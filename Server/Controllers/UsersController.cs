@@ -25,7 +25,9 @@ namespace Server.Controllers
         [HttpGet("me")]
         public async Task<IActionResult> GetCurrentUser()
         {
-            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var userIdStr = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (!int.TryParse(userIdStr, out var userId)) return Unauthorized();
+
             var user = await _userService.GetByIdAsync(userId);
             return Ok(user);
         }
@@ -35,7 +37,9 @@ namespace Server.Controllers
         [HttpPut("me")]
         public async Task<IActionResult> UpdateProfile(UpdateUserDto dto)
         {
-            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var userIdStr = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (!int.TryParse(userIdStr, out var userId)) return Unauthorized();
+
             await _userService.UpdateAsync(userId, dto);
             return NoContent();
         }
@@ -53,8 +57,8 @@ namespace Server.Controllers
 
         // Получение пользователя по ID
         [Authorize]
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetUserById(string id)
+        [HttpGet("{id:int}")]
+        public async Task<IActionResult> GetUserById(int id)
         {
             var user = await _userService.GetByIdAsync(id);
             return user != null ? Ok(user) : NotFound();
@@ -78,7 +82,9 @@ namespace Server.Controllers
         [HttpPut("me")]
         public async Task<IActionResult> UpdateUser([FromBody] UpdateUserDto dto)
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var userIdStr = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (!int.TryParse(userIdStr, out var userId)) return Unauthorized();
+
             var result = await _userService.UpdateAsync(userId, dto);
             return result ? NoContent() : BadRequest("Ошибка обновления");
         }
@@ -90,7 +96,9 @@ namespace Server.Controllers
         [HttpPatch("me")]
         public async Task<IActionResult> PatchUser([FromBody] PatchUserDto dto)
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var userIdStr = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (!int.TryParse(userIdStr, out var userId)) return Unauthorized();
+
             var result = await _userService.PatchAsync(userId, dto);
             return result ? NoContent() : BadRequest("Ошибка обновления");
         }

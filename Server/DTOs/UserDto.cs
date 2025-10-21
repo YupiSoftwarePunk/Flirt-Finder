@@ -2,12 +2,11 @@
 {
     public class UserDto
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         public string Username { get; set; }
         public DateTime CreatedAt { get; set; }
-        public string Bio { get; internal set; }
-        public string Gender { get; internal set; }
-        public DateTime? BirthDate { get; internal set; }
-        public string PhotoUrl { get; internal set; }
+        public string Bio { get; set; }
+        public string Gender { get; set; }
+        public DateTime? BirthDate { get; set; }
     }
 }

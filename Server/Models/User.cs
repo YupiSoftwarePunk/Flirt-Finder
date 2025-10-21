@@ -22,9 +22,6 @@ namespace Server.Models
         [Column("age")]
         public DateTime? BirthDate { get; set; }
 
-        //[Column("photo_path")]
-        //public string PhotoUrl { get; set; }
-
         [Column("password")]
         public string PasswordHash { get; set; }
 

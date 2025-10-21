@@ -15,7 +15,7 @@ namespace Server.Services
             _context = context;
         }
 
-        public async Task<UserDto> GetByIdAsync(string id)
+        public async Task<UserDto> GetByIdAsync(int id)
         {
             var user = await _context.Users.FindAsync(id);
             if (user == null) return null;
@@ -26,12 +26,11 @@ namespace Server.Services
                 Username = user.Username,
                 Bio = user.Bio,
                 Gender = user.Gender,
-                BirthDate = user.BirthDate,
-                PhotoUrl = user.PhotoUrl,
+                BirthDate = user.BirthDate
             };
         }
 
-        public async Task<bool> UpdateAsync(string id, UpdateUserDto dto)
+        public async Task<bool> UpdateAsync(int id, UpdateUserDto dto)
         {
             var user = await _context.Users.FindAsync(id);
             if (user == null) return false;
@@ -39,19 +38,17 @@ namespace Server.Services
             user.Bio = dto.Bio;
             user.Gender = dto.Gender;
             user.BirthDate = dto.BirthDate;
-            user.PhotoUrl = dto.PhotoUrl;
 
             await _context.SaveChangesAsync();
             return true;
         }
 
-        public async Task<bool> PatchAsync(string id, PatchUserDto dto)
+        public async Task<bool> PatchAsync(int id, PatchUserDto dto)
         {
             var user = await _context.Users.FindAsync(id);
             if (user == null) return false;
 
             if (dto.Bio != null) user.Bio = dto.Bio;
-            if (dto.PhotoUrl != null) user.PhotoUrl = dto.PhotoUrl;
 
             await _context.SaveChangesAsync();
             return true;
@@ -68,12 +65,10 @@ namespace Server.Services
 
             var user = new User
             {
-                Id = Guid.NewGuid().ToString(),
                 Username = dto.Username,
                 Bio = dto.Bio,
                 Gender = dto.Gender,
                 BirthDate = dto.BirthDate,
-                PhotoUrl = dto.PhotoUrl,
                 PasswordHash = BCrypt.Net.BCrypt.HashPassword((string)dto.Password)
             };
 
@@ -86,8 +81,7 @@ namespace Server.Services
                 Username = user.Username,
                 Bio = user.Bio,
                 Gender = user.Gender,
-                BirthDate = user.BirthDate,
-                PhotoUrl = user.PhotoUrl
+                BirthDate = user.BirthDate
             };
 
             return (true, "Пользователь создан", userDto);

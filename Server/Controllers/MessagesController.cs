@@ -29,7 +29,9 @@ namespace Server.Controllers
         [HttpPost]
         public async Task<IActionResult> SendMessage([FromBody] MessageDto dto)
         {
-            var senderId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var userIdStr = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (!int.TryParse(userIdStr, out var senderId)) return Unauthorized();
+
             await _messageService.SendAsync(senderId, dto);
             return Ok();
         }
@@ -38,9 +40,11 @@ namespace Server.Controllers
 
         // Получение истории сообщений
         [HttpGet]
-        public async Task<IActionResult> GetMessages([FromQuery] string userId)
+        public async Task<IActionResult> GetMessages([FromQuery] int userId)
         {
-            var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var userIdStr = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (!int.TryParse(userIdStr, out var currentUserId)) return Unauthorized();
+
             var messages = await _messageService.GetChatHistoryAsync(currentUserId, userId);
             return Ok(messages);
         }
@@ -51,7 +55,9 @@ namespace Server.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteMessage(int id)
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var userIdStr = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (!int.TryParse(userIdStr, out var userId)) return Unauthorized();
+
             var success = await _messageService.DeleteAsync(userId, id);
             return success ? NoContent() : Forbid();
         }
@@ -62,7 +68,9 @@ namespace Server.Controllers
         [HttpPatch("{id}")]
         public async Task<IActionResult> EditMessage(int id, [FromBody] EditMessageDto dto)
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var userIdStr = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (!int.TryParse(userIdStr, out var userId)) return Unauthorized();
+
             var success = await _messageService.EditAsync(userId, id, dto);
             return success ? Ok() : BadRequest("Не удалось изменить сообщение");
         }
