@@ -1,13 +1,30 @@
-﻿namespace Server.Models
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Server.Models
 {
+    [Table("likes_dislikes")]
     public class LikeDislike
     {
+        [Key]
+        [Column("id")]
         public int Id { get; set; }
-        public int UserId { get; set; }
-        public int LikedBy { get; set; }
-        public bool Reaction { get; set; }
 
-        public User User { get; set; }
-        public Message Message { get; set; }
+        [Column("user_id")]
+        public int UserId { get; set; }
+
+        [Column("liked_by")]
+        public int LikedBy { get; set; }
+
+        [Column("reaction")]
+        public int Reaction { get; set; }
+
+
+
+        [ForeignKey("UserId")]
+        public User TargetUser { get; set; }
+
+        [ForeignKey("LikedBy")]
+        public User Liker { get; set; }
     }
 }

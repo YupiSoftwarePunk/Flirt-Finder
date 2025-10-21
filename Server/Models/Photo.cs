@@ -16,6 +16,8 @@ namespace Server.Models
         [Column("photo_path")]
         public string Url { get; set; }
 
+
+
         [ForeignKey("UserId")]
         public User User { get; set; }
     }
