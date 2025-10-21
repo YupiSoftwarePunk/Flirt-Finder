@@ -8,7 +8,7 @@ namespace Server.Models
     {
         [Key]
         [Column("id")]
-        public string Id { get; set; }
+        public int Id { get; set; }
 
         [Column("name")]
         public string Username { get; set; }
@@ -22,10 +22,19 @@ namespace Server.Models
         [Column("age")]
         public DateTime? BirthDate { get; set; }
 
-        [Column("photo_path")]
-        public string PhotoUrl { get; set; }
+        //[Column("photo_path")]
+        //public string PhotoUrl { get; set; }
 
         [Column("password")]
         public string PasswordHash { get; set; }
+
+        [Column("login")]
+        public string Login { get; set; }
+
+        [Column("city")]
+        public string City { get; set; }
+
+
+        public ICollection<Photo> Photos { get; set; }
     }
 }
