@@ -23,7 +23,7 @@ namespace Server.Models
         public int Age { get; set; }
 
         [Column("password")]
-        public string PasswordHash { get; set; }
+        public string Password { get; set; }
 
         [Column("login")]
         public string Login { get; set; }

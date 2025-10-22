@@ -27,6 +27,7 @@ namespace Server.Services
                 Bio = user.Bio,
                 Gender = user.Gender,
                 Login = user.Login,
+                City = user.City,
                 Age = user.Age
             };
         }
@@ -39,6 +40,7 @@ namespace Server.Services
             user.Bio = dto.Bio;
             user.Gender = dto.Gender;
             user.Age = dto.Age;
+            user.City = dto.City;
 
             await _context.SaveChangesAsync();
             return true;
@@ -70,7 +72,9 @@ namespace Server.Services
                 Bio = dto.Bio,
                 Gender = dto.Gender,
                 Age = dto.Age,
-                PasswordHash = BCrypt.Net.BCrypt.HashPassword((string)dto.Password)
+                Login = dto.Login,
+                City = dto.City,
+                Password = BCrypt.Net.BCrypt.HashPassword((string)dto.Password)
             };
 
             _context.Users.Add(user);

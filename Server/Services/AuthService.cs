@@ -35,7 +35,12 @@ namespace Server.Services
             var user = new User
             {
                 Login = dto.Login,
-                PasswordHash = BCrypt.Net.BCrypt.HashPassword(dto.Password)
+                Password = BCrypt.Net.BCrypt.HashPassword(dto.Password),
+                Username = "noname",
+                Bio = "nohobby",
+                Gender = "nogen",
+                Age = 16,
+                City = "nocity"
             };
 
             await _userRepository.CreateAsync(user);
@@ -46,7 +51,7 @@ namespace Server.Services
         public async Task<string> Login(LoginDto dto)
         {
             var user = await _userRepository.GetByLoginAsync(dto.Login);
-            if (user == null || !BCrypt.Net.BCrypt.Verify(dto.Password, user.PasswordHash))
+            if (user == null || !BCrypt.Net.BCrypt.Verify(dto.Password, user.Password))
             {
                 return null;
             }

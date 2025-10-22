@@ -16,8 +16,16 @@ namespace Server.Repositories
 
         public async Task CreateAsync(User user)
         {
-            _context.Users.Add(user);
-            await _context.SaveChangesAsync();
+            try
+            {
+                _context.Users.Add(user);
+                await _context.SaveChangesAsync();
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine($"{ex.Message} Ошибка при сохранении пользователя");
+                throw;
+            }
         }
 
         public async Task<User?> GetByIdAsync(string id)

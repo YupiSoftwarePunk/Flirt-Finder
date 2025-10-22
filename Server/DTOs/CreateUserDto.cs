@@ -9,5 +9,7 @@ namespace Server.DTOs
         public int Age { get; set; }
         public string PhotoUrl { get; set; }
         public string Password { get; set; }
+        public string City { get; set; }
+        public string Login { get; set; }
     }
 }
