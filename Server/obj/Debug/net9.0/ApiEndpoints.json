@@ -78,7 +78,7 @@
     "Parameters": [
       {
         "Name": "userId",
-        "Type": "System.String",
+        "Type": "System.Int32",
         "IsRequired": false
       }
     ],
@@ -163,7 +163,7 @@
     "Parameters": [
       {
         "Name": "id",
-        "Type": "System.String",
+        "Type": "System.Int32",
         "IsRequired": true
       }
     ],

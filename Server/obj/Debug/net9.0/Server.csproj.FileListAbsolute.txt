@@ -57,3 +57,5 @@ C:\Users\Denis\Documents\Qt projects\Prototype\Server\obj\Debug\net9.0\Server.ge
 C:\Users\Denis\Documents\Qt projects\Prototype\Server\obj\Debug\net9.0\ref\Server.dll
 C:\Users\Denis\Documents\Qt projects\Prototype\Server\bin\Debug\net9.0\DotNetEnv.dll
 C:\Users\Denis\Documents\Qt projects\Prototype\Server\bin\Debug\net9.0\Sprache.dll
+C:\Users\Denis\Documents\Qt projects\Prototype\Server\bin\Debug\net9.0\AutoMapper.dll
+C:\Users\Denis\Documents\Qt projects\Prototype\Server\bin\Debug\net9.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll

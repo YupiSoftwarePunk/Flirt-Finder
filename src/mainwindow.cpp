@@ -124,7 +124,7 @@ void MainWindow::on_login_button_clicked()
     QNetworkReply* reply = networkManager->post(request, QJsonDocument(json).toJson());
 
     connect(reply, &QNetworkReply::finished, this, [=]() {
-        reply->deleteLater();
+        // reply->deleteLater();
 
         if (reply->error() != QNetworkReply::NoError)
         {
@@ -146,8 +146,10 @@ void MainWindow::on_login_button_clicked()
             return;
         }
 
-        QString token = responseObj["token"].toString();
+        // QString token = responseObj["token"].toString();
+        QString token = QString::fromUtf8(responseData).trimmed();
         qDebug() << "JWT Token:" << token;
+        reply->deleteLater();
 
     QMessageBox::information(this, "Успех", "Авторизация прошла успешно!");
 

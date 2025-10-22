@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Server.Data;
+using Server.Mappings;
 using Server.Repositories;
 using Server.Repositories.Interfaces;
 using Server.Services;
@@ -26,6 +27,8 @@ namespace Server
 
 
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.Services.AddAutoMapper(typeof(UserProfile).Assembly);
 
             var connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING")
                                    ?? builder.Configuration.GetConnectionString("DefaultConnection")
