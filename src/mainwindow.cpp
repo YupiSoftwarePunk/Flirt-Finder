@@ -211,46 +211,89 @@ void MainWindow::on_registration_button_clicked()
         return;
     }
 
-    QSqlQuery query;
-    query.prepare("SELECT COUNT(*) FROM users WHERE login = :login");
-    query.bindValue(":login", login);
+    // QSqlQuery query;
+    // query.prepare("SELECT COUNT(*) FROM users WHERE login = :login");
+    // query.bindValue(":login", login);
 
-    if (!query.exec())
-    {
-        QMessageBox::warning(this, "Ошибка", "Ошибка проверки логина в базе данных!");
-        qDebug() << "Ошибка SQL:" << query.lastError().text();
-        return;
-    }
+    // if (!query.exec())
+    // {
+    //     QMessageBox::warning(this, "Ошибка", "Ошибка проверки логина в базе данных!");
+    //     qDebug() << "Ошибка SQL:" << query.lastError().text();
+    //     return;
+    // }
 
-    query.next();
-    int count = query.value(0).toInt();
-    if (count > 0)
-    {
-        QMessageBox::warning(this, "Ошибка", "Аккаунт с таким логином уже существует!");
-        ui->login_2->clear();
-        ui->password_2->clear();
-        ui->login_2->setFocus();
-        return;
-    }
+    // query.next();
+    // int count = query.value(0).toInt();
+    // if (count > 0)
+    // {
+    //     QMessageBox::warning(this, "Ошибка", "Аккаунт с таким логином уже существует!");
+    //     ui->login_2->clear();
+    //     ui->password_2->clear();
+    //     ui->login_2->setFocus();
+    //     return;
+    // }
 
 
-    query.clear();
-    query.prepare("INSERT INTO users (login, password, name, gender, age, hobbies, city) "
-                  "VALUES (:login, :password, :name, :gender, :age, :hobbies, :city)");
-    query.bindValue(":login", login);
-    query.bindValue(":password", password);
-    query.bindValue(":name", "");
-    query.bindValue(":gender", "");
-    query.bindValue(":age", 0);
-    query.bindValue(":hobbies", "");
-    query.bindValue(":city", "");
+    // query.clear();
+    // query.prepare("INSERT INTO users (login, password, name, gender, age, hobbies, city) "
+    //               "VALUES (:login, :password, :name, :gender, :age, :hobbies, :city)");
+    // query.bindValue(":login", login);
+    // query.bindValue(":password", password);
+    // query.bindValue(":name", "");
+    // query.bindValue(":gender", "");
+    // query.bindValue(":age", 0);
+    // query.bindValue(":hobbies", "");
+    // query.bindValue(":city", "");
 
-    if (!query.exec())
-    {
-        QMessageBox::warning(this, "Ошибка", "Ошибка регистрации!");
-        qDebug() << "Ошибка SQL:" << query.lastError().text();
-        return;
-    }
+    // if (!query.exec())
+    // {
+    //     QMessageBox::warning(this, "Ошибка", "Ошибка регистрации!");
+    //     qDebug() << "Ошибка SQL:" << query.lastError().text();
+    //     return;
+    // }
+
+
+
+    // Создание JSON-объекта
+    QJsonObject json;
+    json["Login"] = login;
+    json["Password"] = password;
+
+    QNetworkRequest request(QUrl("http://localhost:5002/api/auth/register"));
+    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+
+    QNetworkAccessManager* manager = new QNetworkAccessManager(this);
+    QNetworkReply* reply = manager->post(request, QJsonDocument(json).toJson());
+
+    connect(reply, &QNetworkReply::finished, this, [=]() {
+        if (reply->error() == QNetworkReply::NoError)
+        {
+            QByteArray responseData = reply->readAll();
+            QJsonDocument responseDoc = QJsonDocument::fromJson(responseData);
+            QJsonObject responseObj = responseDoc.object();
+
+            QMessageBox::information(this, "Успех", responseObj["message"].toString());
+
+            auto secondWindow = new Second();
+            secondWindow->setUserCredentials(login, password);
+            secondWindow->initializeUserData2();
+            secondWindow->show();
+            this->close();
+        }
+        else
+        {
+            QByteArray errorData = reply->readAll();
+            QJsonDocument errorDoc = QJsonDocument::fromJson(errorData);
+            QString errorMessage = errorDoc.isObject() ? errorDoc.object().value("message").toString() : "Ошибка регистрации";
+
+            QMessageBox::warning(this, "Ошибка", errorMessage);
+            qDebug() << "Ошибка регистрации:" << reply->errorString();
+        }
+
+        reply->deleteLater();
+        manager->deleteLater();
+    });
+
 
 
     QMessageBox::information(this, "Успех", "Регистрация прошла успешно!");

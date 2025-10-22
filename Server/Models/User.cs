@@ -20,7 +20,7 @@ namespace Server.Models
         public string Gender { get; set; }
 
         [Column("age")]
-        public DateTime? BirthDate { get; set; }
+        public int Age { get; set; }
 
         [Column("password")]
         public string PasswordHash { get; set; }

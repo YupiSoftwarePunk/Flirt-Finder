@@ -26,7 +26,8 @@ namespace Server.Services
                 Username = user.Username,
                 Bio = user.Bio,
                 Gender = user.Gender,
-                BirthDate = user.BirthDate
+                Login = user.Login,
+                Age = user.Age
             };
         }
 
@@ -37,7 +38,7 @@ namespace Server.Services
 
             user.Bio = dto.Bio;
             user.Gender = dto.Gender;
-            user.BirthDate = dto.BirthDate;
+            user.Age = dto.Age;
 
             await _context.SaveChangesAsync();
             return true;
@@ -68,7 +69,7 @@ namespace Server.Services
                 Username = dto.Username,
                 Bio = dto.Bio,
                 Gender = dto.Gender,
-                BirthDate = dto.BirthDate,
+                Age = dto.Age,
                 PasswordHash = BCrypt.Net.BCrypt.HashPassword((string)dto.Password)
             };
 
@@ -81,7 +82,7 @@ namespace Server.Services
                 Username = user.Username,
                 Bio = user.Bio,
                 Gender = user.Gender,
-                BirthDate = user.BirthDate
+                Age = user.Age
             };
 
             return (true, "Пользователь создан", userDto);
