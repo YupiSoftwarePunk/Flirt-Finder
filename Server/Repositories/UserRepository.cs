@@ -25,10 +25,10 @@ namespace Server.Repositories
             return await _context.Users.FindAsync(id);
         }
 
-        public async Task<User?> GetByUsernameAsync(string username)
+        public async Task<User?> GetByLoginAsync(string login)
         {
             return await _context.Users
-                .FirstOrDefaultAsync(u => u.Username == username);
+                .FirstOrDefaultAsync(u => u.Login == login);
         }
 
         public async Task UpdateAsync(User user)

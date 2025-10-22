@@ -1,11 +1,13 @@
-﻿using Server.DTOs;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using Server.DTOs;
 using Server.Models;
 using Server.Repositories.Interfaces;
 using Server.Services.Interfaces;
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using System.IdentityModel.Tokens.Jwt;
-using Microsoft.IdentityModel.Tokens;
+using Server.Data;
 
 
 namespace Server.Services
@@ -24,7 +26,7 @@ namespace Server.Services
 
         public async Task<AuthResultDto> Register(RegisterDto dto)
         {
-            var existingUser = await _userRepository.GetByUsernameAsync(dto.Username);
+            var existingUser = await _userRepository.GetByLoginAsync(dto.Login);
             if (existingUser != null)
             {
                 return new AuthResultDto { Success = false, Message = "Пользователь уже существует" };
@@ -32,7 +34,7 @@ namespace Server.Services
 
             var user = new User
             {
-                Username = dto.Username,
+                Login = dto.Login,
                 PasswordHash = BCrypt.Net.BCrypt.HashPassword(dto.Password)
             };
 
@@ -43,7 +45,7 @@ namespace Server.Services
 
         public async Task<string> Login(LoginDto dto)
         {
-            var user = await _userRepository.GetByUsernameAsync(dto.Username);
+            var user = await _userRepository.GetByLoginAsync(dto.Login);
             if (user == null || !BCrypt.Net.BCrypt.Verify(dto.Password, user.PasswordHash))
             {
                 return null;
