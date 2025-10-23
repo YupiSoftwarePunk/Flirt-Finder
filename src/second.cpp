@@ -1,5 +1,9 @@
 #include "include/second.h"
 #include "include/third.h"
+#include "qjsondocument.h"
+#include "qjsonobject.h"
+#include "qnetworkaccessmanager.h"
+#include "qnetworkreply.h"
 #include "ui_second.h"
 
 #include <QFileDialog>
@@ -50,32 +54,93 @@ void Second::initializeUserData2()
 {
     loadUserData();
 
-    QSqlQuery photoQuery;
-    photoQuery.prepare("SELECT photo_path FROM photos WHERE user_id = (SELECT id FROM users WHERE login = :login)");
-    photoQuery.bindValue(":login", login);
+    // QSqlQuery photoQuery;
+    // photoQuery.prepare("SELECT photo_path FROM photos WHERE user_id = (SELECT id FROM users WHERE login = :login)");
+    // photoQuery.bindValue(":login", login);
 
-    if (!photoQuery.exec())
-    {
-        qDebug() << "Ошибка выполнения SQL при загрузке фото:" << photoQuery.lastError().text();
-        return;
-    }
+    // if (!photoQuery.exec())
+    // {
+    //     qDebug() << "Ошибка выполнения SQL при загрузке фото:" << photoQuery.lastError().text();
+    //     return;
+    // }
 
-    if (photoQuery.next())
-    {
-        QString photoPath = photoQuery.value(0).toString();
-        if (!photoPath.isEmpty())
+    // if (photoQuery.next())
+    // {
+    //     QString photoPath = photoQuery.value(0).toString();
+    //     if (!photoPath.isEmpty())
+    //     {
+    //         loadPhotoData(photoPath);
+    //     }
+    //     else
+    //     {
+    //         qDebug() << "Фото отсутствует для пользователя.";
+    //     }
+    // }
+    // else
+    // {
+    //     qDebug() << "Фото для пользователя не найдено.";
+    // }
+
+
+    QNetworkAccessManager* manager = new QNetworkAccessManager(this);
+
+    QNetworkRequest userRequest(QUrl("http://localhost:5002/api/users/me"));
+    userRequest.setRawHeader("Authorization", "Bearer " + token.toUtf8());
+
+    QNetworkReply* userReply = manager->get(userRequest);
+
+    connect(userReply, &QNetworkReply::finished, this, [=]() {
+        if (userReply->error() == QNetworkReply::NoError)
         {
-            loadPhotoData(photoPath);
+            QByteArray responseData = userReply->readAll();
+            QJsonDocument jsonDoc = QJsonDocument::fromJson(responseData);
+            QJsonObject userObj = jsonDoc.object();
+
+            ui->lineEdit->setText(userObj["username"].toString());
+            ui->textEdit->setText(userObj["bio"].toString());
+            ui->comboBox->setCurrentText(userObj["gender"].toString());
+            ui->lineEdit_4->setText(userObj["city"].toString());
+            ui->spinBox->setValue(userObj["age"].toInt());
+
+            QString login = userObj["login"].toString();
+            QNetworkRequest photoRequest(QUrl("http://localhost:5002/api/users/" + login + "/photo"));
+            QNetworkReply* photoReply = manager->get(photoRequest);
+
+            connect(photoReply, &QNetworkReply::finished, this, [=]() {
+                if (photoReply->error() == QNetworkReply::NoError)
+                {
+                    QByteArray photoData = photoReply->readAll();
+                    QPixmap pixmap;
+                    pixmap.loadFromData(photoData);
+                    QGraphicsScene* scene = new QGraphicsScene(this);
+                    scene->addPixmap(pixmap.scaled(150, 150, Qt::KeepAspectRatio));
+                    ui->graphicsView->setScene(scene);
+                }
+                else
+                {
+                    qDebug() << "Фото не найдено:" << photoReply->errorString();
+                }
+
+                photoReply->deleteLater();
+            });
         }
         else
         {
-            qDebug() << "Фото отсутствует для пользователя.";
+            qDebug() << "Ошибка загрузки данных пользователя:" << userReply->errorString();
         }
-    }
-    else
-    {
-        qDebug() << "Фото для пользователя не найдено.";
-    }
+
+        userReply->deleteLater();
+    });
+}
+
+
+
+
+
+
+void Second::setToken(const QString& jwt)
+{
+    token = jwt;
 }
 
 
@@ -329,26 +394,58 @@ bool Second::saveUserData(const QString &login, const QString &password,
 // обновление данных пользователя
 void Second::loadUserData()
 {
-    QSqlQuery query;
-    query.prepare("SELECT name, gender, age, hobbies, city FROM users WHERE login = :login AND password = :password");
-    query.bindValue(":login", login);
-    query.bindValue(":password", password);
+    // QSqlQuery query;
+    // query.prepare("SELECT name, gender, age, hobbies, city FROM users WHERE login = :login AND password = :password");
+    // query.bindValue(":login", login);
+    // query.bindValue(":password", password);
 
-    if (!query.exec())
-    {
-        QMessageBox::warning(this, "Ошибка", "Ошибка загрузки данных!");
-        qDebug() << "Ошибка SQL:" << query.lastError().text();
-        return;
-    }
+    // if (!query.exec())
+    // {
+    //     QMessageBox::warning(this, "Ошибка", "Ошибка загрузки данных!");
+    //     qDebug() << "Ошибка SQL:" << query.lastError().text();
+    //     return;
+    // }
 
-    if (query.next())
-    {
-        ui->lineEdit->setText(query.value("name").toString());
-        ui->comboBox->setCurrentText(query.value("gender").toString());
-        ui->spinBox->setValue(query.value("age").toInt());
-        ui->textEdit->setPlainText(query.value("hobbies").toString());
-        ui->lineEdit_4->setText(query.value("city").toString());
-    }
+    // if (query.next())
+    // {
+    //     ui->lineEdit->setText(query.value("name").toString());
+    //     ui->comboBox->setCurrentText(query.value("gender").toString());
+    //     ui->spinBox->setValue(query.value("age").toInt());
+    //     ui->textEdit->setPlainText(query.value("hobbies").toString());
+    //     ui->lineEdit_4->setText(query.value("city").toString());
+    // }
+
+
+
+    QNetworkAccessManager* manager = new QNetworkAccessManager(this);
+
+    QNetworkRequest request(QUrl("http://localhost:5002/api/users/me"));
+    request.setRawHeader("Authorization", "Bearer " + token.toUtf8());
+
+    QNetworkReply* reply = manager->get(request);
+
+    connect(reply, &QNetworkReply::finished, this, [=]() {
+        if (reply->error() == QNetworkReply::NoError)
+        {
+            QByteArray responseData = reply->readAll();
+            QJsonDocument jsonDoc = QJsonDocument::fromJson(responseData);
+            QJsonObject userObj = jsonDoc.object();
+
+            ui->lineEdit->setText(userObj["username"].toString());
+            ui->comboBox->setCurrentText(userObj["gender"].toString());
+            ui->spinBox->setValue(userObj["age"].toInt());
+            ui->textEdit->setPlainText(userObj["bio"].toString());
+            ui->lineEdit_4->setText(userObj["city"].toString());
+        }
+        else
+        {
+            QMessageBox::warning(this, "Ошибка", "Ошибка загрузки данных!");
+            qDebug() << "Ошибка API:" << reply->errorString();
+        }
+
+        reply->deleteLater();
+        manager->deleteLater();
+    });
 }
 
 

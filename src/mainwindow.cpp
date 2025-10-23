@@ -112,7 +112,7 @@ void MainWindow::on_login_button_clicked()
     // }
 
 
-// Подготовка запроса
+
     QUrl url("http://localhost:5002/api/auth/login");
     QNetworkRequest request(url);
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
@@ -254,7 +254,6 @@ void MainWindow::on_registration_button_clicked()
 
 
 
-    // Создание JSON-объекта
     QJsonObject json;
     json["Login"] = login;
     json["Password"] = password;

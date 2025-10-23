@@ -3,6 +3,18 @@
   "WorkspaceRootPath": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{634DC8F3-D842-404A-81AC-400B4162745B}|Server.csproj|c:\\users\\denis\\documents\\qt projects\\prototype\\server\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{634DC8F3-D842-404A-81AC-400B4162745B}|Server.csproj|solutionrelative:services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{634DC8F3-D842-404A-81AC-400B4162745B}|Server.csproj|c:\\users\\denis\\documents\\qt projects\\prototype\\server\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{634DC8F3-D842-404A-81AC-400B4162745B}|Server.csproj|solutionrelative:controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{634DC8F3-D842-404A-81AC-400B4162745B}|Server.csproj|c:\\users\\denis\\documents\\qt projects\\prototype\\server\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{634DC8F3-D842-404A-81AC-400B4162745B}|Server.csproj|solutionrelative:controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{634DC8F3-D842-404A-81AC-400B4162745B}|Server.csproj|c:\\users\\denis\\documents\\qt projects\\prototype\\server\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{634DC8F3-D842-404A-81AC-400B4162745B}|Server.csproj|solutionrelative:services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -13,10 +25,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{634DC8F3-D842-404A-81AC-400B4162745B}|Server.csproj|c:\\users\\denis\\documents\\qt projects\\prototype\\server\\dtos\\logindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{634DC8F3-D842-404A-81AC-400B4162745B}|Server.csproj|solutionrelative:dtos\\logindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{634DC8F3-D842-404A-81AC-400B4162745B}|Server.csproj|c:\\users\\denis\\documents\\qt projects\\prototype\\server\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{634DC8F3-D842-404A-81AC-400B4162745B}|Server.csproj|solutionrelative:services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{634DC8F3-D842-404A-81AC-400B4162745B}|Server.csproj|c:\\users\\denis\\documents\\qt projects\\prototype\\server\\repositories\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -65,10 +73,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{634DC8F3-D842-404A-81AC-400B4162745B}|Server.csproj|c:\\users\\denis\\documents\\qt projects\\prototype\\server\\models\\likedislike.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{634DC8F3-D842-404A-81AC-400B4162745B}|Server.csproj|solutionrelative:models\\likedislike.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{634DC8F3-D842-404A-81AC-400B4162745B}|Server.csproj|c:\\users\\denis\\documents\\qt projects\\prototype\\server\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{634DC8F3-D842-404A-81AC-400B4162745B}|Server.csproj|solutionrelative:controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{634DC8F3-D842-404A-81AC-400B4162745B}|Server.csproj|c:\\users\\denis\\documents\\qt projects\\prototype\\server\\dtos\\reportdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -131,10 +135,6 @@
       "RelativeMoniker": "D:0:0:{634DC8F3-D842-404A-81AC-400B4162745B}|Server.csproj|solutionrelative:services\\interfaces\\imessageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{634DC8F3-D842-404A-81AC-400B4162745B}|Server.csproj|c:\\users\\denis\\documents\\qt projects\\prototype\\server\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{634DC8F3-D842-404A-81AC-400B4162745B}|Server.csproj|solutionrelative:controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{634DC8F3-D842-404A-81AC-400B4162745B}|Server.csproj|c:\\users\\denis\\documents\\qt projects\\prototype\\server\\services\\interfaces\\iuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{634DC8F3-D842-404A-81AC-400B4162745B}|Server.csproj|solutionrelative:services\\interfaces\\iuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -162,7 +162,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 32,
+          "SelectedChildIndex": 9,
           "Children": [
             {
               "$type": "Bookmark",
@@ -170,7 +170,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 20,
               "Title": "PhotoDto.cs",
               "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\DTOs\\PhotoDto.cs",
               "RelativeDocumentMoniker": "DTOs\\PhotoDto.cs",
@@ -178,12 +178,11 @@
               "RelativeToolTip": "DTOs\\PhotoDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-22T13:19:36.819Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-22T13:19:36.819Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 29,
               "Title": "ReportProfile.cs",
               "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\Mappings\\ReportProfile.cs",
               "RelativeDocumentMoniker": "Mappings\\ReportProfile.cs",
@@ -191,12 +190,11 @@
               "RelativeToolTip": "Mappings\\ReportProfile.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-22T13:14:32.223Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-22T13:14:32.223Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 26,
               "Title": "PhotoProfile.cs",
               "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\Mappings\\PhotoProfile.cs",
               "RelativeDocumentMoniker": "Mappings\\PhotoProfile.cs",
@@ -204,12 +202,11 @@
               "RelativeToolTip": "Mappings\\PhotoProfile.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-22T13:04:47.212Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-22T13:04:47.212Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 28,
               "Title": "MessageProfile.cs",
               "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\Mappings\\MessageProfile.cs",
               "RelativeDocumentMoniker": "Mappings\\MessageProfile.cs",
@@ -217,12 +214,11 @@
               "RelativeToolTip": "Mappings\\MessageProfile.cs",
               "ViewState": "AgIAAAoAAAAAAAAAAAAQwAcAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-22T13:04:32.896Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-22T13:04:32.896Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 32,
               "Title": "IMessageService.cs",
               "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\Services\\Interfaces\\IMessageService.cs",
               "RelativeDocumentMoniker": "Services\\Interfaces\\IMessageService.cs",
@@ -230,12 +226,11 @@
               "RelativeToolTip": "Services\\Interfaces\\IMessageService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAuwAcAAAA1AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-21T13:18:37.171Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-21T13:18:37.171Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 25,
               "Title": "MessageService.cs",
               "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\Services\\MessageService.cs",
               "RelativeDocumentMoniker": "Services\\MessageService.cs",
@@ -243,8 +238,7 @@
               "RelativeToolTip": "Services\\MessageService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAuwAwAAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-21T12:52:34.05Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-21T12:52:34.05Z"
             },
             {
               "$type": "Document",
@@ -256,12 +250,11 @@
               "RelativeToolTip": "Services\\Interfaces\\IUserService.cs",
               "ViewState": "AgIAAAMAAAAAAAAAAIBJwAwAAAA4AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-21T12:49:38.928Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-21T12:49:38.928Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 11,
               "Title": "PhotoService.cs",
               "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\Services\\PhotoService.cs",
               "RelativeDocumentMoniker": "Services\\PhotoService.cs",
@@ -269,25 +262,24 @@
               "RelativeToolTip": "Services\\PhotoService.cs",
               "ViewState": "AgIAAAgAAAAAAAAAAAAAwBoAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-21T11:00:23.982Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-21T11:00:23.982Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "UserService.cs",
               "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\Services\\UserService.cs",
               "RelativeDocumentMoniker": "Services\\UserService.cs",
               "ToolTip": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\Services\\UserService.cs",
               "RelativeToolTip": "Services\\UserService.cs",
-              "ViewState": "AgIAAE0AAAAAAAAAAAAAAB4AAAAeAAAAAAAAAA==",
+              "ViewState": "AgIAAEAAAAAAAAAAAAAQwFUAAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-21T10:40:40.88Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "User.cs",
               "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\Models\\User.cs",
               "RelativeDocumentMoniker": "Models\\User.cs",
@@ -295,12 +287,11 @@
               "RelativeToolTip": "Models\\User.cs",
               "ViewState": "AgIAABMAAAAAAAAAAAA5wCAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-08T16:22:34.739Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-08T16:22:34.739Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 12,
               "Title": "UserDto.cs",
               "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\DTOs\\UserDto.cs",
               "RelativeDocumentMoniker": "DTOs\\UserDto.cs",
@@ -308,8 +299,7 @@
               "RelativeToolTip": "DTOs\\UserDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAuwAIAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-08T16:20:24.934Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-08T16:20:24.934Z"
             },
             {
               "$type": "Document",
@@ -321,12 +311,11 @@
               "RelativeToolTip": ".env",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAB6AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-10-21T10:24:50.579Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-21T10:24:50.579Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 14,
               "Title": "Photo.cs",
               "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\Models\\Photo.cs",
               "RelativeDocumentMoniker": "Models\\Photo.cs",
@@ -334,12 +323,11 @@
               "RelativeToolTip": "Models\\Photo.cs",
               "ViewState": "AgIAAAYAAAAAAAAAAAAAABAAAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-10T15:55:25.757Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-10T15:55:25.757Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 17,
               "Title": "LikeDislike.cs",
               "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\Models\\LikeDislike.cs",
               "RelativeDocumentMoniker": "Models\\LikeDislike.cs",
@@ -347,8 +335,7 @@
               "RelativeToolTip": "Models\\LikeDislike.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-10T15:55:02.217Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-10T15:55:02.217Z"
             },
             {
               "$type": "Document",
@@ -360,8 +347,7 @@
               "RelativeToolTip": "Properties\\launchSettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-10-10T15:39:07.871Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-10T15:39:07.871Z"
             },
             {
               "$type": "Document",
@@ -373,8 +359,7 @@
               "RelativeToolTip": "Server.http",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
-              "WhenOpened": "2025-10-10T15:34:26.905Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-10T15:34:26.905Z"
             },
             {
               "$type": "Document",
@@ -386,12 +371,11 @@
               "RelativeToolTip": "appsettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-10-10T13:23:15.81Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-10T13:23:15.81Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 15,
               "Title": "MessageReport.cs",
               "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\Models\\MessageReport.cs",
               "RelativeDocumentMoniker": "Models\\MessageReport.cs",
@@ -399,12 +383,11 @@
               "RelativeToolTip": "Models\\MessageReport.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-08T16:22:34.002Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-08T16:22:34.002Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 16,
               "Title": "Message.cs",
               "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\Models\\Message.cs",
               "RelativeDocumentMoniker": "Models\\Message.cs",
@@ -412,12 +395,11 @@
               "RelativeToolTip": "Models\\Message.cs",
               "ViewState": "AgIAABMAAAAAAAAAAAA5wAYAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-08T16:22:33.237Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-08T16:22:33.237Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 27,
               "Title": "UserProfile.cs",
               "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\Mappings\\UserProfile.cs",
               "RelativeDocumentMoniker": "Mappings\\UserProfile.cs",
@@ -425,12 +407,11 @@
               "RelativeToolTip": "Mappings\\UserProfile.cs",
               "ViewState": "AgIAAAMAAAAAAAAAAAAAABEAAABGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-08T16:20:26.481Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-08T16:20:26.481Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 7,
               "Title": "UpdateUserDto.cs",
               "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\DTOs\\UpdateUserDto.cs",
               "RelativeDocumentMoniker": "DTOs\\UpdateUserDto.cs",
@@ -438,12 +419,11 @@
               "RelativeToolTip": "DTOs\\UpdateUserDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-08T16:20:23.154Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-08T16:20:23.154Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 18,
               "Title": "ReportDto.cs",
               "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\DTOs\\ReportDto.cs",
               "RelativeDocumentMoniker": "DTOs\\ReportDto.cs",
@@ -451,12 +431,11 @@
               "RelativeToolTip": "DTOs\\ReportDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-08T16:20:21.485Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-08T16:20:21.485Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 9,
               "Title": "RegisterDto.cs",
               "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\DTOs\\RegisterDto.cs",
               "RelativeDocumentMoniker": "DTOs\\RegisterDto.cs",
@@ -464,12 +443,11 @@
               "RelativeToolTip": "DTOs\\RegisterDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAuwAUAAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-08T16:20:20.063Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-08T16:20:20.063Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 19,
               "Title": "PinMessageDto.cs",
               "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\DTOs\\PinMessageDto.cs",
               "RelativeDocumentMoniker": "DTOs\\PinMessageDto.cs",
@@ -477,12 +455,11 @@
               "RelativeToolTip": "DTOs\\PinMessageDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-08T16:20:18.381Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-08T16:20:18.381Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 21,
               "Title": "PatchUserDto.cs",
               "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\DTOs\\PatchUserDto.cs",
               "RelativeDocumentMoniker": "DTOs\\PatchUserDto.cs",
@@ -490,12 +467,11 @@
               "RelativeToolTip": "DTOs\\PatchUserDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-08T16:20:17.264Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-08T16:20:17.264Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 5,
               "Title": "LoginDto.cs",
               "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\DTOs\\LoginDto.cs",
               "RelativeDocumentMoniker": "DTOs\\LoginDto.cs",
@@ -503,12 +479,11 @@
               "RelativeToolTip": "DTOs\\LoginDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-08T16:20:14.756Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-08T16:20:14.756Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 23,
               "Title": "EditMessageDto.cs",
               "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\DTOs\\EditMessageDto.cs",
               "RelativeDocumentMoniker": "DTOs\\EditMessageDto.cs",
@@ -516,12 +491,11 @@
               "RelativeToolTip": "DTOs\\EditMessageDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAuwAcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-08T16:20:13.528Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-08T16:20:13.528Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 8,
               "Title": "CreateUserDto.cs",
               "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\DTOs\\CreateUserDto.cs",
               "RelativeDocumentMoniker": "DTOs\\CreateUserDto.cs",
@@ -529,12 +503,11 @@
               "RelativeToolTip": "DTOs\\CreateUserDto.cs",
               "ViewState": "AgIAAAMAAAAAAAAAAAAAAAwAAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-08T16:20:12.172Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-08T16:20:12.172Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 10,
               "Title": "AuthResultDto.cs",
               "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\DTOs\\AuthResultDto.cs",
               "RelativeDocumentMoniker": "DTOs\\AuthResultDto.cs",
@@ -542,12 +515,11 @@
               "RelativeToolTip": "DTOs\\AuthResultDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-08T16:20:11.314Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-08T16:20:11.314Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 13,
               "Title": "AppDbContext.cs",
               "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\Data\\AppDbContext.cs",
               "RelativeDocumentMoniker": "Data\\AppDbContext.cs",
@@ -555,12 +527,11 @@
               "RelativeToolTip": "Data\\AppDbContext.cs",
               "ViewState": "AgIAAAYAAAAAAAAAAAAAAA4AAAA9AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-08T16:20:09.975Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-08T16:20:09.975Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "UserRepository.cs",
               "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\Repositories\\UserRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\UserRepository.cs",
@@ -568,25 +539,24 @@
               "RelativeToolTip": "Repositories\\UserRepository.cs",
               "ViewState": "AgIAAAoAAAAAAAAAAAAuwBkAAABWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-08T16:10:38.084Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-08T16:10:38.084Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
               "Title": "AuthService.cs",
               "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\Services\\AuthService.cs",
               "RelativeDocumentMoniker": "Services\\AuthService.cs",
               "ToolTip": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\Services\\AuthService.cs",
               "RelativeToolTip": "Services\\AuthService.cs",
-              "ViewState": "AgIAACEAAAAAAAAAAAAYwCoAAAAfAAAAAAAAAA==",
+              "ViewState": "AgIAABsAAAAAAAAAAAAYwCoAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-08T15:30:58.766Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 24,
               "Title": "IUserRepository.cs",
               "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\Repositories\\Interfaces\\IUserRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\Interfaces\\IUserRepository.cs",
@@ -594,12 +564,11 @@
               "RelativeToolTip": "Repositories\\Interfaces\\IUserRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAuwAcAAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-06T14:33:01.245Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-06T14:33:01.245Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 22,
               "Title": "MessageDto.cs",
               "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\DTOs\\MessageDto.cs",
               "RelativeDocumentMoniker": "DTOs\\MessageDto.cs",
@@ -607,12 +576,11 @@
               "RelativeToolTip": "DTOs\\MessageDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAuwAYAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-04T14:54:19.22Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-04T14:54:19.22Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 31,
               "Title": "MessagesController.cs",
               "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\Controllers\\MessagesController.cs",
               "RelativeDocumentMoniker": "Controllers\\MessagesController.cs",
@@ -620,25 +588,24 @@
               "RelativeToolTip": "Controllers\\MessagesController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAEwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-04T14:42:46.296Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-04T14:42:46.296Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 1,
               "Title": "UsersController.cs",
               "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\Controllers\\UsersController.cs",
               "RelativeDocumentMoniker": "Controllers\\UsersController.cs",
               "ToolTip": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\Controllers\\UsersController.cs",
               "RelativeToolTip": "Controllers\\UsersController.cs",
-              "ViewState": "AgIAAFsAAAAAAAAAAAAwwGgAAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAAE0AAAAAAAAAAAAAAF4AAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-04T14:06:59.473Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 2,
               "Title": "AuthController.cs",
               "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\Controllers\\AuthController.cs",
               "RelativeDocumentMoniker": "Controllers\\AuthController.cs",
@@ -651,7 +618,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 30,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
@@ -659,8 +626,7 @@
               "RelativeToolTip": "Program.cs",
               "ViewState": "AgIAABMAAAAAAAAAAAAQwB4AAABJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-27T16:15:33.235Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-27T16:15:33.235Z"
             }
           ]
         }

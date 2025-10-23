@@ -43,6 +43,9 @@ private:
 
     QString login;
     QString password;
+
+    QString token;
+    void setToken(const QString& jwt);
 };
 
 #endif // SECOND_H
