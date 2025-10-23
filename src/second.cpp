@@ -454,31 +454,66 @@ void Second::loadUserData()
 // обновление картинки пользователя
 void Second::loadPhotoData(const QString &login)
 {
-    QSqlQuery photoQuery;
-    photoQuery.prepare("SELECT photo_path FROM photos WHERE user_id = (SELECT id FROM users WHERE login = :login)");
-    photoQuery.bindValue(":login", login);
+    // QSqlQuery photoQuery;
+    // photoQuery.prepare("SELECT photo_path FROM photos WHERE user_id = (SELECT id FROM users WHERE login = :login)");
+    // photoQuery.bindValue(":login", login);
 
-    if (!photoQuery.exec() || !photoQuery.next())
-    {
-        QMessageBox::warning(this, "Ошибка", "Не удалось загрузить изображение!");
-        qDebug() << "Ошибка SQL:" << photoQuery.lastError().text();
-        return;
-    }
+    // if (!photoQuery.exec() || !photoQuery.next())
+    // {
+    //     QMessageBox::warning(this, "Ошибка", "Не удалось загрузить изображение!");
+    //     qDebug() << "Ошибка SQL:" << photoQuery.lastError().text();
+    //     return;
+    // }
 
-    QString photoPath = photoQuery.value(0).toString();
-    qDebug() << "Загруженный путь к картинке:" << photoPath;
+    // QString photoPath = photoQuery.value(0).toString();
+    // qDebug() << "Загруженный путь к картинке:" << photoPath;
 
-    if (!photoPath.isEmpty())
-    {
-        QPixmap pixmap(photoPath);
-        if (!pixmap.isNull())
+    // if (!photoPath.isEmpty())
+    // {
+    //     QPixmap pixmap(photoPath);
+    //     if (!pixmap.isNull())
+    //     {
+    //         QGraphicsScene *scene = new QGraphicsScene(this);
+    //         scene->addPixmap(pixmap.scaled(ui->graphicsView->size(), Qt::KeepAspectRatio));
+    //         ui->graphicsView->setScene(scene);
+    //     } else
+    //     {
+    //         QMessageBox::warning(this, "Ошибка", "Не удалось загрузить изображение в интерфейс!");
+    //     }
+    // }
+
+
+
+    QNetworkAccessManager* manager = new QNetworkAccessManager(this);
+    QNetworkRequest request(QUrl("http://localhost:5002/api/users/" + login + "/photo"));
+
+    QNetworkReply* reply = manager->get(request);
+
+    connect(reply, &QNetworkReply::finished, this, [=]() {
+        if (reply->error() == QNetworkReply::NoError)
         {
-            QGraphicsScene *scene = new QGraphicsScene(this);
-            scene->addPixmap(pixmap.scaled(ui->graphicsView->size(), Qt::KeepAspectRatio));
-            ui->graphicsView->setScene(scene);
-        } else
-        {
-            QMessageBox::warning(this, "Ошибка", "Не удалось загрузить изображение в интерфейс!");
+            QByteArray photoData = reply->readAll();
+            QPixmap pixmap;
+            pixmap.loadFromData(photoData);
+
+            if (!pixmap.isNull())
+            {
+                QGraphicsScene* scene = new QGraphicsScene(this);
+                scene->addPixmap(pixmap.scaled(ui->graphicsView->size(), Qt::KeepAspectRatio));
+                ui->graphicsView->setScene(scene);
+            }
+            else
+            {
+                QMessageBox::warning(this, "Ошибка", "Не удалось загрузить изображение в интерфейс!");
+            }
         }
-    }
+        else
+        {
+            QMessageBox::warning(this, "Ошибка", "Не удалось загрузить изображение!");
+            qDebug() << "Ошибка API:" << reply->errorString();
+        }
+
+        reply->deleteLater();
+        manager->deleteLater();
+    });
 }
