@@ -105,7 +105,7 @@ void Second::initializeUserData2()
             ui->spinBox->setValue(userObj["age"].toInt());
 
             QString login = userObj["login"].toString();
-            QNetworkRequest photoRequest(QUrl("http://localhost:5002/api/users/" + login + "/photo"));
+            QNetworkRequest photoRequest(QUrl("http://localhost:5002/api/users/me/photo"));
             QNetworkReply* photoReply = manager->get(photoRequest);
 
             connect(photoReply, &QNetworkReply::finished, this, [=]() {
@@ -250,6 +250,40 @@ void Second::on_onSaveData_clicked()
     //     ui->lineEdit_4->setFocus();
     //     return;
     // }
+
+
+
+    QNetworkAccessManager* manager = new QNetworkAccessManager(this);
+    QUrl url("http://localhost:5002/api/cities/exists?name=" + QUrl::toPercentEncoding(city));
+    QNetworkRequest request(url);
+    request.setRawHeader("Authorization", "Bearer " + token.toUtf8());
+
+    QNetworkReply* reply = manager->get(request);
+
+    QEventLoop loop;
+    connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
+    loop.exec();
+
+    if (reply->error() != QNetworkReply::NoError)
+    {
+        QMessageBox::warning(this, "Ошибка", "Не удалось проверить город через API!");
+        qDebug() << "Ошибка API:" << reply->errorString();
+        reply->deleteLater();
+        return;
+    }
+
+    QByteArray responseData = reply->readAll();
+    reply->deleteLater();
+
+    QJsonDocument jsonDoc = QJsonDocument::fromJson(responseData);
+    QJsonObject jsonObj = jsonDoc.object();
+
+    if (!jsonObj["exists"].toBool())
+    {
+        QMessageBox::warning(this, "Ошибка", "Город не найден в базе данных! Проверьте правильность ввода.");
+        ui->lineEdit_4->setFocus();
+        return;
+    }
 
 
 
@@ -562,7 +596,8 @@ void Second::loadPhotoData(const QString &login)
 
 
     QNetworkAccessManager* manager = new QNetworkAccessManager(this);
-    QNetworkRequest request(QUrl("http://localhost:5002/api/users/" + login + "/photo"));
+    QNetworkRequest request(QUrl("http://localhost:5002/api/users/me/photo"));
+    request.setRawHeader("Authorization", "Bearer " + token.toUtf8());
 
     QNetworkReply* reply = manager->get(request);
 

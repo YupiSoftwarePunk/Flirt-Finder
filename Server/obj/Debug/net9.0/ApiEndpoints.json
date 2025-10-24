@@ -53,6 +53,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Server.Controllers.CitiesController",
+    "Method": "CheckCityExists",
+    "RelativePath": "api/Cities/exists",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "name",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Server.Controllers.MessagesController",
     "Method": "SendMessage",
     "RelativePath": "api/Messages",
