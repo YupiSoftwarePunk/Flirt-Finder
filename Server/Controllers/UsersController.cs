@@ -102,5 +102,20 @@ namespace Server.Controllers
             var result = await _userService.PatchAsync(userId, dto);
             return result ? NoContent() : BadRequest("Ошибка обновления");
         }
+
+
+        [Authorize]
+        [HttpPost("me/photo")]
+        public async Task<IActionResult> UploadPhoto(IFormFile file)
+        {
+            var userIdStr = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (!int.TryParse(userIdStr, out var userId)) return Unauthorized();
+
+            if (file == null || file.Length == 0)
+                return BadRequest("Файл не получен");
+
+            await _photoService.SavePhotoAsync(userId, file);
+            return Ok("Фото загружено");
+        }
     }
 }

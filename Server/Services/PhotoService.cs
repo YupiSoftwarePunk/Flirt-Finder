@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Server.Data;
+using Server.Models;
 using Server.Services.Interfaces;
 
 namespace Server.Services
@@ -23,6 +24,45 @@ namespace Server.Services
 
             var content = await File.ReadAllBytesAsync(photo.Url);
             return (content, "image/jpeg");
+        }
+
+
+
+        public async Task SavePhotoAsync(int userId, IFormFile file)
+        {
+            // Генерация уникального пути
+            var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "Uploads");
+            if (!Directory.Exists(uploadsFolder))
+                Directory.CreateDirectory(uploadsFolder);
+
+            var fileName = $"{Guid.NewGuid()}_{file.FileName}";
+            var filePath = Path.Combine(uploadsFolder, fileName);
+
+            // Сохранение файла
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                await file.CopyToAsync(stream);
+            }
+
+            // Удаление старого фото (если есть)
+            var existing = await _context.Photos.FirstOrDefaultAsync(p => p.UserId == userId);
+            if (existing != null)
+            {
+                if (!string.IsNullOrEmpty(existing.Url) && File.Exists(existing.Url))
+                    File.Delete(existing.Url);
+
+                _context.Photos.Remove(existing);
+            }
+
+            // Добавление нового фото
+            var photo = new Photo
+            {
+                UserId = userId,
+                Url = filePath
+            };
+
+            _context.Photos.Add(photo);
+            await _context.SaveChangesAsync();
         }
     }
 }
