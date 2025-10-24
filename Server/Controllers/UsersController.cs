@@ -34,7 +34,7 @@ namespace Server.Controllers
 
 
         [Authorize]
-        [HttpPut("me")]
+        [HttpPut("me/basic")]
         public async Task<IActionResult> UpdateProfile(UpdateUserDto dto)
         {
             var userIdStr = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
@@ -79,7 +79,7 @@ namespace Server.Controllers
 
         // Обновление анкеты полностью
         [Authorize]
-        [HttpPut("me")]
+        [HttpPut("me/full")]
         public async Task<IActionResult> UpdateUser([FromBody] UpdateUserDto dto)
         {
             var userIdStr = User.FindFirstValue(ClaimTypes.NameIdentifier);

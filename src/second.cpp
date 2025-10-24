@@ -86,7 +86,7 @@ void Second::initializeUserData2()
 
     QNetworkAccessManager* manager = new QNetworkAccessManager(this);
 
-    QNetworkRequest userRequest(QUrl("http://localhost:5002/api/users/me"));
+    QNetworkRequest userRequest(QUrl("http://localhost:5002/api/users/me/basic"));
     userRequest.setRawHeader("Authorization", "Bearer " + token.toUtf8());
 
     QNetworkReply* userReply = manager->get(userRequest);
@@ -429,7 +429,7 @@ bool Second::saveUserData(const QString &login, const QString &password,
     QNetworkAccessManager* manager = new QNetworkAccessManager(this);
 
     // Обновление анкеты
-    QUrl url("http://localhost:5002/api/users/me");
+    QUrl url("http://localhost:5002/api/users/me/full");
     QNetworkRequest request(url);
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
     request.setRawHeader("Authorization", "Bearer " + token.toUtf8());
@@ -530,7 +530,7 @@ void Second::loadUserData()
 
     QNetworkAccessManager* manager = new QNetworkAccessManager(this);
 
-    QNetworkRequest request(QUrl("http://localhost:5002/api/users/me"));
+    QNetworkRequest request(QUrl("http://localhost:5002/api/users/me/basic"));
     request.setRawHeader("Authorization", "Bearer " + token.toUtf8());
 
     QNetworkReply* reply = manager->get(request);

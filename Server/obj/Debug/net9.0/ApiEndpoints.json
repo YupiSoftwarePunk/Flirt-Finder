@@ -213,8 +213,24 @@
   },
   {
     "ContainingType": "Server.Controllers.UsersController",
-    "Method": "UpdateProfile",
+    "Method": "PatchUser",
     "RelativePath": "api/Users/me",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "Server.DTOs.PatchUserDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Server.Controllers.UsersController",
+    "Method": "UpdateProfile",
+    "RelativePath": "api/Users/me/basic",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -230,7 +246,7 @@
   {
     "ContainingType": "Server.Controllers.UsersController",
     "Method": "UpdateUser",
-    "RelativePath": "api/Users/me",
+    "RelativePath": "api/Users/me/full",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -238,22 +254,6 @@
       {
         "Name": "dto",
         "Type": "Server.DTOs.UpdateUserDto",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Server.Controllers.UsersController",
-    "Method": "PatchUser",
-    "RelativePath": "api/Users/me",
-    "HttpMethod": "PATCH",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "dto",
-        "Type": "Server.DTOs.PatchUserDto",
         "IsRequired": true
       }
     ],

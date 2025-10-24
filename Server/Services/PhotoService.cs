@@ -20,7 +20,8 @@ namespace Server.Services
             if (user == null) return (null, null);
 
             var photo = await _context.Photos.FirstOrDefaultAsync(p => p.UserId == user.Id);
-            if (photo == null || string.IsNullOrEmpty(photo.Url)) return (null, null);
+            if (photo == null || string.IsNullOrEmpty(photo.Url) || !File.Exists(photo.Url))
+                return await GetDefaultPhotoAsync();
 
             var content = await File.ReadAllBytesAsync(photo.Url);
             return (content, "image/jpeg");
@@ -63,6 +64,15 @@ namespace Server.Services
 
             _context.Photos.Add(photo);
             await _context.SaveChangesAsync();
+        }
+
+
+
+        private async Task<(byte[] Content, string ContentType)> GetDefaultPhotoAsync()
+        {
+            var defaultPath = Path.Combine(Directory.GetCurrentDirectory(), "images", "default.png");
+            var content = await File.ReadAllBytesAsync(defaultPath);
+            return (content, "image/png");
         }
     }
 }
