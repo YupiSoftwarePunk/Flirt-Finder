@@ -13,5 +13,7 @@ namespace Server.Data
         public DbSet<MessageReport> MessageReports { get; set; }
         public DbSet<Photo> Photos { get; set; }
         public DbSet<LikeDislike> LikesDislikes { get; set; }
+
+        public DbSet<City> Cities { get; set; }
     }
 }

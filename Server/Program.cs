@@ -65,6 +65,7 @@ namespace Server
 
             builder.Services.AddScoped<IUserRepository, UserRepository>();
             builder.Services.AddScoped<IAuthService, AuthService>();
+            builder.Services.AddScoped<ICityService, CityService>();
 
             builder.Services.AddControllers();
             builder.Services.AddOpenApi();

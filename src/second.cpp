@@ -16,6 +16,8 @@
 #include <QSqlQuery>
 #include <QSqlError>
 #include <QSpinBox>
+#include <QHttpMultiPart>
+#include <QHttpPart>
 
 
 Second::Second(QWidget *parent)
@@ -190,16 +192,16 @@ void Second::on_onSaveData_clicked()
     QString sex = ui->comboBox->currentText();
 
 
-    if (m_photoPath.isEmpty())
-    {
-        QSqlQuery query;
-        query.prepare("SELECT photo_path FROM photos WHERE user_id = (SELECT id FROM users WHERE login = :login)");
-        query.bindValue(":login", login);
-        if (query.exec() && query.next())
-        {
-            m_photoPath = query.value(0).toString();
-        }
-    }
+    // if (m_photoPath.isEmpty())
+    // {
+    //     QSqlQuery query;
+    //     query.prepare("SELECT photo_path FROM photos WHERE user_id = (SELECT id FROM users WHERE login = :login)");
+    //     query.bindValue(":login", login);
+    //     if (query.exec() && query.next())
+    //     {
+    //         m_photoPath = query.value(0).toString();
+    //     }
+    // }
 
 
     if (name.isEmpty() || hobbies.isEmpty() || city.isEmpty() || m_photoPath.isEmpty())
@@ -229,25 +231,27 @@ void Second::on_onSaveData_clicked()
 
 
 
-    // Проверка наличия города в базе данных
-    QSqlQuery cityQuery;
-    cityQuery.prepare("SELECT COUNT(*) FROM cities WHERE name = :city");
-    cityQuery.bindValue(":city", city);
+    // // Проверка наличия города в базе данных
+    // QSqlQuery cityQuery;
+    // cityQuery.prepare("SELECT COUNT(*) FROM cities WHERE name = :city");
+    // cityQuery.bindValue(":city", city);
 
-    if (!cityQuery.exec())
-    {
-        QMessageBox::warning(this, "Ошибка", "Не удалось выполнить запрос к базе данных!");
-        return;
-    }
+    // if (!cityQuery.exec())
+    // {
+    //     QMessageBox::warning(this, "Ошибка", "Не удалось выполнить запрос к базе данных!");
+    //     return;
+    // }
 
-    cityQuery.next();
-    int cityCount = cityQuery.value(0).toInt();
-    if (cityCount == 0)
-    {
-        QMessageBox::warning(this, "Ошибка", "Город не найден в базе данных! Проверьте правильность ввода.");
-        ui->lineEdit_4->setFocus();
-        return;
-    }
+    // cityQuery.next();
+    // int cityCount = cityQuery.value(0).toInt();
+    // if (cityCount == 0)
+    // {
+    //     QMessageBox::warning(this, "Ошибка", "Город не найден в базе данных! Проверьте правильность ввода.");
+    //     ui->lineEdit_4->setFocus();
+    //     return;
+    // }
+
+
 
 
     if (saveUserData(login, password, name, sex, age, hobbies, city, m_photoPath))
@@ -324,67 +328,140 @@ bool Second::saveUserData(const QString &login, const QString &password,
                   const QString &hobbies, const QString &city, const QString &photoPath)
 {
 
-    QSqlQuery query;
-    query.prepare("UPDATE users SET name = :name, gender = :gender, age = :age, hobbies = :hobbies, city = :city "
-                  "WHERE login = :login AND password = :password");
-    query.bindValue(":name", name);
-    query.bindValue(":gender", gender);
-    query.bindValue(":age", age);
-    query.bindValue(":hobbies", hobbies);
-    query.bindValue(":city", city);
-    query.bindValue(":login", login);
-    query.bindValue(":password", password);
+    // QSqlQuery query;
+    // query.prepare("UPDATE users SET name = :name, gender = :gender, age = :age, hobbies = :hobbies, city = :city "
+    //               "WHERE login = :login AND password = :password");
+    // query.bindValue(":name", name);
+    // query.bindValue(":gender", gender);
+    // query.bindValue(":age", age);
+    // query.bindValue(":hobbies", hobbies);
+    // query.bindValue(":city", city);
+    // query.bindValue(":login", login);
+    // query.bindValue(":password", password);
 
-    if (!query.exec())
+    // if (!query.exec())
+    // {
+    //     QMessageBox::warning(this, "Ошибка", "Ошибка сохранения данных пользователя!");
+    //     qDebug() << "Ошибка SQL:" << query.lastError().text();
+    //     return false;
+    // }
+
+
+    // QSqlQuery getUserIdQuery;
+    // getUserIdQuery.prepare("SELECT id FROM users WHERE login = :login");
+    // getUserIdQuery.bindValue(":login", login);
+
+    // if (!getUserIdQuery.exec() || !getUserIdQuery.next())
+    // {
+    //     QMessageBox::warning(this, "Ошибка", "Не удалось получить ID пользователя!");
+    //     qDebug() << "Ошибка SQL:" << getUserIdQuery.lastError().text();
+    //     return false;
+    // }
+
+    // int userId = getUserIdQuery.value(0).toInt();
+    // qDebug() << "User ID:" << userId;
+
+
+    // if (!photoPath.isEmpty())
+    // {
+    //     QSqlQuery deletePhotoQuery;
+    //     deletePhotoQuery.prepare("DELETE FROM photos WHERE user_id = :user_id");
+    //     deletePhotoQuery.bindValue(":user_id", userId);
+
+    //     if (!deletePhotoQuery.exec())
+    //     {
+    //         QMessageBox::warning(this, "Ошибка", "Не удалось удалить старую картинку!");
+    //         qDebug() << "Ошибка SQL:" << deletePhotoQuery.lastError().text();
+    //         return false;
+    //     }
+
+    //     QSqlQuery photoQuery;
+    //     photoQuery.prepare("INSERT INTO photos (user_id, photo_path) VALUES (:user_id, :photo_path)");
+    //     photoQuery.bindValue(":user_id", userId);
+    //     photoQuery.bindValue(":photo_path", photoPath);
+
+    //     if (!photoQuery.exec())
+    //     {
+    //         QMessageBox::warning(this, "Ошибка", "Ошибка сохранения изображения!");
+    //         qDebug() << "Ошибка SQL:" << photoQuery.lastError().text();
+    //         return false;
+    //     }
+    //     qDebug() << "Новый путь к картинке успешно сохранён:" << photoPath;
+    // }
+    // return true;
+
+
+
+    QNetworkAccessManager* manager = new QNetworkAccessManager(this);
+
+    // Обновление анкеты
+    QUrl url("http://localhost:5002/api/users/me");
+    QNetworkRequest request(url);
+    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+    request.setRawHeader("Authorization", "Bearer " + token.toUtf8());
+
+    QJsonObject json;
+    json["bio"] = hobbies;
+    json["gender"] = gender;
+    json["age"] = age;
+    json["city"] = city;
+
+    QNetworkReply* reply = manager->put(request, QJsonDocument(json).toJson());
+
+    QEventLoop loop;
+    connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
+    loop.exec();
+
+    if (reply->error() != QNetworkReply::NoError)
     {
-        QMessageBox::warning(this, "Ошибка", "Ошибка сохранения данных пользователя!");
-        qDebug() << "Ошибка SQL:" << query.lastError().text();
+        QMessageBox::warning(this, "Ошибка", "Ошибка сохранения анкеты!");
+        qDebug() << "Ошибка API:" << reply->errorString();
+        reply->deleteLater();
         return false;
     }
 
+    reply->deleteLater();
 
-    QSqlQuery getUserIdQuery;
-    getUserIdQuery.prepare("SELECT id FROM users WHERE login = :login");
-    getUserIdQuery.bindValue(":login", login);
-
-    if (!getUserIdQuery.exec() || !getUserIdQuery.next())
-    {
-        QMessageBox::warning(this, "Ошибка", "Не удалось получить ID пользователя!");
-        qDebug() << "Ошибка SQL:" << getUserIdQuery.lastError().text();
-        return false;
-    }
-
-    int userId = getUserIdQuery.value(0).toInt();
-    qDebug() << "User ID:" << userId;
-
-
+    // Загрузка фото (если указано)
     if (!photoPath.isEmpty())
     {
-        QSqlQuery deletePhotoQuery;
-        deletePhotoQuery.prepare("DELETE FROM photos WHERE user_id = :user_id");
-        deletePhotoQuery.bindValue(":user_id", userId);
-
-        if (!deletePhotoQuery.exec())
+        QFile photoFile(photoPath);
+        if (!photoFile.open(QIODevice::ReadOnly))
         {
-            QMessageBox::warning(this, "Ошибка", "Не удалось удалить старую картинку!");
-            qDebug() << "Ошибка SQL:" << deletePhotoQuery.lastError().text();
+            QMessageBox::warning(this, "Ошибка", "Не удалось открыть файл изображения!");
             return false;
         }
 
-        QSqlQuery photoQuery;
-        photoQuery.prepare("INSERT INTO photos (user_id, photo_path) VALUES (:user_id, :photo_path)");
-        photoQuery.bindValue(":user_id", userId);
-        photoQuery.bindValue(":photo_path", photoPath);
+        QByteArray photoData = photoFile.readAll();
+        photoFile.close();
 
-        if (!photoQuery.exec())
+        QHttpMultiPart* multiPart = new QHttpMultiPart(QHttpMultiPart::FormDataType);
+        QHttpPart imagePart;
+        imagePart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"file\"; filename=\"photo.jpg\""));
+        imagePart.setHeader(QNetworkRequest::ContentTypeHeader, QVariant("image/jpeg"));
+        imagePart.setBody(photoData);
+        multiPart->append(imagePart);
+
+        QNetworkRequest photoRequest(QUrl("http://localhost:5002/api/users/me/photo"));
+        photoRequest.setRawHeader("Authorization", "Bearer " + token.toUtf8());
+
+        QNetworkReply* photoReply = manager->post(photoRequest, multiPart);
+        multiPart->setParent(photoReply); // автоматическое удаление multipart
+
+        QEventLoop photoLoop;
+        connect(photoReply, &QNetworkReply::finished, &photoLoop, &QEventLoop::quit);
+        photoLoop.exec();
+
+        if (photoReply->error() != QNetworkReply::NoError)
         {
-            QMessageBox::warning(this, "Ошибка", "Ошибка сохранения изображения!");
-            qDebug() << "Ошибка SQL:" << photoQuery.lastError().text();
+            QMessageBox::warning(this, "Ошибка", "Ошибка загрузки изображения!");
+            qDebug() << "Ошибка API (фото):" << photoReply->errorString();
+            photoReply->deleteLater();
             return false;
         }
-        qDebug() << "Новый путь к картинке успешно сохранён:" << photoPath;
+
+        photoReply->deleteLater();
     }
-    return true;
 }
 
 
