@@ -50,7 +50,12 @@ namespace Server.Controllers
         public async Task<IActionResult> GetPhoto(string login)
         {
             var photo = await _photoService.GetPhotoByLoginAsync(login);
-            return File(photo.Content, photo.ContentType);
+
+            if (photo.Content == null)
+                return NotFound("Фото не найдено");
+            var contentType = string.IsNullOrEmpty(photo.ContentType) ? "image/jpeg" : photo.ContentType;
+
+            return File(photo.Content, contentType);
         }
 
 

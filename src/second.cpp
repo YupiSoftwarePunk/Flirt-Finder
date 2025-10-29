@@ -88,6 +88,7 @@ void Second::initializeUserData2()
 
     QNetworkRequest userRequest(QUrl("http://localhost:5002/api/users/me/basic"));
     userRequest.setRawHeader("Authorization", "Bearer " + token.toUtf8());
+    userRequest.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
 
     QNetworkReply* userReply = manager->get(userRequest);
 
@@ -105,7 +106,9 @@ void Second::initializeUserData2()
             ui->spinBox->setValue(userObj["age"].toInt());
 
             QString login = userObj["login"].toString();
-            QNetworkRequest photoRequest(QUrl("http://localhost:5002/api/users/me/photo"));
+            QNetworkRequest photoRequest(QUrl("http://localhost:5002/api/users" + login + "/photo"));
+            photoRequest.setRawHeader("Authorization", "Bearer " + token.toUtf8());
+
             QNetworkReply* photoReply = manager->get(photoRequest);
 
             connect(photoReply, &QNetworkReply::finished, this, [=]() {
@@ -476,7 +479,7 @@ bool Second::saveUserData(const QString &login, const QString &password,
         imagePart.setBody(photoData);
         multiPart->append(imagePart);
 
-        QNetworkRequest photoRequest(QUrl("http://localhost:5002/api/users/me/photo"));
+        QNetworkRequest photoRequest(QUrl("http://localhost:5002/api/users/" + login + "/photo"));
         photoRequest.setRawHeader("Authorization", "Bearer " + token.toUtf8());
 
         QNetworkReply* photoReply = manager->post(photoRequest, multiPart);
@@ -530,7 +533,7 @@ void Second::loadUserData()
 
     QNetworkAccessManager* manager = new QNetworkAccessManager(this);
 
-    QNetworkRequest request(QUrl("http://localhost:5002/api/users/me/basic"));
+    QNetworkRequest request(QUrl("http://localhost:5002/api/users/me"));
     request.setRawHeader("Authorization", "Bearer " + token.toUtf8());
 
     QNetworkReply* reply = manager->get(request);
@@ -596,7 +599,7 @@ void Second::loadPhotoData(const QString &login)
 
 
     QNetworkAccessManager* manager = new QNetworkAccessManager(this);
-    QNetworkRequest request(QUrl("http://localhost:5002/api/users/me/photo"));
+    QNetworkRequest request(QUrl("http://localhost:5002/api/users/" + login + "/photo"));
     request.setRawHeader("Authorization", "Bearer " + token.toUtf8());
 
     QNetworkReply* reply = manager->get(request);
