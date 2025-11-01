@@ -20,9 +20,9 @@
 #include <QHttpPart>
 
 
-Second::Second(QWidget *parent)
-    : QDialog(parent)
-    , ui(new Ui::Second)
+Second::Second(QWidget *parent, const QString& token_)
+    : QDialog(parent), ui(new Ui::Second)
+    , token(token_)
 {
     ui->setupUi(this);
 
@@ -270,7 +270,7 @@ void Second::on_onSaveData_clicked()
     if (reply->error() != QNetworkReply::NoError)
     {
         QMessageBox::warning(this, "Ошибка", "Не удалось проверить город через API!");
-        qDebug() << "Ошибка API:" << reply->errorString();
+        qDebug() << "Ошибка API! Не удалось проверить город через API:" << reply->errorString();
         reply->deleteLater();
         return;
     }
@@ -436,6 +436,7 @@ bool Second::saveUserData(const QString &login, const QString &password,
     QNetworkRequest request(url);
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
     request.setRawHeader("Authorization", "Bearer " + token.toUtf8());
+    qDebug() << "Token used:" << token;
 
     QJsonObject json;
     json["bio"] = hobbies;
@@ -452,7 +453,7 @@ bool Second::saveUserData(const QString &login, const QString &password,
     if (reply->error() != QNetworkReply::NoError)
     {
         QMessageBox::warning(this, "Ошибка", "Ошибка сохранения анкеты!");
-        qDebug() << "Ошибка API:" << reply->errorString();
+        qDebug() << "Ошибка API! Ошибка сохранения анкеты!:" << reply->errorString();
         reply->deleteLater();
         return false;
     }
@@ -535,6 +536,8 @@ void Second::loadUserData()
 
     QNetworkRequest request(QUrl("http://localhost:5002/api/users/me"));
     request.setRawHeader("Authorization", "Bearer " + token.toUtf8());
+    qDebug() << "Token used:" << token;
+
 
     QNetworkReply* reply = manager->get(request);
 
@@ -554,7 +557,7 @@ void Second::loadUserData()
         else
         {
             QMessageBox::warning(this, "Ошибка", "Ошибка загрузки данных!");
-            qDebug() << "Ошибка API:" << reply->errorString();
+            qDebug() << "Ошибка загрузки данных! API:" << reply->errorString();
         }
 
         reply->deleteLater();
@@ -625,7 +628,7 @@ void Second::loadPhotoData(const QString &login)
         else
         {
             QMessageBox::warning(this, "Ошибка", "Не удалось загрузить изображение!");
-            qDebug() << "Ошибка API:" << reply->errorString();
+            qDebug() << "Ошибка! Не удалось загрузить изображение! API:" << reply->errorString();
         }
 
         reply->deleteLater();

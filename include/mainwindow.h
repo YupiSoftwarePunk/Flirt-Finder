@@ -36,6 +36,8 @@ private:
     Ui::MainWindow *ui;
 
     QNetworkAccessManager* networkManager;
+
+    QString token_;
 };
 
 #endif // MAINWINDOW_H

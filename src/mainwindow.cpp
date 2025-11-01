@@ -148,14 +148,17 @@ void MainWindow::on_login_button_clicked()
 
         // QString token = responseObj["token"].toString();
         QString token = QString::fromUtf8(responseData).trimmed();
+        token_ = token;
         reply->deleteLater();
 
     QMessageBox::information(this, "Успех", "Авторизация прошла успешно!");
 
+    qDebug() << "Token used mainWindow: " << token_;
 
     // переход на третье окно
     auto thirdWindow = new Third();
-    auto secondWindow = new Second();
+    auto secondWindow = new Second(this, token_);
+
 
     secondWindow->setUserCredentials(login, password);
     secondWindow->initializeUserData();
@@ -297,7 +300,7 @@ void MainWindow::on_registration_button_clicked()
     QMessageBox::information(this, "Успех", "Регистрация прошла успешно!");
 
     // Передача данных во вторую страницу
-    auto secondWindow = new Second();
+    auto secondWindow = new Second(this, token_);
     secondWindow->setUserCredentials(login, password);
     secondWindow->initializeUserData2();
     secondWindow->show();

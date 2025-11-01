@@ -13,7 +13,7 @@ class Second : public QDialog
     Q_OBJECT
 
 public:
-    explicit Second(QWidget *parent = nullptr);
+    explicit Second(QWidget *parent = nullptr, const QString& token = "");
     ~Second();
 
     void setUserCredentials(const QString &login, const QString &password);
