@@ -20,10 +20,14 @@
 #include <QHttpPart>
 
 
-Second::Second(QWidget *parent, const QString& token_)
-    : QDialog(parent), ui(new Ui::Second)
-    , token(token_)
+Second::Second(QWidget *parent, const QString& token)
+    : QDialog(parent),
+    ui(new Ui::Second)
 {
+    this->token = token;
+    qDebug() << "Token received in constructor:" << this->token;
+
+
     ui->setupUi(this);
 
     ui->lineEdit->installEventFilter(this);
@@ -87,7 +91,7 @@ void Second::initializeUserData2()
     QNetworkAccessManager* manager = new QNetworkAccessManager(this);
 
     QNetworkRequest userRequest(QUrl("http://localhost:5002/api/users/me/basic"));
-    userRequest.setRawHeader("Authorization", "Bearer " + token.toUtf8());
+    userRequest.setRawHeader("Authorization", "Bearer " + this->token.toUtf8());
     userRequest.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
 
     QNetworkReply* userReply = manager->get(userRequest);
@@ -107,7 +111,7 @@ void Second::initializeUserData2()
 
             QString login = userObj["login"].toString();
             QNetworkRequest photoRequest(QUrl("http://localhost:5002/api/users" + login + "/photo"));
-            photoRequest.setRawHeader("Authorization", "Bearer " + token.toUtf8());
+            photoRequest.setRawHeader("Authorization", "Bearer " + this->token.toUtf8());
 
             QNetworkReply* photoReply = manager->get(photoRequest);
 
@@ -145,7 +149,7 @@ void Second::initializeUserData2()
 
 void Second::setToken(const QString& jwt)
 {
-    token = jwt;
+    this->token = jwt;
 }
 
 
@@ -259,7 +263,7 @@ void Second::on_onSaveData_clicked()
     QNetworkAccessManager* manager = new QNetworkAccessManager(this);
     QUrl url("http://localhost:5002/api/cities/exists?name=" + QUrl::toPercentEncoding(city));
     QNetworkRequest request(url);
-    request.setRawHeader("Authorization", "Bearer " + token.toUtf8());
+    request.setRawHeader("Authorization", "Bearer " + this->token.toUtf8());
 
     QNetworkReply* reply = manager->get(request);
 
@@ -435,8 +439,8 @@ bool Second::saveUserData(const QString &login, const QString &password,
     QUrl url("http://localhost:5002/api/users/me/full");
     QNetworkRequest request(url);
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
-    request.setRawHeader("Authorization", "Bearer " + token.toUtf8());
-    qDebug() << "Token used:" << token;
+    request.setRawHeader("Authorization", "Bearer " + this->token.toUtf8());
+    qDebug() << "Token used secondWindow:" << this->token;
 
     QJsonObject json;
     json["bio"] = hobbies;
@@ -481,7 +485,7 @@ bool Second::saveUserData(const QString &login, const QString &password,
         multiPart->append(imagePart);
 
         QNetworkRequest photoRequest(QUrl("http://localhost:5002/api/users/" + login + "/photo"));
-        photoRequest.setRawHeader("Authorization", "Bearer " + token.toUtf8());
+        photoRequest.setRawHeader("Authorization", "Bearer " + this->token.toUtf8());
 
         QNetworkReply* photoReply = manager->post(photoRequest, multiPart);
         multiPart->setParent(photoReply); // автоматическое удаление multipart
@@ -535,8 +539,8 @@ void Second::loadUserData()
     QNetworkAccessManager* manager = new QNetworkAccessManager(this);
 
     QNetworkRequest request(QUrl("http://localhost:5002/api/users/me"));
-    request.setRawHeader("Authorization", "Bearer " + token.toUtf8());
-    qDebug() << "Token used:" << token;
+    request.setRawHeader("Authorization", "Bearer " + this->token.toUtf8());
+    qDebug() << "Token used secondWindow:" << this->token;
 
 
     QNetworkReply* reply = manager->get(request);
@@ -603,7 +607,7 @@ void Second::loadPhotoData(const QString &login)
 
     QNetworkAccessManager* manager = new QNetworkAccessManager(this);
     QNetworkRequest request(QUrl("http://localhost:5002/api/users/" + login + "/photo"));
-    request.setRawHeader("Authorization", "Bearer " + token.toUtf8());
+    request.setRawHeader("Authorization", "Bearer " + this->token.toUtf8());
 
     QNetworkReply* reply = manager->get(request);
 

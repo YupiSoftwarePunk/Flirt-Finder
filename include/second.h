@@ -27,7 +27,7 @@ public:
 
     void initializeUserData();
     void initializeUserData2();
-
+    void setToken(const QString& jwt);
 
 private slots:
     void on_onLoadPhoto_clicked();
@@ -45,7 +45,7 @@ private:
     QString password;
 
     QString token;
-    void setToken(const QString& jwt);
+
 };
 
 #endif // SECOND_H

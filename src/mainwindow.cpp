@@ -146,8 +146,8 @@ void MainWindow::on_login_button_clicked()
             return;
         }
 
-        // QString token = responseObj["token"].toString();
-        QString token = QString::fromUtf8(responseData).trimmed();
+        QString token = responseObj["token"].toString();
+        // QString token = QString::fromUtf8(responseData).trimmed();
         token_ = token;
         reply->deleteLater();
 
@@ -160,6 +160,7 @@ void MainWindow::on_login_button_clicked()
     auto secondWindow = new Second(this, token_);
 
 
+    secondWindow->setToken(token_);
     secondWindow->setUserCredentials(login, password);
     secondWindow->initializeUserData();
 
@@ -272,10 +273,19 @@ void MainWindow::on_registration_button_clicked()
             QByteArray responseData = reply->readAll();
             QJsonDocument responseDoc = QJsonDocument::fromJson(responseData);
             QJsonObject responseObj = responseDoc.object();
+            QString token = responseObj["token"].toString();
+
+            if (token.isEmpty())
+            {
+                QMessageBox::warning(this, "Ошибка", "Токен не получен!");
+                return;
+            }
+            token_ = token;
 
             QMessageBox::information(this, "Успех", responseObj["message"].toString());
 
-            auto secondWindow = new Second();
+            auto secondWindow = new Second(this, token_);
+            secondWindow->setToken(token_);
             secondWindow->setUserCredentials(login, password);
             secondWindow->initializeUserData2();
             secondWindow->show();
@@ -301,6 +311,7 @@ void MainWindow::on_registration_button_clicked()
 
     // Передача данных во вторую страницу
     auto secondWindow = new Second(this, token_);
+    secondWindow->setToken(token_);
     secondWindow->setUserCredentials(login, password);
     secondWindow->initializeUserData2();
     secondWindow->show();
