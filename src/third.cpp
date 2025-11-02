@@ -115,7 +115,7 @@ void Third::loadProfiles(const QString &login)
     QNetworkAccessManager* manager = new QNetworkAccessManager(this);
     QUrl url("http://localhost:5002/api/users/profiles?login=" + QUrl::toPercentEncoding(login));
     QNetworkRequest request(url);
-    request.setRawHeader("Authorization", "Bearer " + token_.toUtf8()); // предполагается, что token доступен
+    request.setRawHeader("Authorization", "Bearer " + token_.toUtf8());
 
     QNetworkReply* reply = manager->get(request);
 
