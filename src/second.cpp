@@ -20,7 +20,7 @@
 #include <QHttpPart>
 
 
-Second::Second(QWidget *parent, const QString& token)
+Second::Second(const QString& token, QWidget *parent)
     : QDialog(parent),
     ui(new Ui::Second)
 {
@@ -300,7 +300,7 @@ void Second::on_onSaveData_clicked()
         loadPhotoData(login);
         QMessageBox::information(this, "Успех", "Данные успешно сохранены!");
 
-        auto thirdWindow = new Third();
+        auto thirdWindow = new Third(token);
         thirdWindow->setCurrentUserData(login, password);
         thirdWindow->loadProfiles(login);
         thirdWindow->show();
@@ -504,6 +504,7 @@ bool Second::saveUserData(const QString &login, const QString &password,
 
         photoReply->deleteLater();
     }
+    return false;
 }
 
 

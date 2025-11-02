@@ -16,7 +16,7 @@ class Fifth : public QDialog
 
 
 public:
-    explicit Fifth(QWidget *parent = nullptr);
+    explicit Fifth(const QString token, QWidget *parent = nullptr);
     ~Fifth();
 
     void setUserCredentials(const QString &login, const QString &password, QListWidgetItem *selectedItem);
@@ -110,6 +110,8 @@ private:
 
     int forwardRecipientId;
     QString forwardedMessageText;
+
+    QString token;
 };
 
 #endif // FIFTH_H

@@ -2587,8 +2587,45 @@ debug/second.o: ../../src/second.cpp ../../include/second.h \
 		C:/Qt/6.9.0/mingw_64/include/QtGui/qvalidator.h \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/qregularexpression.h \
 		../../include/third.h \
-		../../ui_second.h \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/qjsondocument.h \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/qjsonparseerror.h \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/qjsonvalue.h \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/qcborvalue.h \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/qcborcommon.h \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/qdatetime.h \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/qcalendar.h \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/quuid.h \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/qjsonobject.h \
+		C:/Qt/6.9.0/mingw_64/include/QtNetwork/qnetworkaccessmanager.h \
+		C:/Qt/6.9.0/mingw_64/include/QtNetwork/qtnetworkglobal.h \
+		C:/Qt/6.9.0/mingw_64/include/QtNetwork/qtnetwork-config.h \
+		C:/Qt/6.9.0/mingw_64/include/QtNetwork/qtnetworkexports.h \
+		C:/Qt/6.9.0/mingw_64/include/QtNetwork/qnetworkrequest.h \
+		C:/Qt/6.9.0/mingw_64/include/QtNetwork/qhttpheaders.h \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/QSharedDataPointer \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/QString \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/QUrl \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/QVariant \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/q26numeric.h \
+		C:/Qt/6.9.0/mingw_64/include/QtNetwork/QSslConfiguration \
+		C:/Qt/6.9.0/mingw_64/include/QtNetwork/qsslconfiguration.h \
+		C:/Qt/6.9.0/mingw_64/include/QtNetwork/qsslsocket.h \
+		C:/Qt/6.9.0/mingw_64/include/QtNetwork/qtcpsocket.h \
+		C:/Qt/6.9.0/mingw_64/include/QtNetwork/qabstractsocket.h \
+		C:/Qt/6.9.0/mingw_64/include/QtNetwork/qhostaddress.h \
+		C:/Qt/6.9.0/mingw_64/include/QtNetwork/qsslerror.h \
+		C:/Qt/6.9.0/mingw_64/include/QtNetwork/qsslcertificate.h \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/qcryptographichash.h \
+		C:/Qt/6.9.0/mingw_64/include/QtNetwork/qssl.h \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/QFlags \
+		C:/Qt/6.9.0/mingw_64/include/QtNetwork/QSslPreSharedKeyAuthenticator \
+		C:/Qt/6.9.0/mingw_64/include/QtNetwork/qsslpresharedkeyauthenticator.h \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/QMetaType \
+		C:/Qt/6.9.0/mingw_64/include/QtNetwork/qnetworkreply.h \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/QIODevice \
+		C:/Qt/6.9.0/mingw_64/include/QtNetwork/QNetworkRequest \
+		C:/Qt/6.9.0/mingw_64/include/QtNetwork/QNetworkAccessManager \
+		../../ui_second.h \
 		C:/Qt/6.9.0/mingw_64/include/QtWidgets/QApplication \
 		C:/Qt/6.9.0/mingw_64/include/QtWidgets/qapplication.h \
 		C:/Qt/6.9.0/mingw_64/include/QtWidgets/QComboBox \
@@ -2637,8 +2674,6 @@ debug/second.o: ../../src/second.cpp ../../include/second.h \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/qdir.h \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/qdirlisting.h \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/qfiledevice.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qdatetime.h \
-		C:/Qt/6.9.0/mingw_64/include/QtCore/qcalendar.h \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/qfile.h \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/qfileinfo.h \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/qtimezone.h \
@@ -2660,7 +2695,11 @@ debug/second.o: ../../src/second.cpp ../../include/second.h \
 		C:/Qt/6.9.0/mingw_64/include/QtSql/qsqldatabase.h \
 		C:/Qt/6.9.0/mingw_64/include/QtCore/qmetaobject.h \
 		C:/Qt/6.9.0/mingw_64/include/QtSql/QSqlError \
-		C:/Qt/6.9.0/mingw_64/include/QtSql/qsqlerror.h
+		C:/Qt/6.9.0/mingw_64/include/QtSql/qsqlerror.h \
+		C:/Qt/6.9.0/mingw_64/include/QtNetwork/QHttpMultiPart \
+		C:/Qt/6.9.0/mingw_64/include/QtNetwork/qhttpmultipart.h \
+		C:/Qt/6.9.0/mingw_64/include/QtCore/QByteArray \
+		C:/Qt/6.9.0/mingw_64/include/QtNetwork/QHttpPart
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\second.o ..\..\src\second.cpp
 
 debug/third.o: ../../src/third.cpp ../../include/third.h \

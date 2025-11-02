@@ -13,11 +13,13 @@
 #include <QMessageBox>
 #include <QClipboard>
 
-Fifth::Fifth(QWidget *parent)
+Fifth::Fifth(const QString token, QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::Fifth)
 {
     ui->setupUi(this);
+
+    this->token = token;
 
     setWindowTitle("FlirtFinder");
 
@@ -328,7 +330,7 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
 
         QMessageBox::information(this, "Пересылка", "Нажмите два раза на строку с нужным пользователем");
 
-        auto fourthWindow = new Fourth();
+        auto fourthWindow = new Fourth(token, this);
 
         fourthWindow->setUserCredentials(currentLogin, currentPassword);
         fourthWindow->loadNotifications();

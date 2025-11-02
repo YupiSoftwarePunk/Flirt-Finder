@@ -156,8 +156,8 @@ void MainWindow::on_login_button_clicked()
     qDebug() << "Token used mainWindow: " << token_;
 
     // переход на третье окно
-    auto thirdWindow = new Third();
-    auto secondWindow = new Second(this, token_);
+    auto thirdWindow = new Third(token_);
+    auto secondWindow = new Second(token_);
 
 
     secondWindow->setToken(token_);
@@ -284,7 +284,7 @@ void MainWindow::on_registration_button_clicked()
 
             QMessageBox::information(this, "Успех", responseObj["message"].toString());
 
-            auto secondWindow = new Second(this, token_);
+            auto secondWindow = new Second(token_);
             secondWindow->setToken(token_);
             secondWindow->setUserCredentials(login, password);
             secondWindow->initializeUserData2();
@@ -310,7 +310,7 @@ void MainWindow::on_registration_button_clicked()
     QMessageBox::information(this, "Успех", "Регистрация прошла успешно!");
 
     // Передача данных во вторую страницу
-    auto secondWindow = new Second(this, token_);
+    auto secondWindow = new Second(token_);
     secondWindow->setToken(token_);
     secondWindow->setUserCredentials(login, password);
     secondWindow->initializeUserData2();

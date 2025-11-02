@@ -11,12 +11,13 @@
 #include <QPixmap>
 
 
-Fourth::Fourth(QWidget *parent)
+Fourth::Fourth(const QString& token, QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::Fourth)
 {
     ui->setupUi(this);
 
+    this->token = token;
 
     connect(ui->listWidget, &QListWidget::itemSelectionChanged, this, &Fourth::checkMutualLike);
 
@@ -143,7 +144,7 @@ void Fourth::on_ChatButton_clicked()
     {
         // Успешный мэтч, открываем пятый экран
         qDebug() << "Взаимный лайк подтверждён!";
-        auto fifthWindow = new Fifth();
+        auto fifthWindow = new Fifth(token, this);
 
         fifthWindow->setUserCredentials(currentLogin, currentPassword, currentItem); // Передача данных
         fifthWindow->loadChatHistory(getCurrentUserId(currentLogin), targetUserId);
@@ -161,7 +162,7 @@ void Fourth::on_ChatButton_clicked()
 // Нажатие кнопки "Назад"
 void Fourth::on_BackButton_clicked()
 {
-    auto thirdWindow = new Third();
+    auto thirdWindow = new Third(token, this);
     thirdWindow->setCurrentUserData(currentLogin, currentPassword);
     thirdWindow->loadProfiles(currentLogin);
     thirdWindow->show();
@@ -325,7 +326,7 @@ void Fourth::on_listWidget_itemDoubleClicked(QListWidgetItem *item)
                 qDebug() << "Сообщение переслано от" << forwardSenderId << "к" << targetUserId;
             }
 
-            auto fifthWindow = new Fifth();
+            auto fifthWindow = new Fifth(token, this);
             fifthWindow->loadChatHistory(forwardSenderId, targetUserId);
             fifthWindow->show();
             this->close();
@@ -372,7 +373,7 @@ void Fourth::on_listWidget_itemDoubleClicked(QListWidgetItem *item)
     QString hobby = query.value("hobbies").toString();
 
     // Открываем 3 страницу для отображения данных пользователя
-    auto thirdWindow = new Third();
+    auto thirdWindow = new Third(token, this);
     thirdWindow->hideAllButtons();
     thirdWindow->setProfileData(name, age, city, photoPath, hobby);
     thirdWindow->show();

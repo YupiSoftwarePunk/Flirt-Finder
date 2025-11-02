@@ -12,7 +12,7 @@ class Third : public QDialog
     Q_OBJECT
 
 public:
-    explicit Third(QWidget *parent = nullptr);
+    explicit Third(const QString token, QWidget *parent = nullptr);
     ~Third();
 
     void loadProfiles(const QString &currentLogin);
@@ -52,6 +52,8 @@ private:
     void saveReaction(int targetUserId, bool isLike);
 
     void sortProfiles();
+
+    QString token_;
 };
 
 #endif // THIRD_H

@@ -12,11 +12,13 @@
 #include <QThread>
 
 
-Third::Third(QWidget *parent)
+Third::Third(const QString token, QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::Third)
 {
     ui->setupUi(this);
+
+    token_ = token;
 
     this->setFocusPolicy(Qt::StrongFocus);
     this->setFocus();
@@ -315,7 +317,8 @@ void Third::setCurrentUserData(const QString &login, const QString &password)
 // настройки
 void Third::on_settingsButton_clicked()
 {
-    auto secondWindow = new Second();
+    auto secondWindow = new Second(token_);
+    secondWindow->setToken(token_);
     secondWindow->setUserCredentials(currentLogin, currentPassword);
     secondWindow->initializeUserData();
     secondWindow->show();
@@ -381,7 +384,7 @@ void Third::sortProfiles()
 // перейти в ящик уведомлений
 void Third::on_messageBox_clicked()
 {
-    auto fourthWindow = new Fourth();
+    auto fourthWindow = new Fourth(token_);
     fourthWindow->setUserCredentials(currentLogin, currentPassword);
     fourthWindow->loadNotifications();
     fourthWindow->show();

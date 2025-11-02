@@ -15,7 +15,7 @@ class Fourth : public QDialog
 
 
 public:
-    explicit Fourth(QWidget *parent = nullptr);
+    explicit Fourth(const QString& token, QWidget *parent = nullptr);
     ~Fourth();
 
     void loadNotifications();
@@ -60,6 +60,9 @@ private:
     int forwardSenderId;
     QString forwardMessageText;
     bool isForwardMode;
+
+
+    QString token;
 };
 
 #endif // FOURTH_H
