@@ -71,7 +71,12 @@ namespace Server
             builder.Services.AddScoped<IPhotoService, PhotoService>();
             builder.Services.AddScoped<IReportService, ReportService>();
 
-            builder.Services.AddControllers();
+            //builder.Services.AddControllers();
+            builder.Services.AddControllers().AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
+            });
+
             builder.Services.AddOpenApi();
 
             var app = builder.Build();

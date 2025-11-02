@@ -443,6 +443,8 @@ bool Second::saveUserData(const QString &login, const QString &password,
     qDebug() << "Token used secondWindow:" << this->token;
 
     QJsonObject json;
+    json["fullName"] = name;
+    json["photoUrl"] = "";
     json["bio"] = hobbies;
     json["gender"] = gender;
     json["age"] = age;
