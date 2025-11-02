@@ -74,5 +74,12 @@ namespace Server.Services
             var content = await File.ReadAllBytesAsync(defaultPath);
             return (content, "image/png");
         }
+
+
+        public async Task<string> GetPhotoUrlByUserIdAsync(int userId)
+        {
+            var photo = await _context.Photos.FirstOrDefaultAsync(p => p.UserId == userId);
+            return photo?.Url ?? "";
+        }
     }
 }

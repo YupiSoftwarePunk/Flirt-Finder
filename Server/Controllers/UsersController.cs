@@ -122,5 +122,19 @@ namespace Server.Controllers
             await _photoService.SavePhotoAsync(userId, file);
             return Ok("Фото загружено");
         }
+
+
+        [Authorize]
+        [HttpGet("profiles")]
+        public async Task<IActionResult> GetProfiles([FromQuery] string login)
+        {
+            var currentUser = await _userService.GetByLoginAsync(login);
+            if (currentUser == null) return NotFound("Пользователь с таким логином не найден");
+
+            var oppositeGender = currentUser.Gender == "Мужской" ? "Женский" : "Мужской";
+
+            var profiles = await _userService.GetProfilesAsync(currentUser.Id, oppositeGender);
+            return Ok(profiles);
+        }
     }
 }

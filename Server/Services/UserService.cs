@@ -9,6 +9,7 @@ namespace Server.Services
     public class UserService : IUserService
     {
         private readonly AppDbContext _context;
+        private readonly PhotoService _photoService;
 
         public UserService(AppDbContext context)
         {
@@ -90,6 +91,41 @@ namespace Server.Services
             };
 
             return (true, "Пользователь создан", userDto);
+        }
+
+
+
+        public async Task<IEnumerable<UserProfileDto>> GetProfilesAsync(int excludeUserId, string gender)
+        {
+            var users = await _context.Users
+            .Where(u => u.Id != excludeUserId && u.Gender == gender)
+            .ToListAsync();
+
+            var profiles = new List<UserProfileDto>();
+
+            foreach (var user in users)
+            {
+                var photoUrl = await _photoService.GetPhotoUrlByUserIdAsync(user.Id); 
+
+                profiles.Add(new UserProfileDto
+                {
+                    Id = user.Id,
+                    FullName = user.Username,
+                    Age = user.Age,
+                    City = user.City,
+                    Bio = user.Bio,
+                    Gender = user.Gender,
+                    PhotoUrl = photoUrl
+                });
+            }
+
+            return profiles;
+        }
+
+
+        public async Task<User?> GetByLoginAsync(string login)
+        {
+            return await _context.Users.FirstOrDefaultAsync(u => u.Login == login);
         }
     }
 }

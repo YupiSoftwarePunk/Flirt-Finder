@@ -284,5 +284,21 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Server.Controllers.UsersController",
+    "Method": "GetProfiles",
+    "RelativePath": "api/Users/profiles",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "login",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
   }
 ]

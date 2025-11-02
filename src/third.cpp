@@ -2,6 +2,10 @@
 #include "include/fourth.h"
 #include "qevent.h"
 #include "include/second.h"
+#include "qjsondocument.h"
+#include "qjsonobject.h"
+#include "qnetworkaccessmanager.h"
+#include "qnetworkreply.h"
 #include "ui_third.h"
 
 #include <QSqlQuery>
@@ -10,6 +14,7 @@
 #include <QPixmap>
 #include <QMessageBox>
 #include <QThread>
+#include <QJsonArray>
 
 
 Third::Third(const QString token, QWidget *parent)
@@ -40,69 +45,128 @@ void Third::loadProfiles(const QString &login)
     qDebug() << "Текущий логин для загрузки профилей:" << login;
 
     // Получаем пол текущего пользователя
-    QSqlQuery userQuery;
-    userQuery.prepare("SELECT gender FROM users WHERE login = :login");
-    userQuery.bindValue(":login", login);
+    // QSqlQuery userQuery;
+    // userQuery.prepare("SELECT gender FROM users WHERE login = :login");
+    // userQuery.bindValue(":login", login);
 
-    if (!userQuery.exec() || !userQuery.next())
-    {
-        qDebug() << "Ошибка выполнения SQL-запроса для текущего пользователя:" << userQuery.lastError().text();
-        return;
-    }
+    // if (!userQuery.exec() || !userQuery.next())
+    // {
+    //     qDebug() << "Ошибка выполнения SQL-запроса для текущего пользователя:" << userQuery.lastError().text();
+    //     return;
+    // }
 
-    QString currentGender = userQuery.value("gender").toString();
-    QString oppositeGender = (currentGender == "Мужской") ? "Женский" : "Мужской";
+    // QString currentGender = userQuery.value("gender").toString();
+    // QString oppositeGender = (currentGender == "Мужской") ? "Женский" : "Мужской";
 
-    // Выполняем основной запрос для получения профилей противоположного пола и профиля техподдержки
-    QSqlQuery query;
-    query.prepare(
-        "SELECT DISTINCT users.id, users.name, users.age, users.city, users.hobbies, users.gender, photos.photo_path "
-        "FROM users LEFT JOIN photos ON users.id = photos.user_id "
-        "WHERE users.login != :login AND users.gender = :gender OR users.login = 'A9dM1Nn7b3S8t5'"
-        );
-    query.bindValue(":login", login);
-    query.bindValue(":gender", oppositeGender);
+    // // Выполняем основной запрос для получения профилей противоположного пола и профиля техподдержки
+    // QSqlQuery query;
+    // query.prepare(
+    //     "SELECT DISTINCT users.id, users.name, users.age, users.city, users.hobbies, users.gender, photos.photo_path "
+    //     "FROM users LEFT JOIN photos ON users.id = photos.user_id "
+    //     "WHERE users.login != :login AND users.gender = :gender OR users.login = 'A9dM1Nn7b3S8t5'"
+    //     );
+    // query.bindValue(":login", login);
+    // query.bindValue(":gender", oppositeGender);
 
-    if (!query.exec())
-    {
-        qDebug() << "Ошибка выполнения 2 SQL-запроса:" << query.lastError().text();
-        return;
-    }
+    // if (!query.exec())
+    // {
+    //     qDebug() << "Ошибка выполнения 2 SQL-запроса:" << query.lastError().text();
+    //     return;
+    // }
 
 
-    QSet<QString> uniqueIds;
-    while (query.next())
-    {
-        QString userId = query.value("id").toString();
-        if (uniqueIds.contains(userId))
+    // QSet<QString> uniqueIds;
+    // while (query.next())
+    // {
+    //     QString userId = query.value("id").toString();
+    //     if (uniqueIds.contains(userId))
+    //     {
+    //         continue;
+    //     }
+    //     uniqueIds.insert(userId);
+
+    //     QMap<QString, QString> profile;
+    //     profile["id"] = userId;
+    //     profile["name"] = query.value("name").toString();
+    //     profile["age"] = query.value("age").toString();
+    //     profile["city"] = query.value("city").toString();
+    //     profile["hobbies"] = query.value("hobbies").toString();
+    //     profile["gender"] = query.value("gender").toString();
+    //     profile["photo"] = query.value("photo_path").toString();
+    //     profilesData.append(profile);
+    // }
+
+    // qDebug() << "Загружено анкет:" << profilesData.size();
+
+    // if (!profilesData.isEmpty())
+    // {
+    //     currentIndex = 0;
+    //     sortProfiles(); // Сортировка профилей после загрузки
+    //     updateUI();     // Отображаем первую анкету
+    // }
+    // else
+    // {
+    //     QMessageBox::information(this, "Информация", "Нет доступных анкет для отображения.");
+    // }
+
+
+
+
+    QNetworkAccessManager* manager = new QNetworkAccessManager(this);
+    QUrl url("http://localhost:5002/api/users/profiles?login=" + QUrl::toPercentEncoding(login));
+    QNetworkRequest request(url);
+    request.setRawHeader("Authorization", "Bearer " + token_.toUtf8()); // предполагается, что token доступен
+
+    QNetworkReply* reply = manager->get(request);
+
+    connect(reply, &QNetworkReply::finished, this, [=]() {
+        if (reply->error() == QNetworkReply::NoError)
         {
-            continue;
+            QByteArray responseData = reply->readAll();
+            QJsonDocument jsonDoc = QJsonDocument::fromJson(responseData);
+            QJsonArray profilesArray = jsonDoc.array();
+
+            QSet<QString> uniqueIds;
+            for (const QJsonValue& val : profilesArray)
+            {
+                QJsonObject obj = val.toObject();
+                QString userId = QString::number(obj["id"].toInt());
+                if (uniqueIds.contains(userId)) continue;
+                uniqueIds.insert(userId);
+
+                QMap<QString, QString> profile;
+                profile["id"] = userId;
+                profile["name"] = obj["fullName"].toString();
+                profile["age"] = QString::number(obj["age"].toInt());
+                profile["city"] = obj["city"].toString();
+                profile["hobbies"] = obj["bio"].toString();
+                profile["gender"] = obj["gender"].toString();
+                profile["photo"] = obj["photoUrl"].toString();
+                profilesData.append(profile);
+            }
+
+            qDebug() << "Загружено анкет:" << profilesData.size();
+
+            if (!profilesData.isEmpty())
+            {
+                currentIndex = 0;
+                sortProfiles();
+                updateUI();
+            }
+            else
+            {
+                QMessageBox::information(this, "Информация", "Нет доступных анкет для отображения.");
+            }
         }
-        uniqueIds.insert(userId);
+        else
+        {
+            QMessageBox::warning(this, "Ошибка", "Ошибка загрузки анкет!");
+            qDebug() << "Ошибка API (анкеты):" << reply->errorString();
+        }
 
-        QMap<QString, QString> profile;
-        profile["id"] = userId;
-        profile["name"] = query.value("name").toString();
-        profile["age"] = query.value("age").toString();
-        profile["city"] = query.value("city").toString();
-        profile["hobbies"] = query.value("hobbies").toString();
-        profile["gender"] = query.value("gender").toString();
-        profile["photo"] = query.value("photo_path").toString();
-        profilesData.append(profile);
-    }
-
-    qDebug() << "Загружено анкет:" << profilesData.size();
-
-    if (!profilesData.isEmpty())
-    {
-        currentIndex = 0;
-        sortProfiles(); // Сортировка профилей после загрузки
-        updateUI();     // Отображаем первую анкету
-    }
-    else
-    {
-        QMessageBox::information(this, "Информация", "Нет доступных анкет для отображения.");
-    }
+        reply->deleteLater();
+        manager->deleteLater();
+    });
 }
 
 

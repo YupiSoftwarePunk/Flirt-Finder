@@ -12,5 +12,8 @@ namespace Server.Services.Interfaces
         Task<bool> UpdateAsync(int id, UpdateUserDto dto);
         Task<bool> PatchAsync(int id, PatchUserDto dto);
         Task<(bool Success, string Message, UserDto User)> CreateAsync(CreateUserDto dto);
+
+        Task<IEnumerable<UserProfileDto>> GetProfilesAsync(int excludeUserId, string gender);
+        Task<User?> GetByLoginAsync(string login);
     }
 }
