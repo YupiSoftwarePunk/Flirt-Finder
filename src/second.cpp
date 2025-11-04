@@ -458,6 +458,8 @@ bool Second::saveUserData(const QString &login, const QString &password,
 
     if (reply->error() != QNetworkReply::NoError)
     {
+        QByteArray responseData = reply->readAll();
+        qDebug() << "Ошибка сохранения анкеты пользователя"<< responseData;
         QMessageBox::warning(this, "Ошибка", "Ошибка сохранения анкеты!");
         qDebug() << "Ошибка API! Ошибка сохранения анкеты!:" << reply->errorString();
         reply->deleteLater();
@@ -563,6 +565,7 @@ void Second::loadUserData()
         }
         else
         {
+            QByteArray responseData = reply->readAll();
             QMessageBox::warning(this, "Ошибка", "Ошибка загрузки данных!");
             qDebug() << "Ошибка загрузки данных! API:" << reply->errorString();
         }
@@ -629,11 +632,13 @@ void Second::loadPhotoData(const QString &login)
             }
             else
             {
+                QByteArray responseData = reply->readAll();
                 QMessageBox::warning(this, "Ошибка", "Не удалось загрузить изображение в интерфейс!");
             }
         }
         else
         {
+            QByteArray responseData = reply->readAll();
             QMessageBox::warning(this, "Ошибка", "Не удалось загрузить изображение!");
             qDebug() << "Ошибка! Не удалось загрузить изображение! API:" << reply->errorString();
         }

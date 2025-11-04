@@ -123,6 +123,7 @@ void Third::loadProfiles(const QString &login)
         if (reply->error() == QNetworkReply::NoError)
         {
             QByteArray responseData = reply->readAll();
+            qDebug() << "Ответ API:" << QString(responseData);
             QJsonDocument jsonDoc = QJsonDocument::fromJson(responseData);
             QJsonArray profilesArray = jsonDoc.array();
 
@@ -141,7 +142,7 @@ void Third::loadProfiles(const QString &login)
                 profile["city"] = obj["city"].toString();
                 profile["hobbies"] = obj["bio"].toString();
                 profile["gender"] = obj["gender"].toString();
-                profile["photo"] = obj["photoUrl"].toString();
+                profile["photo"] = obj["photoUrl"].isNull() ? "" : obj["photoUrl"].toString();
                 profilesData.append(profile);
             }
 
