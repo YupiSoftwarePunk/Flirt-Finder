@@ -134,85 +134,85 @@
 ## 🔌 API Endpoints
 
  ### **1 Окно (Аутентификация) 🔐**
- - **POST /api/auth/login**
+ - **`POST /api/auth/login`**
 
  Отправка учетных данных (логин/пароль) для аутентификации и создания сессии.
- - **POST /api/auth/register**
+ - **`POST /api/auth/register`**
 
  Создание новой учетной записи пользователя.
 
  ---
 
  ### **2 Окно (Анкета пользователя) 📝**
- - **GET /api/users/me**
- - **GET /api/users/{id}**
+ - **`GET /api/users/me`**
+ - **`GET /api/users/{id}`**
 
  Получение данных текущего пользователя или пользователя по ID для заполнения формы.
- - **PUT /api/users/me**
- - **PATCH /api/users/me**
+ - **`PUT /api/users/me`**
+ - **`PATCH /api/users/me`**
 
  Полное или частичное обновление данных профиля пользователя. PUT если заменяем всю анкету, PATCH если обновляем только измененные поля.
- - **POST /api/users** (если создает нового) или 
- - **PUT /api/users/me** (если обновляет существующего)
+ - **`POST /api/users`** (если создает нового) или 
+ - **`PUT /api/users/me`** (если обновляет существующего)
 
  Зависит от контекста. Если это окончательное сохранение новой анкеты после регистрации - POST. Если редактирование существующей - PUT.
- - **GET /api/users/me**
+ - **`GET /api/users/me`**
 
  Получение данных текущего пользователя.
- - **GET /api/users/{login}/photo**
- - **GET /api/assets/photos/{filename}**
+ - **`GET /api/users/{login}/photo`**
+ - **`GET /api/assets/photos/{filename}`**
 
  Получение файла фотографии пользователя.
 
 ---
 
 ### **3 Окно (Просмотр анкет) 👀**
- - **GET /api/profiles**
+ - **`GET /api/profiles`**
 
  Получение списка анкет для просмотра. Логин текущего пользователя может передаваться в заголовках для исключения его из результатов.
- - **POST /api/reactions**
+ - **`POST /api/reactions`**
 
  Создание новой реакции (лайк/дизлайк) на целевую анкету. Тело запроса: `{targetUserId: 123, type: "like"}`
- - **GET /api/profiles?sort=criteria**
+ - **`GET /api/profiles?sort=criteria`**
 
  Сортировка обычно выполняется на сервере. Клиент просто добавляет параметры сортировки к запросу на получение анкет.
 
 ---
 
 ### **4 Окно (Уведомления) 🔔**
- - **GET /api/notifications**
+ - **`GET /api/notifications`**
 
  Получение списка уведомлений для текущего пользователя.
- - **POST /api/reactions**
+ - **`POST /api/reactions`**
 
  Аналогично saveReaction - создание реакции в ответ на уведомление.
- - **GET /api/users/me** (клиент должен хранить ID после логина)
+ - **`GET /api/users/me`** (клиент должен хранить ID после логина)
 
  Получение ID текущего пользователя, но лучше чтобы клиент сохранял это после успешного логина.
- - **GET /api/matches/check/{targetUserId}**
+ - **`GET /api/matches/check/{targetUserId}`**
 
  Проверка наличия взаимной симпатии с конкретным пользователем.
- - **GET /api/users/{userId}**
+ - **`GET /api/users/{userId}`**
 
  Получение подробной информации о конкретном пользователе при клике на элемент списка.
 
 ---
 
 ### **5 Окно (Чат) 💬**
- - **POST /api/messages**
+ - **`POST /api/messages`**
 
  Создание и отправка нового сообщения. Тело: `{receiverId: 123, content: "Текст сообщения"}`
- - **GET /api/messages?userId={receiverId}**
+ - **`GET /api/messages?userId={receiverId}`**
 
  Получение истории сообщений между текущим пользователем и выбранным собеседником.
 
- - **Удалить сообщение** - **DELETE /api/messages/{id}**
- - **Ответить на сообщение** - **POST /api/messages**
- - **Изменение сообщения** - **PATCH /api/messages/{id}**
- - **Копировать сообщение** - **GET /api/messages/{id}**
+ - **Удалить сообщение** - **`DELETE /api/messages/{id}`**
+ - **Ответить на сообщение** - **`POST /api/messages`**
+ - **Изменение сообщения** - **`PATCH /api/messages/{id}`**
+ - **Копировать сообщение** - **`GET /api/messages/{id}`**
 
- - **Закрепить сообщение** - **POST /api/chats/{chatId}/pinned-messages**
- - **Пожаловаться на сообщение** - **POST /api/reports**
+ - **Закрепить сообщение** - **`POST /api/chats/{chatId}/pinned-messages`**
+ - **Пожаловаться на сообщение** - **`POST /api/reports`**
 
  Контекстное меню	
 
