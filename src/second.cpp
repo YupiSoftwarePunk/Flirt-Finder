@@ -47,7 +47,6 @@ Second::~Second()
 void Second::initializeUserData()
 {
     loadUserData();   // Загружаем данные анкеты
-    loadPhotoData(login); // Загружаем картинку пользователя
 }
 
 
@@ -297,7 +296,6 @@ void Second::on_onSaveData_clicked()
 
     if (saveUserData(login, password, name, sex, age, hobbies, city, m_photoPath))
     {
-        loadPhotoData(login);
         QMessageBox::information(this, "Успех", "Данные успешно сохранены!");
 
         auto thirdWindow = new Third(token);
@@ -543,36 +541,105 @@ void Second::loadUserData()
 
 
 
+    // ########### 1
+    // QNetworkAccessManager* manager = new QNetworkAccessManager(this);
+
+    // QNetworkRequest request(QUrl("http://localhost:5002/api/users/me"));
+    // request.setRawHeader("Authorization", "Bearer " + this->token.toUtf8());
+    // qDebug() << "Token used secondWindow:" << this->token;
+
+
+    // QNetworkReply* reply = manager->get(request);
+
+    // connect(reply, &QNetworkReply::finished, this, [=]() {
+    //     if (reply->error() == QNetworkReply::NoError)
+    //     {
+    //         QByteArray responseData = reply->readAll();
+    //         QJsonDocument jsonDoc = QJsonDocument::fromJson(responseData);
+    //         QJsonObject userObj = jsonDoc.object();
+
+    //         ui->lineEdit->setText(userObj["username"].toString());
+    //         ui->comboBox->setCurrentText(userObj["gender"].toString());
+    //         ui->spinBox->setValue(userObj["age"].toInt());
+    //         ui->textEdit->setPlainText(userObj["bio"].toString());
+    //         ui->lineEdit_4->setText(userObj["city"].toString());
+    //     }
+    //     else
+    //     {
+    //         QByteArray responseData = reply->readAll();
+    //         QMessageBox::warning(this, "Ошибка", "Ошибка загрузки данных!");
+    //         qDebug() << "Ошибка загрузки данных! API:" << reply->errorString();
+    //     }
+
+    //     reply->deleteLater();
+    //     manager->deleteLater();
+    // });
+
+
+
+    if (token.isEmpty()) {
+        QMessageBox::warning(this, "Ошибка", "Токен не найден. Повторите вход.");
+        return;
+    }
+
     QNetworkAccessManager* manager = new QNetworkAccessManager(this);
 
-    QNetworkRequest request(QUrl("http://localhost:5002/api/users/me"));
-    request.setRawHeader("Authorization", "Bearer " + this->token.toUtf8());
-    qDebug() << "Token used secondWindow:" << this->token;
+    // 1. Запрос профиля
+    QNetworkRequest profileRequest(QUrl("http://localhost:5002/api/users/me"));
+    profileRequest.setRawHeader("Authorization", "Bearer " + token.toUtf8());
 
+    QNetworkReply* profileReply = manager->get(profileRequest);
 
-    QNetworkReply* reply = manager->get(request);
-
-    connect(reply, &QNetworkReply::finished, this, [=]() {
-        if (reply->error() == QNetworkReply::NoError)
+    connect(profileReply, &QNetworkReply::finished, this, [=]() {
+        if (profileReply->error() == QNetworkReply::NoError)
         {
-            QByteArray responseData = reply->readAll();
-            QJsonDocument jsonDoc = QJsonDocument::fromJson(responseData);
-            QJsonObject userObj = jsonDoc.object();
+            QByteArray responseData = profileReply->readAll();
+            QJsonObject obj = QJsonDocument::fromJson(responseData).object();
 
-            ui->lineEdit->setText(userObj["username"].toString());
-            ui->comboBox->setCurrentText(userObj["gender"].toString());
-            ui->spinBox->setValue(userObj["age"].toInt());
-            ui->textEdit->setPlainText(userObj["bio"].toString());
-            ui->lineEdit_4->setText(userObj["city"].toString());
+            // Заполнение UI
+            ui->lineEdit->setText(obj["fullName"].toString());
+            ui->spinBox->setValue(obj["age"].toInt());
+            ui->lineEdit_4->setText(obj["city"].toString());
+            ui->textEdit->setText(obj["bio"].toString());
+            ui->comboBox->setCurrentText(obj["gender"].toString());
+
+            // 2. Загрузка фото
+            QNetworkRequest photoRequest(QUrl("http://localhost:5002/api/users/me/photo"));
+            photoRequest.setRawHeader("Authorization", "Bearer " + token.toUtf8());
+
+            QNetworkReply* photoReply = manager->get(photoRequest);
+            connect(photoReply, &QNetworkReply::finished, this, [=]() {
+                if (photoReply->error() == QNetworkReply::NoError)
+                {
+                    QByteArray photoData = photoReply->readAll();
+                    QPixmap pixmap;
+                    pixmap.loadFromData(photoData);
+
+                    if (!pixmap.isNull())
+                    {
+                        QGraphicsScene* scene = new QGraphicsScene(this);
+                        scene->addPixmap(pixmap.scaled(ui->graphicsView->size(), Qt::KeepAspectRatio));
+                        ui->graphicsView->setScene(scene);
+                    }
+                    else
+                    {
+                        qDebug() << "Фото не удалось декодировать. Размер:" << photoData.size();
+                    }
+                }
+                else
+                {
+                    qDebug() << "Ошибка загрузки фото:" << photoReply->errorString();
+                }
+
+                photoReply->deleteLater();
+            });
         }
         else
         {
-            QByteArray responseData = reply->readAll();
-            QMessageBox::warning(this, "Ошибка", "Ошибка загрузки данных!");
-            qDebug() << "Ошибка загрузки данных! API:" << reply->errorString();
+            qDebug() << "Ошибка загрузки профиля:" << profileReply->errorString();
         }
 
-        reply->deleteLater();
+        profileReply->deleteLater();
         manager->deleteLater();
     });
 }
@@ -581,8 +648,8 @@ void Second::loadUserData()
 
 
 // обновление картинки пользователя
-void Second::loadPhotoData(const QString &login)
-{
+// void Second::loadPhotoData(const QString &login)
+// {
     // QSqlQuery photoQuery;
     // photoQuery.prepare("SELECT photo_path FROM photos WHERE user_id = (SELECT id FROM users WHERE login = :login)");
     // photoQuery.bindValue(":login", login);
@@ -612,40 +679,43 @@ void Second::loadPhotoData(const QString &login)
     // }
 
 
+       //// ######### 1
+//     QNetworkAccessManager* manager = new QNetworkAccessManager(this);
+//     QNetworkRequest request(QUrl("http://localhost:5002/api/users/" + login + "/photo"));
+//     request.setRawHeader("Authorization", "Bearer " + this->token.toUtf8());
 
-    QNetworkAccessManager* manager = new QNetworkAccessManager(this);
-    QNetworkRequest request(QUrl("http://localhost:5002/api/users/" + login + "/photo"));
-    request.setRawHeader("Authorization", "Bearer " + this->token.toUtf8());
+//     QNetworkReply* reply = manager->get(request);
 
-    QNetworkReply* reply = manager->get(request);
+//     connect(reply, &QNetworkReply::finished, this, [=]() {
+//         if (reply->error() == QNetworkReply::NoError)
+//         {
+//             QByteArray photoData = reply->readAll();
+//             QPixmap pixmap;
+//             pixmap.loadFromData(photoData);
 
-    connect(reply, &QNetworkReply::finished, this, [=]() {
-        if (reply->error() == QNetworkReply::NoError)
-        {
-            QByteArray photoData = reply->readAll();
-            QPixmap pixmap;
-            pixmap.loadFromData(photoData);
+//             if (!pixmap.isNull())
+//             {
+//                 QGraphicsScene* scene = new QGraphicsScene(this);
+//                 scene->addPixmap(pixmap.scaled(ui->graphicsView->size(), Qt::KeepAspectRatio));
+//                 ui->graphicsView->setScene(scene);
+//             }
+//             else
+//             {
+//                 qDebug() << "Ошибка: изображение не удалось декодировать";
+//                 qDebug() << "Размер данных:" << photoData.size();
+//                 QMessageBox::warning(this, "Ошибка", "Не удалось загрузить изображение в интерфейс!");
+//             }
+//         }
+//         else
+//         {
+//             QByteArray responseData = reply->readAll();
+//             QMessageBox::warning(this, "Ошибка", "Не удалось загрузить изображение!");
+//             qDebug() << "Ошибка! Не удалось загрузить изображение! API:" << reply->errorString();
+//             qDebug() << "HTTP статус:" << reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
+//             qDebug() << "Ответ сервера:" << QString(responseData);
+//         }
 
-            if (!pixmap.isNull())
-            {
-                QGraphicsScene* scene = new QGraphicsScene(this);
-                scene->addPixmap(pixmap.scaled(ui->graphicsView->size(), Qt::KeepAspectRatio));
-                ui->graphicsView->setScene(scene);
-            }
-            else
-            {
-                QByteArray responseData = reply->readAll();
-                QMessageBox::warning(this, "Ошибка", "Не удалось загрузить изображение в интерфейс!");
-            }
-        }
-        else
-        {
-            QByteArray responseData = reply->readAll();
-            QMessageBox::warning(this, "Ошибка", "Не удалось загрузить изображение!");
-            qDebug() << "Ошибка! Не удалось загрузить изображение! API:" << reply->errorString();
-        }
-
-        reply->deleteLater();
-        manager->deleteLater();
-    });
-}
+//         reply->deleteLater();
+//         manager->deleteLater();
+//     });
+// }

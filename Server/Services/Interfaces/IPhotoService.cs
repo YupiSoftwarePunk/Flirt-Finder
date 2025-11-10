@@ -1,4 +1,6 @@
-﻿namespace Server.Services.Interfaces
+﻿using Server.Models;
+
+namespace Server.Services.Interfaces
 {
     public interface IPhotoService
     {
@@ -7,5 +9,7 @@
         Task SavePhotoAsync(int userId, IFormFile file);
 
         Task<string> GetPhotoUrlByUserIdAsync(int userId);
+
+        Task<Photo> GetPhotoByUserIdAsync(int userId);
     }
 }

@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Server.DTOs;
+using Server.Models;
+using Server.Repositories.Interfaces;
 using Server.Services;
 using Server.Services.Interfaces;
 using System.Security.Claims;
@@ -14,11 +16,13 @@ namespace Server.Controllers
     {
         private readonly IUserService _userService;
         private readonly IPhotoService _photoService;
+        private readonly IUserRepository _userRepository;
 
-        public UsersController(IUserService userService, IPhotoService photoService)
+        public UsersController(IUserService userService, IPhotoService photoService, IUserRepository user)
         {
             _userService = userService;
             _photoService = photoService;
+            _userRepository = user;
         }
 
         [Authorize]
@@ -29,6 +33,18 @@ namespace Server.Controllers
             if (!int.TryParse(userIdStr, out var userId)) return Unauthorized();
 
             var user = await _userService.GetByIdAsync(userId);
+            var photo = await _photoService.GetPhotoUrlByUserIdAsync(userId);
+
+            var dto = new UserProfileDto
+            {
+                FullName = user.Username,
+                Age = user.Age,
+                City = user.City,
+                Bio = user.Bio,
+                Gender = user.Gender,
+                PhotoUrl = photo != null ? $"http://localhost:5002/api/users/me/photo" : null
+            };
+
             return Ok(user);
         }
 
@@ -127,7 +143,13 @@ namespace Server.Controllers
             if (file == null || file.Length == 0)
                 return BadRequest("Файл не получен");
 
+            // Сохраняем фото
             await _photoService.SavePhotoAsync(userId, file);
+
+            // Загружаем пользователя
+            var user = await _userRepository.GetByIdAsync(userId);
+            if (user == null) return NotFound("Пользователь не найден");
+
             return Ok("Фото загружено");
         }
 
@@ -147,6 +169,28 @@ namespace Server.Controllers
 
             var profiles = await _userService.GetProfilesAsync(currentUser.Id, oppositeGender);
             return Ok(profiles);
+        }
+
+
+        [Authorize]
+        [HttpGet("me/photo")]
+        public async Task<IActionResult> GetMyPhoto()
+        {
+            var userIdStr = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (!int.TryParse(userIdStr, out var userId))
+                return Unauthorized();
+
+            var photo = await _photoService.GetPhotoByUserIdAsync(userId);
+            if (photo == null || string.IsNullOrEmpty(photo.Url))
+                return NotFound("Фото не найдено");
+
+            var filePath = photo.Url;
+            if (!System.IO.File.Exists(filePath))
+                return NotFound("Файл изображения не найден");
+
+            var contentType = string.IsNullOrEmpty(photo.ContentType) ? "image/jpeg" : photo.ContentType;
+            var fileBytes = await System.IO.File.ReadAllBytesAsync(filePath);
+            return File(fileBytes, contentType);
         }
     }
 }

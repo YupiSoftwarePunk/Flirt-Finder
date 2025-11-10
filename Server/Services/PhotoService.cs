@@ -81,5 +81,10 @@ namespace Server.Services
             var photo = await _context.Photos.FirstOrDefaultAsync(p => p.UserId == userId);
             return photo?.Url ?? "";
         }
+
+        public async Task<Photo> GetPhotoByUserIdAsync(int userId)
+        {
+            return await _context.Photos.FirstOrDefaultAsync(p => p.UserId == userId);
+        }
     }
 }

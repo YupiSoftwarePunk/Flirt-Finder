@@ -28,7 +28,7 @@ namespace Server.Repositories
             }
         }
 
-        public async Task<User?> GetByIdAsync(string id)
+        public async Task<User?> GetByIdAsync(int id)
         {
             return await _context.Users.FindAsync(id);
         }
