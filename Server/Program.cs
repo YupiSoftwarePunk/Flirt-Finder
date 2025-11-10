@@ -1,4 +1,4 @@
-using DotNetEnv;
+Ôªøusing DotNetEnv;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -42,7 +42,7 @@ namespace Server
             var jwtAudience = Environment.GetEnvironmentVariable("JWT_AUDIENCE") ?? builder.Configuration["Jwt:Audience"];
 
             if (string.IsNullOrWhiteSpace(jwtKey))
-                throw new InvalidOperationException("JWT_KEY ÌÂ Á‡‰‡Ì ‚ ÔÂÂÏÂÌÌ˚ı ÓÍÛÊÂÌËˇ ËÎË ‚ appsettings.");
+                throw new InvalidOperationException("JWT_KEY –Ω–µ –∑–∞–¥–∞–Ω –≤ –ø–µ—Ä–µ–º–µ–Ω–Ω—ã—Ö –æ–∫—Ä—É–∂–µ–Ω–∏—è –∏–ª–∏ –≤ appsettings.");
 
             builder.Services.AddAuthentication(options =>
             {
@@ -60,6 +60,20 @@ namespace Server
                     ValidIssuer = jwtIssuer,
                     ValidAudience = jwtAudience,
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey))
+                };
+
+                options.Events = new JwtBearerEvents
+                {
+                    OnAuthenticationFailed = context =>
+                    {
+                        Console.WriteLine("JWT –æ—à–∏–±–∫–∞: " + context.Exception.Message);
+                        return Task.CompletedTask;
+                    },
+                    OnTokenValidated = context =>
+                    {
+                        Console.WriteLine("JWT —Ç–æ–∫–µ–Ω –ø—Ä–∏–Ω—è—Ç");
+                        return Task.CompletedTask;
+                    }
                 };
             });
 
@@ -85,6 +99,7 @@ namespace Server
 
             if (app.Environment.IsDevelopment())
             {
+                app.UseDeveloperExceptionPage();
                 app.MapOpenApi();
             }
 
@@ -94,6 +109,14 @@ namespace Server
             app.UseAuthorization();
 
             app.MapControllers();
+
+
+            app.Use(async (context, next) =>
+            {
+                Console.WriteLine($"‚û°Ô∏è {context.Request.Method} {context.Request.Path}");
+                await next.Invoke();
+                Console.WriteLine($"‚¨ÖÔ∏è {context.Response.StatusCode}");
+            });
 
             app.Run();
         }

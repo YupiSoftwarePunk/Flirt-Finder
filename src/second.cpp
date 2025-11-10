@@ -460,8 +460,9 @@ bool Second::saveUserData(const QString &login, const QString &password,
     {
         QByteArray responseData = reply->readAll();
         qDebug() << "Ошибка сохранения анкеты пользователя"<< responseData;
-        QMessageBox::warning(this, "Ошибка", "Ошибка сохранения анкеты!");
+        // QMessageBox::warning(this, "Ошибка", "Ошибка сохранения анкеты!");
         qDebug() << "Ошибка API! Ошибка сохранения анкеты!:" << reply->errorString();
+        qDebug() << "HTTP статус:" << reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
         reply->deleteLater();
         return false;
     }
@@ -488,7 +489,7 @@ bool Second::saveUserData(const QString &login, const QString &password,
         imagePart.setBody(photoData);
         multiPart->append(imagePart);
 
-        QNetworkRequest photoRequest(QUrl("http://localhost:5002/api/users/" + login + "/photo"));
+        QNetworkRequest photoRequest(QUrl("http://localhost:5002/api/users/me/photo"));
         photoRequest.setRawHeader("Authorization", "Bearer " + this->token.toUtf8());
 
         QNetworkReply* photoReply = manager->post(photoRequest, multiPart);
@@ -507,8 +508,9 @@ bool Second::saveUserData(const QString &login, const QString &password,
         }
 
         photoReply->deleteLater();
+        return true;
     }
-    return false;
+    return true;
 }
 
 

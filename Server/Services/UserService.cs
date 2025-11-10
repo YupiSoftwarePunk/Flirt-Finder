@@ -9,11 +9,12 @@ namespace Server.Services
     public class UserService : IUserService
     {
         private readonly AppDbContext _context;
-        private readonly PhotoService _photoService;
+        private readonly IPhotoService _photoService;
 
-        public UserService(AppDbContext context)
+        public UserService(AppDbContext context, IPhotoService photoService)
         {
             _context = context;
+            _photoService = photoService;
         }
 
         public async Task<UserDto> GetByIdAsync(int id)

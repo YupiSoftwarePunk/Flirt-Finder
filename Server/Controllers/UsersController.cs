@@ -87,11 +87,19 @@ namespace Server.Controllers
         [HttpPut("me/full")]
         public async Task<IActionResult> UpdateUser([FromBody] UpdateUserDto dto)
         {
-            var userIdStr = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (!int.TryParse(userIdStr, out var userId)) return Unauthorized();
+            try
+            {
+                var userIdStr = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                if (!int.TryParse(userIdStr, out var userId)) return Unauthorized();
 
-            var result = await _userService.UpdateAsync(userId, dto);
-            return result ? NoContent() : BadRequest("Ошибка обновления");
+                var result = await _userService.UpdateAsync(userId, dto);
+                return result ? NoContent() : BadRequest("Ошибка обновления");
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine($"Ошибка при обновлении пользователя: {ex.Message}");
+                return StatusCode(500, "Внутренняя ошибка сервера");
+            }
         }
 
 
@@ -129,7 +137,11 @@ namespace Server.Controllers
         public async Task<IActionResult> GetProfiles([FromQuery] string login)
         {
             var currentUser = await _userService.GetByLoginAsync(login);
-            if (currentUser == null) return NotFound("Пользователь с таким логином не найден");
+            if (currentUser == null)
+            {
+                Console.WriteLine($"Пользователь с логином '{login}' не найден");
+                return NotFound("Пользователь с таким логином не найден");
+            }
 
             var oppositeGender = currentUser.Gender == "Мужской" ? "Женский" : "Мужской";
 
