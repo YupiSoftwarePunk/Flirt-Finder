@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{634DC8F3-D842-404A-81AC-400B4162745B}|Server.csproj|c:\\users\\denis\\documents\\qt projects\\prototype\\server\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{634DC8F3-D842-404A-81AC-400B4162745B}|Server.csproj|solutionrelative:controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{634DC8F3-D842-404A-81AC-400B4162745B}|Server.csproj|c:\\users\\denis\\documents\\qt projects\\prototype\\server\\models\\photo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{634DC8F3-D842-404A-81AC-400B4162745B}|Server.csproj|solutionrelative:models\\photo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{634DC8F3-D842-404A-81AC-400B4162745B}|Server.csproj|c:\\users\\denis\\documents\\qt projects\\prototype\\server\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{634DC8F3-D842-404A-81AC-400B4162745B}|Server.csproj|solutionrelative:controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{634DC8F3-D842-404A-81AC-400B4162745B}|Server.csproj|c:\\users\\denis\\documents\\qt projects\\prototype\\server\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -198,7 +198,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 45,
+          "SelectedChildIndex": 22,
           "Children": [
             {
               "$type": "Bookmark",
@@ -467,13 +467,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "Photo.cs",
               "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\Models\\Photo.cs",
               "RelativeDocumentMoniker": "Models\\Photo.cs",
               "ToolTip": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\Models\\Photo.cs",
               "RelativeToolTip": "Models\\Photo.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAmwBIAAAAvAAAAAAAAAA==",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAYwBIAAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-10T15:55:25.757Z",
               "EditorCaption": ""
@@ -748,13 +748,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "UsersController.cs",
               "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\Controllers\\UsersController.cs",
               "RelativeDocumentMoniker": "Controllers\\UsersController.cs",
               "ToolTip": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\Controllers\\UsersController.cs",
               "RelativeToolTip": "Controllers\\UsersController.cs",
-              "ViewState": "AgIAAKkAAAAAAAAAAAAuwLYAAABKAAAAAAAAAA==",
+              "ViewState": "AgIAALQAAAAAAAAAAAAAwMEAAAALAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-04T14:06:59.473Z",
               "EditorCaption": ""

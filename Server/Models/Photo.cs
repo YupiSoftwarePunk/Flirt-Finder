@@ -16,7 +16,7 @@ namespace Server.Models
         [Column("photo_path")]
         public string Url { get; set; }
 
-        public string ContentType { get; set; }
+        //public string ContentType { get; set; }
 
 
         [ForeignKey("UserId")]

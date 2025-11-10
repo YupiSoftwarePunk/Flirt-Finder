@@ -172,25 +172,25 @@ namespace Server.Controllers
         }
 
 
-        [Authorize]
-        [HttpGet("me/photo")]
-        public async Task<IActionResult> GetMyPhoto()
-        {
-            var userIdStr = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (!int.TryParse(userIdStr, out var userId))
-                return Unauthorized();
+        //[Authorize]
+        //[HttpGet("me/photo")]
+        //public async Task<IActionResult> GetMyPhoto()
+        //{
+        //    var userIdStr = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        //    if (!int.TryParse(userIdStr, out var userId))
+        //        return Unauthorized();
 
-            var photo = await _photoService.GetPhotoByUserIdAsync(userId);
-            if (photo == null || string.IsNullOrEmpty(photo.Url))
-                return NotFound("Фото не найдено");
+        //    var photo = await _photoService.GetPhotoByUserIdAsync(userId);
+        //    if (photo == null || string.IsNullOrEmpty(photo.Url))
+        //        return NotFound("Фото не найдено");
 
-            var filePath = photo.Url;
-            if (!System.IO.File.Exists(filePath))
-                return NotFound("Файл изображения не найден");
+        //    var filePath = photo.Url;
+        //    if (!System.IO.File.Exists(filePath))
+        //        return NotFound("Файл изображения не найден");
 
-            var contentType = string.IsNullOrEmpty(photo.ContentType) ? "image/jpeg" : photo.ContentType;
-            var fileBytes = await System.IO.File.ReadAllBytesAsync(filePath);
-            return File(fileBytes, contentType);
-        }
+        //    var contentType = string.IsNullOrEmpty(photo.ContentType) ? "image/jpeg" : photo.ContentType;
+        //    var fileBytes = await System.IO.File.ReadAllBytesAsync(filePath);
+        //    return File(fileBytes, contentType);
+        //}
     }
 }

@@ -287,6 +287,16 @@
   },
   {
     "ContainingType": "Server.Controllers.UsersController",
+    "Method": "GetMyPhoto",
+    "RelativePath": "api/Users/me/photo",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Server.Controllers.UsersController",
     "Method": "GetProfiles",
     "RelativePath": "api/Users/profiles",
     "HttpMethod": "GET",

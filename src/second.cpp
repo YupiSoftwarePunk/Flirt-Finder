@@ -109,7 +109,14 @@ void Second::initializeUserData2()
             ui->spinBox->setValue(userObj["age"].toInt());
 
             QString login = userObj["login"].toString();
-            QNetworkRequest photoRequest(QUrl("http://localhost:5002/api/users" + login + "/photo"));
+            if (login.isEmpty()) {
+                qDebug() << "Логин пустой, невозможно загрузить фото.";
+                return;
+            }
+
+            QString photoUrl = "http://localhost:5002/api/users/" + login + "/photo";  // mb "http://localhost:5002/api/users/me/photo";
+
+            QNetworkRequest photoRequest((QUrl(photoUrl)));
             photoRequest.setRawHeader("Authorization", "Bearer " + this->token.toUtf8());
 
             QNetworkReply* photoReply = manager->get(photoRequest);
