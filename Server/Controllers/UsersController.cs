@@ -42,6 +42,7 @@ namespace Server.Controllers
                 City = user.City,
                 Bio = user.Bio,
                 Gender = user.Gender,
+                Login = user.Login,
                 PhotoUrl = photo != null ? $"http://localhost:5002/api/users/me/photo" : null
             };
 
@@ -107,6 +108,15 @@ namespace Server.Controllers
             {
                 var userIdStr = User.FindFirstValue(ClaimTypes.NameIdentifier);
                 if (!int.TryParse(userIdStr, out var userId)) return Unauthorized();
+
+                var user = await _userRepository.GetByIdAsync(userId);
+                if (user == null) return NotFound();
+
+                user.Username = dto.FullName;
+                user.Age = dto.Age;
+                user.City = dto.City;
+                user.Bio = dto.Bio;
+                user.Gender = dto.Gender;
 
                 var result = await _userService.UpdateAsync(userId, dto);
                 return result ? NoContent() : BadRequest("Ошибка обновления");
