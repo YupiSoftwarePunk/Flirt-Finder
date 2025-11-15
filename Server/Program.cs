@@ -113,9 +113,9 @@ namespace Server
 
             app.Use(async (context, next) =>
             {
-                Console.WriteLine($"➡️ {context.Request.Method} {context.Request.Path}");
+                Console.WriteLine($"{context.Request.Method} {context.Request.Path}");
                 await next.Invoke();
-                Console.WriteLine($"⬅️ {context.Response.StatusCode}");
+                Console.WriteLine($"{context.Response.StatusCode}");
             });
 
             app.Run();

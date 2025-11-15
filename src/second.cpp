@@ -448,18 +448,18 @@ bool Second::saveUserData(const QString &login, const QString &password,
     qDebug() << "Token used secondWindow:" << this->token;
 
     QJsonObject json;
-    json["FullName"] = name;
-    json["photoUrl"] = photoPath;
-    json["bio"] = hobbies;
-    json["gender"] = gender;
-    json["age"] = age;
-    json["city"] = city;
+    // json["FullName"] = name;
+    // json["photoUrl"] = photoPath;
+    // json["bio"] = hobbies;
+    // json["gender"] = gender;
+    // json["age"] = age;
+    // json["city"] = city;
 
     QNetworkReply* reply = manager->put(request, QJsonDocument(json).toJson());
 
-    QEventLoop loop;
-    connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
-    loop.exec();
+    // QEventLoop loop;
+    // connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
+    // loop.exec();
 
     if (reply->error() != QNetworkReply::NoError)
     {
@@ -503,6 +503,22 @@ bool Second::saveUserData(const QString &login, const QString &password,
         QEventLoop photoLoop;
         connect(photoReply, &QNetworkReply::finished, &photoLoop, &QEventLoop::quit);
         photoLoop.exec();
+
+
+        QJsonObject json;
+        json["FullName"] = name;
+        json["photoUrl"] = photoPath;
+        json["bio"] = hobbies;
+        json["gender"] = gender;
+        json["age"] = age;
+        json["city"] = city;
+
+        QNetworkReply* reply = manager->put(request, QJsonDocument(json).toJson());
+
+        QEventLoop loop;
+        connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
+        loop.exec();
+
 
         if (photoReply->error() != QNetworkReply::NoError)
         {
@@ -603,7 +619,7 @@ void Second::loadUserData()
             QByteArray responseData = profileReply->readAll();
             QJsonObject obj = QJsonDocument::fromJson(responseData).object();
 
-            // Заполнение UI
+            // // Заполнение UI
             ui->lineEdit->setText(obj["fullName"].toString());
             ui->spinBox->setValue(obj["age"].toInt());
             ui->lineEdit_4->setText(obj["city"].toString());

@@ -110,7 +110,10 @@ namespace Server.Controllers
                 if (!int.TryParse(userIdStr, out var userId)) return Unauthorized();
 
                 var user = await _userRepository.GetByIdAsync(userId);
-                if (user == null) return NotFound();
+                if (user == null)
+                {
+                    return NotFound(new { message = "Пользователь с указанным логином не найден" });
+                }
 
                 user.Username = dto.FullName;
                 user.Age = dto.Age;
