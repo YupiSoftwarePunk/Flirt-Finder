@@ -3,6 +3,7 @@ using Server.Data;
 using Server.DTOs;
 using Server.Models;
 using Server.Services.Interfaces;
+using System;
 
 namespace Server.Services
 {
@@ -10,6 +11,7 @@ namespace Server.Services
     {
         private readonly AppDbContext _context;
         private readonly IPhotoService _photoService;
+        private IEnumerable<object> photos;
 
         public UserService(AppDbContext context, IPhotoService photoService)
         {
@@ -17,22 +19,39 @@ namespace Server.Services
             _photoService = photoService;
         }
 
-        public async Task<UserDto> GetByIdAsync(int id)
+
+        public async Task<UserProfileDto> GetByIdAsync(int id)
         {
             var user = await _context.Users.FindAsync(id);
+
             if (user == null) return null;
 
-            return new UserDto
+            var photos = await _context.Photos
+            .Where(p => p.UserId == id)
+            .ToListAsync();
+
+            return new UserProfileDto
             {
-                Id = user.Id,
-                Username = user.Username,
-                Bio = user.Bio,
-                Gender = user.Gender,
-                Login = user.Login,
-                City = user.City,
-                Age = user.Age
+                User = new UserDto
+                {
+                    Id = user.Id,
+                    Username = user.Username,
+                    Bio = user.Bio,
+                    Gender = user.Gender,
+                    Login = user.Login,
+                    City = user.City,
+                    Age = user.Age
+                },
+                Photos = photos.Select(p => new PhotoDto
+                {
+                    Id = p.Id,
+                    Url = p.Url,
+                    UserId = user.Id
+                }).ToList()
             };
         }
+
+
 
         public async Task<bool> UpdateAsync(int id, UpdateUserDto dto)
         {
@@ -43,10 +62,15 @@ namespace Server.Services
             user.Gender = dto.Gender;
             user.Age = dto.Age;
             user.City = dto.City;
+            user.Username = dto.Username;
+            user.Photos.Add(new Photo { Url = dto.PhotoUrl });
+            
 
             await _context.SaveChangesAsync();
             return true;
         }
+
+
 
         public async Task<bool> PatchAsync(int id, PatchUserDto dto)
         {
@@ -111,7 +135,7 @@ namespace Server.Services
                 profiles.Add(new UserProfileDto
                 {
                     Id = user.Id,
-                    FullName = user.Username,
+                    Username = user.Username,
                     Age = user.Age,
                     City = user.City,
                     Bio = user.Bio,

@@ -37,7 +37,7 @@ namespace Server.Controllers
 
             var dto = new UserProfileDto
             {
-                FullName = user.Username,
+                Username = user.Username,
                 Age = user.Age,
                 City = user.City,
                 Bio = user.Bio,
@@ -112,14 +112,8 @@ namespace Server.Controllers
                 var user = await _userRepository.GetByIdAsync(userId);
                 if (user == null)
                 {
-                    return NotFound(new { message = "Пользователь с указанным логином не найден" });
+                    return NotFound(new { message = "Пользователь не найден" });
                 }
-
-                user.Username = dto.FullName;
-                user.Age = dto.Age;
-                user.City = dto.City;
-                user.Bio = dto.Bio;
-                user.Gender = dto.Gender;
 
                 var result = await _userService.UpdateAsync(userId, dto);
                 return result ? NoContent() : BadRequest("Ошибка обновления");

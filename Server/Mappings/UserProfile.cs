@@ -16,6 +16,9 @@ namespace Server.Mappings
             CreateMap<User, AuthResultDto>()
                 .ForMember(dest => dest.Success, opt => opt.Ignore())
                 .ForMember(dest => dest.Message, opt => opt.Ignore());
+            CreateMap<UserDto, User>();
+            CreateMap<UserProfileDto, User>();
+            CreateMap<User, UserProfileDto>();
         }
     }
 }
