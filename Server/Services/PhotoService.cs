@@ -76,15 +76,18 @@ namespace Server.Services
         }
 
 
-        public async Task<string> GetPhotoUrlByUserIdAsync(int userId)
+        public async Task<string?> GetPhotoUrlByUserIdAsync(int userId)
         {
-            var photo = await _context.Photos.FirstOrDefaultAsync(p => p.UserId == userId);
-            return photo?.Url ?? "";
+            var p = await _context.Photos
+            .Where(x => x.UserId == userId)
+            .Select(x => x.Url)
+            .FirstOrDefaultAsync();
+            return p;
         }
 
-        public async Task<Photo> GetPhotoByUserIdAsync(int userId)
+        public async Task<Photo?> GetPhotoByUserIdAsync(int userId)
         {
-            return await _context.Photos.FirstOrDefaultAsync(p => p.UserId == userId);
+            return await _context.Photos.FirstOrDefaultAsync(p => p.UserId == userId); 
         }
     }
 }

@@ -43,10 +43,10 @@ namespace Server.Controllers
                 Bio = user.Bio,
                 Gender = user.Gender,
                 Login = user.Login,
-                PhotoUrl = photo != null ? $"http://localhost:5002/api/users/me/photo" : null
+                PhotoUrl = photo
             };
 
-            return Ok(user);
+            return Ok(dto);
         }
 
 
@@ -150,12 +150,7 @@ namespace Server.Controllers
             if (file == null || file.Length == 0)
                 return BadRequest("Файл не получен");
 
-            // Сохраняем фото
             await _photoService.SavePhotoAsync(userId, file);
-
-            // Загружаем пользователя
-            var user = await _userRepository.GetByIdAsync(userId);
-            if (user == null) return NotFound("Пользователь не найден");
 
             return Ok("Фото загружено");
         }
@@ -179,25 +174,23 @@ namespace Server.Controllers
         }
 
 
-        //[Authorize]
-        //[HttpGet("me/photo")]
-        //public async Task<IActionResult> GetMyPhoto()
-        //{
-        //    var userIdStr = User.FindFirstValue(ClaimTypes.NameIdentifier);
-        //    if (!int.TryParse(userIdStr, out var userId))
-        //        return Unauthorized();
+        [Authorize]
+        [HttpGet("me/photo")]
+        public async Task<IActionResult> GetMyPhoto()
+        {
+            var userIdStr = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (!int.TryParse(userIdStr, out var userId)) return Unauthorized();
 
-        //    var photo = await _photoService.GetPhotoByUserIdAsync(userId);
-        //    if (photo == null || string.IsNullOrEmpty(photo.Url))
-        //        return NotFound("Фото не найдено");
+            var photo = await _photoService.GetPhotoByUserIdAsync(userId); 
+            if (photo == null || string.IsNullOrEmpty(photo.Url))
+                return NotFound("Фото не найдено");
 
-        //    var filePath = photo.Url;
-        //    if (!System.IO.File.Exists(filePath))
-        //        return NotFound("Файл изображения не найден");
+            var filePath = photo.Url;
+            if (!System.IO.File.Exists(filePath))
+                return NotFound("Файл изображения не найден");
 
-        //    var contentType = string.IsNullOrEmpty(photo.ContentType) ? "image/jpeg" : photo.ContentType;
-        //    var fileBytes = await System.IO.File.ReadAllBytesAsync(filePath);
-        //    return File(fileBytes, contentType);
-        //}
+            var fileBytes = await System.IO.File.ReadAllBytesAsync(filePath);
+            return File(fileBytes, "image/jpeg");
+        }
     }
 }
