@@ -31,12 +31,13 @@ namespace Server.Services
 
         public async Task SavePhotoAsync(int userId, IFormFile file)
         {
-            // Генерация уникального пути
+            // Папка для загрузок
             var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "Uploads");
             if (!Directory.Exists(uploadsFolder))
                 Directory.CreateDirectory(uploadsFolder);
 
-            var fileName = $"{Guid.NewGuid()}_{file.FileName}";
+            // Генерация уникального имени файла
+            var fileName = $"{Guid.NewGuid()}_{Path.GetFileName(file.FileName)}";
             var filePath = Path.Combine(uploadsFolder, fileName);
 
             // Сохранение файла
@@ -52,6 +53,7 @@ namespace Server.Services
                 if (!string.IsNullOrEmpty(existing.Url) && File.Exists(existing.Url))
                     File.Delete(existing.Url);
 
+                existing.Url = filePath;
                 _context.Photos.Remove(existing);
             }
 

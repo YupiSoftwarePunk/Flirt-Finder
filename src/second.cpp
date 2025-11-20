@@ -370,8 +370,8 @@ bool Second::eventFilter(QObject *watched, QEvent *event)
 
 // сохранение данных в бд
 bool Second::saveUserData(const QString &login, const QString &password,
-                  const QString &name, const QString &gender, int age,
-                  const QString &hobbies, const QString &city, const QString &photoPath)
+                          const QString &name, const QString &gender, int age,
+                          const QString &hobbies, const QString &city, const QString &photoPath)
 {
 
     // QSqlQuery query;
@@ -448,18 +448,18 @@ bool Second::saveUserData(const QString &login, const QString &password,
     qDebug() << "Token used secondWindow:" << this->token;
 
     QJsonObject json;
-    // json["FullName"] = name;
-    // json["photoUrl"] = photoPath;
-    // json["bio"] = hobbies;
-    // json["gender"] = gender;
-    // json["age"] = age;
-    // json["city"] = city;
+    json["UserName"] = name;
+    json["photoUrl"] = photoPath;
+    json["bio"] = hobbies;
+    json["gender"] = gender;
+    json["age"] = age;
+    json["city"] = city;
 
     QNetworkReply* reply = manager->put(request, QJsonDocument(json).toJson());
 
-    // QEventLoop loop;
-    // connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
-    // loop.exec();
+    QEventLoop loop;
+    connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
+    loop.exec();
 
     if (reply->error() != QNetworkReply::NoError)
     {
@@ -484,53 +484,37 @@ bool Second::saveUserData(const QString &login, const QString &password,
             return false;
         }
 
-        QByteArray photoData = photoFile.readAll();
-        photoFile.close();
-
         QHttpMultiPart* multiPart = new QHttpMultiPart(QHttpMultiPart::FormDataType);
+
         QHttpPart imagePart;
-        imagePart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"file\"; filename=\"photo.jpg\""));
+        imagePart.setHeader(QNetworkRequest::ContentDispositionHeader,
+                            QVariant("form-data; name=\"file\"; filename=\"" + QFileInfo(photoFile).fileName() + "\""));
         imagePart.setHeader(QNetworkRequest::ContentTypeHeader, QVariant("image/jpeg"));
-        imagePart.setBody(photoData);
+        imagePart.setBody(photoFile.readAll());
         multiPart->append(imagePart);
+
+        photoFile.close();
 
         QNetworkRequest photoRequest(QUrl("http://localhost:5002/api/users/me/photo"));
         photoRequest.setRawHeader("Authorization", "Bearer " + this->token.toUtf8());
 
         QNetworkReply* photoReply = manager->post(photoRequest, multiPart);
-        multiPart->setParent(photoReply); // автоматическое удаление multipart
+        multiPart->setParent(photoReply);
 
         QEventLoop photoLoop;
         connect(photoReply, &QNetworkReply::finished, &photoLoop, &QEventLoop::quit);
         photoLoop.exec();
 
-
-        QJsonObject json;
-        json["FullName"] = name;
-        json["photoUrl"] = photoPath;
-        json["bio"] = hobbies;
-        json["gender"] = gender;
-        json["age"] = age;
-        json["city"] = city;
-
-        QNetworkReply* reply = manager->put(request, QJsonDocument(json).toJson());
-
-        QEventLoop loop;
-        connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
-        loop.exec();
-
-
         if (photoReply->error() != QNetworkReply::NoError)
         {
-            QMessageBox::warning(this, "Ошибка", "Ошибка загрузки изображения!");
-            qDebug() << "Ошибка API (фото):" << photoReply->errorString();
+            qDebug() << "Ошибка API при загрузке фото:" << photoReply->errorString();
             photoReply->deleteLater();
             return false;
         }
 
         photoReply->deleteLater();
-        return true;
     }
+
     return true;
 }
 

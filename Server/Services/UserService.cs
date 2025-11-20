@@ -63,8 +63,6 @@ namespace Server.Services
             user.Age = dto.Age;
             user.City = dto.City;
             user.Username = dto.Username;
-            user.Photos.Add(new Photo { Url = dto.PhotoUrl });
-            
 
             await _context.SaveChangesAsync();
             return true;
