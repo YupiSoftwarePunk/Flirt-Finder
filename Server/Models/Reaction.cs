@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Server.Models
 {
     [Table("likes_dislikes")]
-    public class LikeDislike
+    public class Reaction
     {
         [Key]
         [Column("id")]

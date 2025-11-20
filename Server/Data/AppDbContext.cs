@@ -12,7 +12,7 @@ namespace Server.Data
         public DbSet<User> Users { get; set; }
         public DbSet<MessageReport> MessageReports { get; set; }
         public DbSet<Photo> Photos { get; set; }
-        public DbSet<LikeDislike> LikesDislikes { get; set; }
+        public DbSet<Reaction> LikesDislikes { get; set; }
 
         public DbSet<City> Cities { get; set; }
     }
