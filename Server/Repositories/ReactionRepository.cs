@@ -1,4 +1,5 @@
-﻿using Server.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using Server.Data;
 using Server.Models;
 using Server.Repositories.Interfaces;
 
@@ -28,7 +29,7 @@ namespace Server.Repositories
             }
             else
             {
-                existing.Value = reaction.Value;
+                existing.UserReaction = reaction.UserReaction;
                 _context.Reactions.Update(existing);
             }
             await _context.SaveChangesAsync();

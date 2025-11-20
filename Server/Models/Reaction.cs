@@ -17,7 +17,7 @@ namespace Server.Models
         public int LikedBy { get; set; }
 
         [Column("reaction")]
-        public int Reaction { get; set; }
+        public int UserReaction { get; set; }
 
 
 

@@ -154,6 +154,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Server.Controllers.ReactionsController",
+    "Method": "SaveReaction",
+    "RelativePath": "api/Reactions",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "Server.DTOs.ReactionDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Server.Controllers.MessagesController",
     "Method": "ReportMessage",
     "RelativePath": "api/reports",

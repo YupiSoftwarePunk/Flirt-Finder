@@ -2,7 +2,7 @@
 
 namespace Server.Repositories.Interfaces
 {
-    public class IReactionRepository
+    public interface IReactionRepository
     {
         Task<Reaction?> GetAsync(int userId, int likedBy);
         Task SaveAsync(Reaction reaction);
