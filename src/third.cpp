@@ -311,40 +311,81 @@ void Third::saveReaction(int targetUserId, bool isLike)
     }
 
 
-    QSqlQuery getCurrentUserIdQuery;
-    getCurrentUserIdQuery.prepare("SELECT id FROM users WHERE login = :login");
-    getCurrentUserIdQuery.bindValue(":login", currentLogin);
+    // QSqlQuery getCurrentUserIdQuery;
+    // getCurrentUserIdQuery.prepare("SELECT id FROM users WHERE login = :login");
+    // getCurrentUserIdQuery.bindValue(":login", currentLogin);
 
-    if (!getCurrentUserIdQuery.exec() || !getCurrentUserIdQuery.next())
+    // if (!getCurrentUserIdQuery.exec() || !getCurrentUserIdQuery.next())
+    // {
+    //     QMessageBox::warning(this, "Ошибка", "Не удалось получить ID текущего пользователя!");
+    //     qDebug() << "Ошибка выполнения SQL:" << getCurrentUserIdQuery.lastError().text();
+    //     return;
+    // }
+
+    // int currentUserId = getCurrentUserIdQuery.value(0).toInt();
+
+
+    // // Сохраняем реакцию
+    // QSqlQuery query;
+
+    // query.prepare("INSERT INTO likes_dislikes (user_id, liked_by, reaction) "
+    //               "VALUES (:user_id, :liked_by_id, :reaction) "
+    //               "ON CONFLICT (user_id, liked_by) DO UPDATE SET reaction = :reaction");
+
+    // query.bindValue(":user_id", targetUserId);
+    // query.bindValue(":liked_by_id", currentUserId);
+    // query.bindValue(":reaction", isLike ? 1 : -1);   // 1 = лайк, -1 = дизлайк
+
+    // if (!query.exec())
+    // {
+    //     QMessageBox::warning(this, "Ошибка", "Ошибка сохранения лайка/дизлайка!");
+    //     qDebug() << "Ошибка выполнения SQL:" << query.lastError().text();
+    // }
+    // else
+    // {
+    //     qDebug() << "Реакция успешно сохранена: " << (isLike ? "Лайк" : "Дизлайк");
+    // }
+
+
+
+
+    if (token_.isEmpty())
     {
-        QMessageBox::warning(this, "Ошибка", "Не удалось получить ID текущего пользователя!");
-        qDebug() << "Ошибка выполнения SQL:" << getCurrentUserIdQuery.lastError().text();
+        QMessageBox::warning(this, "Ошибка", "Токен не найден. Повторите вход.");
+        qDebug() << "Ошибка: токен пуст.";
         return;
     }
 
-    int currentUserId = getCurrentUserIdQuery.value(0).toInt();
+    QJsonObject json;
+    json["targetUserId"] = targetUserId;
+    json["reaction"] = isLike ? 1 : -1;  // 1 = лайк, -1 = дизлайк
+
+    QJsonDocument doc(json);
+    QByteArray data = doc.toJson();
 
 
-    // Сохраняем реакцию
-    QSqlQuery query;
+    QNetworkRequest request(QUrl("http://localhost:5002/api/reactions"));
+    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+    request.setRawHeader("Authorization", "Bearer " + token_.toUtf8());
 
-    query.prepare("INSERT INTO likes_dislikes (user_id, liked_by, reaction) "
-                  "VALUES (:user_id, :liked_by_id, :reaction) "
-                  "ON CONFLICT (user_id, liked_by) DO UPDATE SET reaction = :reaction");
 
-    query.bindValue(":user_id", targetUserId);
-    query.bindValue(":liked_by_id", currentUserId);
-    query.bindValue(":reaction", isLike ? 1 : -1);   // 1 = лайк, -1 = дизлайк
+    QNetworkAccessManager* manager = new QNetworkAccessManager(this);
+    QNetworkReply* reply = manager->post(request, data);
 
-    if (!query.exec())
-    {
-        QMessageBox::warning(this, "Ошибка", "Ошибка сохранения лайка/дизлайка!");
-        qDebug() << "Ошибка выполнения SQL:" << query.lastError().text();
-    }
-    else
-    {
-        qDebug() << "Реакция успешно сохранена: " << (isLike ? "Лайк" : "Дизлайк");
-    }
+    connect(reply, &QNetworkReply::finished, this, [=]() {
+        if (reply->error() == QNetworkReply::NoError)
+        {
+            qDebug() << "Реакция успешно сохранена:" << (isLike ? "Лайк" : "Дизлайк");
+        }
+        else
+        {
+            int statusCode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
+            QMessageBox::warning(this, "Ошибка", "Ошибка сохранения реакции!");
+            qDebug() << "!! Ошибка HTTP:" << statusCode << reply->errorString();
+        }
+        reply->deleteLater();
+        manager->deleteLater();
+    });
 }
 
 

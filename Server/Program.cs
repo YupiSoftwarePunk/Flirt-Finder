@@ -84,6 +84,8 @@ namespace Server
             builder.Services.AddScoped<IMessageService, MessageService>();
             builder.Services.AddScoped<IPhotoService, PhotoService>();
             builder.Services.AddScoped<IReportService, ReportService>();
+            builder.Services.AddScoped<IReactionRepository, ReactionRepository>();
+            builder.Services.AddScoped<ReactionService>();
 
             //builder.Services.AddControllers();
             builder.Services.AddControllers().AddJsonOptions(options =>
