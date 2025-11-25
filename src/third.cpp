@@ -436,20 +436,88 @@ void Third::on_settingsButton_clicked()
 // Сортировка профилей
 void Third::sortProfiles()
 {
-    // Получаем данные текущего пользователя
-    QSqlQuery userQuery;
-    userQuery.prepare("SELECT age, city, hobbies FROM users WHERE login = :login");
-    userQuery.bindValue(":login", currentLogin);
+    // // Получаем данные текущего пользователя
+    // QSqlQuery userQuery;
+    // userQuery.prepare("SELECT age, city, hobbies FROM users WHERE login = :login");
+    // userQuery.bindValue(":login", currentLogin);
 
-    if (!userQuery.exec() || !userQuery.next())
+    // if (!userQuery.exec() || !userQuery.next())
+    // {
+    //     qDebug() << "Ошибка выполнения SQL-запроса для текущего пользователя:" << userQuery.lastError().text();
+    //     return;
+    // }
+
+    // int currentAge = userQuery.value("age").toInt();
+    // QString currentCity = userQuery.value("city").toString();
+    // QString currentHobbies = userQuery.value("hobbies").toString();
+
+
+
+
+    if (token_.isEmpty())
     {
-        qDebug() << "Ошибка выполнения SQL-запроса для текущего пользователя:" << userQuery.lastError().text();
+        qDebug() << "Ошибка: токен пуст.";
         return;
     }
 
-    int currentAge = userQuery.value("age").toInt();
-    QString currentCity = userQuery.value("city").toString();
-    QString currentHobbies = userQuery.value("hobbies").toString();
+    QNetworkAccessManager* manager = new QNetworkAccessManager(this);
+
+    // Получаем данные текущего пользователя
+    QNetworkRequest meRequest(QUrl("http://localhost:5002/api/users/me"));
+    meRequest.setRawHeader("Authorization", "Bearer " + token_.toUtf8());
+
+    QNetworkReply* meReply = manager->get(meRequest);
+    QEventLoop meLoop;
+    connect(meReply, &QNetworkReply::finished, &meLoop, &QEventLoop::quit);
+    meLoop.exec();
+
+    if (meReply->error() != QNetworkReply::NoError)
+    {
+        qDebug() << "Ошибка API при получении текущего пользователя:" << meReply->errorString();
+        meReply->deleteLater();
+        return;
+    }
+
+    QJsonObject meObj = QJsonDocument::fromJson(meReply->readAll()).object();
+    meReply->deleteLater();
+
+    int currentAge = meObj["age"].toInt();
+    QString currentCity = meObj["city"].toString();
+    QString currentHobbies = meObj["bio"].toString();
+
+    // Получаем список профилей
+    QNetworkRequest profilesRequest(QUrl("http://localhost:5002/api/users/profiles?login=" + meObj["login"].toString()));
+    profilesRequest.setRawHeader("Authorization", "Bearer " + token_.toUtf8());
+
+    QNetworkReply* profilesReply = manager->get(profilesRequest);
+    QEventLoop profilesLoop;
+    connect(profilesReply, &QNetworkReply::finished, &profilesLoop, &QEventLoop::quit);
+    profilesLoop.exec();
+
+    if (profilesReply->error() != QNetworkReply::NoError)
+    {
+        qDebug() << "Ошибка API при получении профилей:" << profilesReply->errorString();
+        profilesReply->deleteLater();
+        return;
+    }
+
+    QJsonArray profilesArray = QJsonDocument::fromJson(profilesReply->readAll()).array();
+    profilesReply->deleteLater();
+
+    // Переносим данные в profilesData
+    profilesData.clear();
+    for (const QJsonValue& val : profilesArray)
+    {
+        QJsonObject obj = val.toObject();
+        QMap<QString, QString> profile;
+        profile["age"] = QString::number(obj["age"].toInt());
+        profile["city"] = obj["city"].toString();
+        profile["hobbies"] = obj["bio"].toString();
+        profilesData.append(profile);
+    }
+
+
+
 
     // Сортировка профилей
     std::sort(profilesData.begin(), profilesData.end(), [&](const QMap<QString, QString> &a, const QMap<QString, QString> &b) {

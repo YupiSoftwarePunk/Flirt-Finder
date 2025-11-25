@@ -3,16 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{634DC8F3-D842-404A-81AC-400B4162745B}|Server.csproj|c:\\users\\denis\\documents\\qt projects\\prototype\\server\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{634DC8F3-D842-404A-81AC-400B4162745B}|Server.csproj|solutionrelative:controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{634DC8F3-D842-404A-81AC-400B4162745B}|Server.csproj|c:\\users\\denis\\documents\\qt projects\\prototype\\server\\services\\photoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{634DC8F3-D842-404A-81AC-400B4162745B}|Server.csproj|solutionrelative:services\\photoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{634DC8F3-D842-404A-81AC-400B4162745B}|Server.csproj|c:\\users\\denis\\documents\\qt projects\\prototype\\server\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{634DC8F3-D842-404A-81AC-400B4162745B}|Server.csproj|solutionrelative:services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{634DC8F3-D842-404A-81AC-400B4162745B}|Server.csproj|c:\\users\\denis\\documents\\qt projects\\prototype\\server\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{634DC8F3-D842-404A-81AC-400B4162745B}|Server.csproj|solutionrelative:controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{634DC8F3-D842-404A-81AC-400B4162745B}|Server.csproj|c:\\users\\denis\\documents\\qt projects\\prototype\\server\\dtos\\updateuserdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -222,63 +222,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 23,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "ReactionsController.cs",
-              "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\Controllers\\ReactionsController.cs",
-              "RelativeDocumentMoniker": "Controllers\\ReactionsController.cs",
-              "ToolTip": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\Controllers\\ReactionsController.cs",
-              "RelativeToolTip": "Controllers\\ReactionsController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAfAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-20T17:34:09.789Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "IReactionService.cs",
-              "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\Services\\Interfaces\\IReactionService.cs",
-              "RelativeDocumentMoniker": "Services\\Interfaces\\IReactionService.cs",
-              "ToolTip": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\Services\\Interfaces\\IReactionService.cs",
-              "RelativeToolTip": "Services\\Interfaces\\IReactionService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-20T17:27:15.077Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "ReactionService.cs",
-              "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\Services\\ReactionService.cs",
-              "RelativeDocumentMoniker": "Services\\ReactionService.cs",
-              "ToolTip": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\Services\\ReactionService.cs",
-              "RelativeToolTip": "Services\\ReactionService.cs",
-              "ViewState": "AgIAAAoAAAAAAAAAAAAqwBUAAAAoAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-20T17:27:01.963Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "ReactionRepository.cs",
-              "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\Repositories\\ReactionRepository.cs",
-              "RelativeDocumentMoniker": "Repositories\\ReactionRepository.cs",
-              "ToolTip": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\Repositories\\ReactionRepository.cs",
-              "RelativeToolTip": "Repositories\\ReactionRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-20T17:23:44.013Z",
-              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -290,8 +238,7 @@
               "RelativeToolTip": "Repositories\\Interfaces\\IReactionRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-20T17:22:33.999Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-20T17:22:33.999Z"
             },
             {
               "$type": "Document",
@@ -303,8 +250,7 @@
               "RelativeToolTip": "DTOs\\ReactionDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAuwAUAAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-20T17:21:56.527Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-20T17:21:56.527Z"
             },
             {
               "$type": "Document",
@@ -320,6 +266,80 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "PhotoService.cs",
+              "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\Services\\PhotoService.cs",
+              "RelativeDocumentMoniker": "Services\\PhotoService.cs",
+              "ToolTip": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\Services\\PhotoService.cs",
+              "RelativeToolTip": "Services\\PhotoService.cs",
+              "ViewState": "AgIAADcAAAAAAAAAAAAmwEYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-21T11:00:23.982Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "UsersController.cs",
+              "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\Controllers\\UsersController.cs",
+              "RelativeDocumentMoniker": "Controllers\\UsersController.cs",
+              "ToolTip": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\Controllers\\UsersController.cs",
+              "RelativeToolTip": "Controllers\\UsersController.cs",
+              "ViewState": "AgIAALUAAAAAAAAAAAAawJAAAABEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-04T14:06:59.473Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "ReactionRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\Repositories\\ReactionRepository.cs",
+              "RelativeDocumentMoniker": "Repositories\\ReactionRepository.cs",
+              "ToolTip": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\Repositories\\ReactionRepository.cs",
+              "RelativeToolTip": "Repositories\\ReactionRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-20T17:23:44.013Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "ReactionService.cs",
+              "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\Services\\ReactionService.cs",
+              "RelativeDocumentMoniker": "Services\\ReactionService.cs",
+              "ToolTip": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\Services\\ReactionService.cs",
+              "RelativeToolTip": "Services\\ReactionService.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAqwBUAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-20T17:27:01.963Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "IReactionService.cs",
+              "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\Services\\Interfaces\\IReactionService.cs",
+              "RelativeDocumentMoniker": "Services\\Interfaces\\IReactionService.cs",
+              "ToolTip": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\Services\\Interfaces\\IReactionService.cs",
+              "RelativeToolTip": "Services\\Interfaces\\IReactionService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-20T17:27:15.077Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "ReactionsController.cs",
+              "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\Controllers\\ReactionsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ReactionsController.cs",
+              "ToolTip": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\Controllers\\ReactionsController.cs",
+              "RelativeToolTip": "Controllers\\ReactionsController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-20T17:34:09.789Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 15,
               "Title": "IReportService.cs",
               "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\Services\\Interfaces\\IReportService.cs",
@@ -328,8 +348,7 @@
               "RelativeToolTip": "Services\\Interfaces\\IReportService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-24T15:37:15.996Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-24T15:37:15.996Z"
             },
             {
               "$type": "Document",
@@ -389,8 +408,7 @@
               "RelativeToolTip": "Services\\CityService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-24T13:16:58.559Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-24T13:16:58.559Z"
             },
             {
               "$type": "Document",
@@ -414,8 +432,7 @@
               "RelativeToolTip": "Services\\Interfaces\\IPhotoService.cs",
               "ViewState": "AgIAAAcAAAAAAAAAAAAQwA8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-24T12:43:40.049Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-24T12:43:40.049Z"
             },
             {
               "$type": "Document",
@@ -503,20 +520,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "PhotoService.cs",
-              "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\Services\\PhotoService.cs",
-              "RelativeDocumentMoniker": "Services\\PhotoService.cs",
-              "ToolTip": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\Services\\PhotoService.cs",
-              "RelativeToolTip": "Services\\PhotoService.cs",
-              "ViewState": "AgIAADoAAAAAAAAAAAAIwCgAAABBAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-21T11:00:23.982Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "UserService.cs",
               "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\Services\\UserService.cs",
               "RelativeDocumentMoniker": "Services\\UserService.cs",
@@ -524,8 +528,7 @@
               "RelativeToolTip": "Services\\UserService.cs",
               "ViewState": "AgIAACMAAAAAAAAAAAAEwEAAAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-21T10:40:40.88Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-21T10:40:40.88Z"
             },
             {
               "$type": "Document",
@@ -537,8 +540,7 @@
               "RelativeToolTip": "Models\\User.cs",
               "ViewState": "AgIAABoAAAAAAAAAAAAswCIAAAA2AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-08T16:22:34.739Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-08T16:22:34.739Z"
             },
             {
               "$type": "Document",
@@ -574,8 +576,7 @@
               "RelativeToolTip": "Models\\Photo.cs",
               "ViewState": "AgIAAAsAAAAAAAAAAAAAwBAAAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-10T15:55:25.757Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-10T15:55:25.757Z"
             },
             {
               "$type": "Document",
@@ -587,8 +588,7 @@
               "RelativeToolTip": "Models\\Reaction.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-10T15:55:02.217Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-10T15:55:02.217Z"
             },
             {
               "$type": "Document",
@@ -672,8 +672,7 @@
               "RelativeToolTip": "DTOs\\UpdateUserDto.cs",
               "ViewState": "AgIAAAMAAAAAAAAAAAAAAAcAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-08T16:20:23.154Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-08T16:20:23.154Z"
             },
             {
               "$type": "Document",
@@ -781,8 +780,7 @@
               "RelativeToolTip": "Data\\AppDbContext.cs",
               "ViewState": "AgIAAAoAAAAAAAAAAAAzwA4AAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-08T16:20:09.975Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-08T16:20:09.975Z"
             },
             {
               "$type": "Document",
@@ -794,8 +792,7 @@
               "RelativeToolTip": "Repositories\\UserRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAA1AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-08T16:10:38.084Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-08T16:10:38.084Z"
             },
             {
               "$type": "Document",
@@ -819,8 +816,7 @@
               "RelativeToolTip": "Repositories\\Interfaces\\IUserRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-06T14:33:01.245Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-06T14:33:01.245Z"
             },
             {
               "$type": "Document",
@@ -848,19 +844,6 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "UsersController.cs",
-              "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\Controllers\\UsersController.cs",
-              "RelativeDocumentMoniker": "Controllers\\UsersController.cs",
-              "ToolTip": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\Controllers\\UsersController.cs",
-              "RelativeToolTip": "Controllers\\UsersController.cs",
-              "ViewState": "AgIAAIQAAAAAAAAAAIAxwJAAAABEAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-04T14:06:59.473Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 26,
               "Title": "AuthController.cs",
               "DocumentMoniker": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\Controllers\\AuthController.cs",
@@ -881,8 +864,7 @@
               "RelativeToolTip": "Program.cs",
               "ViewState": "AgIAAEkAAAAAAAAAAAAQwFcAAAA6AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-27T16:15:33.235Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-27T16:15:33.235Z"
             }
           ]
         }
