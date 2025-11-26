@@ -8,26 +8,26 @@ TARGET = project_name
 INCLUDEPATH += .
 
 SOURCES += \
-    .\src\fourth.cpp \
-    .\src\fifth.cpp \
-    main.cpp \
-    .\src\mainwindow.cpp \
-    .\src\second.cpp \
-    .\src\third.cpp
+    .\ src\fourth.cpp \
+    .\ src\fifth.cpp \
+    .\ main.cpp \
+    .\ src\mainwindow.cpp \
+    .\ src\second.cpp \
+    .\ src\third.cpp
 
 HEADERS += \
-    .\include\fourth.h \
-    .\include\mainwindow.h \
-    .\include\second.h \
-    .\include\third.h \
-    .\include\fifth.h
+    .\ include\fourth.h \
+    .\ include\mainwindow.h \
+    .\ include\second.h \
+    .\ include\third.h \
+    .\ include\fifth.h
 
 FORMS += \
-    .\forms\fourth.ui \
-    .\forms\mainwindow.ui \
-    .\forms\second.ui \
-    .\forms\third.ui \
-    .\forms\fifth.ui
+    .\ forms\fourth.ui \
+    .\ forms\mainwindow.ui \
+    .\ forms\second.ui \
+    .\ Cforms\third.ui \
+    .\ forms\fifth.ui
 
 
 win32:RC_FILE = file.rc

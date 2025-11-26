@@ -48,7 +48,7 @@ private:
     QString currentPassword;
 
 
-    int getCurrentUserId(const QString &login);
+    int getCurrentUserId();
 
     void checkMutualLike();
 

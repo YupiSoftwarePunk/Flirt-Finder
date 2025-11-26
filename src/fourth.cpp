@@ -1,5 +1,10 @@
 #include "include/fourth.h"
 #include "include/fifth.h"
+#include "qjsonarray.h"
+#include "qjsondocument.h"
+#include "qjsonobject.h"
+#include "qnetworkaccessmanager.h"
+#include "qnetworkreply.h"
 #include "qsqlerror.h"
 #include "include/third.h"
 #include "ui_fourth.h"
@@ -48,7 +53,7 @@ Fourth::~Fourth()
 void Fourth::loadNotifications()
 {
     // Получаем ID текущего пользователя
-    int currentUserId = getCurrentUserId(currentLogin);
+    int currentUserId = getCurrentUserId();
 
     if (currentUserId == -1)
     {
@@ -56,41 +61,95 @@ void Fourth::loadNotifications()
         return;
     }
 
-    QSqlQuery query;
-    query.prepare(
-        "SELECT u.id, u.name, u.age, u.city, p.photo_path "
-        "FROM users u "
-        "INNER JOIN likes_dislikes l ON u.id = l.user_id "
-        "LEFT JOIN photos p ON u.id = p.user_id "
-        "WHERE l.liked_by = :currentUserId AND l.reaction = 1"
-        );
-    query.bindValue(":currentUserId", currentUserId);
-
-    if (!query.exec())
+    if (token.isEmpty())
     {
-        QMessageBox::warning(this, "Ошибка", "Не удалось загрузить уведомления.");
-        qDebug() << "Ошибка выполнения SQL:" << query.lastError().text();
+        QMessageBox::warning(this, "Ошибка", "Токен отсутствует. Повторите вход.");
         return;
     }
 
-    while (query.next())
+    // QSqlQuery query;
+    // query.prepare(
+    //     "SELECT u.id, u.name, u.age, u.city, p.photo_path "
+    //     "FROM users u "
+    //     "INNER JOIN likes_dislikes l ON u.id = l.user_id "
+    //     "LEFT JOIN photos p ON u.id = p.user_id "
+    //     "WHERE l.liked_by = :currentUserId AND l.reaction = 1"
+    //     );
+    // query.bindValue(":currentUserId", currentUserId);
+
+    // if (!query.exec())
+    // {
+    //     QMessageBox::warning(this, "Ошибка", "Не удалось загрузить уведомления.");
+    //     qDebug() << "Ошибка выполнения SQL:" << query.lastError().text();
+    //     return;
+    // }
+
+    // while (query.next())
+    // {
+    //     int userId = query.value("id").toInt();
+    //     QString name = query.value("name").toString();
+    //     int age = query.value("age").toInt();
+    //     QString city = query.value("city").toString();
+    //     QString photoPath = query.value("photo_path").toString();
+
+    //     QListWidgetItem *item = new QListWidgetItem(ui->listWidget);
+    //     item->setText(QString("%1, %2 лет, %3").arg(name).arg(age).arg(city));
+
+    //     if (!photoPath.isEmpty())
+    //     {
+    //         QPixmap pixmap(photoPath);
+    //         item->setIcon(QIcon(pixmap.scaled(50, 50, Qt::KeepAspectRatio)));
+    //     }
+    //     item->setData(Qt::UserRole, userId);
+
+    //     ui->listWidget->addItem(item);
+    // }
+
+
+
+    QNetworkAccessManager manager;
+    QNetworkRequest request(QUrl("http://localhost:5002/api/reactions/notifications?userId=" + QString::number(currentUserId)));
+    request.setRawHeader("Authorization", "Bearer " + token.toUtf8());
+
+    QNetworkReply* reply = manager.get(request);
+    QEventLoop loop;
+    connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
+    loop.exec();
+
+    if (reply->error() != QNetworkReply::NoError)
     {
-        int userId = query.value("id").toInt();
-        QString name = query.value("name").toString();
-        int age = query.value("age").toInt();
-        QString city = query.value("city").toString();
-        QString photoPath = query.value("photo_path").toString();
+        QMessageBox::warning(this, "Ошибка", "Не удалось загрузить уведомления.");
+        qDebug() << "Ошибка API (notifications):" << reply->errorString();
+        reply->deleteLater();
+        return;
+    }
+
+    QJsonArray notifArray = QJsonDocument::fromJson(reply->readAll()).array();
+    reply->deleteLater();
+
+    ui->listWidget->clear();
+    for (const QJsonValue& val : notifArray)
+    {
+        QJsonObject obj = val.toObject();
+        int userId = obj["id"].toInt();
+        QString name = obj["username"].toString();
+        int age = obj["age"].toInt();
+        QString city = obj["city"].toString();
+        QString photoUrl = obj["photoUrl"].toString();
 
         QListWidgetItem *item = new QListWidgetItem(ui->listWidget);
         item->setText(QString("%1, %2 лет, %3").arg(name).arg(age).arg(city));
 
-        if (!photoPath.isEmpty())
+        if (!photoUrl.isEmpty())
         {
-            QPixmap pixmap(photoPath);
-            item->setIcon(QIcon(pixmap.scaled(50, 50, Qt::KeepAspectRatio)));
+            QPixmap pixmap;
+            if (pixmap.load(photoUrl))
+            {
+                item->setIcon(QIcon(pixmap.scaled(50, 50, Qt::KeepAspectRatio)));
+            }
         }
-        item->setData(Qt::UserRole, userId);
 
+        item->setData(Qt::UserRole, userId);
         ui->listWidget->addItem(item);
     }
 
@@ -113,7 +172,7 @@ void Fourth::on_ChatButton_clicked()
     qDebug() << "Проверка взаимного лайка для targetUserId:" << targetUserId;
 
 
-    if (targetUserId <= 0 || targetUserId == getCurrentUserId(currentLogin))
+    if (targetUserId <= 0 || targetUserId == getCurrentUserId())
     {
         QMessageBox::warning(this, "Ошибка", "Некорректный или совпадающий ID целевого пользователя.");
         return;
@@ -129,7 +188,7 @@ void Fourth::on_ChatButton_clicked()
         "WHERE l1.user_id = :currentUserId AND l2.user_id = :targetUserId "
         "AND l1.reaction = 1 AND l2.reaction = 1"
         );
-    query.bindValue(":currentUserId", getCurrentUserId(currentLogin)); // ID текущего пользователя
+    query.bindValue(":currentUserId", getCurrentUserId()); // ID текущего пользователя
     query.bindValue(":targetUserId", targetUserId); // ID целевого пользователя
 
     if (!query.exec() || !query.next())
@@ -147,7 +206,7 @@ void Fourth::on_ChatButton_clicked()
         auto fifthWindow = new Fifth(token, this);
 
         fifthWindow->setUserCredentials(currentLogin, currentPassword, currentItem); // Передача данных
-        fifthWindow->loadChatHistory(getCurrentUserId(currentLogin), targetUserId);
+        fifthWindow->loadChatHistory(getCurrentUserId(), targetUserId);
         fifthWindow->show();
     }
     else
@@ -226,19 +285,48 @@ void Fourth::setUserCredentials(const QString &login, const QString &password)
 
 
 // получить id пользователя
-int Fourth::getCurrentUserId(const QString &login)
+int Fourth::getCurrentUserId()
 {
-    QSqlQuery query;
-    query.prepare("SELECT id FROM users WHERE login = :login");
-    query.bindValue(":login", login);
+    // QSqlQuery query;
+    // query.prepare("SELECT id FROM users WHERE login = :login");
+    // query.bindValue(":login", login);
 
-    if (!query.exec() || !query.next())
+    // if (!query.exec() || !query.next())
+    // {
+    //     qDebug() << "Ошибка: ID пользователя для логина " << login << " не найден.";
+    //     return -1;
+    // }
+
+    // return query.value(0).toInt();
+
+
+
+    if (token.isEmpty())
     {
-        qDebug() << "Ошибка: ID пользователя для логина " << login << " не найден.";
+        qDebug() << "Ошибка: токен пуст.";
         return -1;
     }
 
-    return query.value(0).toInt();
+    QNetworkAccessManager manager;
+    QNetworkRequest request(QUrl("http://localhost:5002/api/users/me/id"));
+    request.setRawHeader("Authorization", "Bearer " + token.toUtf8());
+
+    QNetworkReply* reply = manager.get(request);
+    QEventLoop loop;
+    connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
+    loop.exec();
+
+    if (reply->error() != QNetworkReply::NoError)
+    {
+        qDebug() << "Ошибка API при получении ID:" << reply->errorString();
+        reply->deleteLater();
+        return -1;
+    }
+
+    QJsonObject obj = QJsonDocument::fromJson(reply->readAll()).object();
+    reply->deleteLater();
+
+    return obj["userId"].toInt(-1);
 }
 
 
@@ -269,7 +357,7 @@ void Fourth::checkMutualLike()
         "AND l1.reaction = 1 AND l2.reaction = 1"
         );
 
-    query.bindValue(":currentUserId", getCurrentUserId(currentLogin));
+    query.bindValue(":currentUserId", getCurrentUserId());
     query.bindValue(":targetUserId", targetUserId);
 
     if (!query.exec() || !query.next())
