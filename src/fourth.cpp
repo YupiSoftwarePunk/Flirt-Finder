@@ -178,28 +178,74 @@ void Fourth::on_ChatButton_clicked()
         return;
     }
 
-    // Проверяем взаимный лайк в базе данных
-    QSqlQuery query;
-    query.prepare(
-        "SELECT COUNT(*) "
-        "FROM likes_dislikes AS l1 "
-        "INNER JOIN likes_dislikes AS l2 "
-        "ON l1.user_id = l2.liked_by AND l1.liked_by = l2.user_id "
-        "WHERE l1.user_id = :currentUserId AND l2.user_id = :targetUserId "
-        "AND l1.reaction = 1 AND l2.reaction = 1"
-        );
-    query.bindValue(":currentUserId", getCurrentUserId()); // ID текущего пользователя
-    query.bindValue(":targetUserId", targetUserId); // ID целевого пользователя
+    // // Проверяем взаимный лайк в базе данных
+    // QSqlQuery query;
+    // query.prepare(
+    //     "SELECT COUNT(*) "
+    //     "FROM likes_dislikes AS l1 "
+    //     "INNER JOIN likes_dislikes AS l2 "
+    //     "ON l1.user_id = l2.liked_by AND l1.liked_by = l2.user_id "
+    //     "WHERE l1.user_id = :currentUserId AND l2.user_id = :targetUserId "
+    //     "AND l1.reaction = 1 AND l2.reaction = 1"
+    //     );
+    // query.bindValue(":currentUserId", getCurrentUserId()); // ID текущего пользователя
+    // query.bindValue(":targetUserId", targetUserId); // ID целевого пользователя
 
-    if (!query.exec() || !query.next())
+    // if (!query.exec() || !query.next())
+    // {
+    //     QMessageBox::warning(this, "Ошибка", "Не удалось проверить взаимный лайк.");
+    //     qDebug() << "Ошибка выполнения SQL запроса:" << query.lastError().text();
+    //     return;
+    // }
+    //
+    // int mutualLikeCount = query.value(0).toInt();
+    // if (mutualLikeCount == 1)
+    // {
+    //     // Успешный мэтч, открываем пятый экран
+    //     qDebug() << "Взаимный лайк подтверждён!";
+    //     auto fifthWindow = new Fifth(token, this);
+
+    //     fifthWindow->setUserCredentials(currentLogin, currentPassword, currentItem); // Передача данных
+    //     fifthWindow->loadChatHistory(getCurrentUserId(), targetUserId);
+    //     fifthWindow->show();
+    // }
+    // else
+    // {
+    //     // Мэтч отсутствует
+    //     QMessageBox::warning(this, "Ошибка", "У вас нет взаимного лайка с этим пользователем.");
+    // }
+
+
+
+    if (token.isEmpty())
     {
-        QMessageBox::warning(this, "Ошибка", "Не удалось проверить взаимный лайк.");
-        qDebug() << "Ошибка выполнения SQL запроса:" << query.lastError().text();
+        QMessageBox::warning(this, "Ошибка", "Токен отсутствует. Повторите вход.");
         return;
     }
 
-    int mutualLikeCount = query.value(0).toInt();
-    if (mutualLikeCount == 1)
+    QNetworkAccessManager manager;
+    QUrl url(QString("http://localhost:5002/api/reactions/mutual?targetUserId=%1").arg(targetUserId));
+    QNetworkRequest request(url);
+    request.setRawHeader("Authorization", "Bearer " + token.toUtf8());
+
+    QNetworkReply* reply = manager.get(request);
+    QEventLoop loop;
+    connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
+    loop.exec();
+
+    if (reply->error() != QNetworkReply::NoError) {
+        QMessageBox::warning(this, "Ошибка", "Не удалось проверить взаимный лайк.");
+        qDebug() << "Ошибка API:" << reply->errorString();
+        reply->deleteLater();
+        return;
+    }
+
+    QJsonObject obj = QJsonDocument::fromJson(reply->readAll()).object();
+    reply->deleteLater();
+
+    bool mutualLike = obj["mutualLike"].toBool();
+
+    if (mutualLike)
     {
         // Успешный мэтч, открываем пятый экран
         qDebug() << "Взаимный лайк подтверждён!";

@@ -274,8 +274,7 @@
               "RelativeToolTip": "Services\\PhotoService.cs",
               "ViewState": "AgIAADcAAAAAAAAAAAAmwEYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-21T11:00:23.982Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-21T11:00:23.982Z"
             },
             {
               "$type": "Document",
@@ -285,7 +284,7 @@
               "RelativeDocumentMoniker": "Controllers\\UsersController.cs",
               "ToolTip": "C:\\Users\\Denis\\Documents\\Qt projects\\Prototype\\Server\\Controllers\\UsersController.cs",
               "RelativeToolTip": "Controllers\\UsersController.cs",
-              "ViewState": "AgIAALEAAAAAAAAAAAAAAJAAAABEAAAAAAAAAA==",
+              "ViewState": "AgIAALEAAAAAAAAAAAAAALoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-04T14:06:59.473Z",
               "EditorCaption": ""

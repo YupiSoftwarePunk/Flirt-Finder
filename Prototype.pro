@@ -10,7 +10,7 @@ INCLUDEPATH += .
 SOURCES += \
     .\ src\fourth.cpp \
     .\ src\fifth.cpp \
-    .\ main.cpp \
+    main.cpp \
     .\ src\mainwindow.cpp \
     .\ src\second.cpp \
     .\ src\third.cpp
@@ -26,7 +26,7 @@ FORMS += \
     .\ forms\fourth.ui \
     .\ forms\mainwindow.ui \
     .\ forms\second.ui \
-    .\ Cforms\third.ui \
+    .\ forms\third.ui \
     .\ forms\fifth.ui
 
 
