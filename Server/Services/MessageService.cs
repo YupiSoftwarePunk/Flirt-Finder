@@ -63,5 +63,21 @@ namespace Server.Services
             _context.Messages.Add(message);
             await _context.SaveChangesAsync();
         }
+
+
+        public async Task ForwardAsync(int senderId, ForwardMessageDto dto)
+        {
+            var message = new Message
+            {
+                SenderId = dto.SenderId,
+                ReceiverId = dto.ReceiverId,
+                Content = dto.Content,
+                IsForwarded = dto.IsForwarded,
+                Timestamp = DateTime.UtcNow
+            };
+
+            _context.Messages.Add(message);
+            await _context.SaveChangesAsync();
+        }
     }
 }

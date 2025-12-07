@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Server.DTOs;
 using Server.Services.Interfaces;
@@ -100,11 +101,24 @@ namespace Server.Controllers
 
         // Пожаловаться на сообщение
         [HttpPost("/api/reports")]
-        public async Task<IActionResult> ReportMessage([FromBody] ReportDto dto)
+        public async Task<IActionResult> ReportMessage([FromBody] ReportMessageDto dto)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             await _reportService.ReportMessageAsync(userId, dto);
             return Ok("Жалоба отправлена");
+        }
+
+
+
+        [Authorize]
+        [HttpPost("forward")]
+        public async Task<IActionResult> ForwardMessage([FromBody] ForwardMessageDto dto)
+        {
+            var userIdStr = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (!int.TryParse(userIdStr, out var senderId)) return Unauthorized();
+
+            await _messageService.ForwardAsync(senderId, dto);
+            return Ok(new { message = "Сообщение переслано" });
         }
     }
 }

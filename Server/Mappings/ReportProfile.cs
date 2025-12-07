@@ -8,7 +8,7 @@ namespace Server.Mappings
     {
         public ReportProfile()
         {
-            CreateMap<ReportDto, MessageReport>()
+            CreateMap<ReportMessageDto, MessageReport>()
                 .ForMember(dest => dest.ReportedAt, opt => opt.MapFrom(src => DateTime.UtcNow));
         }
     }

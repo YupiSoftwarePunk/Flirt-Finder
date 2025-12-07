@@ -21,7 +21,7 @@ namespace Server.Models
 
         [Column("send_time")]
         public DateTime Timestamp { get; set; }
-
+        public bool IsForwarded { get; set; }
 
 
         [ForeignKey("SenderId")]
@@ -29,5 +29,6 @@ namespace Server.Models
 
         [ForeignKey("ReceiverId")]
         public User Receiver { get; set; }
+        
     }
 }

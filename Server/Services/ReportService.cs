@@ -14,7 +14,7 @@ namespace Server.Services
             _context = context;
         }
 
-        public async Task ReportMessageAsync(string userId, ReportDto dto)
+        public async Task ReportMessageAsync(string userId, ReportMessageDto dto)
         {
             var report = new MessageReport
             {

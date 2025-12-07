@@ -154,6 +154,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Server.Controllers.MessagesController",
+    "Method": "ForwardMessage",
+    "RelativePath": "api/Messages/forward",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "Server.DTOs.ForwardMessageDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Server.Controllers.ReactionsController",
     "Method": "SaveReaction",
     "RelativePath": "api/Reactions",
@@ -170,6 +186,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Server.Controllers.ReactionsController",
+    "Method": "CheckMutualLike",
+    "RelativePath": "api/Reactions/mutual",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "targetUserId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Server.Controllers.MessagesController",
     "Method": "ReportMessage",
     "RelativePath": "api/reports",
@@ -179,7 +211,7 @@
     "Parameters": [
       {
         "Name": "dto",
-        "Type": "Server.DTOs.ReportDto",
+        "Type": "Server.DTOs.ReportMessageDto",
         "IsRequired": true
       }
     ],

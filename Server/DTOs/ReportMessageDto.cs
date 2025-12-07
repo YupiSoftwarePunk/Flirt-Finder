@@ -1,6 +1,6 @@
 ﻿namespace Server.DTOs
 {
-    public class ReportDto
+    public class ReportMessageDto
     {
         public int MessageId { get; set; }
         public string Reason { get; set; }

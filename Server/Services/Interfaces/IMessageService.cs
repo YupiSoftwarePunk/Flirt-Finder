@@ -10,5 +10,6 @@ namespace Server.Services.Interfaces
         Task<bool> DeleteAsync(int userId, int messageId);
         Task<bool> EditAsync(int userId, int messageId, EditMessageDto dto);
         Task<Message> GetByIdAsync(int messageId);
+        Task ForwardAsync(int senderId, ForwardMessageDto dto);
     }
 }

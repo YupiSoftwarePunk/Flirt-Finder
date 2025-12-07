@@ -520,17 +520,51 @@ void Fourth::on_listWidget_itemDoubleClicked(QListWidgetItem *item)
     {
         if (forwardSenderId > 0 && !forwardMessageText.isEmpty())
         {
-            QSqlQuery query;
-            query.prepare("INSERT INTO messages (sender_id, receiver_id, message_text) "
-                          "VALUES (:senderId, :receiverId, :messageText)");
-            query.bindValue(":senderId", forwardSenderId);
-            query.bindValue(":receiverId", targetUserId);
-            query.bindValue(":messageText", forwardMessageText);
+            // QSqlQuery query;
+            // query.prepare("INSERT INTO messages (sender_id, receiver_id, message_text) "
+            //               "VALUES (:senderId, :receiverId, :messageText)");
+            // query.bindValue(":senderId", forwardSenderId);
+            // query.bindValue(":receiverId", targetUserId);
+            // query.bindValue(":messageText", forwardMessageText);
 
-            if (query.exec())
+            // if (query.exec())
+            // {
+            //     qDebug() << "Сообщение переслано от" << forwardSenderId << "к" << targetUserId;
+            // }
+
+
+            if (token.isEmpty())
+            {
+                QMessageBox::warning(this, "Ошибка", "Токен отсутствует. Повторите вход.");
+                return;
+            }
+
+            // Формируем JSON для API
+            QJsonObject json;
+            json["receiverId"] = targetUserId;
+            json["messageText"] = forwardMessageText;
+            json["isForwarded"] = true;
+
+            QNetworkAccessManager manager;
+            QNetworkRequest request(QUrl("http://localhost:5002/api/messages/forward"));
+            request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+            request.setRawHeader("Authorization", "Bearer " + token.toUtf8());
+
+            QNetworkReply* reply = manager.post(request, QJsonDocument(json).toJson());
+
+            QEventLoop loop;
+            connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
+            loop.exec();
+
+            if (reply->error() == QNetworkReply::NoError)
             {
                 qDebug() << "Сообщение переслано от" << forwardSenderId << "к" << targetUserId;
             }
+            else
+            {
+                qDebug() << "Ошибка API при пересылке:" << reply->errorString();
+            }
+            reply->deleteLater();
 
             auto fifthWindow = new Fifth(token, this);
             fifthWindow->loadChatHistory(forwardSenderId, targetUserId);
