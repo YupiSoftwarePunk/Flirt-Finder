@@ -295,24 +295,54 @@ void Fourth::on_LikeButton_clicked()
         return;
     }
 
-    QSqlQuery query;
-    query.prepare(
-        "INSERT INTO likes_dislikes (user_id, liked_by, reaction) "
-        "VALUES (:user_id, (SELECT id FROM users WHERE login = :login), 1) "
-        "ON CONFLICT (user_id, liked_by) DO UPDATE SET reaction = 1"
-        );
-    query.bindValue(":user_id", userId);
-    query.bindValue(":login", currentLogin);
+    // QSqlQuery query;
+    // query.prepare(
+    //     "INSERT INTO likes_dislikes (user_id, liked_by, reaction) "
+    //     "VALUES (:user_id, (SELECT id FROM users WHERE login = :login), 1) "
+    //     "ON CONFLICT (user_id, liked_by) DO UPDATE SET reaction = 1"
+    //     );
+    // query.bindValue(":user_id", userId);
+    // query.bindValue(":login", currentLogin);
 
-    if (query.exec())
+    // if (query.exec())
+    // {
+    //     QMessageBox::information(this, "Лайк", "Вы лайкнули пользователя в ответ!");
+    // }
+    // else
+    // {
+    //     QMessageBox::warning(this, "Ошибка", "Не удалось поставить лайк.");
+    //     qDebug() << "Ошибка выполнения SQL:" << query.lastError().text();
+    // }
+
+
+    QJsonObject json;
+    json["targetUserId"] = userId;
+    json["reaction"] = 1; // 1 = лайк, -1 = дизлайк
+
+    QNetworkAccessManager* manager = new QNetworkAccessManager(this);
+    QNetworkRequest request(QUrl("http://localhost:5002/api/reactions"));
+    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+    request.setRawHeader("Authorization", "Bearer " + token.toUtf8());
+
+    QNetworkReply* reply = manager->post(request, QJsonDocument(json).toJson());
+
+    QEventLoop loop;
+    connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
+    loop.exec();
+
+    if (reply->error() == QNetworkReply::NoError)
     {
-        QMessageBox::information(this, "Лайк", "Вы лайкнули пользователя в ответ!");
+        QMessageBox::information(this, "Лайк", "Вы лайкнули пользователя!");
+        qDebug() << "Ответ API:" << reply->readAll();
     }
     else
     {
         QMessageBox::warning(this, "Ошибка", "Не удалось поставить лайк.");
-        qDebug() << "Ошибка выполнения SQL:" << query.lastError().text();
+        qDebug() << "Ошибка API:" << reply->errorString();
     }
+
+    reply->deleteLater();
+    manager->deleteLater();
 }
 
 
