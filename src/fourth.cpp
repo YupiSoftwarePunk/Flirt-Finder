@@ -423,28 +423,70 @@ void Fourth::checkMutualLike()
     int targetUserId = currentItem->data(Qt::UserRole).toInt();
     qDebug() << "Проверка взаимного лайка для userId:" << targetUserId;
 
-    QSqlQuery query;
-    query.prepare(
-        "SELECT COUNT(*) "
-        "FROM likes_dislikes AS l1 "
-        "INNER JOIN likes_dislikes AS l2 "
-        "ON l1.user_id = l2.liked_by AND l1.liked_by = l2.user_id "
-        "WHERE l1.user_id = :currentUserId AND l2.user_id = :targetUserId "
-        "AND l1.reaction = 1 AND l2.reaction = 1"
-        );
+    // QSqlQuery query;
+    // query.prepare(
+    //     "SELECT COUNT(*) "
+    //     "FROM likes_dislikes AS l1 "
+    //     "INNER JOIN likes_dislikes AS l2 "
+    //     "ON l1.user_id = l2.liked_by AND l1.liked_by = l2.user_id "
+    //     "WHERE l1.user_id = :currentUserId AND l2.user_id = :targetUserId "
+    //     "AND l1.reaction = 1 AND l2.reaction = 1"
+    //     );
 
-    query.bindValue(":currentUserId", getCurrentUserId());
-    query.bindValue(":targetUserId", targetUserId);
+    // query.bindValue(":currentUserId", getCurrentUserId());
+    // query.bindValue(":targetUserId", targetUserId);
 
-    if (!query.exec() || !query.next())
+    // if (!query.exec() || !query.next())
+    // {
+    //     qDebug() << "Ошибка выполнения SQL запроса:" << query.lastError().text();
+    //     ui->ChatButton->setEnabled(false);
+    //     return;
+    // }
+    //
+    // int mutualLikeCount = query.value(0).toInt();
+    // if (mutualLikeCount == 1)
+    // {
+    //     ui->ChatButton->setEnabled(true);
+    //     qDebug() << "Взаимный лайк подтверждён. Кнопка активирована.";
+    // }
+    // else
+    // {
+    //     ui->ChatButton->setEnabled(false);
+    //     qDebug() << "Взаимный лайк отсутствует. Кнопка отключена.";
+    // }
+
+
+    if (token.isEmpty())
     {
-        qDebug() << "Ошибка выполнения SQL запроса:" << query.lastError().text();
         ui->ChatButton->setEnabled(false);
+        qDebug() << "Ошибка: токен отсутствует.";
         return;
     }
 
-    int mutualLikeCount = query.value(0).toInt();
-    if (mutualLikeCount == 1)
+    QNetworkAccessManager manager;
+    QUrl url(QString("http://localhost:5002/api/reactions/mutual?targetUserId=%1").arg(targetUserId));
+    QNetworkRequest request(url);
+    request.setRawHeader("Authorization", "Bearer " + token.toUtf8());
+
+    QNetworkReply* reply = manager.get(request);
+    QEventLoop loop;
+    connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
+    loop.exec();
+
+    if (reply->error() != QNetworkReply::NoError)
+    {
+        qDebug() << "Ошибка API:" << reply->errorString();
+        ui->ChatButton->setEnabled(false);
+        reply->deleteLater();
+        return;
+    }
+
+    QJsonObject obj = QJsonDocument::fromJson(reply->readAll()).object();
+    reply->deleteLater();
+
+    bool mutualLike = obj["mutualLike"].toBool();
+
+    if (mutualLike)
     {
         ui->ChatButton->setEnabled(true);
         qDebug() << "Взаимный лайк подтверждён. Кнопка активирована.";
@@ -513,33 +555,62 @@ void Fourth::on_listWidget_itemDoubleClicked(QListWidgetItem *item)
     qDebug() << "Открытие анкеты для targetUserId: " << targetUserId;
 
     // Выполняем запрос в БД, чтобы загрузить данные пользователя
-    QSqlQuery query;
-    query.prepare(
-        "SELECT u.name, u.age, u.city, u.hobbies, p.photo_path "
-        "FROM users u "
-        "LEFT JOIN photos p ON u.id = p.user_id "
-        "WHERE u.id = :userId"
-        );
-    query.bindValue(":userId", targetUserId);
+    // QSqlQuery query;
+    // query.prepare(
+    //     "SELECT u.name, u.age, u.city, u.hobbies, p.photo_path "
+    //     "FROM users u "
+    //     "LEFT JOIN photos p ON u.id = p.user_id "
+    //     "WHERE u.id = :userId"
+    //     );
+    // query.bindValue(":userId", targetUserId);
 
-    if (!query.exec() || !query.next())
+    // if (!query.exec() || !query.next())
+    // {
+    //     QMessageBox::warning(this, "Ошибка", "Не удалось загрузить данные анкеты.");
+    //     qDebug() << "Ошибка SQL: " << query.lastError().text();
+    //     return;
+    // }
+
+    // // Извлекаем данные пользователя
+    // QString name = query.value("name").toString();
+    // int age = query.value("age").toInt();
+    // QString city = query.value("city").toString();
+    // QString photoPath = query.value("photo_path").toString();
+    // QString hobby = query.value("hobbies").toString();
+
+
+    QNetworkAccessManager manager;
+    QUrl url(QString("http://localhost:5002/api/users/%1").arg(targetUserId));
+    QNetworkRequest request(url);
+    request.setRawHeader("Authorization", "Bearer " + token.toUtf8());
+
+    QNetworkReply* reply = manager.get(request);
+    QEventLoop loop;
+    connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
+    loop.exec();
+
+    if (reply->error() != QNetworkReply::NoError)
     {
         QMessageBox::warning(this, "Ошибка", "Не удалось загрузить данные анкеты.");
-        qDebug() << "Ошибка SQL: " << query.lastError().text();
+        qDebug() << "Ошибка API:" << reply->errorString();
+        reply->deleteLater();
         return;
     }
 
-    // Извлекаем данные пользователя
-    QString name = query.value("name").toString();
-    int age = query.value("age").toInt();
-    QString city = query.value("city").toString();
-    QString photoPath = query.value("photo_path").toString();
-    QString hobby = query.value("hobbies").toString();
+    QJsonObject obj = QJsonDocument::fromJson(reply->readAll()).object();
+    reply->deleteLater();
+
+    QString name = obj["username"].toString();
+    int age = obj["age"].toInt();
+    QString city = obj["city"].toString();
+    QString photoUrl = obj["photoUrl"].toString();
+    QString hobby = obj["bio"].toString();
+
 
     // Открываем 3 страницу для отображения данных пользователя
     auto thirdWindow = new Third(token, this);
     thirdWindow->hideAllButtons();
-    thirdWindow->setProfileData(name, age, city, photoPath, hobby);
+    thirdWindow->setProfileData(name, age, city, photoUrl, hobby);
     thirdWindow->show();
 }
 
