@@ -7,6 +7,7 @@ namespace Server.Services.Interfaces
     {
         Task<bool> SaveReactionAsync(int currentUserId, ReactionDto dto);
 
+        Task<bool> CheckMutualLikeAsync(int currentUserId, int targetUserId);
 
 
     }

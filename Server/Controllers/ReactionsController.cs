@@ -28,5 +28,19 @@ namespace Server.Controllers
             await _reactionService.SaveReactionAsync(currentUserId, dto);
             return Ok(new { message = "Реакция сохранена" });
         }
+
+
+        [Authorize]
+        [HttpGet("mutual")]
+        public async Task<IActionResult> CheckMutualLike([FromQuery] int targetUserId)
+        {
+            var userIdStr = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (!int.TryParse(userIdStr, out var currentUserId))
+                return Unauthorized();
+
+            var mutualLike = await _reactionService.CheckMutualLikeAsync(currentUserId, targetUserId);
+
+            return Ok(new { mutualLike });
+        }
     }
 }

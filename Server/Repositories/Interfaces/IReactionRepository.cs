@@ -6,5 +6,6 @@ namespace Server.Repositories.Interfaces
     {
         Task<Reaction?> GetAsync(int userId, int likedBy);
         Task SaveAsync(Reaction reaction);
+        Task<bool> HasMutualLikeAsync(int currentUserId, int targetUserId);
     }
 }

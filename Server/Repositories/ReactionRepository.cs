@@ -34,5 +34,17 @@ namespace Server.Repositories
             }
             await _context.SaveChangesAsync();
         }
+
+
+        public async Task<bool> HasMutualLikeAsync(int currentUserId, int targetUserId)
+        {
+            var like1 = await _context.Reactions
+                .FirstOrDefaultAsync(r => r.UserId == targetUserId && r.LikedBy == currentUserId && r.UserReaction == 1);
+
+            var like2 = await _context.Reactions
+                .FirstOrDefaultAsync(r => r.UserId == currentUserId && r.LikedBy == targetUserId && r.UserReaction == 1);
+
+            return like1 != null && like2 != null;
+        }
     }
 }

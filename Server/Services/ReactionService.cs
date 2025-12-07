@@ -26,5 +26,11 @@ namespace Server.Services
             await _repository.SaveAsync(reaction);
             return true;
         }
+
+
+        public async Task<bool> CheckMutualLikeAsync(int currentUserId, int targetUserId)
+        {
+            return await _repository.HasMutualLikeAsync(currentUserId, targetUserId);
+        }
     }
 }
