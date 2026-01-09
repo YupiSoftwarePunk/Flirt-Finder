@@ -33,8 +33,19 @@ namespace Server.Controllers
             var userIdStr = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (!int.TryParse(userIdStr, out var senderId)) return Unauthorized();
 
-            await _messageService.SendAsync(senderId, dto);
-            return Ok();
+            var message = await _messageService.SendAsync(senderId, dto);
+
+            var response = new MessageDto
+            {
+                Id = message.Id,
+                SenderId = message.SenderId,
+                ReceiverId = message.ReceiverId,
+                Content = message.Content,
+                Timestamp = message.Timestamp,
+                IsForwarded = message.IsForwarded
+            };
+
+            return Ok(response);
         }
 
 

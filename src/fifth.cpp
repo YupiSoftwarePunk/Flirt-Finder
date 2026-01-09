@@ -3,8 +3,11 @@
 #include "qboxlayout.h"
 #include "qdatetime.h"
 #include "qevent.h"
+#include "qjsonobject.h"
 #include "qlabel.h"
 #include "qmenu.h"
+#include "qnetworkreply.h"
+#include "qnetworkrequest.h"
 #include "qtimezone.h"
 #include "ui_fifth.h"
 
@@ -99,33 +102,75 @@ void Fifth::on_sendButton_clicked()
     qDebug() << "Отправка сообщения от senderId:" << senderId << " к receiverId:" << receiverId;
 
 
-    QSqlQuery query;
-    query.prepare(
-        "INSERT INTO messages (sender_id, receiver_id, message_text, reference_message_id) "
-        "VALUES (:senderId, :receiverId, :messageText, :referenceMessageId)"
-        );
-    query.bindValue(":senderId", senderId);
-    query.bindValue(":receiverId", receiverId);
-    query.bindValue(":messageText", messageText);
+    // QSqlQuery query;
+    // query.prepare(
+    //     "INSERT INTO messages (sender_id, receiver_id, message_text, reference_message_id) "
+    //     "VALUES (:senderId, :receiverId, :messageText, :referenceMessageId)"
+    //     );
+    // query.bindValue(":senderId", senderId);
+    // query.bindValue(":receiverId", receiverId);
+    // query.bindValue(":messageText", messageText);
 
-    // Проверяем, есть ли ссылка на другое сообщение
-    if (referenceMessageId != -1)
-    {
-        query.bindValue(":referenceMessageId", referenceMessageId);
-        qDebug() << "referenceMessageId при отправке:" << referenceMessageId;
+    // // Проверяем, есть ли ссылка на другое сообщение
+    // if (referenceMessageId != -1)
+    // {
+    //     query.bindValue(":referenceMessageId", referenceMessageId);
+    //     qDebug() << "referenceMessageId при отправке:" << referenceMessageId;
 
-    }
-    else
-    {
-        query.bindValue(":referenceMessageId", QVariant(QVariant::Int));
-    }
+    // }
+    // else
+    // {
+    //     query.bindValue(":referenceMessageId", QVariant(QVariant::Int));
+    // }
 
-    if (!query.exec())
+    // if (!query.exec())
+    // {
+    //     QMessageBox::warning(this, "Ошибка", "Не удалось отправить сообщение.");
+    //     qDebug() << "Ошибка SQL:" << query.lastError().text();
+    //     return;
+    // }
+
+
+// Формируем JSON
+    QNetworkAccessManager networkManager;
+
+    QJsonObject json;
+    json["receiverId"] = receiverId;
+    json["content"] = messageText;
+
+    QJsonDocument doc(json);
+    QByteArray data = doc.toJson();
+
+    // Настраиваем запрос
+    QNetworkRequest request(QUrl("http://localhost:5000/api/messages"));
+    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+
+    // JWT токен
+    request.setRawHeader("Authorization", "Bearer " + token.toUtf8());
+
+    // Отправляем POST
+    QNetworkReply* reply = networkManager.post(request, data);
+
+    connect(reply, &QNetworkReply::finished, this, [=]()
     {
-        QMessageBox::warning(this, "Ошибка", "Не удалось отправить сообщение.");
-        qDebug() << "Ошибка SQL:" << query.lastError().text();
-        return;
-    }
+        if (reply->error() != QNetworkReply::NoError)
+        {
+            QMessageBox::warning(this, "Ошибка", "Не удалось отправить сообщение на сервер.");
+            qDebug() << "Network error:" << reply->errorString();
+            reply->deleteLater();
+            return;
+        }
+
+        // Читаем JSON‑ответ
+        QByteArray response = reply->readAll();
+        QJsonDocument doc = QJsonDocument::fromJson(response);
+        QJsonObject obj = doc.object();
+
+        int messageId = obj["id"].toInt();
+        QString content = obj["content"].toString();
+        QString timestamp = obj["timestamp"].toString();
+
+
 
     // Добавляем сообщение в список
     QListWidgetItem *item = new QListWidgetItem(QString("Вы: %1").arg(messageText), ui->listWidget);
@@ -134,6 +179,11 @@ void Fifth::on_sendButton_clicked()
     {
         item->setData(Qt::UserRole, referenceMessageId);
     }
+
+    // Сохраняем id и timestamp
+    item->setData(Qt::UserRole, messageId);
+    item->setData(Qt::UserRole + 1, timestamp);
+
     ui->listWidget->addItem(item);
 
     ui->textEdit->clear();
@@ -141,7 +191,10 @@ void Fifth::on_sendButton_clicked()
 
     referenceMessageId = -1;
 
-    loadChatHistory(senderId, receiverId);
+    // reply->deleteLater();
+
+    loadChatHistory(senderId, receiverId);  
+    });
 }
 
 
@@ -598,5 +651,3 @@ void Fifth::onContextMenuRequested(const QPoint &pos)
         loadChatHistory(senderId, receiverId);
     }
 }
-
-

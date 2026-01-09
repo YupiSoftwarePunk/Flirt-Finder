@@ -5,7 +5,7 @@ namespace Server.Services.Interfaces
 {
     public interface IMessageService
     {
-        Task SendAsync(int senderId, MessageDto dto);
+        Task<Message> SendAsync(int senderId, MessageDto dto);
         Task<IEnumerable<Message>> GetChatHistoryAsync(int senderId, int receiverId);
         Task<bool> DeleteAsync(int userId, int messageId);
         Task<bool> EditAsync(int userId, int messageId, EditMessageDto dto);

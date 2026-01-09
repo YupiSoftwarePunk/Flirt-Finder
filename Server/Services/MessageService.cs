@@ -50,18 +50,22 @@ namespace Server.Services
                 .ToListAsync();
         }
 
-        public async Task SendAsync(int senderId, MessageDto dto)
+        public async Task<Message> SendAsync(int senderId, MessageDto dto)
         {
             var message = new Message
             {
+                Id = dto.Id,
                 SenderId = senderId,
                 ReceiverId = dto.ReceiverId,
                 Content = dto.Content,
-                Timestamp = DateTime.UtcNow
+                Timestamp = DateTime.UtcNow,
+                IsForwarded = dto.IsForwarded
             };
 
             _context.Messages.Add(message);
             await _context.SaveChangesAsync();
+
+            return message;
         }
 
 
