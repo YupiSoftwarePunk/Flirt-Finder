@@ -67,7 +67,6 @@ void MainWindow::on_login_button_clicked()
     }
 
 
-    // Ограничение длины логина
     if (login.length() < 3 || login.length() > 20)
     {
         QMessageBox::warning(this, "Ошибка", "Логин должен содержать от 3 до 20 символов!");
@@ -77,7 +76,6 @@ void MainWindow::on_login_button_clicked()
         return;
     }
 
-    // Ограничение длины пароля
     if (password.length() < 6 || password.length() > 20)
     {
         QMessageBox::warning(this, "Ошибка", "Пароль должен содержать от 6 до 30 символов!");
@@ -86,32 +84,6 @@ void MainWindow::on_login_button_clicked()
         ui->login->setFocus();
         return;
     }
-
-
-    // QSqlQuery query;
-    // query.prepare("SELECT COUNT(*) FROM users WHERE login = :login AND password = :password");
-    // query.bindValue(":login", login);
-    // query.bindValue(":password", password);
-
-    // if (!query.exec())
-    // {
-    //     QMessageBox::warning(this, "Ошибка", "Ошибка проверки авторизации!");
-    //     qDebug() << "Ошибка SQL:" << query.lastError().text();
-    //     return;
-    // }
-
-    // query.next();
-    // int count = query.value(0).toInt();
-    // if (count == 0)
-    // {
-    //     QMessageBox::warning(this, "Ошибка", "Неверный логин или пароль!");
-    //     ui->login->clear();
-    //     ui->password->clear();
-    //     ui->login->setFocus();
-    //     return;
-    // }
-
-
 
     QUrl url("http://localhost:5002/api/auth/login");
     QNetworkRequest request(url);
@@ -155,7 +127,6 @@ void MainWindow::on_login_button_clicked()
 
     qDebug() << "Token used mainWindow: " << token_;
 
-    // переход на третье окно
     auto thirdWindow = new Third(token_);
     auto secondWindow = new Second(token_);
 
@@ -194,7 +165,6 @@ void MainWindow::on_registration_button_clicked()
     }
 
 
-    // Ограничение длины логина
     if (login.length() < 3 || login.length() > 20)
     {
         QMessageBox::warning(this, "Ошибка", "Логин должен содержать от 3 до 20 символов!");
@@ -204,7 +174,6 @@ void MainWindow::on_registration_button_clicked()
         return;
     }
 
-    // Ограничение длины пароля
     if (password.length() < 6 || password.length() > 20)
     {
         QMessageBox::warning(this, "Ошибка", "Пароль должен содержать от 6 до 30 символов!");
@@ -213,48 +182,6 @@ void MainWindow::on_registration_button_clicked()
         ui->login_2->setFocus();
         return;
     }
-
-    // QSqlQuery query;
-    // query.prepare("SELECT COUNT(*) FROM users WHERE login = :login");
-    // query.bindValue(":login", login);
-
-    // if (!query.exec())
-    // {
-    //     QMessageBox::warning(this, "Ошибка", "Ошибка проверки логина в базе данных!");
-    //     qDebug() << "Ошибка SQL:" << query.lastError().text();
-    //     return;
-    // }
-
-    // query.next();
-    // int count = query.value(0).toInt();
-    // if (count > 0)
-    // {
-    //     QMessageBox::warning(this, "Ошибка", "Аккаунт с таким логином уже существует!");
-    //     ui->login_2->clear();
-    //     ui->password_2->clear();
-    //     ui->login_2->setFocus();
-    //     return;
-    // }
-
-
-    // query.clear();
-    // query.prepare("INSERT INTO users (login, password, name, gender, age, hobbies, city) "
-    //               "VALUES (:login, :password, :name, :gender, :age, :hobbies, :city)");
-    // query.bindValue(":login", login);
-    // query.bindValue(":password", password);
-    // query.bindValue(":name", "");
-    // query.bindValue(":gender", "");
-    // query.bindValue(":age", 0);
-    // query.bindValue(":hobbies", "");
-    // query.bindValue(":city", "");
-
-    // if (!query.exec())
-    // {
-    //     QMessageBox::warning(this, "Ошибка", "Ошибка регистрации!");
-    //     qDebug() << "Ошибка SQL:" << query.lastError().text();
-    //     return;
-    // }
-
 
 
     QJsonObject json;

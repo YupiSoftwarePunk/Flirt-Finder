@@ -59,33 +59,6 @@ void Second::initializeUserData2()
 {
     loadUserData();
 
-    // QSqlQuery photoQuery;
-    // photoQuery.prepare("SELECT photo_path FROM photos WHERE user_id = (SELECT id FROM users WHERE login = :login)");
-    // photoQuery.bindValue(":login", login);
-
-    // if (!photoQuery.exec())
-    // {
-    //     qDebug() << "Ошибка выполнения SQL при загрузке фото:" << photoQuery.lastError().text();
-    //     return;
-    // }
-
-    // if (photoQuery.next())
-    // {
-    //     QString photoPath = photoQuery.value(0).toString();
-    //     if (!photoPath.isEmpty())
-    //     {
-    //         loadPhotoData(photoPath);
-    //     }
-    //     else
-    //     {
-    //         qDebug() << "Фото отсутствует для пользователя.";
-    //     }
-    // }
-    // else
-    // {
-    //     qDebug() << "Фото для пользователя не найдено.";
-    // }
-
 
     QNetworkAccessManager* manager = new QNetworkAccessManager(this);
 
@@ -205,18 +178,6 @@ void Second::on_onSaveData_clicked()
     QString sex = ui->comboBox->currentText();
 
 
-    // if (m_photoPath.isEmpty())
-    // {
-    //     QSqlQuery query;
-    //     query.prepare("SELECT photo_path FROM photos WHERE user_id = (SELECT id FROM users WHERE login = :login)");
-    //     query.bindValue(":login", login);
-    //     if (query.exec() && query.next())
-    //     {
-    //         m_photoPath = query.value(0).toString();
-    //     }
-    // }
-
-
     if (name.isEmpty() || hobbies.isEmpty() || city.isEmpty() || m_photoPath.isEmpty())
     {
         QMessageBox::warning(this, "Ошибка", "Все поля должны быть заполнены!");
@@ -241,29 +202,6 @@ void Second::on_onSaveData_clicked()
         ui->lineEdit_4->setFocus();
         return;
     }
-
-
-
-    // // Проверка наличия города в базе данных
-    // QSqlQuery cityQuery;
-    // cityQuery.prepare("SELECT COUNT(*) FROM cities WHERE name = :city");
-    // cityQuery.bindValue(":city", city);
-
-    // if (!cityQuery.exec())
-    // {
-    //     QMessageBox::warning(this, "Ошибка", "Не удалось выполнить запрос к базе данных!");
-    //     return;
-    // }
-
-    // cityQuery.next();
-    // int cityCount = cityQuery.value(0).toInt();
-    // if (cityCount == 0)
-    // {
-    //     QMessageBox::warning(this, "Ошибка", "Город не найден в базе данных! Проверьте правильность ввода.");
-    //     ui->lineEdit_4->setFocus();
-    //     return;
-    // }
-
 
 
     QNetworkAccessManager* manager = new QNetworkAccessManager(this);
@@ -297,9 +235,6 @@ void Second::on_onSaveData_clicked()
         ui->lineEdit_4->setFocus();
         return;
     }
-
-
-
 
     if (saveUserData(login, password, name, sex, age, hobbies, city, m_photoPath))
     {
@@ -373,70 +308,6 @@ bool Second::saveUserData(const QString &login, const QString &password,
                           const QString &name, const QString &gender, int age,
                           const QString &hobbies, const QString &city, const QString &photoPath)
 {
-
-    // QSqlQuery query;
-    // query.prepare("UPDATE users SET name = :name, gender = :gender, age = :age, hobbies = :hobbies, city = :city "
-    //               "WHERE login = :login AND password = :password");
-    // query.bindValue(":name", name);
-    // query.bindValue(":gender", gender);
-    // query.bindValue(":age", age);
-    // query.bindValue(":hobbies", hobbies);
-    // query.bindValue(":city", city);
-    // query.bindValue(":login", login);
-    // query.bindValue(":password", password);
-
-    // if (!query.exec())
-    // {
-    //     QMessageBox::warning(this, "Ошибка", "Ошибка сохранения данных пользователя!");
-    //     qDebug() << "Ошибка SQL:" << query.lastError().text();
-    //     return false;
-    // }
-
-
-    // QSqlQuery getUserIdQuery;
-    // getUserIdQuery.prepare("SELECT id FROM users WHERE login = :login");
-    // getUserIdQuery.bindValue(":login", login);
-
-    // if (!getUserIdQuery.exec() || !getUserIdQuery.next())
-    // {
-    //     QMessageBox::warning(this, "Ошибка", "Не удалось получить ID пользователя!");
-    //     qDebug() << "Ошибка SQL:" << getUserIdQuery.lastError().text();
-    //     return false;
-    // }
-
-    // int userId = getUserIdQuery.value(0).toInt();
-    // qDebug() << "User ID:" << userId;
-
-
-    // if (!photoPath.isEmpty())
-    // {
-    //     QSqlQuery deletePhotoQuery;
-    //     deletePhotoQuery.prepare("DELETE FROM photos WHERE user_id = :user_id");
-    //     deletePhotoQuery.bindValue(":user_id", userId);
-
-    //     if (!deletePhotoQuery.exec())
-    //     {
-    //         QMessageBox::warning(this, "Ошибка", "Не удалось удалить старую картинку!");
-    //         qDebug() << "Ошибка SQL:" << deletePhotoQuery.lastError().text();
-    //         return false;
-    //     }
-
-    //     QSqlQuery photoQuery;
-    //     photoQuery.prepare("INSERT INTO photos (user_id, photo_path) VALUES (:user_id, :photo_path)");
-    //     photoQuery.bindValue(":user_id", userId);
-    //     photoQuery.bindValue(":photo_path", photoPath);
-
-    //     if (!photoQuery.exec())
-    //     {
-    //         QMessageBox::warning(this, "Ошибка", "Ошибка сохранения изображения!");
-    //         qDebug() << "Ошибка SQL:" << photoQuery.lastError().text();
-    //         return false;
-    //     }
-    //     qDebug() << "Новый путь к картинке успешно сохранён:" << photoPath;
-    // }
-    // return true;
-
-
 
     QNetworkAccessManager* manager = new QNetworkAccessManager(this);
 
@@ -525,66 +396,8 @@ bool Second::saveUserData(const QString &login, const QString &password,
 // обновление данных пользователя
 void Second::loadUserData()
 {
-    // QSqlQuery query;
-    // query.prepare("SELECT name, gender, age, hobbies, city FROM users WHERE login = :login AND password = :password");
-    // query.bindValue(":login", login);
-    // query.bindValue(":password", password);
-
-    // if (!query.exec())
-    // {
-    //     QMessageBox::warning(this, "Ошибка", "Ошибка загрузки данных!");
-    //     qDebug() << "Ошибка SQL:" << query.lastError().text();
-    //     return;
-    // }
-
-    // if (query.next())
-    // {
-    //     ui->lineEdit->setText(query.value("name").toString());
-    //     ui->comboBox->setCurrentText(query.value("gender").toString());
-    //     ui->spinBox->setValue(query.value("age").toInt());
-    //     ui->textEdit->setPlainText(query.value("hobbies").toString());
-    //     ui->lineEdit_4->setText(query.value("city").toString());
-    // }
-
-
-
-    // ########### 1
-    // QNetworkAccessManager* manager = new QNetworkAccessManager(this);
-
-    // QNetworkRequest request(QUrl("http://localhost:5002/api/users/me"));
-    // request.setRawHeader("Authorization", "Bearer " + this->token.toUtf8());
-    // qDebug() << "Token used secondWindow:" << this->token;
-
-
-    // QNetworkReply* reply = manager->get(request);
-
-    // connect(reply, &QNetworkReply::finished, this, [=]() {
-    //     if (reply->error() == QNetworkReply::NoError)
-    //     {
-    //         QByteArray responseData = reply->readAll();
-    //         QJsonDocument jsonDoc = QJsonDocument::fromJson(responseData);
-    //         QJsonObject userObj = jsonDoc.object();
-
-    //         ui->lineEdit->setText(userObj["username"].toString());
-    //         ui->comboBox->setCurrentText(userObj["gender"].toString());
-    //         ui->spinBox->setValue(userObj["age"].toInt());
-    //         ui->textEdit->setPlainText(userObj["bio"].toString());
-    //         ui->lineEdit_4->setText(userObj["city"].toString());
-    //     }
-    //     else
-    //     {
-    //         QByteArray responseData = reply->readAll();
-    //         QMessageBox::warning(this, "Ошибка", "Ошибка загрузки данных!");
-    //         qDebug() << "Ошибка загрузки данных! API:" << reply->errorString();
-    //     }
-
-    //     reply->deleteLater();
-    //     manager->deleteLater();
-    // });
-
-
-
-    if (token.isEmpty()) {
+    if (token.isEmpty())
+    {
         QMessageBox::warning(this, "Ошибка", "Токен не найден. Повторите вход.");
         return;
     }

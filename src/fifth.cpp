@@ -131,7 +131,6 @@ void Fifth::on_sendButton_clicked()
     // }
 
 
-// Формируем JSON
     QNetworkAccessManager networkManager;
 
     QJsonObject json;
@@ -141,14 +140,11 @@ void Fifth::on_sendButton_clicked()
     QJsonDocument doc(json);
     QByteArray data = doc.toJson();
 
-    // Настраиваем запрос
     QNetworkRequest request(QUrl("http://localhost:5000/api/messages"));
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
 
-    // JWT токен
     request.setRawHeader("Authorization", "Bearer " + token.toUtf8());
 
-    // Отправляем POST
     QNetworkReply* reply = networkManager.post(request, data);
 
     connect(reply, &QNetworkReply::finished, this, [=]()
@@ -171,8 +167,6 @@ void Fifth::on_sendButton_clicked()
         QString timestamp = obj["timestamp"].toString();
 
 
-
-    // Добавляем сообщение в список
     QListWidgetItem *item = new QListWidgetItem(QString("Вы: %1").arg(messageText), ui->listWidget);
     item->setTextAlignment(Qt::AlignRight);
     if (referenceMessageId != -1)
@@ -180,7 +174,6 @@ void Fifth::on_sendButton_clicked()
         item->setData(Qt::UserRole, referenceMessageId);
     }
 
-    // Сохраняем id и timestamp
     item->setData(Qt::UserRole, messageId);
     item->setData(Qt::UserRole + 1, timestamp);
 
