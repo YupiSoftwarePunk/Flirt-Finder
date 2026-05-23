@@ -59,3 +59,4 @@ C:\Users\Denis\Documents\Qt projects\Prototype\Server\bin\Debug\net9.0\DotNetEnv
 C:\Users\Denis\Documents\Qt projects\Prototype\Server\bin\Debug\net9.0\Sprache.dll
 C:\Users\Denis\Documents\Qt projects\Prototype\Server\bin\Debug\net9.0\AutoMapper.dll
 C:\Users\Denis\Documents\Qt projects\Prototype\Server\bin\Debug\net9.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\Denis\Documents\Qt projects\Prototype\Server\obj\Debug\net9.0\swae.build.ex.cache
